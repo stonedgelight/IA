@@ -4,53 +4,88 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Obrigado pelo Contacto | André Carmo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        :root {
+            --primary-blue: #0066cc;
+            --dark-blue: #001a33;
+            --electric-blue: #00d4ff;
+            --deep-space: #000814;
+            --text-light: #e6f7ff;
+            --text-gray: #b3d9ff;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #000814 0%, #001a33 100%);
-            color: #e6f7ff;
+            background: linear-gradient(135deg, var(--deep-space) 0%, var(--dark-blue) 100%);
+            color: var(--text-light);
+            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
-            margin: 0;
             text-align: center;
-        }
-        .container {
-            max-width: 600px;
             padding: 2rem;
         }
-        .icon {
-            font-size: 4rem;
-            color: #00d4ff;
-            margin-bottom: 1rem;
+        .container { max-width: 600px; animation: fadeIn 0.8s ease; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .success-icon {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--electric-blue));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+            font-size: 3rem;
+            color: white;
+            box-shadow: 0 10px 30px rgba(0, 102, 204, 0.4);
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
         }
         h1 {
             font-size: 2.5rem;
             margin-bottom: 1rem;
+            background: linear-gradient(135deg, #ffffff, var(--electric-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
-        p {
-            color: #b3d9ff;
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-        }
+        p { color: var(--text-gray); font-size: 1.2rem; margin-bottom: 2rem; line-height: 1.6; }
         .btn {
             display: inline-block;
-            padding: 1rem 2rem;
-            background: linear-gradient(135deg, #0066cc, #0080ff);
+            padding: 1rem 2.5rem;
+            background: linear-gradient(135deg, var(--primary-blue), var(--electric-blue));
             color: white;
             text-decoration: none;
             border-radius: 50px;
             font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 102, 204, 0.4);
         }
+        .btn:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(0, 128, 255, 0.6); }
+        .contact-info { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid rgba(0, 212, 255, 0.2); }
+        .contact-info p { font-size: 1rem; margin-bottom: 0.5rem; }
+        .contact-info strong { color: var(--electric-blue); }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="icon">✓</div>
+        <div class="success-icon"><i class="fas fa-check"></i></div>
         <h1>Obrigado pelo Contacto!</h1>
-        <p>Recebi a sua mensagem e responderei em breve, normalmente dentro de 24 horas.</p>
-        <a href="index.html" class="btn">Voltar ao Site</a>
+        <p>Recebi a sua mensagem e responderei em breve, normalmente dentro de <strong>24 horas</strong>.</p>
+        <a href="index.html" class="btn"><i class="fas fa-arrow-left"></i> Voltar ao Site</a>
+        <div class="contact-info">
+            <p>Se precisar de algo urgente:</p>
+            <p><strong>+351 912 405 722</strong></p>
+            <p>andre.carmo@gmail.com</p>
+        </div>
     </div>
 </body>
 </html>
