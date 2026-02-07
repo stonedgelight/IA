@@ -1,0 +1,1618 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>André Carmo | Automação Inteligente para Empresas</title>
+    <meta name="description" content="Especialista em automação com IA para PMEs em Portugal. Chatbots WhatsApp, automação de processos e atendimento inteligente.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-blue: #0066cc;
+            --dark-blue: #001a33;
+            --electric-blue: #00d4ff;
+            --neon-blue: #0080ff;
+            --deep-space: #000814;
+            --text-light: #e6f7ff;
+            --text-gray: #b3d9ff;
+            --glass-bg: rgba(0, 102, 204, 0.1);
+            --glass-border: rgba(0, 212, 255, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--deep-space);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Scrollbar personalizada */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--dark-blue);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-blue);
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--electric-blue);
+        }
+
+        /* Navegação */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(0, 8, 20, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--glass-border);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            background: rgba(0, 8, 20, 0.98);
+            box-shadow: 0 5px 30px rgba(0, 102, 204, 0.3);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--electric-blue), var(--primary-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-gray);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--electric-blue);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--electric-blue);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--electric-blue);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: linear-gradient(135deg, var(--deep-space) 0%, var(--dark-blue) 50%, var(--deep-space) 100%);
+            overflow: hidden;
+            padding: 6rem 2rem 4rem;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('https://kimi-web-img.moonshot.cn/img/as2.ftcdn.net/7f6dcdc77c3dc4438c421f658a7bf4b45baccfea.jpg');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.3;
+            animation: pulse 8s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.2; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(1.05); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            text-align: center;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            color: var(--electric-blue);
+            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #ffffff 0%, var(--electric-blue) 50%, var(--primary-blue) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: var(--text-gray);
+            margin-bottom: 2.5rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1rem;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-blue), var(--neon-blue));
+            color: white;
+            box-shadow: 0 10px 30px rgba(0, 102, 204, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 128, 255, 0.6);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--electric-blue);
+            border: 2px solid var(--electric-blue);
+        }
+
+        .btn-secondary:hover {
+            background: var(--electric-blue);
+            color: var(--deep-space);
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 4rem;
+            flex-wrap: wrap;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--electric-blue);
+            display: block;
+        }
+
+        .stat-label {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        /* Seções Gerais */
+        section {
+            padding: 6rem 2rem;
+            position: relative;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-tag {
+            color: var(--electric-blue);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #ffffff, var(--electric-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-subtitle {
+            color: var(--text-gray);
+            max-width: 600px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+        }
+
+        /* Sobre Section */
+        .about {
+            background: linear-gradient(180deg, var(--deep-space) 0%, var(--dark-blue) 100%);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-image {
+            position: relative;
+        }
+
+        .about-image img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 102, 204, 0.3);
+            border: 2px solid var(--glass-border);
+        }
+
+        .about-content h3 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--electric-blue);
+        }
+
+        .about-content p {
+            color: var(--text-gray);
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .experience-list {
+            list-style: none;
+            margin-top: 2rem;
+        }
+
+        .experience-list li {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            color: var(--text-light);
+        }
+
+        .experience-list i {
+            color: var(--electric-blue);
+            font-size: 1.2rem;
+        }
+
+        /* Serviços Section */
+        .services {
+            background: var(--deep-space);
+            position: relative;
+        }
+
+        .services::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('https://kimi-web-img.moonshot.cn/img/thumbs.dreamstime.com/0c28dc25fb2289c7ba659de341ddb878960b758d.jpg');
+            background-size: cover;
+            opacity: 0.1;
+            background-attachment: fixed;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .service-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2.5rem;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-blue), var(--electric-blue));
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 102, 204, 0.3);
+            border-color: var(--electric-blue);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            color: var(--electric-blue);
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-light);
+        }
+
+        .service-card p {
+            color: var(--text-gray);
+            margin-bottom: 1.5rem;
+        }
+
+        .service-features {
+            list-style: none;
+        }
+
+        .service-features li {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--text-gray);
+        }
+
+        .service-features i {
+            color: var(--electric-blue);
+            font-size: 0.8rem;
+        }
+
+        /* Portfolio Section */
+        .portfolio {
+            background: linear-gradient(180deg, var(--dark-blue) 0%, var(--deep-space) 100%);
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .portfolio-item {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .portfolio-item:hover {
+            transform: scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 102, 204, 0.4);
+        }
+
+        .portfolio-image {
+            height: 250px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--dark-blue));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: var(--electric-blue);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .portfolio-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to top, var(--deep-space), transparent);
+        }
+
+        .portfolio-content {
+            padding: 2rem;
+        }
+
+        .portfolio-tag {
+            display: inline-block;
+            background: var(--glass-bg);
+            color: var(--electric-blue);
+            padding: 0.3rem 1rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            margin-bottom: 1rem;
+            border: 1px solid var(--glass-border);
+        }
+
+        .portfolio-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-light);
+        }
+
+        .portfolio-content p {
+            color: var(--text-gray);
+            margin-bottom: 1.5rem;
+        }
+
+        .portfolio-stats {
+            display: flex;
+            gap: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--glass-border);
+        }
+
+        .portfolio-stat {
+            text-align: center;
+        }
+
+        .portfolio-stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--electric-blue);
+            display: block;
+        }
+
+        .portfolio-stat-label {
+            font-size: 0.8rem;
+            color: var(--text-gray);
+        }
+
+        /* Processo Section */
+        .process {
+            background: var(--deep-space);
+        }
+
+        .process-steps {
+            display: flex;
+            justify-content: space-between;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .process-step {
+            flex: 1;
+            min-width: 200px;
+            text-align: center;
+            position: relative;
+        }
+
+        .process-step:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            top: 40px;
+            right: -50%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary-blue), transparent);
+        }
+
+        .step-number {
+            width: 80px;
+            height: 80px;
+            background: var(--glass-bg);
+            border: 2px solid var(--electric-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--electric-blue);
+            margin: 0 auto 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .process-step h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-light);
+        }
+
+        .process-step p {
+            color: var(--text-gray);
+            font-size: 0.95rem;
+        }
+
+        /* Preços Section */
+        .pricing {
+            background: linear-gradient(180deg, var(--deep-space) 0%, var(--dark-blue) 100%);
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .pricing-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            text-align: center;
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .pricing-card.featured {
+            border-color: var(--electric-blue);
+            transform: scale(1.05);
+            box-shadow: 0 20px 40px rgba(0, 102, 204, 0.3);
+        }
+
+        .pricing-card.featured::before {
+            content: 'Mais Popular';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--electric-blue);
+            color: var(--deep-space);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 102, 204, 0.3);
+        }
+
+        .pricing-card.featured:hover {
+            transform: scale(1.05) translateY(-10px);
+        }
+
+        .pricing-name {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-light);
+        }
+
+        .pricing-price {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--electric-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        .pricing-price span {
+            font-size: 1rem;
+            color: var(--text-gray);
+            font-weight: 400;
+        }
+
+        .pricing-description {
+            color: var(--text-gray);
+            margin-bottom: 2rem;
+        }
+
+        .pricing-features {
+            list-style: none;
+            text-align: left;
+            margin-bottom: 2rem;
+        }
+
+        .pricing-features li {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid var(--glass-border);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-gray);
+        }
+
+        .pricing-features li:last-child {
+            border-bottom: none;
+        }
+
+        .pricing-features i {
+            color: var(--electric-blue);
+        }
+
+        /* Contactos Section */
+        .contact {
+            background: var(--deep-space);
+            position: relative;
+        }
+
+        .contact::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('https://kimi-web-img.moonshot.cn/img/gd-hbimg.huaban.com/ef89a69a06971ff7fdd81179be1b3c8bddcf73d7');
+            background-size: cover;
+            opacity: 0.1;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact-info h3 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--electric-blue);
+        }
+
+        .contact-info > p {
+            color: var(--text-gray);
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .contact-methods {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .contact-method {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.5rem;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .contact-method:hover {
+            border-color: var(--electric-blue);
+            transform: translateX(10px);
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--primary-blue);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.3rem;
+        }
+
+        .contact-details h4 {
+            color: var(--text-light);
+            margin-bottom: 0.3rem;
+        }
+
+        .contact-details p {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        .contact-form {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 3rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(0, 26, 51, 0.5);
+            border: 1px solid var(--glass-border);
+            border-radius: 10px;
+            color: var(--text-light);
+            font-family: inherit;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--electric-blue);
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.2);
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark-blue);
+            border-top: 1px solid var(--glass-border);
+            padding: 3rem 2rem 2rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-brand p {
+            color: var(--text-gray);
+            margin-top: 1rem;
+            line-height: 1.8;
+        }
+
+        .footer-links h4 {
+            color: var(--electric-blue);
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: var(--text-gray);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--electric-blue);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid var(--glass-border);
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--electric-blue);
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--electric-blue);
+            color: var(--deep-space);
+            transform: translateY(-3px);
+        }
+
+        /* Responsividade */
+        @media (max-width: 968px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            .about-grid,
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .process-step:not(:last-child)::after {
+                display: none;
+            }
+
+            .process-steps {
+                flex-direction: column;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .pricing-card.featured {
+                transform: scale(1);
+            }
+
+            .pricing-card.featured:hover {
+                transform: scale(1) translateY(-10px);
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero-stats {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .social-links {
+                justify-content: center;
+            }
+
+            .contact-form {
+                padding: 2rem 1.5rem;
+            }
+        }
+
+        /* Animações */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+    <!-- Navegação -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <i class="fas fa-robot"></i>
+                André Carmo
+            </a>
+            <ul class="nav-links">
+                <li><a href="#inicio">Início</a></li>
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="#servicos">Serviços</a></li>
+                <li><a href="#portfolio">Portfólio</a></li>
+                <li><a href="#precos">Preços</a></li>
+                <li><a href="#contactos">Contactos</a></li>
+            </ul>
+            <div class="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="inicio">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <i class="fas fa-sparkles"></i> 30 Anos de Experiência em Tecnologia
+            </div>
+            <h1>Automação Inteligente para Empresas Portuguesas</h1>
+            <p class="hero-subtitle">
+                Transformo negócios com IA e automação. Chatbots WhatsApp, atendimento automático e 
+                processos inteligentes — soluções acessíveis para PMEs que querem crescer sem complicações.
+            </p>
+            <div class="hero-cta">
+                <a href="#contactos" class="btn btn-primary">
+                    <i class="fas fa-rocket"></i> Começar Agora
+                </a>
+                <a href="#portfolio" class="btn btn-secondary">
+                    <i class="fas fa-eye"></i> Ver Projetos
+                </a>
+            </div>
+            <div class="hero-stats">
+                <div class="stat">
+                    <span class="stat-number">30+</span>
+                    <span class="stat-label">Anos em TI</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">48h</span>
+                    <span class="stat-label">Entrega Rápida</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">100%</span>
+                    <span class="stat-label">Focado em PMEs</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sobre Section -->
+    <section class="about" id="sobre">
+        <div class="container">
+            <div class="section-header fade-in">
+                <span class="section-tag">Sobre Mim</span>
+                <h2 class="section-title">Tecnologia ao Serviço do Seu Negócio</h2>
+                <p class="section-subtitle">
+                    Combino três décadas de experiência em arquitetura de sistemas com as mais recentes 
+                    tecnologias de IA para criar soluções práticas e acessíveis.
+                </p>
+            </div>
+            <div class="about-grid">
+                <div class="about-image fade-in">
+                    <img src="https://kimi-web-img.moonshot.cn/img/as2.ftcdn.net/7f6dcdc77c3dc4438c421f658a7bf4b45baccfea.jpg" alt="Tecnologia IA">
+                </div>
+                <div class="about-content fade-in">
+                    <h3>Por Que Escolher Trabalhar Comigo?</h3>
+                    <p>
+                        Ao contrário das grandes consultoras que cobram dezenas de milhares de euros, 
+                        ofereço soluções de automação inteligente especificamente desenhadas para 
+                        pequenas e médias empresas portuguesas.
+                    </p>
+                    <p>
+                        A minha abordagem é simples: entendo o seu negócio, identifico os processos 
+                        que podem ser automatizados e implemento soluções rápidas que começam a 
+                        poupar-lhe tempo e dinheiro imediatamente.
+                    </p>
+                    <ul class="experience-list">
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <span>Arquitetura Windows & Linux — 30 anos de experiência</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <span>Programação e desenvolvimento de software</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <span>Especialização em automação com IA e n8n</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <span>Conhecimento profundo de infraestruturas e APIs</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <span>Compromisso com soluções acessíveis e escaláveis</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Serviços Section -->
+    <section class="services" id="servicos">
+        <div class="container">
+            <div class="section-header fade-in">
+                <span class="section-tag">Serviços</span>
+                <h2 class="section-title">Soluções de Automação para o Seu Negócio</h2>
+                <p class="section-subtitle">
+                    Desde chatbots inteligentes até automação completa de processos — 
+                    escolha a solução que melhor se adapta às suas necessidades.
+                </p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card fade-in">
+                    <i class="fas fa-comments service-icon"></i>
+                    <h3>Chatbots WhatsApp</h3>
+                    <p>
+                        Atendimento automático 24/7 via WhatsApp. Responde a perguntas frequentes, 
+                        qualifica leads e encaminha conversas complexas para a sua equipa.
+                    </p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> Integração com WhatsApp Business</li>
+                        <li><i class="fas fa-check"></i> Respostas inteligentes com IA</li>
+                        <li><i class="fas fa-check"></i> Encaminhamento para humanos</li>
+                        <li><i class="fas fa-check"></i> Relatórios de conversações</li>
+                    </ul>
+                </div>
+                <div class="service-card fade-in">
+                    <i class="fas fa-calendar-check service-icon"></i>
+                    <h3>Agendamento Automático</h3>
+                    <p>
+                        Sistema de marcação de consultas e reuniões automatizado. 
+                        Elimine o telefone e deixe os clientes agendar diretamente pelo WhatsApp ou site.
+                    </p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> Integração com Google Calendar</li>
+                        <li><i class="fas fa-check"></i> Lembretes automáticos SMS/WhatsApp</li>
+                        <li><i class="fas fa-check"></i> Gestão de cancelamentos</li>
+                        <li><i class="fas fa-check"></i> Confirmações automáticas</li>
+                    </ul>
+                </div>
+                <div class="service-card fade-in">
+                    <i class="fas fa-filter service-icon"></i>
+                    <h3>Qualificação de Leads</h3>
+                    <p>
+                        Automatize o processo de captura e qualificação de potenciais clientes. 
+                        O sistema pergunta, classifica e organiza os leads automaticamente.
+                    </p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> Formulários inteligentes</li>
+                        <li><i class="fas fa-check"></i> Pontuação automática de leads</li>
+                        <li><i class="fas fa-check"></i> Integração com CRM</li>
+                        <li><i class="fas fa-check"></i> Notificações em tempo real</li>
+                    </ul>
+                </div>
+                <div class="service-card fade-in">
+                    <i class="fas fa-envelope-open-text service-icon"></i>
+                    <h3>Automação de E-mails</h3>
+                    <p>
+                        Respostas automáticas, classificação de e-mails e follow-ups programados. 
+                        Mantenha a comunicação profissional sem perder tempo.
+                    </p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> Respostas automáticas inteligentes</li>
+                        <li><i class="fas fa-check"></i> Classificação por prioridade</li>
+                        <li><i class="fas fa-check"></i> Sequências de follow-up</li>
+                        <li><i class="fas fa-check"></i> Integração Gmail/Outlook</li>
+                    </ul>
+                </div>
+                <div class="service-card fade-in">
+                    <i class="fas fa-database service-icon"></i>
+                    <h3>Integração de Sistemas</h3>
+                    <p>
+                        Conecte as suas ferramentas favoritas (Excel, Google Sheets, CRMs) 
+                        para eliminar tarefas manuais de transferência de dados.
+                    </p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> Sincronização de dados</li>
+                        <li><i class="fas fa-check"></i> Relatórios automáticos</li>
+                        <li><i class="fas fa-check"></i> Backup automático</li>
+                        <li><i class="fas fa-check"></i> Alertas e notificações</li>
+                    </ul>
+                </div>
+                <div class="service-card fade-in">
+                    <i class="fas fa-robot service-icon"></i>
+                    <h3>Agentes de IA Personalizados</h3>
+                    <p>
+                        Soluções avançadas com inteligência artificial generativa para 
+                        tarefas complexas como análise de documentos e atendimento técnico.
+                    </p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> Processamento de linguagem natural</li>
+                        <li><i class="fas fa-check"></i> Análise de documentos PDF</li>
+                        <li><i class="fas fa-check"></i> Base de conhecimento inteligente</li>
+                        <li><i class="fas fa-check"></i> Aprendizagem contínua</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section class="portfolio" id="portfolio">
+        <div class="container">
+            <div class="section-header fade-in">
+                <span class="section-tag">Portfólio</span>
+                <h2 class="section-title">Projetos Realizados</h2>
+                <p class="section-subtitle">
+                    Exemplos de automações implementadas para clientes em Portugal. 
+                    Resultados reais em pouco tempo.
+                </p>
+            </div>
+            <div class="portfolio-grid">
+                <div class="portfolio-item fade-in">
+                    <div class="portfolio-image">
+                        <i class="fas fa-tooth"></i>
+                    </div>
+                    <div class="portfolio-content">
+                        <span class="portfolio-tag">Saúde</span>
+                        <h3>Clínica Dentária Smile</h3>
+                        <p>
+                            Implementação de chatbot WhatsApp para agendamento de consultas 
+                            e lembretes automáticos. Redução de 70% nas chamadas telefónicas.
+                        </p>
+                        <div class="portfolio-stats">
+                            <div class="portfolio-stat">
+                                <span class="portfolio-stat-value">70%</span>
+                                <span class="portfolio-stat-label">Redução Chamadas</span>
+                            </div>
+                            <div class="portfolio-stat">
+                                <span class="portfolio-stat-value">48h</span>
+                                <span class="portfolio-stat-label">Tempo Implementação</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="portfolio-item fade-in">
+                    <div class="portfolio-image">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <div class="portfolio-content">
+                        <span class="portfolio-tag">Imobiliário</span>
+                        <h3>Imobiliária Casa Nova</h3>
+                        <p>
+                            Sistema de qualificação automática de leads via WhatsApp 
+                            e integração com Google Sheets para gestão de propriedades.
+                        </p>
+                        <div class="portfolio-stats">
+                            <div class="portfolio-stat">
+                                <span class="portfolio-stat-value">3x</span>
+                                <span class="portfolio-stat-label">Mais Leads Qualificados</span>
+                            </div>
+                            <div class="portfolio-stat">
+                                <span class="portfolio-stat-value">5h</span>
+                                <span class="portfolio-stat-label">Poupadas por Dia</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="portfolio-item fade-in">
+                    <div class="portfolio-image">
+                        <i class="fas fa-spa"></i>
+                    </div>
+                    <div class="portfolio-content">
+                        <span class="portfolio-tag">Bem-Estar</span>
+                        <h3>Centro de Estética Belle</h3>
+                        <p>
+                            Automação completa de agendamentos com confirmações automáticas, 
+                            lembretes e gestão de lista de espera.
+                        </p>
+                        <div class="portfolio-stats">
+                            <div class="portfolio-stat">
+                                <span class="portfolio-stat-value">40%</span>
+                                <span class="portfolio-stat-label">Redução Faltas</span>
+                            </div>
+                            <div class="portfolio-stat">
+                                <span class="portfolio-stat-value">24/7</span>
+                                <span class="portfolio-stat-label">Disponibilidade</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Processo Section -->
+    <section class="process">
+        <div class="container">
+            <div class="section-header fade-in">
+                <span class="section-tag">Como Funciona</span>
+                <h2 class="section-title">Processo Simples e Rápido</h2>
+                <p class="section-subtitle">
+                    De ideia a implementação em poucos dias, sem complicações técnicas para si.
+                </p>
+            </div>
+            <div class="process-steps">
+                <div class="process-step fade-in">
+                    <div class="step-number">1</div>
+                    <h3>Diagnóstico</h3>
+                    <p>Conversa inicial para entender o seu negócio e identificar processos que podem ser automatizados.</p>
+                </div>
+                <div class="process-step fade-in">
+                    <div class="step-number">2</div>
+                    <h3>Proposta</h3>
+                    <p>Apresentação de solução personalizada com orçamento transparente e prazos definidos.</p>
+                </div>
+                <div class="process-step fade-in">
+                    <div class="step-number">3</div>
+                    <h3>Implementação</h3>
+                    <p>Desenvolvimento e configuração da solução, normalmente concluído em 24-48 horas.</p>
+                </div>
+                <div class="process-step fade-in">
+                    <div class="step-number">4</div>
+                    <h3>Entrega</h3>
+                    <p>Formação rápida e documentação simples. Suporte contínuo garantido.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Preços Section -->
+    <section class="pricing" id="precos">
+        <div class="container">
+            <div class="section-header fade-in">
+                <span class="section-tag">Investimento</span>
+                <h2 class="section-title">Preços Transparentes</h2>
+                <p class="section-subtitle">
+                    Soluções acessíveis para PMEs. Sem custos escondidos, sem surpresas.
+                </p>
+            </div>
+            <div class="pricing-grid">
+                <div class="pricing-card fade-in">
+                    <h3 class="pricing-name">Starter</h3>
+                    <div class="pricing-price">
+                        €1.350<span>/único</span>
+                    </div>
+                    <p class="pricing-description">
+                        Ideal para pequenos negócios que querem começar com automação.
+                    </p>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> Chatbot WhatsApp básico</li>
+                        <li><i class="fas fa-check"></i> Até 5 fluxos de conversação</li>
+                        <li><i class="fas fa-check"></i> Integração Google Sheets</li>
+                        <li><i class="fas fa-check"></i> Formação básica incluída</li>
+                        <li><i class="fas fa-check"></i> Manutenção mensal €200 após 1 mês</li>
+                    </ul>
+                    <a href="#contactos" class="btn btn-secondary" style="width: 100%;">Escolher Starter</a>
+                </div>
+                <div class="pricing-card featured fade-in">
+                    <h3 class="pricing-name">Business</h3>
+                    <div class="pricing-price">
+                        €3.350<span>/único</span>
+                    </div>
+                    <p class="pricing-description">
+                        Solução completa para empresas em crescimento. Mais popular.
+                    </p>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> Chatbot WhatsApp avançado</li>
+                        <li><i class="fas fa-check"></i> Fluxos ilimitados</li>
+                        <li><i class="fas fa-check"></i> Agendamento automático</li>
+                        <li><i class="fas fa-check"></i> Integração CRM/E-mail</li>
+                        <li><i class="fas fa-check"></i> IA para respostas inteligentes</li>
+                        <li><i class="fas fa-check"></i> Relatórios avançados</li>
+                        <li><i class="fas fa-check"></i> Manutenção mensal €500 após 1 mês</li>
+                    </ul>
+                    <a href="#contactos" class="btn btn-primary" style="width: 100%;">Escolher Business</a>
+                </div>
+                <div class="pricing-card fade-in">
+                    <h3 class="pricing-name">Enterprise</h3>
+                    <div class="pricing-price">
+                        €8.500<span>/único</span>
+                    </div>
+                    <p class="pricing-description">
+                        Automação completa e personalizada para necessidades específicas.
+                    </p>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> Tudo do plano Business</li>
+                        <li><i class="fas fa-check"></i> Agentes de IA personalizados</li>
+                        <li><i class="fas fa-check"></i> Integrações múltiplas</li>
+                        <li><i class="fas fa-check"></i> Análise de documentos</li>
+                        <li><i class="fas fa-check"></i> Base de conhecimento IA</li>
+                        <li><i class="fas fa-check"></i> Suporte prioritário 90 dias</li>
+                        <li><i class="fas fa-check"></i> Manutenção mensal €1.200 após 1 mês</li>
+                    </ul>
+                    <a href="#contactos" class="btn btn-secondary" style="width: 100%;">Contactar</a>
+                </div>
+            </div>
+            <p style="text-align: center; margin-top: 3rem; color: var(--text-gray);">
+                <i class="fas fa-info-circle" style="color: var(--electric-blue);"></i> 
+                Todos os planos incluem instalação, configuração e formação. 
+                Intervenções fora do plano Manutenção a partir de €70/h.
+            </p>
+        </div>
+    </section>
+
+    <!-- Contactos Section -->
+    <section class="contact" id="contactos">
+        <div class="container">
+            <div class="section-header fade-in">
+                <span class="section-tag">Contacto</span>
+                <h2 class="section-title">Vamos Conversar</h2>
+                <p class="section-subtitle">
+                    Pronto para automatizar o seu negócio? Entre em contacto e receba 
+                    uma proposta gratuita em 24 horas.
+                </p>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-info fade-in">
+                    <h3>Fale Comigo Diretamente</h3>
+                    <p>
+                        Estou disponível para uma conversa sem compromisso sobre como a automação 
+                        pode ajudar o seu negócio específico.
+                    </p>
+                    <div class="contact-methods">
+                        <div class="contact-method">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h4>Telefone/WhatsApp</h4>
+                                <p>+351 912 405 722</p>
+                            </div>
+                        </div>
+                        <div class="contact-method">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h4>E-mail</h4>
+                                <p>andre.carmo@gmail.com</p>
+                            </div>
+                        </div>
+                        <div class="contact-method">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h4>Localização</h4>
+                                <p>Portugal</p>
+                            </div>
+                        </div>
+                        <div class="contact-method">
+                            <div class="contact-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h4>Disponibilidade</h4>
+                                <p>Seg-Sex: 9h às 18h | Resposta em 24h</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form fade-in">
+                    <form action="https://formspree.io/f/xgoleojl" method="POST">
+                        <input type="hidden" name="_subject" value="Novo contacto via website - André Carmo">
+
+                        <div class="form-group">
+                            <label for="name">Nome Completo *</label>
+                            <input type="text" id="name" name="name" required placeholder="O seu nome">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">E-mail *</label>
+                            <input type="email" id="email" name="email" required placeholder="seu@email.pt">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone">Telefone</label>
+                            <input type="tel" id="phone" name="telefone" placeholder="+351 9XX XXX XXX">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="company">Nome da Empresa</label>
+                            <input type="text" id="company" name="empresa" placeholder="Nome da sua empresa">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="service">Serviço de Interesse *</label>
+                            <select id="service" name="servico" required>
+                                <option value="">Selecione uma opção</option>
+                                <option value="chatbot">Chatbot WhatsApp</option>
+                                <option value="agendamento">Agendamento Automático</option>
+                                <option value="leads">Qualificação de Leads</option>
+                                <option value="email">Automação de E-mails</option>
+                                <option value="integracao">Integração de Sistemas</option>
+                                <option value="outro">Outro / Não tenho certeza</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">Mensagem</label>
+                            <textarea id="message" name="mensagem" placeholder="Descreva brevemente o que precisa ou as suas dúvidas..."></textarea>
+                        </div>
+
+                        <input type="text" name="_gotcha" style="display:none">
+
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">
+                            <i class="fas fa-paper-plane"></i> Enviar Mensagem
+                        </button>
+
+                        <p style="margin-top: 1rem; font-size: 0.85rem; color: var(--text-gray); text-align: center;">
+                            <i class="fas fa-lock"></i> Os seus dados estão protegidos e nunca serão partilhados.
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <a href="#" class="logo">
+                    <i class="fas fa-robot"></i>
+                    André Carmo
+                </a>
+                <p>
+                    Especialista em automação inteligente para PMEs em Portugal. 
+                    30 anos de experiência em tecnologia ao serviço do seu negócio.
+                </p>
+                <div class="social-links">
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h4>Links Rápidos</h4>
+                <ul>
+                    <li><a href="#inicio">Início</a></li>
+                    <li><a href="#sobre">Sobre</a></li>
+                    <li><a href="#servicos">Serviços</a></li>
+                    <li><a href="#portfolio">Portfólio</a></li>
+                    <li><a href="#precos">Preços</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Serviços</h4>
+                <ul>
+                    <li><a href="#servicos">Chatbots WhatsApp</a></li>
+                    <li><a href="#servicos">Agendamento Automático</a></li>
+                    <li><a href="#servicos">Qualificação de Leads</a></li>
+                    <li><a href="#servicos">Automação de E-mails</a></li>
+                    <li><a href="#servicos">Agentes de IA</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="#">Política de Privacidade</a></li>
+                    <li><a href="#">Termos de Serviço</a></li>
+                    <li><a href="#">RGPD</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 André Carmo. Todos os direitos reservados. | NIF: 217 056 903</p>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Fade in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Mobile menu toggle (simplified)
+        document.querySelector('.mobile-menu').addEventListener('click', function() {
+            alert('Menu mobile - implementar toggle completo se necessário');
+        });
+    </script>
+</body>
+</html>
