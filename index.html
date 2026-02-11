@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Automação de E-mails | André Carmo</title>
-    <meta name="description" content="Automatize a sua comunicação por e-mail. Respostas automáticas, classificação inteligente e follow-ups programados para PMEs em Portugal.">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>André Carmo | Automação Inteligente para Empresas</title>
+    <meta name="description" content="Especialista em automação com IA para PMEs em Portugal. Chatbots WhatsApp, automação de processos e atendimento inteligente.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300 ;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css ">
     <style>
         :root {
             --primary-blue: #0066cc;
@@ -96,8 +96,8 @@
             cursor: pointer;
             color: var(--electric-blue);
         }
-        .page-hero {
-            min-height: 60vh;
+        .hero {
+            min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -106,40 +106,30 @@
             overflow: hidden;
             padding: 6rem 2rem 4rem;
         }
-        .page-hero::before {
+        .hero::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background-image: url('https://kimi-web-img.moonshot.cn/img/as2.ftcdn.net/7f6dcdc77c3dc4438c421f658a7bf4b45baccfea.jpg');
+            background-image: url('https://kimi-web-img.moonshot.cn/img/as2.ftcdn.net/7f6dcdc77c3dc4438c421f658a7bf4b45baccfea.jpg ');
             background-size: cover;
             background-position: center;
             opacity: 0.3;
+            animation: pulse 8s ease-in-out infinite;
         }
-        .page-hero-content {
+        @keyframes pulse {
+            0%, 100% { opacity: 0.2; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(1.05); }
+        }
+        .hero-content {
             position: relative;
             z-index: 2;
             max-width: 900px;
             text-align: center;
         }
-        .breadcrumb {
-            display: flex;
-            justify-content: center;
-            gap: 0.5rem;
-            margin-bottom: 2rem;
-            font-size: 0.9rem;
-            color: var(--text-gray);
-        }
-        .breadcrumb a {
-            color: var(--electric-blue);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-        .breadcrumb a:hover { color: var(--text-light); }
-        .breadcrumb span { color: var(--text-gray); }
-        .page-hero-badge {
+        .hero-badge {
             display: inline-block;
             background: var(--glass-bg);
             border: 1px solid var(--glass-border);
@@ -149,9 +139,14 @@
             color: var(--electric-blue);
             margin-bottom: 2rem;
             backdrop-filter: blur(10px);
+            animation: float 3s ease-in-out infinite;
         }
-        .page-hero h1 {
-            font-size: clamp(2.5rem, 5vw, 3.5rem);
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
             font-weight: 800;
             line-height: 1.1;
             margin-bottom: 1.5rem;
@@ -160,8 +155,8 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
-        .page-hero-subtitle {
-            font-size: 1.2rem;
+        .hero-subtitle {
+            font-size: 1.3rem;
             color: var(--text-gray);
             margin-bottom: 2.5rem;
             max-width: 700px;
@@ -205,6 +200,24 @@
             background: var(--electric-blue);
             color: var(--deep-space);
         }
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 4rem;
+            flex-wrap: wrap;
+        }
+        .stat { text-align: center; }
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--electric-blue);
+            display: block;
+        }
+        .stat-label {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
         section {
             padding: 6rem 2rem;
             position: relative;
@@ -241,156 +254,238 @@
             margin: 0 auto;
             font-size: 1.1rem;
         }
-        .features {
+        .about {
             background: linear-gradient(180deg, var(--deep-space) 0%, var(--dark-blue) 100%);
         }
-        .features-grid {
+        .about-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
         }
-        .feature-card {
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
+        .about-image { position: relative; }
+        .about-image img {
+            width: 100%;
             border-radius: 20px;
-            padding: 2.5rem;
-            transition: all 0.4s ease;
-            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 60px rgba(0, 102, 204, 0.3);
+            border: 2px solid var(--glass-border);
         }
-        .feature-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 102, 204, 0.3);
-            border-color: var(--electric-blue);
-        }
-        .feature-icon {
-            font-size: 2.5rem;
-            color: var(--electric-blue);
+        .about-content h3 {
+            font-size: 2rem;
             margin-bottom: 1.5rem;
-            display: block;
+            color: var(--electric-blue);
         }
-        .feature-card h3 {
-            font-size: 1.4rem;
+        .about-content p {
+            color: var(--text-gray);
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+        .experience-list {
+            list-style: none;
+            margin-top: 2rem;
+        }
+        .experience-list li {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
             margin-bottom: 1rem;
             color: var(--text-light);
         }
-        .feature-card p {
-            color: var(--text-gray);
+        .experience-list i {
+            color: var(--electric-blue);
+            font-size: 1.2rem;
         }
-        .benefits {
+        .services-preview {
             background: var(--deep-space);
             position: relative;
         }
-        .benefits::before {
+        .services-preview::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background-image: url('https://kimi-web-img.moonshot.cn/img/thumbs.dreamstime.com/0c28dc25fb2289c7ba659de341ddb878960b758d.jpg');
+            background-image: url('https://kimi-web-img.moonshot.cn/img/thumbs.dreamstime.com/0c28dc25fb2289c7ba659de341ddb878960b758d.jpg ');
             background-size: cover;
             opacity: 0.1;
+            background-attachment: fixed;
         }
-        .benefits-grid {
+        .services-links-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 3rem;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
             position: relative;
             z-index: 1;
         }
-        .benefit-item {
-            display: flex;
-            gap: 1.5rem;
-            padding: 2rem;
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            transition: all 0.3s ease;
-        }
-        .benefit-item:hover {
-            border-color: var(--electric-blue);
-            transform: translateX(10px);
-        }
-        .benefit-icon {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, var(--primary-blue), var(--neon-blue));
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            color: white;
-            flex-shrink: 0;
-        }
-        .benefit-content h3 {
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
-            color: var(--text-light);
-        }
-        .benefit-content p {
-            color: var(--text-gray);
-            font-size: 0.95rem;
-        }
-        .testimonials {
-            background: linear-gradient(180deg, var(--dark-blue) 0%, var(--deep-space) 100%);
-        }
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-        }
-        .testimonial-card {
+        .service-link-card {
             background: var(--glass-bg);
             border: 1px solid var(--glass-border);
             border-radius: 20px;
             padding: 2.5rem;
-            position: relative;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(10px);
+            text-align: center;
+            text-decoration: none;
+            display: block;
         }
-        .testimonial-card::before {
-            content: '"';
-            font-size: 6rem;
+        .service-link-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 102, 204, 0.3);
+            border-color: var(--electric-blue);
+        }
+        .service-link-icon {
+            font-size: 3rem;
             color: var(--electric-blue);
-            opacity: 0.3;
-            position: absolute;
-            top: 1rem;
-            left: 1.5rem;
-            font-family: Georgia, serif;
-            line-height: 1;
-        }
-        .testimonial-text {
-            color: var(--text-gray);
-            font-style: italic;
             margin-bottom: 1.5rem;
-            position: relative;
-            z-index: 1;
+            display: block;
         }
-        .testimonial-author {
-            display: flex;
+        .service-link-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-light);
+        }
+        .service-link-card p {
+            color: var(--text-gray);
+            margin-bottom: 1.5rem;
+        }
+        .service-link-btn {
+            display: inline-flex;
             align-items: center;
+            gap: 0.5rem;
+            color: var(--electric-blue);
+            font-weight: 600;
+            transition: gap 0.3s ease;
+        }
+        .service-link-card:hover .service-link-btn {
             gap: 1rem;
         }
-        .testimonial-avatar {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, var(--primary-blue), var(--electric-blue));
+        .portfolio {
+            background: linear-gradient(180deg, var(--dark-blue) 0%, var(--deep-space) 100%);
+        }
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+        .portfolio-item {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            position: relative;
+        }
+        .portfolio-item:hover {
+            transform: scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 102, 204, 0.4);
+        }
+        .portfolio-image {
+            height: 250px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--dark-blue));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: var(--electric-blue);
+            position: relative;
+            overflow: hidden;
+        }
+        .portfolio-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to top, var(--deep-space), transparent);
+        }
+        .portfolio-content { padding: 2rem; }
+        .portfolio-tag {
+            display: inline-block;
+            background: var(--glass-bg);
+            color: var(--electric-blue);
+            padding: 0.3rem 1rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            margin-bottom: 1rem;
+            border: 1px solid var(--glass-border);
+        }
+        .portfolio-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-light);
+        }
+        .portfolio-content p {
+            color: var(--text-gray);
+            margin-bottom: 1.5rem;
+        }
+        .portfolio-stats {
+            display: flex;
+            gap: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--glass-border);
+        }
+        .portfolio-stat { text-align: center; }
+        .portfolio-stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--electric-blue);
+            display: block;
+        }
+        .portfolio-stat-label {
+            font-size: 0.8rem;
+            color: var(--text-gray);
+        }
+        .process { background: var(--deep-space); }
+        .process-steps {
+            display: flex;
+            justify-content: space-between;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        .process-step {
+            flex: 1;
+            min-width: 200px;
+            text-align: center;
+            position: relative;
+        }
+        .process-step:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            top: 40px;
+            right: -50%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary-blue), transparent);
+        }
+        .step-number {
+            width: 80px;
+            height: 80px;
+            background: var(--glass-bg);
+            border: 2px solid var(--electric-blue);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 700;
-            color: white;
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--electric-blue);
+            margin: 0 auto 1.5rem;
+            position: relative;
+            z-index: 1;
         }
-        .testimonial-info h4 {
+        .process-step h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
             color: var(--text-light);
-            font-size: 1rem;
         }
-        .testimonial-info p {
+        .process-step p {
             color: var(--text-gray);
-            font-size: 0.85rem;
+            font-size: 0.95rem;
         }
         .pricing {
-            background: var(--deep-space);
+            background: linear-gradient(180deg, var(--deep-space) 0%, var(--dark-blue) 100%);
         }
         .pricing-grid {
             display: grid;
@@ -439,7 +534,7 @@
             color: var(--text-light);
         }
         .pricing-price {
-            font-size: 2.5rem;
+            font-size: 3rem;
             font-weight: 800;
             color: var(--electric-blue);
             margin-bottom: 0.5rem;
@@ -465,7 +560,6 @@
             align-items: center;
             gap: 0.5rem;
             color: var(--text-gray);
-            font-size: 0.95rem;
         }
         .pricing-features li:last-child { border-bottom: none; }
         .pricing-features i { color: var(--electric-blue); }
@@ -480,7 +574,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background-image: url('https://kimi-web-img.moonshot.cn/img/gd-hbimg.huaban.com/ef89a69a06971ff7fdd81179be1b3c8bddcf73d7');
+            background-image: url('https://kimi-web-img.moonshot.cn/img/gd-hbimg.huaban.com/ef89a69a06971ff7fdd81179be1b3c8bddcf73d7 ');
             background-size: cover;
             opacity: 0.1;
         }
@@ -639,19 +733,28 @@
         @media (max-width: 968px) {
             .nav-links { display: none; }
             .mobile-menu { display: block; }
-            .contact-grid, .benefits-grid { grid-template-columns: 1fr; }
+            .about-grid, .contact-grid { grid-template-columns: 1fr; }
+            .process-step:not(:last-child)::after { display: none; }
+            .process-steps { flex-direction: column; }
             .footer-content { grid-template-columns: 1fr 1fr; }
             .pricing-card.featured { transform: scale(1); }
             .pricing-card.featured:hover { transform: scale(1) translateY(-10px); }
+            .services-links-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 640px) {
+            .services-links-grid { grid-template-columns: 1fr; }
         }
         @media (max-width: 576px) {
+            .hero-stats {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
             .footer-content {
                 grid-template-columns: 1fr;
                 text-align: center;
             }
             .social-links { justify-content: center; }
             .contact-form { padding: 2rem 1.5rem; }
-            .benefit-item { flex-direction: column; text-align: center; }
         }
         .fade-in {
             opacity: 0;
@@ -664,14 +767,76 @@
         }
         #successMessage, #errorMessage { display: none; }
     </style>
-    <link rel="canonical" href="https://www.andrecarmo.pt/automacao-emails.html">
-    <meta name="robots" content="index, follow">
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="Automação de E-mails | André Carmo">
-    <meta property="og:description" content="Automatize a sua comunicação por e-mail. Respostas automáticas e follow-ups programados para PMEs.">
-    <meta property="og:url" content="https://www.andrecarmo.pt/automacao-emails.html">
+    <link rel="canonical" href="https://www.andrecarmo.pt">
+
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+
+<meta name="author" content="André Carmo">
+<meta name="keywords" content="automação com IA, chatbots WhatsApp, automação empresarial, n8n, agentes de IA, PMEs Portugal, automação de processos">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="André Carmo | Automação Inteligente com IA para Empresas">
+<meta property="og:description" content="Especialista em automação com IA, chatbots WhatsApp e agentes inteligentes para PMEs em Portugal.">
+<meta property="og:url" content="https://www.andrecarmo.pt ">
+<meta property="og:site_name" content="André Carmo">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="André Carmo | Automação Inteligente com IA">
+<meta name="twitter:description" content="Automação de processos, chatbots WhatsApp e agentes de IA para empresas portuguesas.">
 </head>
 <body>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org ",
+  "@type": "Person",
+  "name": "André Carmo",
+  "url": "https://www.andrecarmo.pt ",
+  "image": "https://www.andrecarmo.pt/favicon.png ",
+  "jobTitle": "Especialista em Automação com Inteligência Artificial",
+  "worksFor": {
+    "@type": "Organization",
+    "name": "André Carmo – Automação Inteligente"
+  },
+  "address": {
+    "@type": "PostalAddress",
+    "addressCountry": "PT"
+  },
+  "knowsAbout": [
+    "Automação de Processos",
+    "Chatbots WhatsApp",
+    "Inteligência Artificial",
+    "n8n",
+    "Integração de APIs",
+    "Agentes de IA"
+  ],
+  "sameAs": [
+    "https://www.linkedin.com/in/stonedge "
+  ]
+}
+</script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org ",
+  "@type": "Service",
+  "serviceType": "Automação com Inteligência Artificial",
+  "provider": {
+    "@type": "Person",
+    "name": "André Carmo"
+  },
+  "areaServed": {
+    "@type": "Country",
+    "name": "Portugal"
+  },
+  "offers": {
+    "@type": "Offer",
+    "priceCurrency": "EUR",
+    "availability": "https://schema.org/InStock "
+  },
+  "description": "Implementação de chatbots WhatsApp, automação de processos empresariais, agentes de IA e integração de sistemas para PMEs."
+}
+</script>
     <nav id="navbar">
         <div class="nav-container">
             <a href="index.html" class="logo">
@@ -684,7 +849,7 @@
                 <li><a href="index.html#servicos">Soluções</a></li>
                 <li><a href="index.html#portfolio">Portfólio</a></li>
                 <li><a href="index.html#precos">Preços</a></li>
-                <li><a href="#contactos">Contactos</a></li>
+                <li><a href="index.html#contactos">Contactos</a></li>
             </ul>
             <div class="mobile-menu">
                 <i class="fas fa-bars"></i>
@@ -692,214 +857,289 @@
         </div>
     </nav>
 
-    <section class="page-hero">
-        <div class="page-hero-content">
-            <div class="breadcrumb">
-                <a href="index.html">Início</a>
-                <span>/</span>
-                <a href="index.html#servicos">Soluções</a>
-                <span>/</span>
-                <span>Automação de E-mails</span>
+    <section class="hero" id="inicio">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <i class="fas fa-sparkles"></i> 30 Anos de Experiência em Tecnologia
             </div>
-            <div class="page-hero-badge">
-                <i class="fas fa-envelope-open-text"></i> Solução de Automação
-            </div>
-            <h1>Automação de E-mails</h1>
-            <p class="page-hero-subtitle">
-                Respostas automáticas inteligentes, classificação de mensagens e follow-ups programados. 
-                Mantenha uma comunicação profissional sem perder tempo.
+            <h1>André Carmo</h1>
+            <h1>Automação Inteligente com IA para Empresas Portuguesas</h1>
+            <p class="hero-subtitle">
+                Transformo negócios com IA e automação. Chatbots WhatsApp, atendimento automático e 
+                processos inteligentes — soluções acessíveis para PMEs que querem crescer sem complicações.
             </p>
             <div class="hero-cta">
                 <a href="#contactos" class="btn btn-primary">
-                    <i class="fas fa-rocket"></i> Pedir Orçamento
+                    <i class="fas fa-rocket"></i> Começar Agora
                 </a>
-                <a href="#funcionalidades" class="btn btn-secondary">
-                    <i class="fas fa-info-circle"></i> Ver Funcionalidades
+                <a href="#portfolio" class="btn btn-secondary">
+                    <i class="fas fa-eye"></i> Ver Projetos
+                </a>
+            </div>
+            <div class="hero-stats">
+                <div class="stat">
+                    <span class="stat-number">30+</span>
+                    <span class="stat-label">Anos em TI</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">48h</span>
+                    <span class="stat-label">Entrega Rápida</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">100%</span>
+                    <span class="stat-label">Focado em PMEs</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="about" id="sobre">
+        <div class="container">
+            <div class="section-header fade-in">
+                <span class="section-tag">Sobre Mim</span>
+                <h2 class="section-title">Tecnologia ao Serviço do Seu Negócio</h2>
+                <p class="section-subtitle">
+                    Combino três décadas de experiência em arquitetura de sistemas com as mais recentes 
+                    tecnologias de IA para criar soluções práticas e acessíveis.
+                </p>
+            </div>
+            <div class="about-grid">
+                <div class="about-image fade-in">
+                    <img src="https://kimi-web-img.moonshot.cn/img/as2.ftcdn.net/7f6dcdc77c3dc4438c421f658a7bf4b45baccfea.jpg " alt="Tecnologia IA">
+                </div>
+                <div class="about-content fade-in">
+                    <h3>Porque Escolher Trabalhar Comigo?</h3>
+                    <p>
+                        Ao contrário das grandes consultoras que cobram dezenas de milhares de euros, 
+                        ofereço soluções de automação inteligente especificamente desenhadas para 
+                        pequenas e médias empresas portuguesas.
+                    </p>
+                    <p>
+                        A minha abordagem é simples: entendo o seu negócio, identifico os processos 
+                        que podem ser automatizados e implemento soluções rápidas que começam a 
+                        poupar-lhe tempo e dinheiro imediatamente.
+                    </p>
+                    <ul class="experience-list">
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <span>Arquitetura Windows & Linux — 30 anos de experiência</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <span>Programação e desenvolvimento de software</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <span>Especialização em automação com IA e n8n</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <span>Conhecimento profundo de infraestruturas e APIs</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <span>Compromisso com soluções acessíveis e escaláveis</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="services-preview" id="servicos">
+        <div class="container">
+            <div class="section-header fade-in">
+                <span class="section-tag">Soluções Acessíveis para PMEs</span>
+                <h2 class="section-title">Escolha a Solução Ideal para o Seu Negócio</h2>
+                <p class="section-subtitle">
+                    Seis soluções de automação inteligente desenhadas especificamente para pequenas 
+                    e médias empresas portuguesas. Clique para ver todos os detalhes de cada serviço.
+                </p>
+            </div>
+            <div class="services-links-grid" style="grid-template-columns: repeat(3, 1fr);">
+                <a href="chatbots-whatsapp.html" class="service-link-card fade-in">
+                    <i class="fas fa-comments service-link-icon"></i>
+                    <h3>Chatbots WhatsApp</h3>
+                    <p>
+                        Atendimento automático 24/7 via WhatsApp. Responde a perguntas frequentes, 
+                        qualifica leads e encaminha conversas complexas.
+                    </p>
+                    <span class="service-link-btn">
+                        Ver Detalhes <i class="fas fa-arrow-right"></i>
+                    </span>
+                </a>
+                <a href="agendamento-automatico.html" class="service-link-card fade-in">
+                    <i class="fas fa-calendar-check service-link-icon"></i>
+                    <h3>Agendamento Automático</h3>
+                    <p>
+                        Sistema de marcação de consultas e reuniões automatizado. 
+                        Elimine o telefone e deixe os clientes agendar diretamente.
+                    </p>
+                    <span class="service-link-btn">
+                        Ver Detalhes <i class="fas fa-arrow-right"></i>
+                    </span>
+                </a>
+                <a href="qualificacao-leads.html" class="service-link-card fade-in">
+                    <i class="fas fa-filter service-link-icon"></i>
+                    <h3>Qualificação de Leads</h3>
+                    <p>
+                        Automatize o processo de captura e qualificação de potenciais clientes. 
+                        O sistema pergunta, classifica e organiza automaticamente.
+                    </p>
+                    <span class="service-link-btn">
+                        Ver Detalhes <i class="fas fa-arrow-right"></i>
+                    </span>
+                </a>
+                <a href="automacao-emails.html" class="service-link-card fade-in">
+                    <i class="fas fa-envelope-open-text service-link-icon"></i>
+                    <h3>Automação de E-mails</h3>
+                    <p>
+                        Respostas automáticas, classificação de e-mails e follow-ups programados. 
+                        Mantenha a comunicação profissional sem perder tempo.
+                    </p>
+                    <span class="service-link-btn">
+                        Ver Detalhes <i class="fas fa-arrow-right"></i>
+                    </span>
+                </a>
+                <a href="integracao-sistemas.html" class="service-link-card fade-in">
+                    <i class="fas fa-database service-link-icon"></i>
+                    <h3>Integração de Sistemas</h3>
+                    <p>
+                        Conecte as suas ferramentas favoritas (Excel, Google Sheets, CRMs) 
+                        para eliminar tarefas manuais de transferência de dados.
+                    </p>
+                    <span class="service-link-btn">
+                        Ver Detalhes <i class="fas fa-arrow-right"></i>
+                    </span>
+                </a>
+                <a href="agentes-ia.html" class="service-link-card fade-in">
+                    <i class="fas fa-robot service-link-icon"></i>
+                    <h3>Agentes de IA</h3>
+                    <p>
+                        Soluções avançadas com inteligência artificial generativa para 
+                        tarefas complexas como análise de documentos e atendimento técnico.
+                    </p>
+                    <span class="service-link-btn">
+                        Ver Detalhes <i class="fas fa-arrow-right"></i>
+                    </span>
                 </a>
             </div>
         </div>
-    </section>
+	    </section>
 
-    <section class="features" id="funcionalidades">
+    <section class="portfolio" id="portfolio">
         <div class="container">
             <div class="section-header fade-in">
-                <span class="section-tag">Funcionalidades</span>
-                <h2 class="section-title">Tudo o Que Precisa para Automatizar os Seus E-mails</h2>
+                <span class="section-tag">Portfólio</span>
+                <h2 class="section-title">Projetos Realizados</h2>
                 <p class="section-subtitle">
-                    Ferramentas completas para transformar a forma como comunica por e-mail, 
-                    reduzindo tempo e aumentando a eficiência.
+                    Exemplos de automações implementadas para clientes em Portugal. 
+                    Resultados reais em pouco tempo.
                 </p>
             </div>
-            <div class="features-grid">
-                <div class="feature-card fade-in">
-                    <i class="fas fa-robot feature-icon"></i>
-                    <h3>Respostas Automáticas Inteligentes</h3>
-                    <p>
-                        Configure respostas automáticas baseadas em palavras-chave e contexto. 
-                        O sistema identifica o tema do e-mail e responde com a informação mais adequada, 
-                        24 horas por dia, 7 dias por semana.
-                    </p>
-                </div>
-                <div class="feature-card fade-in">
-                    <i class="fas fa-tags feature-icon"></i>
-                    <h3>Classificação Automática</h3>
-                    <p>
-                        E-mails automaticamente organizados por categoria, prioridade ou cliente. 
-                        Reduza o tempo a procurar mensagens importantes e concentre-se no que realmente importa.
-                    </p>
-                </div>
-                <div class="feature-card fade-in">
-                    <i class="fas fa-clock feature-icon"></i>
-                    <h3>Follow-ups Programados</h3>
-                    <p>
-                        Nunca mais perca um lead por falta de follow-up. O sistema envia lembretes 
-                        automáticos para si e para os seus clientes, garantindo que nenhuma oportunidade passa despercebida.
-                    </p>
-                </div>
-                <div class="feature-card fade-in">
-                    <i class="fas fa-sync feature-icon"></i>
-                    <h3>Sincronização Gmail/Outlook</h3>
-                    <p>
-                        Integração perfeita com Gmail, Outlook e outros clientes de e-mail. 
-                        Mantém todas as suas automatizações sincronizadas em tempo real, sem necessidade de configurações complexas.
-                    </p>
-                </div>
-                <div class="feature-card fade-in">
-                    <i class="fas fa-chart-line feature-icon"></i>
-                    <h3>Análise de E-mails</h3>
-                    <p>
-                        Métricas detalhadas sobre taxas de abertura, tempo de resposta e eficácia das comunicações. 
-                        Use dados reais para melhorar continuamente a sua estratégia de e-mail.
-                    </p>
-                </div>
-                <div class="feature-card fade-in">
-                    <i class="fas fa-shield-alt feature-icon"></i>
-                    <h3>Proteção contra Spam</h3>
-                    <p>
-                        Filtros avançados que protegem a sua caixa de entrada de spam e e-mails maliciosos, 
-                        mantendo a sua produtividade e segurança digital.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="benefits">
-        <div class="container">
-            <div class="section-header fade-in">
-                <span class="section-tag">Vantagens</span>
-                <h2 class="section-title">Por Que Automatizar os Seus E-mails?</h2>
-                <p class="section-subtitle">
-                    Descubra como esta solução pode transformar a comunicação da sua empresa.
-                </p>
-            </div>
-            <div class="benefits-grid">
-                <div class="benefit-item fade-in">
-                    <div class="benefit-icon">
-                        <i class="fas fa-clock"></i>
+            <div class="portfolio-grid">
+                <div class="portfolio-item fade-in">
+                    <div class="portfolio-image">
+                        <i class="fas fa-tooth"></i>
                     </div>
-                    <div class="benefit-content">
-                        <h3>Poupe 5+ Horas por Dia</h3>
-                        <p>Elimine tarefas repetitivas de e-mail e concentre-se em atividades que realmente fazem crescer o seu negócio.</p>
+                    <div class="portfolio-content">
+                        <span class="portfolio-tag">Saúde</span>
+                        <h3>Clínica Dentária Smile</h3>
+                        <p>
+                            Implementação de chatbot WhatsApp para agendamento de consultas 
+                            e lembretes automáticos. Redução de 70% nas chamadas telefónicas.
+                        </p>
+                        <div class="portfolio-stats">
+                            <div class="portfolio-stat">
+                                <span class="portfolio-stat-value">70%</span>
+                                <span class="portfolio-stat-label">Redução Chamadas</span>
+                            </div>
+                            <div class="portfolio-stat">
+                                <span class="portfolio-stat-value">48h</span>
+                                <span class="portfolio-stat-label">Tempo Implementação</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="benefit-item fade-in">
-                    <div class="benefit-icon">
-                        <i class="fas fa-bolt"></i>
+                <div class="portfolio-item fade-in">
+                    <div class="portfolio-image">
+                        <i class="fas fa-home"></i>
                     </div>
-                    <div class="benefit-content">
-                        <h3>Respostas em Segundos</h3>
-                        <p>Os seus clientes recebem respostas imediatas, mesmo fora do horário de trabalho. Multas nunca mais esperam.</p>
-                    </div>
-                </div>
-                <div class="benefit-item fade-in">
-                    <div class="benefit-icon">
-                        <i class="fas fa-user-friends"></i>
-                    </div>
-                    <div class="benefit-content">
-                        <h3>Atendimento Personalizado</h3>
-                        <p>Cada cliente recebe uma resposta adequada ao seu histórico e necessidades específicas.</p>
-                    </div>
-                </div>
-                <div class="benefit-item fade-in">
-                    <div class="benefit-icon">
-                        <i class="fas fa-chart-pie"></i>
-                    </div>
-                    <div class="benefit-content">
-                        <h3>Mais Leads Convertidos</h3>
-                        <p>Follow-ups automáticos garantem que nenhuma oportunidade de negócio é esquecida.</p>
+                    <div class="portfolio-content">
+                        <span class="portfolio-tag">Imobiliário</span>
+                        <h3>Imobiliária Casa Nova</h3>
+                        <p>
+                            Sistema de qualificação automática de leads via WhatsApp 
+                            e integração com Google Sheets para gestão de propriedades.
+                        </p>
+                        <div class="portfolio-stats">
+                            <div class="portfolio-stat">
+                                <span class="portfolio-stat-value">3x</span>
+                                <span class="portfolio-stat-label">Mais Leads Qualificados</span>
+                            </div>
+                            <div class="portfolio-stat">
+                                <span class="portfolio-stat-value">5h</span>
+                                <span class="portfolio-stat-label">Poupadas por Dia</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="benefit-item fade-in">
-                    <div class="benefit-icon">
-                        <i class="fas fa-check-circle"></i>
+                <div class="portfolio-item fade-in">
+                    <div class="portfolio-image">
+                        <i class="fas fa-spa"></i>
                     </div>
-                    <div class="benefit-content">
-                        <h3>Zero Erros Humanos</h3>
-                        <p>Esqueça e-mails respondidos pela metade ou respostas copy-paste inadequadas.</p>
-                    </div>
-                </div>
-                <div class="benefit-item fade-in">
-                    <div class="benefit-icon">
-                        <i class="fas fa-expand-arrows-alt"></i>
-                    </div>
-                    <div class="benefit-content">
-                        <h3>Escalável</h3>
-                        <p>Funciona perfeitamente seja para 10 ou 10.000 e-mails por dia. A solução cresce com o seu negócio.</p>
+                    <div class="portfolio-content">
+                        <span class="portfolio-tag">Bem-Estar</span>
+                        <h3>Centro de Estética Belle</h3>
+                        <p>
+                            Automação completa de agendamentos com confirmações automáticas, 
+                            lembretes e gestão de lista de espera.
+                        </p>
+                        <div class="portfolio-stats">
+                            <div class="portfolio-stat">
+                                <span class="portfolio-stat-value">40%</span>
+                                <span class="portfolio-stat-label">Redução Faltas</span>
+                            </div>
+                            <div class="portfolio-stat">
+                                <span class="portfolio-stat-value">24/7</span>
+                                <span class="portfolio-stat-label">Disponibilidade</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="testimonials">
+    <section class="process">
         <div class="container">
             <div class="section-header fade-in">
-                <span class="section-tag">Depoimentos</span>
-                <h2 class="section-title">O Que Dizem os Nossos Clientes</h2>
+                <span class="section-tag">Como Funciona</span>
+                <h2 class="section-title">Processo Simples e Rápido</h2>
                 <p class="section-subtitle">
-                    Empresas que já automatizaram os seus e-mails connosco.
+                    De ideia a implementação em poucos dias, sem complicações técnicas para si.
                 </p>
             </div>
-            <div class="testimonials-grid">
-                <div class="testimonial-card fade-in">
-                    <p class="testimonial-text">
-                        "Passámos de 200 e-mails por dia para uma gestão 完全 automatizada. 
-                        A nossa equipa agora foca-se em fechar negócios, não em responder mensagens."
-                    </p>
-                    <div class="testimonial-author">
-                        <div class="testimonial-avatar">MR</div>
-                        <div class="testimonial-info">
-                            <h4>Miguel Rodrigues</h4>
-                            <p>Diretor Comercial, TechNova Lda</p>
-                        </div>
-                    </div>
+            <div class="process-steps">
+                <div class="process-step fade-in">
+                    <div class="step-number">1</div>
+                    <h3>Diagnóstico</h3>
+                    <p>Conversa inicial para entender o seu negócio e identificar processos que podem ser automatizados.</p>
                 </div>
-                <div class="testimonial-card fade-in">
-                    <p class="testimonial-text">
-                        "Nunca mais perdi um lead por falta de resposta. O sistema faz follow-up automático 
-                        e as conversões aumentaram 40% em 3 meses."
-                    </p>
-                    <div class="testimonial-author">
-                        <div class="testimonial-avatar">SP</div>
-                        <div class="testimonial-info">
-                            <h4>Susana Pereira</h4>
-                            <p>CEO, Marketing Digital Plus</p>
-                        </div>
-                    </div>
+                <div class="process-step fade-in">
+                    <div class="step-number">2</div>
+                    <h3>Proposta</h3>
+                    <p>Apresentação de solução personalizada com orçamento transparente e prazos definidos.</p>
                 </div>
-                <div class="testimonial-card fade-in">
-                    <p class="testimonial-text">
-                        "A classificação automática de e-mails mudou a forma como trabalho. 
-                        Chego de manhã e já tenho as mensagens importantes destacadas."
-                    </p>
-                    <div class="testimonial-author">
-                        <div class="testimonial-avatar">JC</div>
-                        <div class="testimonial-info">
-                            <h4>João Costa</h4>
-                            <p>Gestor de Projetos, ConstróiFacil</p>
-                        </div>
-                    </div>
+                <div class="process-step fade-in">
+                    <div class="step-number">3</div>
+                    <h3>Implementação</h3>
+                    <p>Desenvolvimento e configuração da solução, normalmente concluído em 24-48 horas.</p>
+                </div>
+                <div class="process-step fade-in">
+                    <div class="step-number">4</div>
+                    <h3>Entrega</h3>
+                    <p>Formação rápida e documentação simples. Suporte contínuo garantido.</p>
                 </div>
             </div>
         </div>
@@ -909,72 +1149,72 @@
         <div class="container">
             <div class="section-header fade-in">
                 <span class="section-tag">Investimento</span>
-                <h2 class="section-title">Planos para Automação de E-mails</h2>
+                <h2 class="section-title">Preços Transparentes</h2>
                 <p class="section-subtitle">
-                    Escolha o plano que melhor se adapta às necessidades da sua empresa.
+                    Soluções acessíveis para PMEs. Sem custos escondidos, sem surpresas.
                 </p>
             </div>
             <div class="pricing-grid">
                 <div class="pricing-card fade-in">
-                    <h3 class="pricing-name">Básico</h3>
+                    <h3 class="pricing-name">Starter</h3>
                     <div class="pricing-price">
-                        €890<span>/único</span>
+                        €1.350<span>/único</span>
                     </div>
                     <p class="pricing-description">
-                        Ideal para pequenas empresas com volume moderado de e-mails.
+                        Ideal para pequenos negócios que querem começar com automação.
                     </p>
                     <ul class="pricing-features">
-                        <li><i class="fas fa-check"></i> Respostas automáticas básicas</li>
-                        <li><i class="fas fa-check"></i> Classificação até 5 categorias</li>
-                        <li><i class="fas fa-check"></i> Integração Gmail/Outlook</li>
-                        <li><i class="fas fa-check"></i> 3 sequências de follow-up</li>
-                        <li><i class="fas fa-check"></i> Relatórios básicos</li>
-                        <li><i class="fas fa-check"></i> Manutenção €150/mês</li>
+                        <li><i class="fas fa-check"></i> Chatbot WhatsApp básico</li>
+                        <li><i class="fas fa-check"></i> Até 5 fluxos de conversação</li>
+                        <li><i class="fas fa-check"></i> Integração Google Sheets</li>
+                        <li><i class="fas fa-check"></i> Formação básica incluída</li>
+                        <li><i class="fas fa-check"></i> Manutenção mensal €200 após 1 mês</li>
                     </ul>
-                    <a href="#contactos" class="btn btn-secondary" style="width: 100%;">Escolher Básico</a>
+                    <a href="#contactos" class="btn btn-secondary" style="width: 100%;">Escolher Starter</a>
                 </div>
                 <div class="pricing-card featured fade-in">
-                    <h3 class="pricing-name">Profissional</h3>
+                    <h3 class="pricing-name">Business</h3>
                     <div class="pricing-price">
-                        €1.890<span>/único</span>
+                        €3.350<span>/único</span>
                     </div>
                     <p class="pricing-description">
                         Solução completa para empresas em crescimento. Mais popular.
                     </p>
                     <ul class="pricing-features">
-                        <li><i class="fas fa-check"></i> Respostas automáticas com IA</li>
-                        <li><i class="fas fa-check"></i> Classificação ilimitada</li>
-                        <li><i class="fas fa-check"></i> Integração múltipla</li>
-                        <li><i class="fas fa-check"></i> Follow-ups ilimitados</li>
-                        <li><i class="fas fa-check"></i> Análise avançada</li>
-                        <li><i class="fas fa-check"></i> Segmentação de clientes</li>
-                        <li><i class="fas fa-check"></i> Manutenção €300/mês</li>
+                        <li><i class="fas fa-check"></i> Chatbot WhatsApp avançado</li>
+                        <li><i class="fas fa-check"></i> Fluxos ilimitados</li>
+                        <li><i class="fas fa-check"></i> Agendamento automático</li>
+                        <li><i class="fas fa-check"></i> Integração CRM/E-mail</li>
+                        <li><i class="fas fa-check"></i> IA para respostas inteligentes</li>
+                        <li><i class="fas fa-check"></i> Relatórios avançados</li>
+                        <li><i class="fas fa-check"></i> Manutenção mensal €500 após 1 mês</li>
                     </ul>
-                    <a href="#contactos" class="btn btn-primary" style="width: 100%;">Escolher Profissional</a>
+                    <a href="#contactos" class="btn btn-primary" style="width: 100%;">Escolher Business</a>
                 </div>
                 <div class="pricing-card fade-in">
                     <h3 class="pricing-name">Enterprise</h3>
                     <div class="pricing-price">
-                        €4.500<span>/único</span>
+                        €8.500<span>/único</span>
                     </div>
                     <p class="pricing-description">
-                        Automação completa para grandes volumes e necessidades específicas.
+                        Automação completa e personalizada para necessidades específicas.
                     </p>
                     <ul class="pricing-features">
-                        <li><i class="fas fa-check"></i> Tudo do Profissional</li>
-                        <li><i class="fas fa-check"></i> Agente de IA dedicado</li>
-                        <li><i class="fas fa-check"></i> Múltiplas caixas de e-mail</li>
-                        <li><i class="fas fa-check"></i> API personalizada</li>
-                        <li><i class="fas fa-check"></i> Relatórios customizados</li>
-                        <li><i class="fas fa-check"></i> Suporte prioritário</li>
-                        <li><i class="fas fa-check"></i> Manutenção €600/mês</li>
+                        <li><i class="fas fa-check"></i> Tudo do plano Business</li>
+                        <li><i class="fas fa-check"></i> Agentes de IA personalizados</li>
+                        <li><i class="fas fa-check"></i> Integrações múltiplas</li>
+                        <li><i class="fas fa-check"></i> Análise de documentos</li>
+                        <li><i class="fas fa-check"></i> Base de conhecimento IA</li>
+                        <li><i class="fas fa-check"></i> Suporte prioritário 90 dias</li>
+                        <li><i class="fas fa-check"></i> Manutenção mensal €1.200 após 1 mês</li>
                     </ul>
                     <a href="#contactos" class="btn btn-secondary" style="width: 100%;">Contactar</a>
                 </div>
             </div>
             <p style="text-align: center; margin-top: 3rem; color: var(--text-gray);">
                 <i class="fas fa-info-circle" style="color: var(--electric-blue);"></i> 
-                Implementação típica em 48 horas. Todos os planos incluem formação e documentação.
+                Todos os planos incluem instalação, configuração e formação. 
+                Intervenções fora do plano Manutenção a partir de €70/h.
             </p>
         </div>
     </section>
@@ -983,17 +1223,18 @@
         <div class="container">
             <div class="section-header fade-in">
                 <span class="section-tag">Contacto</span>
-                <h2 class="section-title">Vamos Automatizar os Seus E-mails</h2>
+                <h2 class="section-title">Vamos Conversar</h2>
                 <p class="section-subtitle">
-                    Entre em contacto para uma proposta personalizada. Resposta garantida em 24 horas.
+                    Pronto para automatizar o seu negócio? Entre em contacto e receba 
+                    uma proposta gratuita em 24 horas.
                 </p>
             </div>
             <div class="contact-grid">
                 <div class="contact-info fade-in">
                     <h3>Fale Comigo Diretamente</h3>
                     <p>
-                        Estou disponível para esclarecer todas as suas dúvidas sobre a automação de e-mails 
-                        e como pode beneficiar o seu negócio específico.
+                        Estou disponível para uma conversa sem compromisso sobre como a automação 
+                        pode ajudar o seu negócio específico.
                     </p>
                     <div class="contact-methods">
                         <div class="contact-method">
@@ -1016,18 +1257,27 @@
                         </div>
                         <div class="contact-method">
                             <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h4>Localização</h4>
+                                <p>Portugal</p>
+                            </div>
+                        </div>
+                        <div class="contact-method">
+                            <div class="contact-icon">
                                 <i class="fas fa-clock"></i>
                             </div>
                             <div class="contact-details">
                                 <h4>Disponibilidade</h4>
-                                <p>Seg-Sex: 9h às 18h</p>
+                                <p>Seg-Sex: 9h às 18h | Resposta em 24h</p>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="contact-form fade-in">
-                    <form id="contactForm" action="https://formspree.io/f/xgoleojl" method="POST">
-                        <input type="hidden" name="_subject" value="Novo contacto - Automação de E-mails">
+                    <form id="contactForm" action="https://formspree.io/f/xgoleojl " method="POST">
+                        <input type="hidden" name="_subject" value="Novo contacto via website - André Carmo">
                         
                         <div class="form-group">
                             <label for="name">Nome Completo *</label>
@@ -1053,16 +1303,18 @@
                             <label for="service">Serviço de Interesse *</label>
                             <select id="service" name="servico" required>
                                 <option value="">Selecione uma opção</option>
-                                <option value="email-basico">Automação de E-mails - Básico</option>
-                                <option value="email-profissional">Automação de E-mails - Profissional</option>
-                                <option value="email-enterprise">Automação de E-mails - Enterprise</option>
+                                <option value="chatbot">Chatbot WhatsApp</option>
+                                <option value="agendamento">Agendamento Automático</option>
+                                <option value="leads">Qualificação de Leads</option>
+                                <option value="email">Automação de E-mails</option>
+                                <option value="integracao">Integração de Sistemas</option>
                                 <option value="outro">Outro / Não tenho certeza</option>
                             </select>
                         </div>
 
                         <div class="form-group">
                             <label for="message">Mensagem</label>
-                            <textarea id="message" name="mensagem" placeholder="Descreva brevemente as suas necessidades de automação de e-mails..."></textarea>
+                            <textarea id="message" name="mensagem" placeholder="Descreva brevemente o que precisa ou as suas dúvidas..."></textarea>
                         </div>
 
                         <input type="text" name="_gotcha" style="display:none">
@@ -1074,13 +1326,19 @@
                         <div id="successMessage" style="display: none; margin-top: 2rem; padding: 2rem; background: rgba(0, 212, 255, 0.1); border: 1px solid var(--electric-blue); border-radius: 15px; text-align: center;">
                             <i class="fas fa-check-circle" style="font-size: 3rem; color: var(--electric-blue); margin-bottom: 1rem;"></i>
                             <h3 style="color: var(--electric-blue); margin-bottom: 0.5rem; font-size: 1.5rem;">Mensagem Enviada!</h3>
-                            <p style="color: var(--text-gray);">Obrigado. Responderei em 24 horas.</p>
+                            <p style="color: var(--text-gray); margin-bottom: 1rem;">Obrigado pelo contacto. Responderei em breve, normalmente dentro de 24 horas.</p>
+                            <p style="color: var(--text-gray); font-size: 0.9rem;">Se precisar de algo urgente: <strong style="color: var(--electric-blue);">+351 912 405 722</strong></p>
                         </div>
 
                         <div id="errorMessage" style="display: none; margin-top: 2rem; padding: 1.5rem; background: rgba(255, 0, 0, 0.1); border: 1px solid #ff4444; border-radius: 10px; text-align: center;">
-                            <i class="fas fa-exclamation-circle" style="font-size: 2rem; color: #ff4444;"></i>
-                            <h3 style="color: #ff4444; margin-top: 0.5rem;">Erro ao Enviar</h3>
+                            <i class="fas fa-exclamation-circle" style="font-size: 2rem; color: #ff4444; margin-bottom: 0.5rem;"></i>
+                            <h3 style="color: #ff4444; margin-bottom: 0.5rem;">Erro ao Enviar</h3>
+                            <p style="color: var(--text-gray); font-size: 0.9rem;">Por favor, tente novamente ou contacte-me diretamente pelo telefone.</p>
                         </div>
+
+                        <p style="margin-top: 1rem; font-size: 0.85rem; color: var(--text-gray); text-align: center;">
+                            <i class="fas fa-lock"></i> Os seus dados estão protegidos e nunca serão partilhados.
+                        </p>
                     </form>
                 </div>
             </div>
@@ -1099,10 +1357,10 @@
                     30 anos de experiência em tecnologia ao serviço do seu negócio.
                 </p>
                 <div class="social-links">
-                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="#"><i class="fab fa-github"></i></a>
-                    <a href="#"><i class="fab fa-whatsapp"></i></a>
-                    <a href="#"><i class="fas fa-envelope"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#" aria-label="Email"><i class="fas fa-envelope"></i></a>
                 </div>
             </div>
             <div class="footer-links">
@@ -1141,55 +1399,97 @@
     </footer>
 
     <script>
+        // Navbar scroll effect
         window.addEventListener('scroll', function() {
             const navbar = document.getElementById('navbar');
-            navbar.classList.toggle('scrolled', window.scrollY > 50);
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
         });
 
+        // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
+            anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
-                if (target) target.scrollIntoView({ behavior: 'smooth' });
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
             });
         });
 
-        const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+        // Fade in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
         const observer = new IntersectionObserver(function(entries) {
             entries.forEach(entry => {
-                if (entry.isIntersecting) entry.target.classList.add('visible');
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
             });
         }, observerOptions);
-        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // AJAX Form Submission
         document.getElementById('contactForm').addEventListener('submit', function(e) {
             e.preventDefault();
+            
             const form = this;
             const submitBtn = document.getElementById('submitBtn');
             const successMsg = document.getElementById('successMessage');
             const errorMsg = document.getElementById('errorMessage');
             
+            // Desativa o botão durante o envio
             submitBtn.disabled = true;
             submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> A enviar...';
             
+            // Prepara os dados
+            const formData = new FormData(form);
+            
+            // Envia via AJAX
             fetch(form.action, {
                 method: 'POST',
-                body: new FormData(form),
-                headers: { 'Accept': 'application/json' }
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
             })
             .then(response => {
                 if (response.ok) {
-                    form.querySelectorAll('.form-group, #submitBtn').forEach(el => el.style.display = 'none');
+                    // Esconde o formulário e mostra sucesso
+                    form.querySelectorAll('.form-group, #submitBtn').forEach(el => {
+                        el.style.display = 'none';
+                    });
                     successMsg.style.display = 'block';
+                    
+                    // Scroll para a mensagem
+                    successMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 } else {
-                    throw new Error('Erro');
+                    throw new Error('Erro no servidor');
                 }
             })
-            .catch(() => {
+            .catch(error => {
+                // Mostra erro
                 errorMsg.style.display = 'block';
                 submitBtn.disabled = false;
                 submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Tentar Novamente';
             });
+        });
+
+        // Mobile menu toggle (simplified)
+        document.querySelector('.mobile-menu').addEventListener('click', function() {
+            alert('Menu mobile - implementar toggle completo se necessário');
         });
     </script>
 </body>
