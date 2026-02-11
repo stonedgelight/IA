@@ -295,11 +295,11 @@
             color: var(--electric-blue);
             font-size: 1.2rem;
         }
-        .services {
+        .services-preview {
             background: var(--deep-space);
             position: relative;
         }
-        .services::before {
+        .services-preview::before {
             content: '';
             position: absolute;
             top: 0;
@@ -311,67 +311,54 @@
             opacity: 0.1;
             background-attachment: fixed;
         }
-        .services-grid {
+        .services-links-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 2rem;
             position: relative;
             z-index: 1;
         }
-        .service-card {
+        .service-link-card {
             background: var(--glass-bg);
             border: 1px solid var(--glass-border);
             border-radius: 20px;
             padding: 2.5rem;
             transition: all 0.4s ease;
             backdrop-filter: blur(10px);
-            position: relative;
-            overflow: hidden;
+            text-align: center;
+            text-decoration: none;
+            display: block;
         }
-        .service-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: linear-gradient(90deg, var(--primary-blue), var(--electric-blue));
-            transform: scaleX(0);
-            transition: transform 0.4s ease;
-        }
-        .service-card:hover::before { transform: scaleX(1); }
-        .service-card:hover {
+        .service-link-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 20px 40px rgba(0, 102, 204, 0.3);
             border-color: var(--electric-blue);
         }
-        .service-icon {
+        .service-link-icon {
             font-size: 3rem;
             color: var(--electric-blue);
             margin-bottom: 1.5rem;
             display: block;
         }
-        .service-card h3 {
+        .service-link-card h3 {
             font-size: 1.5rem;
             margin-bottom: 1rem;
             color: var(--text-light);
         }
-        .service-card p {
+        .service-link-card p {
             color: var(--text-gray);
             margin-bottom: 1.5rem;
         }
-        .service-features { list-style: none; }
-        .service-features li {
-            display: flex;
+        .service-link-btn {
+            display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            margin-bottom: 0.5rem;
-            font-size: 0.9rem;
-            color: var(--text-gray);
-        }
-        .service-features i {
             color: var(--electric-blue);
-            font-size: 0.8rem;
+            font-weight: 600;
+            transition: gap 0.3s ease;
+        }
+        .service-link-card:hover .service-link-btn {
+            gap: 1rem;
         }
         .portfolio {
             background: linear-gradient(180deg, var(--dark-blue) 0%, var(--deep-space) 100%);
@@ -752,6 +739,7 @@
             .footer-content { grid-template-columns: 1fr 1fr; }
             .pricing-card.featured { transform: scale(1); }
             .pricing-card.featured:hover { transform: scale(1) translateY(-10px); }
+            .services-links-grid { grid-template-columns: 1fr; }
         }
         @media (max-width: 576px) {
             .hero-stats {
@@ -776,7 +764,7 @@
         }
         #successMessage, #errorMessage { display: none; }
     </style>
-    <link rel="canonical" href="https://www.andrecarmo.pt ">
+    <link rel="canonical" href="https://www.andrecarmo.pt">
 
 <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
 
@@ -848,17 +836,17 @@
 </script>
     <nav id="navbar">
         <div class="nav-container">
-            <a href="#" class="logo">
+            <a href="index.html" class="logo">
                 <i class="fas fa-robot"></i>
                 André Carmo
             </a>
             <ul class="nav-links">
-                <li><a href="#inicio">Início</a></li>
-                <li><a href="#sobre">Sobre</a></li>
-                <li><a href="#servicos">Serviços</a></li>
-                <li><a href="#portfolio">Portfólio</a></li>
-                <li><a href="#precos">Preços</a></li>
-                <li><a href="#contactos">Contactos</a></li>
+                <li><a href="index.html#inicio">Início</a></li>
+                <li><a href="index.html#sobre">Sobre</a></li>
+                <li><a href="index.html#servicos">Soluções</a></li>
+                <li><a href="index.html#portfolio">Portfólio</a></li>
+                <li><a href="index.html#precos">Preços</a></li>
+                <li><a href="index.html#contactos">Contactos</a></li>
             </ul>
             <div class="mobile-menu">
                 <i class="fas fa-bars"></i>
@@ -955,101 +943,50 @@
         </div>
     </section>
 
-    <section class="services" id="servicos">
+    <section class="services-preview" id="servicos">
         <div class="container">
             <div class="section-header fade-in">
-                <span class="section-tag">Serviços</span>
-                <h2 class="section-title">Soluções de Automação para o Seu Negócio</h2>
+                <span class="section-tag">Soluções Acessíveis para PMEs</span>
+                <h2 class="section-title">Escolha a Solução Ideal para o Seu Negócio</h2>
                 <p class="section-subtitle">
-                    Desde chatbots inteligentes até automação completa de processos — 
-                    escolha a solução que melhor se adapta às suas necessidades.
+                    Três soluções de automação inteligente desenhadas especificamente para pequenas 
+                    e médias empresas portuguesas. Clique para ver todos os detalhes.
                 </p>
             </div>
-            <div class="services-grid">
-                <div class="service-card fade-in">
-                    <i class="fas fa-comments service-icon"></i>
+            <div class="services-links-grid">
+                <a href="chatbots-whatsapp.html" class="service-link-card fade-in">
+                    <i class="fas fa-comments service-link-icon"></i>
                     <h3>Chatbots WhatsApp</h3>
                     <p>
                         Atendimento automático 24/7 via WhatsApp. Responde a perguntas frequentes, 
-                        qualifica leads e encaminha conversas complexas para a sua equipa.
+                        qualifica leads e encaminha conversas complexas.
                     </p>
-                    <ul class="service-features">
-                        <li><i class="fas fa-check"></i> Integração com WhatsApp Business</li>
-                        <li><i class="fas fa-check"></i> Respostas inteligentes com IA</li>
-                        <li><i class="fas fa-check"></i> Encaminhamento para humanos</li>
-                        <li><i class="fas fa-check"></i> Relatórios de conversações</li>
-                    </ul>
-                </div>
-                <div class="service-card fade-in">
-                    <i class="fas fa-calendar-check service-icon"></i>
+                    <span class="service-link-btn">
+                        Ver Detalhes <i class="fas fa-arrow-right"></i>
+                    </span>
+                </a>
+                <a href="agendamento-automatico.html" class="service-link-card fade-in">
+                    <i class="fas fa-calendar-check service-link-icon"></i>
                     <h3>Agendamento Automático</h3>
                     <p>
                         Sistema de marcação de consultas e reuniões automatizado. 
-                        Elimine o telefone e deixe os clientes agendar diretamente pelo WhatsApp ou site.
+                        Elimine o telefone e deixe os clientes agendar diretamente.
                     </p>
-                    <ul class="service-features">
-                        <li><i class="fas fa-check"></i> Integração com Google Calendar</li>
-                        <li><i class="fas fa-check"></i> Lembretes automáticos SMS/WhatsApp</li>
-                        <li><i class="fas fa-check"></i> Gestão de cancelamentos</li>
-                        <li><i class="fas fa-check"></i> Confirmações automáticas</li>
-                    </ul>
-                </div>
-                <div class="service-card fade-in">
-                    <i class="fas fa-filter service-icon"></i>
+                    <span class="service-link-btn">
+                        Ver Detalhes <i class="fas fa-arrow-right"></i>
+                    </span>
+                </a>
+                <a href="qualificacao-leads.html" class="service-link-card fade-in">
+                    <i class="fas fa-filter service-link-icon"></i>
                     <h3>Qualificação de Leads</h3>
                     <p>
                         Automatize o processo de captura e qualificação de potenciais clientes. 
-                        O sistema pergunta, classifica e organiza os leads automaticamente.
+                        O sistema pergunta, classifica e organiza automaticamente.
                     </p>
-                    <ul class="service-features">
-                        <li><i class="fas fa-check"></i> Formulários inteligentes</li>
-                        <li><i class="fas fa-check"></i> Pontuação automática de leads</li>
-                        <li><i class="fas fa-check"></i> Integração com CRM</li>
-                        <li><i class="fas fa-check"></i> Notificações em tempo real</li>
-                    </ul>
-                </div>
-                <div class="service-card fade-in">
-                    <i class="fas fa-envelope-open-text service-icon"></i>
-                    <h3>Automação de E-mails</h3>
-                    <p>
-                        Respostas automáticas, classificação de e-mails e follow-ups programados. 
-                        Mantenha a comunicação profissional sem perder tempo.
-                    </p>
-                    <ul class="service-features">
-                        <li><i class="fas fa-check"></i> Respostas automáticas inteligentes</li>
-                        <li><i class="fas fa-check"></i> Classificação por prioridade</li>
-                        <li><i class="fas fa-check"></i> Sequências de follow-up</li>
-                        <li><i class="fas fa-check"></i> Integração Gmail/Outlook</li>
-                    </ul>
-                </div>
-                <div class="service-card fade-in">
-                    <i class="fas fa-database service-icon"></i>
-                    <h3>Integração de Sistemas</h3>
-                    <p>
-                        Conecte as suas ferramentas favoritas (Excel, Google Sheets, CRMs) 
-                        para eliminar tarefas manuais de transferência de dados.
-                    </p>
-                    <ul class="service-features">
-                        <li><i class="fas fa-check"></i> Sincronização de dados</li>
-                        <li><i class="fas fa-check"></i> Relatórios automáticos</li>
-                        <li><i class="fas fa-check"></i> Backup automático</li>
-                        <li><i class="fas fa-check"></i> Alertas e notificações</li>
-                    </ul>
-                </div>
-                <div class="service-card fade-in">
-                    <i class="fas fa-robot service-icon"></i>
-                    <h3>Agentes de IA Personalizados</h3>
-                    <p>
-                        Soluções avançadas com inteligência artificial generativa para 
-                        tarefas complexas como análise de documentos e atendimento técnico.
-                    </p>
-                    <ul class="service-features">
-                        <li><i class="fas fa-check"></i> Processamento de linguagem natural</li>
-                        <li><i class="fas fa-check"></i> Análise de documentos PDF</li>
-                        <li><i class="fas fa-check"></i> Base de conhecimento inteligente</li>
-                        <li><i class="fas fa-check"></i> Aprendizagem contínua</li>
-                    </ul>
-                </div>
+                    <span class="service-link-btn">
+                        Ver Detalhes <i class="fas fa-arrow-right"></i>
+                    </span>
+                </a>
             </div>
         </div>
 	    </section>
@@ -1375,7 +1312,7 @@
     <footer>
         <div class="footer-content">
             <div class="footer-brand">
-                <a href="#" class="logo">
+                <a href="index.html" class="logo">
                     <i class="fas fa-robot"></i>
                     André Carmo
                 </a>
@@ -1393,21 +1330,21 @@
             <div class="footer-links">
                 <h4>Links Rápidos</h4>
                 <ul>
-                    <li><a href="#inicio">Início</a></li>
-                    <li><a href="#sobre">Sobre</a></li>
-                    <li><a href="#servicos">Serviços</a></li>
-                    <li><a href="#portfolio">Portfólio</a></li>
-                    <li><a href="#precos">Preços</a></li>
+                    <li><a href="index.html#inicio">Início</a></li>
+                    <li><a href="index.html#sobre">Sobre</a></li>
+                    <li><a href="index.html#servicos">Soluções</a></li>
+                    <li><a href="index.html#portfolio">Portfólio</a></li>
+                    <li><a href="index.html#precos">Preços</a></li>
                 </ul>
             </div>
             <div class="footer-links">
                 <h4>Serviços</h4>
                 <ul>
-                    <li><a href="#servicos">Chatbots WhatsApp</a></li>
-                    <li><a href="#servicos">Agendamento Automático</a></li>
-                    <li><a href="#servicos">Qualificação de Leads</a></li>
-                    <li><a href="#servicos">Automação de E-mails</a></li>
-                    <li><a href="#servicos">Agentes de IA</a></li>
+                    <li><a href="chatbots-whatsapp.html">Chatbots WhatsApp</a></li>
+                    <li><a href="agendamento-automatico.html">Agendamento Automático</a></li>
+                    <li><a href="qualificacao-leads.html">Qualificação de Leads</a></li>
+                    <li><a href="index.html#contactos">Automação de E-mails</a></li>
+                    <li><a href="index.html#contactos">Agentes de IA</a></li>
                 </ul>
             </div>
             <div class="footer-links">
