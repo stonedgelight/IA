@@ -496,82 +496,6 @@
         .pricing {
             background: linear-gradient(180deg, var(--deep-space) 0%, var(--dark-blue) 100%);
         }
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-        .pricing-card {
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            padding: 3rem 2rem;
-            text-align: center;
-            transition: all 0.4s ease;
-            position: relative;
-        }
-        .pricing-card.featured {
-            border-color: var(--electric-blue);
-            transform: scale(1.05);
-            box-shadow: 0 20px 40px rgba(0, 102, 204, 0.3);
-        }
-        .pricing-card.featured::before {
-            content: 'Mais Popular';
-            position: absolute;
-            top: -12px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--electric-blue);
-            color: var(--deep-space);
-            padding: 0.5rem 1.5rem;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 0.9rem;
-        }
-        .pricing-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 102, 204, 0.3);
-        }
-        .pricing-card.featured:hover {
-            transform: scale(1.05) translateY(-10px);
-        }
-        .pricing-name {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--text-light);
-        }
-        .pricing-price {
-            font-size: 3rem;
-            font-weight: 800;
-            color: var(--electric-blue);
-            margin-bottom: 0.5rem;
-        }
-        .pricing-price span {
-            font-size: 1rem;
-            color: var(--text-gray);
-            font-weight: 400;
-        }
-        .pricing-description {
-            color: var(--text-gray);
-            margin-bottom: 2rem;
-        }
-        .pricing-features {
-            list-style: none;
-            text-align: left;
-            margin-bottom: 2rem;
-        }
-        .pricing-features li {
-            padding: 0.8rem 0;
-            border-bottom: 1px solid var(--glass-border);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: var(--text-gray);
-        }
-        .pricing-features li:last-child { border-bottom: none; }
-        .pricing-features i { color: var(--electric-blue); }
         .contact {
             background: var(--deep-space);
             position: relative;
@@ -746,8 +670,6 @@
             .process-step:not(:last-child)::after { display: none; }
             .process-steps { flex-direction: column; }
             .footer-content { grid-template-columns: 1fr 1fr; }
-            .pricing-card.featured { transform: scale(1); }
-            .pricing-card.featured:hover { transform: scale(1) translateY(-10px); }
             .services-links-grid { grid-template-columns: repeat(2, 1fr); }
         }
         @media (max-width: 640px) {
@@ -1157,74 +1079,36 @@
     <section class="pricing" id="precos">
         <div class="container">
             <div class="section-header fade-in">
-                <span class="section-tag">Investimento</span>
-                <h2 class="section-title">Preços Transparentes</h2>
+                <span class="section-tag">Orçamento Personalizado</span>
+                <h2 class="section-title">Soluções à Medida do Seu Negócio</h2>
                 <p class="section-subtitle">
-                    Soluções acessíveis para PMEs. Sem custos escondidos, sem surpresas.
+                    Cada empresa tem necessidades únicas. Entre em contacto para uma proposta 
+                    personalizada, sem compromisso e adaptada ao seu orçamento.
                 </p>
             </div>
-            <div class="pricing-grid">
-                <div class="pricing-card fade-in">
-                    <h3 class="pricing-name">Starter</h3>
-                    <div class="pricing-price">
-                        €1.350<span>/único</span>
+            <div style="text-align: center; margin-top: 3rem;">
+                <a href="#contactos" class="btn btn-primary" style="font-size: 1.2rem; padding: 1.2rem 3rem;">
+                    <i class="fas fa-paper-plane"></i> Pedir Proposta Gratuita
+                </a>
+                <div style="margin-top: 3rem; display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap; color: var(--text-gray);">
+                    <div style="text-align: center;">
+                        <i class="fas fa-check-circle" style="color: var(--electric-blue); font-size: 1.5rem; margin-bottom: 0.5rem;"></i>
+                        <p style="font-size: 0.9rem;">Proposta em 24h</p>
                     </div>
-                    <p class="pricing-description">
-                        Ideal para pequenos negócios que querem começar com automação.
-                    </p>
-                    <ul class="pricing-features">
-                        <li><i class="fas fa-check"></i> Chatbot WhatsApp básico</li>
-                        <li><i class="fas fa-check"></i> Até 5 fluxos de conversação</li>
-                        <li><i class="fas fa-check"></i> Integração Google Sheets</li>
-                        <li><i class="fas fa-check"></i> Formação básica incluída</li>
-                        <li><i class="fas fa-check"></i> Manutenção mensal €200 após 1 mês</li>
-                    </ul>
-                    <a href="#contactos" class="btn btn-secondary" style="width: 100%;">Escolher Starter</a>
-                </div>
-                <div class="pricing-card featured fade-in">
-                    <h3 class="pricing-name">Business</h3>
-                    <div class="pricing-price">
-                        €3.350<span>/único</span>
+                    <div style="text-align: center;">
+                        <i class="fas fa-check-circle" style="color: var(--electric-blue); font-size: 1.5rem; margin-bottom: 0.5rem;"></i>
+                        <p style="font-size: 0.9rem;">Sem Compromisso</p>
                     </div>
-                    <p class="pricing-description">
-                        Solução completa para empresas em crescimento. Mais popular.
-                    </p>
-                    <ul class="pricing-features">
-                        <li><i class="fas fa-check"></i> Chatbot WhatsApp avançado</li>
-                        <li><i class="fas fa-check"></i> Fluxos ilimitados</li>
-                        <li><i class="fas fa-check"></i> Agendamento automático</li>
-                        <li><i class="fas fa-check"></i> Integração CRM/E-mail</li>
-                        <li><i class="fas fa-check"></i> IA para respostas inteligentes</li>
-                        <li><i class="fas fa-check"></i> Relatórios avançados</li>
-                        <li><i class="fas fa-check"></i> Manutenção mensal €500 após 1 mês</li>
-                    </ul>
-                    <a href="#contactos" class="btn btn-primary" style="width: 100%;">Escolher Business</a>
-                </div>
-                <div class="pricing-card fade-in">
-                    <h3 class="pricing-name">Enterprise</h3>
-                    <div class="pricing-price">
-                        €8.500<span>/único</span>
+                    <div style="text-align: center;">
+                        <i class="fas fa-check-circle" style="color: var(--electric-blue); font-size: 1.5rem; margin-bottom: 0.5rem;"></i>
+                        <p style="font-size: 0.9rem;">Implementação 24-48h</p>
                     </div>
-                    <p class="pricing-description">
-                        Automação completa e personalizada para necessidades específicas.
-                    </p>
-                    <ul class="pricing-features">
-                        <li><i class="fas fa-check"></i> Tudo do plano Business</li>
-                        <li><i class="fas fa-check"></i> Agentes de IA personalizados</li>
-                        <li><i class="fas fa-check"></i> Integrações múltiplas</li>
-                        <li><i class="fas fa-check"></i> Análise de documentos</li>
-                        <li><i class="fas fa-check"></i> Base de conhecimento IA</li>
-                        <li><i class="fas fa-check"></i> Suporte prioritário 90 dias</li>
-                        <li><i class="fas fa-check"></i> Manutenção mensal €1.200 após 1 mês</li>
-                    </ul>
-                    <a href="#contactos" class="btn btn-secondary" style="width: 100%;">Contactar</a>
+                    <div style="text-align: center;">
+                        <i class="fas fa-check-circle" style="color: var(--electric-blue); font-size: 1.5rem; margin-bottom: 0.5rem;"></i>
+                        <p style="font-size: 0.9rem;">Suporte Contínuo</p>
+                    </div>
                 </div>
             </div>
-            <p style="text-align: center; margin-top: 3rem; color: var(--text-gray);">
-                <i class="fas fa-info-circle" style="color: var(--electric-blue);"></i> 
-                Todos os planos incluem instalação, configuração e formação. 
-                Intervenções fora do plano Manutenção a partir de €70/h.
-            </p>
         </div>
     </section>
 

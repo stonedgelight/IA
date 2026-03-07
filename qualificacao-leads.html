@@ -12,8 +12,8 @@
 </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Automação de E-mails | André Carmo</title>
-    <meta name="description" content="Automatize a sua comunicação por e-mail. Respostas automáticas, classificação inteligente e follow-ups programados para PMEs em Portugal.">
+    <title>Qualificação de Leads | André Carmo</title>
+    <meta name="description" content="Automatize o processo de captura e qualificação de potenciais clientes. O sistema pergunta, classifica e organiza automaticamente.">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -398,86 +398,6 @@
             color: var(--text-gray);
             font-size: 0.85rem;
         }
-        .pricing {
-            background: var(--deep-space);
-        }
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-        .pricing-card {
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            padding: 3rem 2rem;
-            text-align: center;
-            transition: all 0.4s ease;
-            position: relative;
-        }
-        .pricing-card.featured {
-            border-color: var(--electric-blue);
-            transform: scale(1.05);
-            box-shadow: 0 20px 40px rgba(0, 102, 204, 0.3);
-        }
-        .pricing-card.featured::before {
-            content: 'Mais Popular';
-            position: absolute;
-            top: -12px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--electric-blue);
-            color: var(--deep-space);
-            padding: 0.5rem 1.5rem;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 0.9rem;
-        }
-        .pricing-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 102, 204, 0.3);
-        }
-        .pricing-card.featured:hover {
-            transform: scale(1.05) translateY(-10px);
-        }
-        .pricing-name {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--text-light);
-        }
-        .pricing-price {
-            font-size: 2.5rem;
-            font-weight: 800;
-            color: var(--electric-blue);
-            margin-bottom: 0.5rem;
-        }
-        .pricing-price span {
-            font-size: 1rem;
-            color: var(--text-gray);
-            font-weight: 400;
-        }
-        .pricing-description {
-            color: var(--text-gray);
-            margin-bottom: 2rem;
-        }
-        .pricing-features {
-            list-style: none;
-            text-align: left;
-            margin-bottom: 2rem;
-        }
-        .pricing-features li {
-            padding: 0.8rem 0;
-            border-bottom: 1px solid var(--glass-border);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: var(--text-gray);
-            font-size: 0.95rem;
-        }
-        .pricing-features li:last-child { border-bottom: none; }
-        .pricing-features i { color: var(--electric-blue); }
         .contact {
             background: var(--deep-space);
             position: relative;
@@ -650,8 +570,6 @@
             .mobile-menu { display: block; }
             .contact-grid, .benefits-grid { grid-template-columns: 1fr; }
             .footer-content { grid-template-columns: 1fr 1fr; }
-            .pricing-card.featured { transform: scale(1); }
-            .pricing-card.featured:hover { transform: scale(1) translateY(-10px); }
         }
         @media (max-width: 576px) {
             .footer-content {
@@ -673,12 +591,12 @@
         }
         #successMessage, #errorMessage { display: none; }
     </style>
-    <link rel="canonical" href="https://www.andrecarmo.pt/automacao-emails.html">
+    <link rel="canonical" href="https://www.andrecarmo.pt/qualificacao-leads.html">
     <meta name="robots" content="index, follow">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Automação de E-mails | André Carmo">
-    <meta property="og:description" content="Automatize a sua comunicação por e-mail. Respostas automáticas e follow-ups programados para PMEs.">
-    <meta property="og:url" content="https://www.andrecarmo.pt/automacao-emails.html">
+    <meta property="og:title" content="Qualificação de Leads | André Carmo">
+    <meta property="og:description" content="Automatize a captura e qualificação de potenciais clientes para PMEs em Portugal.">
+    <meta property="og:url" content="https://www.andrecarmo.pt/qualificacao-leads.html">
 </head>
 <body>
     <nav id="navbar">
@@ -708,15 +626,15 @@
                 <span>/</span>
                 <a href="index.html#servicos">Soluções</a>
                 <span>/</span>
-                <span>Automação de E-mails</span>
+                <span>Qualificação de Leads</span>
             </div>
             <div class="page-hero-badge">
-                <i class="fas fa-envelope-open-text"></i> Solução de Automação
+                <i class="fas fa-filter"></i> Solução de Automação
             </div>
-            <h1>Automação de E-mails</h1>
+            <h1>Qualificação de Leads</h1>
             <p class="page-hero-subtitle">
-                Respostas automáticas inteligentes, classificação de mensagens e follow-ups programados. 
-                Mantenha uma comunicação profissional sem perder tempo.
+                Automatize o processo de captura e qualificação de potenciais clientes. 
+                O sistema pergunta, classifica e organiza automaticamente.
             </p>
             <div class="hero-cta">
                 <a href="#contactos" class="btn btn-primary">
@@ -733,60 +651,60 @@
         <div class="container">
             <div class="section-header fade-in">
                 <span class="section-tag">Funcionalidades</span>
-                <h2 class="section-title">Tudo o Que Precisa para Automatizar os Seus E-mails</h2>
+                <h2 class="section-title">Tudo o Que Precisa para Qualificar Leads Automaticamente</h2>
                 <p class="section-subtitle">
-                    Ferramentas completas para transformar a forma como comunica por e-mail, 
-                    reduzindo tempo e aumentando a eficiência.
+                    Ferramentas completas para capturar, avaliar e priorizar potenciais clientes 
+                    sem esforço manual.
                 </p>
             </div>
             <div class="features-grid">
                 <div class="feature-card fade-in">
                     <i class="fas fa-robot feature-icon"></i>
-                    <h3>Respostas Automáticas Inteligentes</h3>
+                    <h3>Questionário Inteligente</h3>
                     <p>
-                        Configure respostas automáticas baseadas em palavras-chave e contexto. 
-                        O sistema identifica o tema do e-mail e responde com a informação mais adequada, 
-                        24 horas por dia, 7 dias por semana.
+                        O sistema faz as perguntas certas de forma conversacional, 
+                        recolhendo informações essenciais sobre orçamento, necessidades 
+                        e timing de compra.
+                    </p>
+                </div>
+                <div class="feature-card fade-in">
+                    <i class="fas fa-star feature-icon"></i>
+                    <h3>Pontuação Automática</h3>
+                    <p>
+                        Cada lead recebe uma pontuação baseada em critérios definidos por si. 
+                        Foque-se primeiro nos que têm maior probabilidade de conversão.
                     </p>
                 </div>
                 <div class="feature-card fade-in">
                     <i class="fas fa-tags feature-icon"></i>
-                    <h3>Classificação Automática</h3>
+                    <h3>Segmentação Automática</h3>
                     <p>
-                        E-mails automaticamente organizados por categoria, prioridade ou cliente. 
-                        Reduza o tempo a procurar mensagens importantes e concentre-se no que realmente importa.
+                        Classifique leads por categoria, urgência, valor potencial ou 
+                        qualquer critério relevante para o seu negócio.
                     </p>
                 </div>
                 <div class="feature-card fade-in">
-                    <i class="fas fa-clock feature-icon"></i>
-                    <h3>Follow-ups Programados</h3>
+                    <i class="fas fa-bell feature-icon"></i>
+                    <h3>Alertas em Tempo Real</h3>
                     <p>
-                        Nunca mais perca um lead por falta de follow-up. O sistema envia lembretes 
-                        automáticos para si e para os seus clientes, garantindo que nenhuma oportunidade passa despercebida.
+                        Receba notificações instantâneas quando um lead qualificado entra 
+                        no sistema, para contacto imediato enquanto está quente.
                     </p>
                 </div>
                 <div class="feature-card fade-in">
-                    <i class="fas fa-sync feature-icon"></i>
-                    <h3>Sincronização Gmail/Outlook</h3>
+                    <i class="fas fa-database feature-icon"></i>
+                    <h3>Integração com CRM</h3>
                     <p>
-                        Integração perfeita com Gmail, Outlook e outros clientes de e-mail. 
-                        Mantém todas as suas automatizações sincronizadas em tempo real, sem necessidade de configurações complexas.
+                        Envie leads diretamente para o seu CRM, planilhas ou sistema 
+                        de gestão, já com toda a informação organizada.
                     </p>
                 </div>
                 <div class="feature-card fade-in">
                     <i class="fas fa-chart-line feature-icon"></i>
-                    <h3>Análise de E-mails</h3>
+                    <h3>Análise de Conversão</h3>
                     <p>
-                        Métricas detalhadas sobre taxas de abertura, tempo de resposta e eficácia das comunicações. 
-                        Use dados reais para melhorar continuamente a sua estratégia de e-mail.
-                    </p>
-                </div>
-                <div class="feature-card fade-in">
-                    <i class="fas fa-shield-alt feature-icon"></i>
-                    <h3>Proteção contra Spam</h3>
-                    <p>
-                        Filtros avançados que protegem a sua caixa de entrada de spam e e-mails maliciosos, 
-                        mantendo a sua produtividade e segurança digital.
+                        Acompanhe taxas de conversão por canal, origem e qualificação. 
+                        Otimize o seu funil de vendas com dados reais.
                     </p>
                 </div>
             </div>
@@ -797,19 +715,19 @@
         <div class="container">
             <div class="section-header fade-in">
                 <span class="section-tag">Vantagens</span>
-                <h2 class="section-title">Por Que Automatizar os Seus E-mails?</h2>
+                <h2 class="section-title">Por Que Automatizar a Qualificação de Leads?</h2>
                 <p class="section-subtitle">
-                    Descubra como esta solução pode transformar a comunicação da sua empresa.
+                    Descubra como esta solução pode transformar o seu processo comercial.
                 </p>
             </div>
             <div class="benefits-grid">
                 <div class="benefit-item fade-in">
                     <div class="benefit-icon">
-                        <i class="fas fa-clock"></i>
+                        <i class="fas fa-bullseye"></i>
                     </div>
                     <div class="benefit-content">
-                        <h3>Poupe 5+ Horas por Dia</h3>
-                        <p>Elimine tarefas repetitivas de e-mail e concentre-se em atividades que realmente fazem crescer o seu negócio.</p>
+                        <h3>Foque-se no Que Importa</h3>
+                        <p>Receba apenas leads qualificados e prontos para comprar. Pare de perder tempo com curiosos.</p>
                     </div>
                 </div>
                 <div class="benefit-item fade-in">
@@ -817,17 +735,17 @@
                         <i class="fas fa-bolt"></i>
                     </div>
                     <div class="benefit-content">
-                        <h3>Respostas em Segundos</h3>
-                        <p>Os seus clientes recebem respostas imediatas, mesmo fora do horário de trabalho. Multas nunca mais esperam.</p>
+                        <h3>Resposta Imediata</h3>
+                        <p>Contacte leads enquanto estão quentes. O sistema alerta-o no momento exato da qualificação.</p>
                     </div>
                 </div>
                 <div class="benefit-item fade-in">
                     <div class="benefit-icon">
-                        <i class="fas fa-user-friends"></i>
+                        <i class="fas fa-sort-amount-up"></i>
                     </div>
                     <div class="benefit-content">
-                        <h3>Atendimento Personalizado</h3>
-                        <p>Cada cliente recebe uma resposta adequada ao seu histórico e necessidades específicas.</p>
+                        <h3>Priorização Inteligente</h3>
+                        <p>Saiba exatamente por onde começar cada dia. Os leads mais promissores aparecem primeiro.</p>
                     </div>
                 </div>
                 <div class="benefit-item fade-in">
@@ -835,17 +753,17 @@
                         <i class="fas fa-chart-pie"></i>
                     </div>
                     <div class="benefit-content">
-                        <h3>Mais Leads Convertidos</h3>
-                        <p>Follow-ups automáticos garantem que nenhuma oportunidade de negócio é esquecida.</p>
+                        <h3>Mais Conversões</h3>
+                        <p>Leads bem qualificados convertem 3x mais. Aumente as suas vendas sem aumentar o volume.</p>
                     </div>
                 </div>
                 <div class="benefit-item fade-in">
                     <div class="benefit-icon">
-                        <i class="fas fa-check-circle"></i>
+                        <i class="fas fa-clock"></i>
                     </div>
                     <div class="benefit-content">
-                        <h3>Zero Erros Humanos</h3>
-                        <p>Esqueça e-mails respondidos pela metade ou respostas copy-paste inadequadas.</p>
+                        <h3>Poupe 15+ Horas por Semana</h3>
+                        <p>Deixe de fazer perguntas de triagem manualmente. O sistema faz isso por si 24/7.</p>
                     </div>
                 </div>
                 <div class="benefit-item fade-in">
@@ -854,7 +772,7 @@
                     </div>
                     <div class="benefit-content">
                         <h3>Escalável</h3>
-                        <p>Funciona perfeitamente seja para 10 ou 10.000 e-mails por dia. A solução cresce com o seu negócio.</p>
+                        <p>Processe 10 ou 1000 leads por dia com o mesmo esforço. A solução cresce com o seu negócio.</p>
                     </div>
                 </div>
             </div>
@@ -867,124 +785,53 @@
                 <span class="section-tag">Depoimentos</span>
                 <h2 class="section-title">O Que Dizem os Nossos Clientes</h2>
                 <p class="section-subtitle">
-                    Empresas que já automatizaram os seus e-mails connosco.
+                    Empresas que já automatizaram a qualificação de leads connosco.
                 </p>
             </div>
             <div class="testimonials-grid">
                 <div class="testimonial-card fade-in">
                     <p class="testimonial-text">
-                        "Passámos de 200 e-mails por dia para uma gestão 完全 automatizada. 
-                        A nossa equipa agora foca-se em fechar negócios, não em responder mensagens."
+                        "Antes perdíamos 70% do tempo com leads que não tinham 
+                        orçamento. Agora o sistema filtra tudo e só falamos 
+                        com quem realmente pode comprar. As vendas aumentaram 40%."
                     </p>
                     <div class="testimonial-author">
-                        <div class="testimonial-avatar">MR</div>
+                        <div class="testimonial-avatar">PL</div>
                         <div class="testimonial-info">
-                            <h4>Miguel Rodrigues</h4>
-                            <p>Diretor Comercial, TechNova Lda</p>
+                            <h4>Pedro Lopes</h4>
+                            <p>Diretor Comercial, TechSolutions PT</p>
                         </div>
                     </div>
                 </div>
                 <div class="testimonial-card fade-in">
                     <p class="testimonial-text">
-                        "Nunca mais perdi um lead por falta de resposta. O sistema faz follow-up automático 
-                        e as conversões aumentaram 40% em 3 meses."
+                        "O sistema qualifica leads enquanto durmo. Acordo com 
+                        uma lista organizada de potenciais clientes, já pontuados 
+                        por prioridade. É como ter um assistente comercial 24/7."
                     </p>
                     <div class="testimonial-author">
-                        <div class="testimonial-avatar">SP</div>
+                        <div class="testimonial-avatar">CS</div>
                         <div class="testimonial-info">
-                            <h4>Susana Pereira</h4>
-                            <p>CEO, Marketing Digital Plus</p>
+                            <h4>Carla Santos</h4>
+                            <p>Consultora, Imobiliária Premium</p>
                         </div>
                     </div>
                 </div>
                 <div class="testimonial-card fade-in">
                     <p class="testimonial-text">
-                        "A classificação automática de e-mails mudou a forma como trabalho. 
-                        Chego de manhã e já tenho as mensagens importantes destacadas."
+                        "Integrámos com o nosso CRM e agora toda a equipa de vendas 
+                        trabalha de forma sincronizada. Cada lead chega com histórico 
+                        completo, pronto para ação."
                     </p>
                     <div class="testimonial-author">
-                        <div class="testimonial-avatar">JC</div>
+                        <div class="testimonial-avatar">TN</div>
                         <div class="testimonial-info">
-                            <h4>João Costa</h4>
-                            <p>Gestor de Projetos, ConstróiFacil</p>
+                            <h4>Tiago Nunes</h4>
+                            <p>Gerente, Agência Marketing Digital</p>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <section class="pricing" id="precos">
-        <div class="container">
-            <div class="section-header fade-in">
-                <span class="section-tag">Investimento</span>
-                <h2 class="section-title">Planos para Automação de E-mails</h2>
-                <p class="section-subtitle">
-                    Escolha o plano que melhor se adapta às necessidades da sua empresa.
-                </p>
-            </div>
-            <div class="pricing-grid">
-                <div class="pricing-card fade-in">
-                    <h3 class="pricing-name">Básico</h3>
-                    <div class="pricing-price">
-                        €890<span>/único</span>
-                    </div>
-                    <p class="pricing-description">
-                        Ideal para pequenas empresas com volume moderado de e-mails.
-                    </p>
-                    <ul class="pricing-features">
-                        <li><i class="fas fa-check"></i> Respostas automáticas básicas</li>
-                        <li><i class="fas fa-check"></i> Classificação até 5 categorias</li>
-                        <li><i class="fas fa-check"></i> Integração Gmail/Outlook</li>
-                        <li><i class="fas fa-check"></i> 3 sequências de follow-up</li>
-                        <li><i class="fas fa-check"></i> Relatórios básicos</li>
-                        <li><i class="fas fa-check"></i> Manutenção €150/mês</li>
-                    </ul>
-                    <a href="#contactos" class="btn btn-secondary" style="width: 100%;">Escolher Básico</a>
-                </div>
-                <div class="pricing-card featured fade-in">
-                    <h3 class="pricing-name">Profissional</h3>
-                    <div class="pricing-price">
-                        €1.890<span>/único</span>
-                    </div>
-                    <p class="pricing-description">
-                        Solução completa para empresas em crescimento. Mais popular.
-                    </p>
-                    <ul class="pricing-features">
-                        <li><i class="fas fa-check"></i> Respostas automáticas com IA</li>
-                        <li><i class="fas fa-check"></i> Classificação ilimitada</li>
-                        <li><i class="fas fa-check"></i> Integração múltipla</li>
-                        <li><i class="fas fa-check"></i> Follow-ups ilimitados</li>
-                        <li><i class="fas fa-check"></i> Análise avançada</li>
-                        <li><i class="fas fa-check"></i> Segmentação de clientes</li>
-                        <li><i class="fas fa-check"></i> Manutenção €300/mês</li>
-                    </ul>
-                    <a href="#contactos" class="btn btn-primary" style="width: 100%;">Escolher Profissional</a>
-                </div>
-                <div class="pricing-card fade-in">
-                    <h3 class="pricing-name">Enterprise</h3>
-                    <div class="pricing-price">
-                        €4.500<span>/único</span>
-                    </div>
-                    <p class="pricing-description">
-                        Automação completa para grandes volumes e necessidades específicas.
-                    </p>
-                    <ul class="pricing-features">
-                        <li><i class="fas fa-check"></i> Tudo do Profissional</li>
-                        <li><i class="fas fa-check"></i> Agente de IA dedicado</li>
-                        <li><i class="fas fa-check"></i> Múltiplas caixas de e-mail</li>
-                        <li><i class="fas fa-check"></i> API personalizada</li>
-                        <li><i class="fas fa-check"></i> Relatórios customizados</li>
-                        <li><i class="fas fa-check"></i> Suporte prioritário</li>
-                        <li><i class="fas fa-check"></i> Manutenção €600/mês</li>
-                    </ul>
-                    <a href="#contactos" class="btn btn-secondary" style="width: 100%;">Contactar</a>
-                </div>
-            </div>
-            <p style="text-align: center; margin-top: 3rem; color: var(--text-gray);">
-                <i class="fas fa-info-circle" style="color: var(--electric-blue);"></i> 
-                Implementação típica em 48 horas. Todos os planos incluem formação e documentação.
-            </p>
         </div>
     </section>
 
@@ -992,7 +839,7 @@
         <div class="container">
             <div class="section-header fade-in">
                 <span class="section-tag">Contacto</span>
-                <h2 class="section-title">Vamos Automatizar os Seus E-mails</h2>
+                <h2 class="section-title">Vamos Automatizar a Qualificação dos Seus Leads</h2>
                 <p class="section-subtitle">
                     Entre em contacto para uma proposta personalizada. Resposta garantida em 24 horas.
                 </p>
@@ -1001,7 +848,7 @@
                 <div class="contact-info fade-in">
                     <h3>Fale Comigo Diretamente</h3>
                     <p>
-                        Estou disponível para esclarecer todas as suas dúvidas sobre a automação de e-mails 
+                        Estou disponível para esclarecer todas as suas dúvidas sobre qualificação de leads 
                         e como pode beneficiar o seu negócio específico.
                     </p>
                     <div class="contact-methods">
@@ -1036,7 +883,7 @@
                 </div>
                 <div class="contact-form fade-in">
                     <form id="contactForm" action="https://formspree.io/f/xgoleojl" method="POST">
-                        <input type="hidden" name="_subject" value="Novo contacto - Automação de E-mails">
+                        <input type="hidden" name="_subject" value="Novo contacto - Qualificação de Leads">
                         
                         <div class="form-group">
                             <label for="name">Nome Completo *</label>
@@ -1062,16 +909,14 @@
                             <label for="service">Serviço de Interesse *</label>
                             <select id="service" name="servico" required>
                                 <option value="">Selecione uma opção</option>
-                                <option value="email-basico">Automação de E-mails - Básico</option>
-                                <option value="email-profissional">Automação de E-mails - Profissional</option>
-                                <option value="email-enterprise">Automação de E-mails - Enterprise</option>
+                                <option value="leads">Qualificação de Leads</option>
                                 <option value="outro">Outro / Não tenho certeza</option>
                             </select>
                         </div>
 
                         <div class="form-group">
                             <label for="message">Mensagem</label>
-                            <textarea id="message" name="mensagem" placeholder="Descreva brevemente as suas necessidades de automação de e-mails..."></textarea>
+                            <textarea id="message" name="mensagem" placeholder="Descreva brevemente as suas necessidades de qualificação de leads..."></textarea>
                         </div>
 
                         <input type="text" name="_gotcha" style="display:none">
@@ -1203,4 +1048,3 @@
     </script>
 </body>
 </html>
-

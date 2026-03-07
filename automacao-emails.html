@@ -398,86 +398,6 @@
             color: var(--text-gray);
             font-size: 0.85rem;
         }
-        .pricing {
-            background: var(--deep-space);
-        }
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-        .pricing-card {
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            padding: 3rem 2rem;
-            text-align: center;
-            transition: all 0.4s ease;
-            position: relative;
-        }
-        .pricing-card.featured {
-            border-color: var(--electric-blue);
-            transform: scale(1.05);
-            box-shadow: 0 20px 40px rgba(0, 102, 204, 0.3);
-        }
-        .pricing-card.featured::before {
-            content: 'Mais Popular';
-            position: absolute;
-            top: -12px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--electric-blue);
-            color: var(--deep-space);
-            padding: 0.5rem 1.5rem;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 0.9rem;
-        }
-        .pricing-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 102, 204, 0.3);
-        }
-        .pricing-card.featured:hover {
-            transform: scale(1.05) translateY(-10px);
-        }
-        .pricing-name {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--text-light);
-        }
-        .pricing-price {
-            font-size: 2.5rem;
-            font-weight: 800;
-            color: var(--electric-blue);
-            margin-bottom: 0.5rem;
-        }
-        .pricing-price span {
-            font-size: 1rem;
-            color: var(--text-gray);
-            font-weight: 400;
-        }
-        .pricing-description {
-            color: var(--text-gray);
-            margin-bottom: 2rem;
-        }
-        .pricing-features {
-            list-style: none;
-            text-align: left;
-            margin-bottom: 2rem;
-        }
-        .pricing-features li {
-            padding: 0.8rem 0;
-            border-bottom: 1px solid var(--glass-border);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: var(--text-gray);
-            font-size: 0.95rem;
-        }
-        .pricing-features li:last-child { border-bottom: none; }
-        .pricing-features i { color: var(--electric-blue); }
         .contact {
             background: var(--deep-space);
             position: relative;
@@ -650,8 +570,6 @@
             .mobile-menu { display: block; }
             .contact-grid, .benefits-grid { grid-template-columns: 1fr; }
             .footer-content { grid-template-columns: 1fr 1fr; }
-            .pricing-card.featured { transform: scale(1); }
-            .pricing-card.featured:hover { transform: scale(1) translateY(-10px); }
         }
         @media (max-width: 576px) {
             .footer-content {
@@ -818,7 +736,7 @@
                     </div>
                     <div class="benefit-content">
                         <h3>Respostas em Segundos</h3>
-                        <p>Os seus clientes recebem respostas imediatas, mesmo fora do horário de trabalho. Multas nunca mais esperam.</p>
+                        <p>Os seus clientes recebem respostas imediatas, mesmo fora do horário de trabalho. Nunca mais esperam.</p>
                     </div>
                 </div>
                 <div class="benefit-item fade-in">
@@ -873,7 +791,7 @@
             <div class="testimonials-grid">
                 <div class="testimonial-card fade-in">
                     <p class="testimonial-text">
-                        "Passámos de 200 e-mails por dia para uma gestão 完全 automatizada. 
+                        "Passámos de 200 e-mails por dia para uma gestão completamente automatizada. 
                         A nossa equipa agora foca-se em fechar negócios, não em responder mensagens."
                     </p>
                     <div class="testimonial-author">
@@ -911,80 +829,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <section class="pricing" id="precos">
-        <div class="container">
-            <div class="section-header fade-in">
-                <span class="section-tag">Investimento</span>
-                <h2 class="section-title">Planos para Automação de E-mails</h2>
-                <p class="section-subtitle">
-                    Escolha o plano que melhor se adapta às necessidades da sua empresa.
-                </p>
-            </div>
-            <div class="pricing-grid">
-                <div class="pricing-card fade-in">
-                    <h3 class="pricing-name">Básico</h3>
-                    <div class="pricing-price">
-                        €890<span>/único</span>
-                    </div>
-                    <p class="pricing-description">
-                        Ideal para pequenas empresas com volume moderado de e-mails.
-                    </p>
-                    <ul class="pricing-features">
-                        <li><i class="fas fa-check"></i> Respostas automáticas básicas</li>
-                        <li><i class="fas fa-check"></i> Classificação até 5 categorias</li>
-                        <li><i class="fas fa-check"></i> Integração Gmail/Outlook</li>
-                        <li><i class="fas fa-check"></i> 3 sequências de follow-up</li>
-                        <li><i class="fas fa-check"></i> Relatórios básicos</li>
-                        <li><i class="fas fa-check"></i> Manutenção €150/mês</li>
-                    </ul>
-                    <a href="#contactos" class="btn btn-secondary" style="width: 100%;">Escolher Básico</a>
-                </div>
-                <div class="pricing-card featured fade-in">
-                    <h3 class="pricing-name">Profissional</h3>
-                    <div class="pricing-price">
-                        €1.890<span>/único</span>
-                    </div>
-                    <p class="pricing-description">
-                        Solução completa para empresas em crescimento. Mais popular.
-                    </p>
-                    <ul class="pricing-features">
-                        <li><i class="fas fa-check"></i> Respostas automáticas com IA</li>
-                        <li><i class="fas fa-check"></i> Classificação ilimitada</li>
-                        <li><i class="fas fa-check"></i> Integração múltipla</li>
-                        <li><i class="fas fa-check"></i> Follow-ups ilimitados</li>
-                        <li><i class="fas fa-check"></i> Análise avançada</li>
-                        <li><i class="fas fa-check"></i> Segmentação de clientes</li>
-                        <li><i class="fas fa-check"></i> Manutenção €300/mês</li>
-                    </ul>
-                    <a href="#contactos" class="btn btn-primary" style="width: 100%;">Escolher Profissional</a>
-                </div>
-                <div class="pricing-card fade-in">
-                    <h3 class="pricing-name">Enterprise</h3>
-                    <div class="pricing-price">
-                        €4.500<span>/único</span>
-                    </div>
-                    <p class="pricing-description">
-                        Automação completa para grandes volumes e necessidades específicas.
-                    </p>
-                    <ul class="pricing-features">
-                        <li><i class="fas fa-check"></i> Tudo do Profissional</li>
-                        <li><i class="fas fa-check"></i> Agente de IA dedicado</li>
-                        <li><i class="fas fa-check"></i> Múltiplas caixas de e-mail</li>
-                        <li><i class="fas fa-check"></i> API personalizada</li>
-                        <li><i class="fas fa-check"></i> Relatórios customizados</li>
-                        <li><i class="fas fa-check"></i> Suporte prioritário</li>
-                        <li><i class="fas fa-check"></i> Manutenção €600/mês</li>
-                    </ul>
-                    <a href="#contactos" class="btn btn-secondary" style="width: 100%;">Contactar</a>
-                </div>
-            </div>
-            <p style="text-align: center; margin-top: 3rem; color: var(--text-gray);">
-                <i class="fas fa-info-circle" style="color: var(--electric-blue);"></i> 
-                Implementação típica em 48 horas. Todos os planos incluem formação e documentação.
-            </p>
         </div>
     </section>
 
@@ -1203,4 +1047,3 @@
     </script>
 </body>
 </html>
-
