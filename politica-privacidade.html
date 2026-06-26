@@ -21,6 +21,7 @@
             --glass-border: rgba(0, 212, 255, 0.2);
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-padding-top: 72px; }
         body {
             font-family: 'Inter', sans-serif;
             background-color: var(--deep-space);
@@ -112,6 +113,11 @@
             margin: 1.5rem 0;
         }
         .highlight-box p { margin: 0; }
+        .kv { display: grid; grid-template-columns: max-content 1fr; gap: 0.25rem 0; margin: 0.6rem 0 0; padding: 0; list-style: none; }
+        .kv dt { font-weight: 600; color: var(--text-light); white-space: nowrap; }
+        .kv dd { margin: 0; color: var(--text-gray); }
+        .kv dd::before { content: '\00a0:\00a0'; }
+        .kv dd a { color: var(--electric-blue); }
         table {
             width: 100%;
             border-collapse: collapse;
@@ -181,13 +187,13 @@
         <!-- 1 -->
         <h2 id="responsavel">1. Responsável pelo Tratamento de Dados</h2>
         <div class="highlight-box">
-            <p>
-                <strong>André Carmo — Automação Inteligente</strong><br>
-                NIF: 217 056 903<br>
-                Portugal<br>
-                E-mail: <a href="mailto:andre.carmo@gmail.com">andre.carmo@gmail.com</a><br>
-                Telefone: <a href="tel:+351912405722">+351 912 405 722</a>
-            </p>
+            <strong>André Carmo — Automação Inteligente</strong>
+            <dl class="kv">
+                <dt>NIF</dt>       <dd>217 056 903</dd>
+                <dt>País</dt>      <dd>Portugal</dd>
+                <dt>E-mail</dt>    <dd><a href="mailto:andre.carmo@gmail.com">andre.carmo@gmail.com</a></dd>
+                <dt>Telefone</dt>  <dd><a href="tel:+351912405722">+351 912 405 722</a></dd>
+            </dl>
         </div>
         <p>
             André Carmo é o responsável pelo tratamento dos dados pessoais recolhidos através deste website
@@ -405,12 +411,12 @@
         <!-- 12 -->
         <h2 id="contacto-rgpd">12. Contacto para Questões de Privacidade</h2>
         <div class="highlight-box">
-            <p>
-                <strong>André Carmo</strong><br>
-                E-mail: <a href="mailto:andre.carmo@gmail.com">andre.carmo@gmail.com</a><br>
-                Telefone: <a href="tel:+351912405722">+351 912 405 722</a><br>
-                NIF: 217 056 903 · Portugal
-            </p>
+            <strong>André Carmo</strong>
+            <dl class="kv">
+                <dt>E-mail</dt>    <dd><a href="mailto:andre.carmo@gmail.com">andre.carmo@gmail.com</a></dd>
+                <dt>Telefone</dt>  <dd><a href="tel:+351912405722">+351 912 405 722</a></dd>
+                <dt>NIF</dt>       <dd>217 056 903 · Portugal</dd>
+            </dl>
         </div>
     </main>
 
