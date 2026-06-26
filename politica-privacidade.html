@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Política de Privacidade, RGPD e Termos de Serviço | André Carmo</title>
+    <meta name="description" content="Política de Privacidade, Proteção de Dados (RGPD) e Termos de Serviço de André Carmo — Automação Inteligente.">
+    <meta name="robots" content="noindex, follow">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-blue: #0066cc;
+            --dark-blue: #001a33;
+            --electric-blue: #00d4ff;
+            --deep-space: #000814;
+            --text-light: #e6f7ff;
+            --text-gray: #b3d9ff;
+            --glass-bg: rgba(0, 102, 204, 0.1);
+            --glass-border: rgba(0, 212, 255, 0.2);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--deep-space);
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+        nav {
+            position: sticky;
+            top: 0;
+            width: 100%;
+            background: rgba(0, 8, 20, 0.97);
+            border-bottom: 1px solid var(--glass-border);
+            z-index: 100;
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .logo {
+            font-size: 1.3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--electric-blue), var(--primary-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .back-link {
+            color: var(--electric-blue);
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        .back-link:hover { text-decoration: underline; }
+        main {
+            max-width: 860px;
+            margin: 0 auto;
+            padding: 4rem 2rem 6rem;
+        }
+        .page-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #fff, var(--electric-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+        .last-updated {
+            color: var(--text-gray);
+            font-size: 0.85rem;
+            margin-bottom: 3rem;
+        }
+        .toc {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            margin-bottom: 3rem;
+        }
+        .toc h2 { font-size: 1rem; color: var(--electric-blue); margin-bottom: 1rem; }
+        .toc ol { padding-left: 1.5rem; }
+        .toc li { margin-bottom: 0.4rem; }
+        .toc a { color: var(--text-gray); text-decoration: none; font-size: 0.9rem; }
+        .toc a:hover { color: var(--electric-blue); text-decoration: underline; }
+        h2 {
+            font-size: 1.4rem;
+            color: var(--electric-blue);
+            margin: 2.5rem 0 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--glass-border);
+        }
+        h3 { font-size: 1.1rem; color: var(--text-light); margin: 1.5rem 0 0.5rem; }
+        p { color: var(--text-gray); margin-bottom: 1rem; }
+        ul, ol { color: var(--text-gray); padding-left: 1.5rem; margin-bottom: 1rem; }
+        li { margin-bottom: 0.4rem; }
+        strong { color: var(--text-light); }
+        a { color: var(--electric-blue); }
+        .highlight-box {
+            background: var(--glass-bg);
+            border-left: 3px solid var(--electric-blue);
+            border-radius: 0 8px 8px 0;
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+        }
+        .highlight-box p { margin: 0; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0 1.5rem;
+            font-size: 0.9rem;
+        }
+        th {
+            background: var(--glass-bg);
+            color: var(--electric-blue);
+            padding: 0.7rem 1rem;
+            text-align: left;
+            border: 1px solid var(--glass-border);
+        }
+        td {
+            padding: 0.7rem 1rem;
+            border: 1px solid var(--glass-border);
+            color: var(--text-gray);
+            vertical-align: top;
+        }
+        footer {
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid var(--glass-border);
+            color: var(--text-gray);
+            font-size: 0.85rem;
+            background: var(--dark-blue);
+        }
+        @media (max-width: 640px) {
+            .page-title { font-size: 1.6rem; }
+            main { padding: 2rem 1.2rem 4rem; }
+            table { font-size: 0.8rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="index.html" class="logo">
+            <i class="fas fa-robot"></i> André Carmo
+        </a>
+        <a href="index.html" class="back-link">
+            <i class="fas fa-arrow-left"></i> Voltar ao site
+        </a>
+    </nav>
+
+    <main>
+        <h1 class="page-title">Política de Privacidade, RGPD e Termos de Serviço</h1>
+        <p class="last-updated">Última atualização: 26 de junho de 2026</p>
+
+        <nav class="toc" aria-label="Índice">
+            <h2><i class="fas fa-list"></i> Índice</h2>
+            <ol>
+                <li><a href="#responsavel">Responsável pelo Tratamento</a></li>
+                <li><a href="#dados-recolhidos">Dados Pessoais Recolhidos</a></li>
+                <li><a href="#finalidades">Finalidades e Base Legal</a></li>
+                <li><a href="#cookies">Cookies e Google Analytics</a></li>
+                <li><a href="#partilha">Partilha de Dados com Terceiros</a></li>
+                <li><a href="#retencao">Período de Retenção</a></li>
+                <li><a href="#direitos">Os Seus Direitos (RGPD)</a></li>
+                <li><a href="#seguranca">Segurança dos Dados</a></li>
+                <li><a href="#menores">Menores de Idade</a></li>
+                <li><a href="#termos">Termos de Serviço</a></li>
+                <li><a href="#alteracoes">Alterações a Esta Política</a></li>
+                <li><a href="#contacto-rgpd">Contacto para Questões de Privacidade</a></li>
+            </ol>
+        </nav>
+
+        <!-- 1 -->
+        <h2 id="responsavel">1. Responsável pelo Tratamento de Dados</h2>
+        <div class="highlight-box">
+            <p>
+                <strong>André Carmo — Automação Inteligente</strong><br>
+                NIF: 217 056 903<br>
+                Portugal<br>
+                E-mail: <a href="mailto:andre.carmo@gmail.com">andre.carmo@gmail.com</a><br>
+                Telefone: <a href="tel:+351912405722">+351 912 405 722</a>
+            </p>
+        </div>
+        <p>
+            André Carmo é o responsável pelo tratamento dos dados pessoais recolhidos através deste website
+            (<strong>www.andrecarmo.pt</strong>) e demais páginas associadas, nos termos do Regulamento (UE) 2016/679
+            (RGPD) e da legislação nacional aplicável.
+        </p>
+
+        <!-- 2 -->
+        <h2 id="dados-recolhidos">2. Dados Pessoais Recolhidos</h2>
+        <p>Este website recolhe dados pessoais apenas quando o visitante os fornece voluntariamente:</p>
+        <h3>2.1 Formulário de Contacto</h3>
+        <ul>
+            <li>Nome completo</li>
+            <li>Endereço de e-mail</li>
+            <li>Número de telefone (opcional)</li>
+            <li>Nome da empresa (opcional)</li>
+            <li>Serviço de interesse</li>
+            <li>Mensagem de texto livre</li>
+        </ul>
+        <h3>2.2 Dados de Navegação (com consentimento)</h3>
+        <p>
+            Se aceitar os cookies de análise, o Google Analytics recolhe dados anónimos de navegação
+            (páginas visitadas, duração, dispositivo, localização geográfica aproximada). O endereço IP
+            é anonimizado antes de ser transmitido à Google.
+        </p>
+
+        <!-- 3 -->
+        <h2 id="finalidades">3. Finalidades do Tratamento e Base Legal</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Finalidade</th>
+                    <th>Dados usados</th>
+                    <th>Base legal (RGPD)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Responder a pedidos de contacto e propostas</td>
+                    <td>Nome, e-mail, telefone, empresa, mensagem</td>
+                    <td>Art. 6.º, n.º 1, al. b) — execução de contrato / diligências pré-contratuais</td>
+                </tr>
+                <tr>
+                    <td>Análise estatística do site (Google Analytics)</td>
+                    <td>Dados de navegação anónimos</td>
+                    <td>Art. 6.º, n.º 1, al. a) — consentimento explícito</td>
+                </tr>
+            </tbody>
+        </table>
+        <p>
+            Os dados do formulário de contacto <strong>não são usados para marketing</strong> sem consentimento
+            adicional e específico.
+        </p>
+
+        <!-- 4 -->
+        <h2 id="cookies">4. Cookies e Google Analytics</h2>
+        <p>Este website usa dois tipos de cookies:</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Cookie</th>
+                    <th>Tipo</th>
+                    <th>Finalidade</th>
+                    <th>Duração</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>ac_cookie_consent</code></td>
+                    <td>Funcional (localStorage)</td>
+                    <td>Guardar a sua escolha de consentimento</td>
+                    <td>Permanente até remoção</td>
+                </tr>
+                <tr>
+                    <td><code>_ga</code>, <code>_ga_*</code></td>
+                    <td>Análise (Google Analytics)</td>
+                    <td>Estatísticas anónimas de visitas</td>
+                    <td>2 anos</td>
+                </tr>
+            </tbody>
+        </table>
+        <p>
+            O Google Analytics <strong>só é ativado após o seu consentimento</strong> através do banner de cookies.
+            Pode retirar o consentimento a qualquer momento apagando os dados do browser (localStorage e cookies
+            <code>_ga*</code>).
+        </p>
+        <p>
+            Para mais informações sobre como a Google trata os dados do Analytics, consulte:
+            <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">
+                Política de Privacidade da Google
+            </a>.
+        </p>
+
+        <!-- 5 -->
+        <h2 id="partilha">5. Partilha de Dados com Terceiros</h2>
+        <p>Os seus dados pessoais podem ser transmitidos apenas a:</p>
+        <ul>
+            <li>
+                <strong>Formspree, Inc.</strong> — processador do formulário de contacto, sediado nos EUA.
+                Opera sob o RGPD como subprocessador. Política:
+                <a href="https://formspree.io/legal/privacy-policy" target="_blank" rel="noopener noreferrer">formspree.io/legal/privacy-policy</a>.
+            </li>
+            <li>
+                <strong>Google LLC</strong> — fornecedor do Google Analytics, sediado nos EUA.
+                Só recebe dados se aceitar os cookies de análise. Cláusulas contratuais tipo aplicáveis.
+                Política: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">policies.google.com/privacy</a>.
+            </li>
+        </ul>
+        <p>
+            <strong>Não vendemos, alugamos nem partilhamos</strong> os seus dados pessoais com outros terceiros
+            para fins comerciais.
+        </p>
+
+        <!-- 6 -->
+        <h2 id="retencao">6. Período de Retenção dos Dados</h2>
+        <ul>
+            <li>
+                <strong>Dados do formulário de contacto:</strong> conservados durante o tempo necessário para
+                responder ao pedido e, em caso de relação comercial, pelo período legalmente exigido (máx. 10 anos
+                para obrigações fiscais).
+            </li>
+            <li>
+                <strong>Dados de análise (Google Analytics):</strong> 14 meses (configuração padrão com
+                anonimização de IP).
+            </li>
+        </ul>
+
+        <!-- 7 -->
+        <h2 id="direitos">7. Os Seus Direitos ao Abrigo do RGPD</h2>
+        <p>Enquanto titular de dados pessoais, tem os seguintes direitos:</p>
+        <ul>
+            <li><strong>Acesso:</strong> solicitar uma cópia dos seus dados pessoais que tratamos.</li>
+            <li><strong>Retificação:</strong> corrigir dados inexatos ou incompletos.</li>
+            <li><strong>Apagamento ("direito a ser esquecido"):</strong> solicitar a eliminação dos seus dados.</li>
+            <li><strong>Limitação:</strong> restringir o tratamento em determinadas circunstâncias.</li>
+            <li><strong>Portabilidade:</strong> receber os seus dados num formato estruturado e legível por máquina.</li>
+            <li><strong>Oposição:</strong> opor-se ao tratamento com base em interesses legítimos.</li>
+            <li><strong>Retirada do consentimento:</strong> retirar o consentimento para cookies a qualquer momento.</li>
+        </ul>
+        <p>
+            Para exercer qualquer destes direitos, contacte:
+            <a href="mailto:andre.carmo@gmail.com">andre.carmo@gmail.com</a>.
+            Respondemos em prazo máximo de <strong>30 dias</strong>.
+        </p>
+        <div class="highlight-box">
+            <p>
+                <strong>Reclamação à CNPD:</strong> Se considerar que o tratamento dos seus dados viola o RGPD,
+                tem o direito de apresentar reclamação à
+                <a href="https://www.cnpd.pt" target="_blank" rel="noopener noreferrer">Comissão Nacional de Proteção de Dados (CNPD)</a>
+                — autoridade de controlo em Portugal.
+            </p>
+        </div>
+
+        <!-- 8 -->
+        <h2 id="seguranca">8. Segurança dos Dados</h2>
+        <p>
+            Adotamos medidas técnicas e organizativas adequadas para proteger os seus dados contra acesso
+            não autorizado, perda ou destruição, incluindo:
+        </p>
+        <ul>
+            <li>Transmissão via HTTPS (TLS);</li>
+            <li>Acesso restrito aos dados de contacto (apenas o responsável);</li>
+            <li>Utilização de processadores certificados (Formspree, Google).</li>
+        </ul>
+
+        <!-- 9 -->
+        <h2 id="menores">9. Menores de Idade</h2>
+        <p>
+            Este website destina-se a empresas e profissionais. Não recolhemos intencionalmente dados de
+            crianças com menos de 16 anos. Se tiver conhecimento de que um menor nos forneceu dados pessoais,
+            contacte-nos para os removermos imediatamente.
+        </p>
+
+        <!-- 10 -->
+        <h2 id="termos">10. Termos de Serviço</h2>
+        <h3>10.1 Âmbito</h3>
+        <p>
+            Os presentes Termos regem a utilização do website www.andrecarmo.pt e a prestação de serviços
+            de automação inteligente por André Carmo (NIF 217 056 903).
+        </p>
+        <h3>10.2 Serviços</h3>
+        <p>
+            André Carmo presta serviços de consultoria e implementação de automação com inteligência
+            artificial para empresas, incluindo chatbots, integrações de sistemas, agentes de IA e
+            automação de processos. As condições específicas de cada projeto são definidas em proposta
+            escrita e acordadas com o cliente antes do início dos trabalhos.
+        </p>
+        <h3>10.3 Propriedade Intelectual</h3>
+        <p>
+            Todo o conteúdo deste website (textos, design, código) é propriedade de André Carmo,
+            salvo indicação em contrário. A reprodução total ou parcial sem autorização prévia e escrita
+            é proibida. As soluções desenvolvidas para clientes ficam sujeitas aos termos acordados
+            contratualmente em cada projeto.
+        </p>
+        <h3>10.4 Limitação de Responsabilidade</h3>
+        <p>
+            As informações neste website têm caráter meramente informativo. André Carmo não se
+            responsabiliza por decisões tomadas com base exclusiva no conteúdo do site. A responsabilidade
+            máxima por qualquer projeto está limitada ao valor contratualmente acordado.
+        </p>
+        <h3>10.5 Lei Aplicável</h3>
+        <p>
+            Estes Termos são regidos pela lei portuguesa. Qualquer litígio será submetido ao foro
+            competente em Portugal.
+        </p>
+
+        <!-- 11 -->
+        <h2 id="alteracoes">11. Alterações a Esta Política</h2>
+        <p>
+            Esta política pode ser atualizada periodicamente. A data de "última atualização" no topo
+            desta página indica quando foram feitas as alterações mais recentes. Alterações significativas
+            serão comunicadas de forma destacada no website.
+        </p>
+
+        <!-- 12 -->
+        <h2 id="contacto-rgpd">12. Contacto para Questões de Privacidade</h2>
+        <div class="highlight-box">
+            <p>
+                <strong>André Carmo</strong><br>
+                E-mail: <a href="mailto:andre.carmo@gmail.com">andre.carmo@gmail.com</a><br>
+                Telefone: <a href="tel:+351912405722">+351 912 405 722</a><br>
+                NIF: 217 056 903 · Portugal
+            </p>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 André Carmo. Todos os direitos reservados. | NIF: 217 056 903</p>
+        <p style="margin-top:0.5rem;">
+            <a href="index.html">Voltar ao site principal</a>
+        </p>
+    </footer>
+
+    <script src="cookie-consent.js"></script>
+</body>
+</html>
