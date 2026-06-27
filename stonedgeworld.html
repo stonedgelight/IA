@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>StonedgeWorld | App Comunitária 40+ | André Carmo</title>
+<title>StonedgeWorld | Solução Comunitária 40+ | André Carmo</title>
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
-<meta name="description" content="A primeira app portuguesa de encontros comunitários para adultos 40+. Gratuita para sempre, sem swipe, sem algoritmos de vício.">
+<meta name="description" content="Solução comunitária de combate ao isolamento social dos adultos 40+ em Portugal. Do isolamento ao convívio presencial, em parceria com câmaras e juntas de freguesia. Gratuita, sem fins comerciais sobre os utilizadores.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
@@ -183,7 +183,8 @@ section{padding:88px 0;position:relative}
 .ntag{font-size:.77rem;padding:.22rem .65rem;background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.15);border-radius:100px;color:#fca5a5}
 
 /* CRONOGRAMA */
-#cronograma{background:var(--bg3)}
+#cronograma{background:var(--bg)}
+#cronograma .tld{background:var(--bg)}
 .tl{position:relative;padding-left:2.44rem;max-width:700px}
 .tl::before{content:'';position:absolute;left:15px;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--accent),rgba(37,99,235,.08))}
 .tli{position:relative;padding-bottom:2.4rem}
@@ -218,7 +219,7 @@ section{padding:88px 0;position:relative}
 .tr{font-size:.76rem;color:var(--muted);line-height:1.45}
 
 /* CONTACTO */
-#contacto{background:var(--bg)}
+#contacto{background:var(--bg3)}
 #contacto .hdr{margin-bottom:7rem}
 .cg{display:grid;grid-template-columns:1fr 1.5fr;gap:3rem;align-items:start}
 .cl2 h3{font-family:var(--heading);font-size:1.45rem;font-weight:700;margin-bottom:.9rem}
@@ -259,6 +260,14 @@ footer{background:#0a1628;border-top:1px solid var(--border);padding:4rem 2rem 2
 .rv.in{opacity:1;transform:none}
 .d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
 
+/* ALTERNATIVA */
+#alternativa{background:var(--bg3)}
+
+/* PARCERIA INSTITUCIONAL */
+.instbox{background:rgba(37,99,235,.05);border:1px solid rgba(37,99,235,.18);border-radius:var(--rl);padding:1.65rem 2rem;margin-top:1.5rem;text-align:center}
+.instbox h4{font-family:var(--heading);font-size:.98rem;font-weight:600;color:var(--accent);margin-bottom:.6rem}
+.instbox p{font-size:.875rem;color:var(--muted);line-height:1.72;max-width:700px;margin:0 auto}
+
 /* RESPONSIVE */
 @media(max-width:1024px){.fg{grid-template-columns:1fr 1fr}.ftop{grid-template-columns:1fr 1fr}}
 @media(max-width:768px){:root{--nav-h:60px}.pg{grid-template-columns:1fr}.fg{grid-template-columns:1fr}.eg{grid-template-columns:1fr}.rg{grid-template-columns:1fr 1fr}.tg{grid-template-columns:repeat(3,1fr)}.cg{grid-template-columns:1fr}.ftop{grid-template-columns:1fr 1fr}.nav-ul{display:none}.ham{display:block}.hstats{flex-wrap:wrap}.hstat{min-width:120px}.frow{grid-template-columns:1fr}}
@@ -276,7 +285,7 @@ footer{background:#0a1628;border-top:1px solid var(--border);padding:4rem 2rem 2
     </a>
     <ul class="nav-ul" id="navul">
       <li><a href="#problema">O Problema</a></li>
-      <li><a href="#solucao">A App</a></li>
+      <li><a href="#solucao">A Solução</a></li>
       <li><a href="#estado">MVP</a></li>
       <li><a href="#modelo">Modelo</a></li>
       <li><a href="#cronograma">Cronograma</a></li>
@@ -291,11 +300,11 @@ footer{background:#0a1628;border-top:1px solid var(--border);padding:4rem 2rem 2
   <div class="hg"></div><div class="hdots"></div>
   <div class="c">
     <div class="hi">
-      <h1 class="h1"><span class="acc">StonedgeWorld</span><br>A app que quer<br>tirar Portugal do sofá</h1>
-      <p class="hp">A primeira plataforma portuguesa de encontros comunitários para adultos 40+. Gratuita para sempre. Sem swipe. Sem algoritmos de vício. Os utilizadores veem quem está na sua cidade e nas cidades vizinhas.</p>
+      <h1 class="h1"><span class="acc">StonedgeWorld</span><br>Do isolamento<br>ao convívio presencial</h1>
+      <p class="hp">Uma solução comunitária que usa a tecnologia<br>para um único fim: tirar os adultos 40+ do isolamento<br>e levá-los a conhecer pessoas na vida real, na sua cidade.<br>Desenvolvida em parceria com câmaras municipais<br>e juntas de freguesia<br>a tirar Portugal do sofá.</p>
       <div class="hcmt"><i class="fas fa-lock"></i> Compromisso público: nunca haverá modelo comercial sobre os utilizadores</div>
       <div class="hstats">
-        <div class="hstat"><span class="hsv">8h</span><span class="hsl">MVP construído com IA</span></div>
+        <div class="hstat"><span class="hsv">1&nbsp;em&nbsp;6</span><span class="hsl">Pessoas afetadas por solidão (OMS, 2025)</span></div>
         <div class="hstat"><span class="hsv">40+</span><span class="hsl">Público-alvo em anos</span></div>
         <div class="hstat"><span class="hsv">€0</span><span class="hsl">Para utilizadores, sempre</span></div>
         <div class="hstat"><span class="hsv">100%</span><span class="hsl">Feito em Portugal</span></div>
@@ -309,24 +318,14 @@ footer{background:#0a1628;border-top:1px solid var(--border);padding:4rem 2rem 2
   <div class="c">
     <div class="hdr rv">
       <span class="lbl"><i class="fas fa-exclamation-triangle"></i> O Problema</span>
-      <h2 class="sh">Portugal não se encontra</h2>
-      <p class="sd">As redes sociais prometem conexão. Entregam isolamento. Os adultos 40+ pagam o preço mais alto.</p>
+      <h2 class="sh">O isolamento social dos 40+<br>não tem resposta</h2>
+      <p class="sd">A Comissão da OMS reconheceu-o como prioridade de saúde pública global em 2025. Em Portugal, não existe uma solução estruturada para os adultos 40+.</p>
     </div>
     <div class="pg">
-      <div class="card rv d1"><div class="ci">😔</div><h3>Isolamento Social Crescente</h3><p>Divorciados, viúvos, pais em ninho vazio, profissionais relocados. Pessoas com história e valor, sem ferramentas pensadas para elas.</p></div>
-      <div class="card rv d2"><div class="ci">📱</div><h3>Algoritmos Projetados para Viciar</h3><p>Scroll infinito, métricas de vaidade, notificações manipuladoras. Tudo desenhado para manter-te no sofá, sozinho, a consumir.</p></div>
-      <div class="card rv d1"><div class="ci">💸</div><h3>Plataformas Exploratórias</h3><p>Tinder para os 20s. Subscriptions, coins, boosts — um modelo de negócio construído sobre a solidão das pessoas.</p></div>
-      <div class="card rv d2"><div class="ci">🌍</div><h3>Nada Feito para Portugal</h3><p>Plataformas estrangeiras sem verificação de identidade, sem contexto local, sem comunidades reais por cidade e região.</p></div>
-    </div>
-    <div class="vstbl rv">
-      <table>
-        <thead><tr><th>Plataforma</th><th>Modelo</th><th>Público 40+</th><th>Verificação</th><th class="tg">StonedgeWorld</th></tr></thead>
-        <tbody>
-          <tr><td class="p">Tinder / Bumble</td><td class="bad">Subscriptions + coins</td><td class="bad">Não pensado</td><td class="bad">Nenhuma</td><td class="good">✓ Melhor em tudo</td></tr>
-          <tr><td class="p">Facebook / Instagram</td><td class="bad">Publicidade invasiva</td><td class="bad">Parcialmente</td><td class="bad">Nenhuma</td><td class="good">✓ Melhor em tudo</td></tr>
-          <tr><td class="p">StonedgeWorld</td><td class="good">Patrocínios éticos locais</td><td class="good">100% focado</td><td class="good">Dupla obrigatória</td><td class="good">✓ A nossa proposta</td></tr>
-        </tbody>
-      </table>
+      <div class="card rv d1" style="grid-column:span 2"><div class="ci">😔</div><h3>Isolamento Social Crescente — Prioridade de Saúde Pública Global</h3><p>1 em cada 6 pessoas no mundo é afetada pela solidão — reconhecida pela Comissão da OMS em junho de 2025 como prioridade de saúde pública global, associada a maior risco de AVC, depressão e mortalidade prematura. O Inquérito Europeu de Solidão (JRC / Comissão Europeia, 2022) mostra Portugal entre os países da UE com maior aumento de solidão. Divorciados, viúvos, pais com filhos que saíram de casa, profissionais relocados: pessoas com história e valor, sem ferramentas pensadas para elas.</p></div>
+      <div class="card rv d2"><div class="ci">👥</div><h3>Uma Faixa Etária sem Resposta</h3><p>Os 65+ têm as universidades seniores e os centros de dia. Os jovens têm redes sociais nativas. Os 40+ ficaram de fora: demasiado novos para os programas seniores, demasiado velhos para as dinâmicas digitais atuais. Não existem estruturas de convívio de proximidade pensadas especificamente para eles.</p></div>
+      <div class="card rv d1"><div class="ci">📱</div><h3>O Digital que Isola em vez de Ligar</h3><p>Algoritmos de retenção, scroll infinito, métricas de vaidade. Tinder para os 20s, subscriptions, coins, boosts — um modelo de negócio construído sobre a solidão das pessoas. Desenhado para manter no sofá, não para levar à rua.</p></div>
+      <div class="card rv d2" style="grid-column:span 2"><div class="ci">🗺️</div><h3>Sem Dados, Sem Resposta Local</h3><p>Os dados de isolamento social na faixa 40+ ao nível municipal não estão sistematizados em Portugal — são recolhidos pelos próprios municípios no Diagnóstico Social. A ausência de dados não significa ausência do problema: significa que ainda não foi medido.</p></div>
     </div>
   </div>
 </section>
@@ -335,9 +334,9 @@ footer{background:#0a1628;border-top:1px solid var(--border);padding:4rem 2rem 2
 <section id="solucao">
   <div class="c">
     <div class="hdr c2 rv">
-      <span class="lbl"><i class="fas fa-mobile-alt"></i> A Solução</span>
-      <h2 class="sh">Uma plataforma comunitária,<br>não um mercado</h2>
-      <p class="sd">Os utilizadores veem quem está na sua cidade e nas cidades vizinhas. Comunidades locais reais, sem fronteiras artificiais.</p>
+      <span class="lbl"><i class="fas fa-handshake"></i> A Solução</span>
+      <h2 class="sh">Cada funcionalidade serve um propósito:<br>o encontro presencial</h2>
+      <p class="sd">Toda a arquitetura — a fotografia adiada, a verificação de identidade, a videochamada obrigatória — existe para construir a confiança necessária para que duas pessoas se encontrem cara a cara, em segurança. A segurança e a confiança são o caminho para o convívio real.</p>
     </div>
     <div class="fg">
       <div class="card rv d1"><div class="ci">🆓</div><h3>100% Gratuita Para Sempre</h3><p>Sem subscrições, sem coins, sem truques. Gratuita para qualquer utilizador, agora e sempre. Sem excepções.</p></div>
@@ -395,8 +394,8 @@ footer{background:#0a1628;border-top:1px solid var(--border);padding:4rem 2rem 2
   <div class="c">
     <div class="hdr c2 rv">
       <span class="lbl"><i class="fas fa-project-diagram"></i> Fluxo da App</span>
-      <h2 class="sh">Da descoberta ao encontro real</h2>
-      <p class="sd">Cada passo foi desenhado para promover conexões autênticas, não engagement compulsivo.</p>
+      <h2 class="sh">Do registo ao convívio comunitário</h2>
+      <p class="sd">Cada passo foi desenhado para construir confiança e levar ao encontro presencial — e do encontro a dois ao evento comunitário da cidade.</p>
     </div>
     <div class="mwrap rv">
       <div class="mermaid">
@@ -409,18 +408,22 @@ flowchart TD
     E -->|✓ Aprovado| F([🗺️ Feed Local por Distância])
     F --> G[Perfis por distância\n+ score compatibilidade]
     G --> H{Quer conversar?}
-    H -->|Sim| I[💬 Chat Realtime\nSupabase WebSocket]
+    H -->|Sim| I[💬 Chat]
     I --> J{10 mensagens\ntrocadas?}
     J -->|Ainda não| I
     J -->|Sim| K[📸 Foto revelada\nbilateralmente]
     K --> L{Match mútuo?}
     L -->|Sim| M[📹 Videochamada\nobrigatória · Agora.io]
     M --> N([🤝 Encontro Físico Real])
+    N --> O([☕ Encontro num espaço local parceiro])
+    O --> P([🏘️ Evento comunitário da cidade])
     L -->|Não| G
     H -->|Não| G
     style A fill:#1e3a5f,stroke:#2563eb,color:#f1f5f9
     style F fill:#1e3a5f,stroke:#2563eb,color:#f1f5f9
     style N fill:#064e3b,stroke:#10b981,color:#f1f5f9
+    style O fill:#064e3b,stroke:#10b981,color:#f1f5f9
+    style P fill:#064e3b,stroke:#10b981,color:#f1f5f9
     style E fill:#2d2a1a,stroke:#f59e0b,color:#f1f5f9
     style K fill:#162032,stroke:#06b6d4,color:#f1f5f9
     style M fill:#0d3022,stroke:#10b981,color:#f1f5f9
@@ -448,6 +451,35 @@ flowchart TD
         <span class="ntag">Subscrições</span><span class="ntag">Coins / Boosts</span><span class="ntag">Venda de dados</span><span class="ntag">Targeting comportamental</span><span class="ntag">Algoritmos de retenção</span><span class="ntag">Publicidade invasiva</span><span class="ntag">Scroll infinito</span>
       </div>
     </div>
+    <div class="instbox rv">
+      <h4>🏛️ Parceria Institucional</h4>
+      <p>Câmaras municipais e juntas de freguesia divulgam o projeto junto dos residentes 40+, facilitam o contacto com cafés e espaços locais, e cedem espaço para os encontros e eventos comunitários — sem custo para o erário público. Esta lógica enquadra-se nos instrumentos de inovação social <strong style="color:var(--text)">Portugal Inovação Social 2030 / PESSOAS 2030</strong>, onde os municípios podem ser promotores ou investidores sociais.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ALTERNATIVA — para utilizadores e media -->
+<section id="alternativa">
+  <div class="c">
+    <div class="hdr c2 rv">
+      <span class="lbl"><i class="fas fa-balance-scale"></i> Para Quem Compara</span>
+      <h2 class="sh">E porque não as plataformas<br>que já existem?</h2>
+      <p class="sd">Para utilizadores 40+ e media — o argumento da alternativa ética e gratuita, sem concessões.</p>
+    </div>
+    <div class="pg">
+      <div class="card rv d1"><div class="ci">🆓</div><h3>Sem Subscrições, Sem Coins, Sem Boosts</h3><p>As grandes plataformas ganham dinheiro com a sua solidão. StonedgeWorld é gratuita para sempre, para qualquer utilizador. Sem truques, sem versões premium, sem funcionalidades pagas.</p></div>
+      <div class="card rv d2"><div class="ci">🛡️</div><h3>Sem Venda de Dados, Sem Targeting</h3><p>Os seus dados não são o produto. Sem publicidade comportamental, sem perfis para vender, sem algoritmos de retenção. RGPD completo, com RLS em todas as tabelas da base de dados.</p></div>
+    </div>
+    <div class="vstbl rv">
+      <table>
+        <thead><tr><th>Plataforma</th><th>Modelo</th><th>Público 40+</th><th>Verificação</th><th class="tg">StonedgeWorld</th></tr></thead>
+        <tbody>
+          <tr><td class="p">Tinder / Bumble</td><td class="bad">Subscriptions + coins</td><td class="bad">Não pensado</td><td class="bad">Nenhuma</td><td class="good">✓ Melhor em tudo</td></tr>
+          <tr><td class="p">Facebook / Instagram</td><td class="bad">Publicidade invasiva</td><td class="bad">Parcialmente</td><td class="bad">Nenhuma</td><td class="good">✓ Melhor em tudo</td></tr>
+          <tr><td class="p">StonedgeWorld</td><td class="good">Patrocínios éticos locais</td><td class="good">100% focado</td><td class="good">Dupla obrigatória</td><td class="good">✓ A nossa proposta</td></tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </section>
 
@@ -461,8 +493,8 @@ flowchart TD
     <div class="tl rv">
       <div class="tli">
         <div class="tld"><span></span></div>
-        <div class="tlh"><span class="tldt">Junho 2026 — Hoje</span><span class="tltitle">MVP Funcional — Projeto Piloto União Freguesias Gondomar</span></div>
-        <div class="tlb">Arquitectura completa a correr em Android físico. Autenticação, feed, chat em tempo real, verificação de identidade, notificações push. Backend Supabase cloud activo com RGPD completo.</div>
+        <div class="tlh"><span class="tldt">Junho 2026 — Hoje</span><span class="tltitle">MVP Funcional — Projeto Piloto</span></div>
+        <div class="tlb">Arquitectura completa a correr em Android físico. Autenticação, feed, chat em tempo real, verificação de identidade, notificações push. Backend Supabase cloud activo com RGPD completo. Desenvolvido em colaboração com a <strong style="color:var(--text)">União de Freguesias de Gondomar, S. Cosme, Valbom e Jovim</strong> — parceria com parecer favorável, protocolo em fase de assinatura.</div>
         <div class="tltags"><span class="tltag">React Native</span><span class="tltag">Supabase</span><span class="tltag">Expo SDK 54</span><span class="tltag">RGPD</span></div>
       </div>
       <div class="tli">
@@ -530,7 +562,7 @@ flowchart TD
           <div class="fg2"><label>Interesse *</label>
             <select name="interesse" required>
               <option value="">Selecione uma opção</option>
-              <option>Parceria / Câmara Municipal</option>
+              <option>Parceria — Câmara Municipal / Junta de Freguesia</option>
               <option>Incubadora / Aceleradora (UPTEC, Startup Braga...)</option>
               <option>Investimento (Portugal Ventures...)</option>
               <option>Media / Imprensa</option>
@@ -576,6 +608,7 @@ flowchart TD
         <li><a href="#solucao">A Solução</a></li>
         <li><a href="#estado">Estado MVP</a></li>
         <li><a href="#modelo">Modelo</a></li>
+        <li><a href="#alternativa">vs Apps</a></li>
       </ul>
     </div>
     <div class="fcol">
