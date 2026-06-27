@@ -60,7 +60,6 @@ body { text-align: center; }
 /* Elements that must remain left-aligned */
 .nw, .nstrip, .ntags, .fbot, .ftop,
 .tl, .rdbox, .cis, .frow, .cfbox, .cg,
-table, thead, tbody, tr, th, td,
 .nav-ul, .fcol ul, .fbrand, .fbrand p,
 .cl, .cl2, .ci2, .cit, .ct { text-align: left; }
 /* Hero: centrado */
@@ -88,7 +87,7 @@ section{padding:88px 0;position:relative}
 /* CARD */
 .card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--rl);padding:1.65rem;transition:all var(--t)}
 .card:hover{border-color:rgba(37,99,235,.35);transform:translateY(-3px);box-shadow:0 6px 24px rgba(0,0,0,.35)}
-.ci{width:48px;height:48px;background:rgba(37,99,235,.1);border:1px solid rgba(37,99,235,.2);border-radius:10px;display:grid;place-items:center;font-size:1.25rem;margin-bottom:1rem}
+.ci{width:48px;height:48px;background:rgba(37,99,235,.1);border:1px solid rgba(37,99,235,.2);border-radius:10px;display:grid;place-items:center;font-size:1.25rem;margin:0 auto 1rem}
 .card h3{font-family:var(--heading);font-size:.975rem;font-weight:600;margin-bottom:.45rem}
 .card p{font-size:.875rem;color:var(--muted);line-height:1.65}
 
@@ -126,10 +125,10 @@ section{padding:88px 0;position:relative}
 #problema{background:var(--bg)}
 .pg{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin-bottom:1.5rem}
 .vstbl{background:var(--bg2);border:1px solid var(--border);border-radius:var(--rl);overflow:hidden}
-.vstbl table{width:100%;border-collapse:collapse}
+.vstbl table{width:100%;border-collapse:collapse;table-layout:fixed}
 .vstbl th{padding:.8rem 1.2rem;text-align:left;font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);background:rgba(0,0,0,.2);border-bottom:1px solid var(--border)}
 .vstbl th.tg{color:var(--green)}
-.vstbl td{padding:.8rem 1.2rem;font-size:.875rem;border-bottom:1px solid var(--border2);vertical-align:middle}
+.vstbl td{padding:.8rem 1.2rem;font-size:.875rem;border-bottom:1px solid var(--border2);vertical-align:middle;text-align:left}
 .vstbl tr:last-child td{border-bottom:none}
 .vstbl td.p{font-weight:600;color:var(--muted);font-size:.84rem}
 .vstbl td.bad{color:#f87171}
@@ -138,8 +137,8 @@ section{padding:88px 0;position:relative}
 /* SOLUCAO */
 #solucao{background:var(--bg3)}
 .fg{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-bottom:1.5rem}
-.cmtbox{background:rgba(16,185,129,.06);border:1px solid rgba(16,185,129,.18);border-radius:var(--rl);padding:1.5rem 1.8rem;display:flex;align-items:flex-start;gap:1.2rem}
-.cmtbox .ic{font-size:1.7rem;flex-shrink:0;line-height:1}
+.cmtbox{background:rgba(16,185,129,.06);border:1px solid rgba(16,185,129,.18);border-radius:var(--rl);padding:1.5rem 1.8rem;display:flex;flex-direction:column;align-items:center;margin-top:2.5rem}
+.cmtbox .ic{font-size:1.7rem;line-height:1;margin-bottom:1rem}
 .cmtbox h4{font-family:var(--heading);font-size:.93rem;font-weight:600;color:var(--green);margin-bottom:.35rem}
 .cmtbox p{font-size:.875rem;color:var(--muted);line-height:1.65}
 
@@ -171,8 +170,8 @@ section{padding:88px 0;position:relative}
 
 /* MODELO */
 #modelo{background:var(--bg)}
-.rg{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-bottom:1.5rem}
-.rc{background:var(--bg2);border:1px solid var(--border);border-radius:var(--rl);padding:1.65rem;text-align:center;transition:all var(--t)}
+.rg{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:auto auto auto auto;gap:1.2rem;margin-bottom:1.5rem}
+.rc{display:grid;grid-template-rows:subgrid;grid-row:span 4;align-items:start;background:var(--bg2);border:1px solid var(--border);border-radius:var(--rl);padding:1.65rem;text-align:center;transition:all var(--t)}
 .rc:hover{border-color:rgba(37,99,235,.35);transform:translateY(-3px);box-shadow:0 6px 24px rgba(0,0,0,.35)}
 .rem{font-size:1.9rem;display:block;margin-bottom:.7rem}
 .rv{font-family:var(--heading);font-size:2.1rem;font-weight:800;color:var(--accent);display:block;line-height:1;margin-bottom:.45rem}
@@ -185,11 +184,11 @@ section{padding:88px 0;position:relative}
 
 /* CRONOGRAMA */
 #cronograma{background:var(--bg3)}
-.tl{position:relative;padding-left:2rem;max-width:700px}
-.tl::before{content:'';position:absolute;left:7px;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--accent),rgba(37,99,235,.08))}
+.tl{position:relative;padding-left:2.44rem;max-width:700px}
+.tl::before{content:'';position:absolute;left:15px;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--accent),rgba(37,99,235,.08))}
 .tli{position:relative;padding-bottom:2.4rem}
 .tli:last-child{padding-bottom:0}
-.tld{position:absolute;left:-2.42rem;top:3px;width:18px;height:18px;border-radius:50%;background:var(--bg3);border:2px solid var(--accent);display:grid;place-items:center}
+.tld{position:absolute;left:-2rem;top:2px;width:18px;height:18px;border-radius:50%;background:var(--bg3);border:2px solid var(--accent);display:grid;place-items:center}
 .tld span{width:6px;height:6px;background:var(--accent);border-radius:50%}
 .tld.lnch{border-color:var(--green)}.tld.lnch span{background:var(--green)}
 .tlh{display:flex;align-items:center;gap:.7rem;margin-bottom:.55rem;flex-wrap:wrap}
@@ -219,7 +218,8 @@ section{padding:88px 0;position:relative}
 .tr{font-size:.76rem;color:var(--muted);line-height:1.45}
 
 /* CONTACTO */
-#contacto{background:var(--bg3)}
+#contacto{background:var(--bg)}
+#contacto .hdr{margin-bottom:7rem}
 .cg{display:grid;grid-template-columns:1fr 1.5fr;gap:3rem;align-items:start}
 .cl2 h3{font-family:var(--heading);font-size:1.45rem;font-weight:700;margin-bottom:.9rem}
 .cl2 p{font-size:.9rem;color:var(--muted);line-height:1.72;margin-bottom:1.8rem}
@@ -280,7 +280,6 @@ footer{background:#0a1628;border-top:1px solid var(--border);padding:4rem 2rem 2
       <li><a href="#estado">MVP</a></li>
       <li><a href="#modelo">Modelo</a></li>
       <li><a href="#cronograma">Cronograma</a></li>
-      <li><a href="#financiamento">Apoiar</a></li>
       <li><a href="#contacto" class="cta">Contacto</a></li>
     </ul>
     <button class="ham" id="ham" aria-label="Menu"><span></span><span></span><span></span></button>
@@ -292,14 +291,9 @@ footer{background:#0a1628;border-top:1px solid var(--border);padding:4rem 2rem 2
   <div class="hg"></div><div class="hdots"></div>
   <div class="c">
     <div class="hi">
-      <div class="hbadge"><span class="bdot"></span>MVP Android funcional · Lançamento Setembro 2026</div>
       <h1 class="h1"><span class="acc">StonedgeWorld</span><br>A app que quer<br>tirar Portugal do sofá</h1>
       <p class="hp">A primeira plataforma portuguesa de encontros comunitários para adultos 40+. Gratuita para sempre. Sem swipe. Sem algoritmos de vício. Os utilizadores veem quem está na sua cidade e nas cidades vizinhas.</p>
       <div class="hcmt"><i class="fas fa-lock"></i> Compromisso público: nunca haverá modelo comercial sobre os utilizadores</div>
-      <div class="hctas">
-        <a href="#financiamento" class="btn btn-p btn-lg"><i class="fas fa-coffee"></i> Apoiar no PPL.pt</a>
-        <a href="#solucao" class="btn btn-o btn-lg">Saber mais <i class="fas fa-arrow-down"></i></a>
-      </div>
       <div class="hstats">
         <div class="hstat"><span class="hsv">8h</span><span class="hsl">MVP construído com IA</span></div>
         <div class="hstat"><span class="hsv">40+</span><span class="hsl">Público-alvo em anos</span></div>
@@ -384,13 +378,13 @@ footer{background:#0a1628;border-top:1px solid var(--border);padding:4rem 2rem 2
       </div>
       <div class="rdbox rv d2">
         <h3><i class="fas fa-map"></i> Roadmap Imediato</h3>
-        <div class="rdi"><div class="rdd"><span></span></div><div class="rdc"><strong>Fix revelação de foto + videochamada real</strong><em>Maio 2026 · ~3 dias com Claude Code</em><div><span class="rtag">Agora.io SDK</span></div></div></div>
-        <div class="rdi"><div class="rdd"><span></span></div><div class="rdc"><strong>Liveness detection na selfie</strong><em>Maio 2026 · expo-face-detector · ~3 dias</em><div><span class="rtag">Anti-fraude</span></div></div></div>
-        <div class="rdi"><div class="rdd"><span></span></div><div class="rdc"><strong>OCR automático na factura de morada</strong><em>Junho 2026 · Google Vision API · ~3 dias</em><div><span class="rtag">Automação</span></div></div></div>
-        <div class="rdi"><div class="rdd"><span></span></div><div class="rdc"><strong>Painel de administração</strong><em>Junho 2026 · ~5 dias</em><div><span class="rtag">Admin</span></div></div></div>
-        <div class="rdi"><div class="rdd"><span></span></div><div class="rdc"><strong>Beta privado — primeiros utilizadores 40+</strong><em>Meados Junho 2026 · Porto e Norte</em><div><span class="rtag b">Beta</span></div></div></div>
-        <div class="rdi"><div class="rdd"><span></span></div><div class="rdc"><strong>Eventos locais por cidade</strong><em>Julho 2026 · ~4 dias</em><div><span class="rtag">Comunidade</span></div></div></div>
-        <div class="rdi"><div class="rdd"><span></span></div><div class="rdc"><strong>🚀 Lançamento Google Play Store</strong><em>Setembro 2026 · EAS Build APK</em><div><span class="rtag b">Lançamento</span></div></div></div>
+        <div class="rdi"><div class="rdd"><span></span></div><div class="rdc"><strong>Fix revelação de foto + videochamada real</strong><em>~3 dias com Claude Code</em><div><span class="rtag">Agora.io SDK</span></div></div></div>
+        <div class="rdi"><div class="rdd"><span></span></div><div class="rdc"><strong>Liveness detection na selfie</strong><em>expo-face-detector · ~3 dias</em><div><span class="rtag">Anti-fraude</span></div></div></div>
+        <div class="rdi"><div class="rdd"><span></span></div><div class="rdc"><strong>OCR automático na factura de morada</strong><em>Google Vision API · ~3 dias</em><div><span class="rtag">Automação</span></div></div></div>
+        <div class="rdi"><div class="rdd"><span></span></div><div class="rdc"><strong>Painel de administração</strong><em>~5 dias</em><div><span class="rtag">Admin</span></div></div></div>
+        <div class="rdi"><div class="rdd"><span></span></div><div class="rdc"><strong>Beta privado — primeiros utilizadores 40+</strong><em>Porto e Norte</em><div><span class="rtag b">Beta</span></div></div></div>
+        <div class="rdi"><div class="rdd"><span></span></div><div class="rdc"><strong>Eventos locais por cidade</strong><em>~4 dias</em><div><span class="rtag">Comunidade</span></div></div></div>
+        <div class="rdi"><div class="rdd"><span></span></div><div class="rdc"><strong>🚀 Lançamento Google Play Store</strong><em>EAS Build APK</em><div><span class="rtag b">Lançamento</span></div></div></div>
       </div>
     </div>
   </div>
@@ -445,8 +439,8 @@ flowchart TD
     </div>
     <div class="rg">
       <div class="rc rv d1"><span class="rem">📍</span><span class="rv2" style="font-family:var(--heading);font-size:2rem;font-weight:800;color:var(--accent);display:block;line-height:1;margin-bottom:.45rem">€50<small style="font-size:.45em;font-weight:400">/mês</small></span><div class="rl2">Patrocínios Locais</div><div class="rd">Restaurantes, bares e espaços de eventos pagam para aparecer como local recomendado para o primeiro encontro na sua cidade</div></div>
-      <div class="rc rv d2"><span class="rem">🎟️</span><div class="rl2">Eventos Comunitários</div><div class="rd">A plataforma organiza encontros temáticos por cidade. A comunidade paga o evento, não a app</div></div>
-      <div class="rc rv d3"><span class="rem">📢</span><div class="rl2">Anúncios de Parceiros</div><div class="rd">Anúncios não evasivos de parceiros de eventos. Sem cookies, sem tracking, sem dados partilhados</div></div>
+      <div class="rc rv d2"><span class="rem">🎟️</span><span></span><div class="rl2">Eventos Comunitários</div><div class="rd">A plataforma organiza encontros temáticos por cidade. A comunidade paga o evento, não a app</div></div>
+      <div class="rc rv d3"><span class="rem">📢</span><span></span><div class="rl2">Anúncios de Parceiros</div><div class="rd">Anúncios não evasivos de parceiros de eventos. Sem cookies, sem tracking, sem dados partilhados</div></div>
     </div>
     <div class="nstrip rv">
       <span class="ntitle">Nunca existirá →</span>
@@ -462,72 +456,45 @@ flowchart TD
   <div class="c">
     <div class="hdr rv">
       <span class="lbl"><i class="fas fa-calendar-alt"></i> Cronograma</span>
-      <h2 class="sh">De MVP a produto lançado<br>em 5 meses</h2>
+      <h2 class="sh">De MVP a produto lançado<br>em colaboração com Câmaras e Freguesias</h2>
     </div>
     <div class="tl rv">
       <div class="tli">
         <div class="tld"><span></span></div>
-        <div class="tlh"><span class="tldt">Abril 2026 — Hoje</span><span class="tltitle">MVP Funcional — Estado Actual</span></div>
+        <div class="tlh"><span class="tldt">Junho 2026 — Hoje</span><span class="tltitle">MVP Funcional — Projeto Piloto União Freguesias Gondomar</span></div>
         <div class="tlb">Arquitectura completa a correr em Android físico. Autenticação, feed, chat em tempo real, verificação de identidade, notificações push. Backend Supabase cloud activo com RGPD completo.</div>
         <div class="tltags"><span class="tltag">React Native</span><span class="tltag">Supabase</span><span class="tltag">Expo SDK 54</span><span class="tltag">RGPD</span></div>
       </div>
       <div class="tli">
         <div class="tld"><span></span></div>
-        <div class="tlh"><span class="tldt">Maio 2026</span><span class="tltitle">Fix + Videochamada Real</span></div>
+        <div class="tlh"><span class="tltitle">Fix + Videochamada Real</span></div>
         <div class="tlb">Resolução do bug de revelação de foto. Integração SDK Agora.io para videochamada real. Liveness detection na selfie de verificação.</div>
         <div class="tltags"><span class="tltag">Agora.io</span><span class="tltag">expo-face-detector</span></div>
       </div>
       <div class="tli">
         <div class="tld"><span></span></div>
-        <div class="tlh"><span class="tldt">Junho 2026</span><span class="tltitle">Automação + Painel Admin</span></div>
+        <div class="tlh"><span class="tltitle">Automação + Painel Admin</span></div>
         <div class="tlb">OCR automático na factura de morada via Google Vision API. Painel web de administração para aprovação de perfis. Primeiros parceiros B2B contactados no Porto.</div>
         <div class="tltags"><span class="tltag">Google Vision API</span><span class="tltag">Painel Admin</span></div>
       </div>
       <div class="tli">
         <div class="tld"><span></span></div>
-        <div class="tlh"><span class="tldt beta">Meados Junho 2026 — Beta</span><span class="tltitle">Primeiros Utilizadores Beta 40+</span></div>
+        <div class="tlh"><span class="tltitle">Primeiros Utilizadores Beta 40+</span></div>
         <div class="tlb">Beta privado com utilizadores reais no Porto e Norte. Testes do fluxo completo — registo, verificação, chat, videochamada. Feedback para ajustes finais.</div>
         <div class="tltags"><span class="tltag">Porto</span><span class="tltag">Beta Privado</span><span class="tltag">Utilizadores Reais</span></div>
       </div>
       <div class="tli">
         <div class="tld"><span></span></div>
-        <div class="tlh"><span class="tldt">Julho 2026</span><span class="tltitle">Eventos Locais + Beta Nacional</span></div>
+        <div class="tlh"><span class="tltitle">Eventos Locais + Beta Nacional</span></div>
         <div class="tlb">Funcionalidade de eventos comunitários por cidade. Ajustes com base no feedback beta. Expansão a outras cidades (Braga, Coimbra, Lisboa).</div>
         <div class="tltags"><span class="tltag">Eventos</span><span class="tltag">Beta Nacional</span></div>
       </div>
       <div class="tli">
         <div class="tld lnch"><span></span></div>
-        <div class="tlh"><span class="tldt lnch">🚀 Setembro 2026</span><span class="tltitle">Lançamento Google Play Store</span></div>
+        <div class="tlh"><span class="tltitle">Lançamento Google Play Store</span></div>
         <div class="tlb">Publicação pública na Google Play Store via EAS Build (APK standalone). Campanha de lançamento no Porto e Norte. Expansão orgânica a todo o território nacional.</div>
         <div class="tltags"><span class="tltag">Google Play</span><span class="tltag">EAS Build</span><span class="tltag">Lançamento Nacional</span></div>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- PPL -->
-<section id="financiamento">
-  <div class="c">
-    <div class="hdr c2 rv">
-      <span class="lbl"><i class="fas fa-hand-holding-heart"></i> Crowdfunding PPL.pt</span>
-      <h2 class="sh">Ajuda-me a tirar<br>Portugal do sofá</h2>
-      <p class="sd">Preciso de 3 meses focados para terminar e lançar. Sem este financiamento o StonedgeWorld fica em pausa enquanto trabalho noutros projectos.</p>
-    </div>
-    <div class="fbox rv">
-      <h3>Meta: €5.000 — Campanha PPL.pt</h3>
-      <p>Modelo "Tudo ou nada" — só recebes os apoios se a meta for atingida dentro de 45 dias. Sem risco para os apoiantes.</p>
-      <div class="pw">
-        <div class="plbls"><span>Angariado</span><span id="plbl">Campanha em breve</span></div>
-        <div class="pbar"><div class="pfill" id="pfill"></div></div>
-      </div>
-      <a href="https://ppl.pt/stonedgeworld" target="_blank" rel="noopener" class="btn btn-p btn-lg" style="margin-top:1.4rem"><i class="fas fa-coffee"></i> Apoiar agora no PPL.pt</a>
-    </div>
-    <div class="tg">
-      <div class="tier rv d1"><span class="te">☕</span><span class="tp">€5</span><div class="tn">Café</div><div class="tr">Nome nos créditos da app</div></div>
-      <div class="tier rv d2"><span class="te">⭐</span><span class="tp">€15</span><div class="tn">Apoiante</div><div class="tr">Créditos + badge "Fundador" permanente no perfil</div></div>
-      <div class="tier rv d3"><span class="te">🚀</span><span class="tp">€30</span><div class="tn">Early Bird</div><div class="tr">Tudo acima + acesso beta antes do lançamento</div></div>
-      <div class="tier rv d1"><span class="te">💛</span><span class="tp">€75</span><div class="tn">Embaixador</div><div class="tr">Tudo acima + convite para 1.º evento StonedgeWorld</div></div>
-      <div class="tier rv d2"><span class="te">🏆</span><span class="tp">€150</span><div class="tn">Co-criador</div><div class="tr">Tudo acima + chamada de 1h para influenciar features</div></div>
     </div>
   </div>
 </section>
@@ -548,7 +515,6 @@ flowchart TD
           <a href="tel:+351912405722" class="cit"><i class="fas fa-phone"></i>+351 912 405 722</a>
           <a href="mailto:andre.carmo@gmail.com" class="cit"><i class="fas fa-envelope"></i>andre.carmo@gmail.com</a>
           <a href="https://andrecarmo.pt" class="cit"><i class="fas fa-globe"></i>andrecarmo.pt</a>
-          <a href="https://ppl.pt/stonedgeworld" target="_blank" class="cit"><i class="fas fa-coffee"></i>Campanha PPL.pt</a>
         </div>
       </div>
       <div class="cfbox rv d2">
@@ -568,7 +534,6 @@ flowchart TD
               <option>Incubadora / Aceleradora (UPTEC, Startup Braga...)</option>
               <option>Investimento (Portugal Ventures...)</option>
               <option>Media / Imprensa</option>
-              <option>Apoiar no PPL.pt</option>
               <option>Patrocínio local (restaurante, espaço de eventos)</option>
               <option>Utilizador interessado (40+)</option>
               <option>Outro</option>
@@ -611,7 +576,6 @@ flowchart TD
         <li><a href="#solucao">A Solução</a></li>
         <li><a href="#estado">Estado MVP</a></li>
         <li><a href="#modelo">Modelo</a></li>
-        <li><a href="#financiamento">Apoiar no PPL</a></li>
       </ul>
     </div>
     <div class="fcol">
