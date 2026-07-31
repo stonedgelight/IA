@@ -9,6 +9,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="canonical" href="https://www.andrecarmo.pt/imobiliarias.html">
+    <link rel="alternate" hreflang="pt-PT" href="https://www.andrecarmo.pt/imobiliarias.html">
+    <link rel="alternate" hreflang="en" href="https://www.andrecarmo.pt/en/imobiliarias.html">
+    <link rel="alternate" hreflang="x-default" href="https://www.andrecarmo.pt/imobiliarias.html">
   <meta name="robots" content="index, follow">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Consultoria Operacional para Imobiliárias | André Carmo">
@@ -303,7 +306,47 @@
       .diagram-wrapper { padding: 1.5rem 1rem; }
     }
     #successMessage, #errorMessage { display: none; }
-  </style>
+          /* ===== Seletor de idioma / Language switcher ===== */
+        .lang-switch {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin-left: 3rem;
+            flex: 0 0 auto;
+        }
+        .lang-switch-label {
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--text-gray, #b3d9ff);
+            white-space: nowrap;
+            line-height: 1;
+        }
+        .lang-flag {
+            width: 30px;
+            height: 30px;
+            min-width: 30px;
+            border-radius: 50%;
+            overflow: hidden;
+            display: block;
+            border: 1px solid var(--glass-border, rgba(0, 212, 255, 0.35));
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .lang-flag:hover { transform: scale(1.12); box-shadow: 0 0 14px rgba(0, 212, 255, 0.55); }
+        .lang-flag .flag-on, .lang-flag .flag-off { display: block; width: 100%; height: 100%; }
+        .lang-flag .flag-off { display: none; }
+        .lang-flag:hover .flag-on { display: none; }
+        .lang-flag:hover .flag-off { display: block; }
+        .lang-flag svg { display: block; width: 100%; height: 100%; }
+        .nav-container .nav-links { margin-left: auto; }
+        @media (max-width: 1180px) { .lang-switch-label { display: none; } }
+        @media (max-width: 1080px) { .nav-container .nav-links { gap: 1.4rem; } }
+        @media (max-width: 968px) {
+            .lang-switch { margin-left: auto; }
+            .lang-switch-label { display: inline; }
+            .mobile-menu { margin-left: 1.25rem; }
+        }
+        @media (max-width: 560px) { .lang-switch-label { display: none; } }
+    </style>
 </head>
 <body>
 
@@ -319,6 +362,13 @@
       <li><a href="index.html#portfolio">Portfólio</a></li>
       <li><a href="#contactos">Contactos</a></li>
     </ul>
+    <div class="lang-switch">
+        <span class="lang-switch-label">Select language</span>
+        <a href="en/imobiliarias.html" class="lang-flag" hreflang="en" title="View this page in English" aria-label="View this page in English">
+            <span class="flag-on"><svg viewBox="0 0 60 60" aria-hidden="true"><rect width="60" height="60" fill="#DA291C"/><rect width="24" height="60" fill="#046A38"/><circle cx="24" cy="30" r="11" fill="#FFE900" stroke="#046A38" stroke-width="1.5"/><circle cx="24" cy="30" r="6.5" fill="#DA291C" stroke="#FFFFFF" stroke-width="1.5"/></svg></span>
+            <span class="flag-off"><svg viewBox="0 0 60 60" aria-hidden="true"><rect width="60" height="60" fill="#012169"/><path d="M0 0 60 60M60 0 0 60" stroke="#FFFFFF" stroke-width="12"/><path d="M0 0 60 60M60 0 0 60" stroke="#C8102E" stroke-width="6"/><path d="M30 0V60M0 30H60" stroke="#FFFFFF" stroke-width="20"/><path d="M30 0V60M0 30H60" stroke="#C8102E" stroke-width="12"/></svg></span>
+        </a>
+    </div>
     <div class="mobile-menu"><i class="fas fa-bars"></i></div>
   </div>
 </nav>

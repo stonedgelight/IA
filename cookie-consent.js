@@ -36,19 +36,41 @@
     hideBar();
   }
 
+  var TEXTS = {
+    pt: {
+      body: 'Utilizamos cookies de análise (Google Analytics) para melhorar este site. ' +
+            'Pode aceitar ou recusar o rastreamento. ',
+      link: 'Política de Privacidade & RGPD',
+      reject: 'Recusar',
+      accept: 'Aceitar'
+    },
+    en: {
+      body: 'We use analytics cookies (Google Analytics) to improve this website. ' +
+            'You can accept or reject tracking. ',
+      link: 'Privacy Policy & GDPR',
+      reject: 'Reject',
+      accept: 'Accept'
+    }
+  };
+
+  function t() {
+    var lang = (document.documentElement.getAttribute('lang') || 'pt').toLowerCase();
+    return lang.indexOf('en') === 0 ? TEXTS.en : TEXTS.pt;
+  }
+
   function showBar() {
+    var txt = t();
     var bar = document.createElement('div');
     bar.id = 'cc-bar';
     bar.innerHTML =
       '<div style="max-width:900px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;">' +
         '<p style="margin:0;font-size:.88rem;line-height:1.5;color:#b3d9ff;">' +
-          'Utilizamos cookies de análise (Google Analytics) para melhorar este site. ' +
-          'Pode aceitar ou recusar o rastreamento. ' +
-          '<a href="politica-privacidade.html" style="color:#00d4ff;text-decoration:underline;">Política de Privacidade & RGPD</a>.' +
+          txt.body +
+          '<a href="politica-privacidade.html" style="color:#00d4ff;text-decoration:underline;">' + txt.link + '</a>.' +
         '</p>' +
         '<div style="display:flex;gap:.6rem;flex-shrink:0;">' +
-          '<button id="cc-reject" style="padding:.55rem 1.2rem;border-radius:50px;border:1px solid #00d4ff;background:transparent;color:#00d4ff;font-size:.85rem;font-weight:600;cursor:pointer;">Recusar</button>' +
-          '<button id="cc-accept" style="padding:.55rem 1.2rem;border-radius:50px;border:none;background:linear-gradient(135deg,#0066cc,#0080ff);color:#fff;font-size:.85rem;font-weight:600;cursor:pointer;">Aceitar</button>' +
+          '<button id="cc-reject" style="padding:.55rem 1.2rem;border-radius:50px;border:1px solid #00d4ff;background:transparent;color:#00d4ff;font-size:.85rem;font-weight:600;cursor:pointer;">' + txt.reject + '</button>' +
+          '<button id="cc-accept" style="padding:.55rem 1.2rem;border-radius:50px;border:none;background:linear-gradient(135deg,#0066cc,#0080ff);color:#fff;font-size:.85rem;font-weight:600;cursor:pointer;">' + txt.accept + '</button>' +
         '</div>' +
       '</div>';
     bar.style.cssText =

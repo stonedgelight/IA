@@ -1,53 +1,146 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://andrecarmo.pt/</loc>
+    <xhtml:link rel="alternate" hreflang="pt-PT" href="https://andrecarmo.pt/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://andrecarmo.pt/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://andrecarmo.pt/"/>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
+    <loc>https://andrecarmo.pt/en/</loc>
+    <xhtml:link rel="alternate" hreflang="pt-PT" href="https://andrecarmo.pt/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://andrecarmo.pt/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://andrecarmo.pt/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
     <loc>https://andrecarmo.pt/chatbots-whatsapp.html</loc>
+    <xhtml:link rel="alternate" hreflang="pt-PT" href="https://andrecarmo.pt/chatbots-whatsapp.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://andrecarmo.pt/en/chatbots-whatsapp.html"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://andrecarmo.pt/en/chatbots-whatsapp.html</loc>
+    <xhtml:link rel="alternate" hreflang="pt-PT" href="https://andrecarmo.pt/chatbots-whatsapp.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://andrecarmo.pt/en/chatbots-whatsapp.html"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://andrecarmo.pt/clinicas-dentarias.html</loc>
+    <xhtml:link rel="alternate" hreflang="pt-PT" href="https://andrecarmo.pt/clinicas-dentarias.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://andrecarmo.pt/en/clinicas-dentarias.html"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://andrecarmo.pt/en/clinicas-dentarias.html</loc>
+    <xhtml:link rel="alternate" hreflang="pt-PT" href="https://andrecarmo.pt/clinicas-dentarias.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://andrecarmo.pt/en/clinicas-dentarias.html"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://andrecarmo.pt/agendamento-automatico.html</loc>
+    <xhtml:link rel="alternate" hreflang="pt-PT" href="https://andrecarmo.pt/agendamento-automatico.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://andrecarmo.pt/en/agendamento-automatico.html"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://andrecarmo.pt/en/agendamento-automatico.html</loc>
+    <xhtml:link rel="alternate" hreflang="pt-PT" href="https://andrecarmo.pt/agendamento-automatico.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://andrecarmo.pt/en/agendamento-automatico.html"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://andrecarmo.pt/qualificacao-leads.html</loc>
+    <xhtml:link rel="alternate" hreflang="pt-PT" href="https://andrecarmo.pt/qualificacao-leads.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://andrecarmo.pt/en/qualificacao-leads.html"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://andrecarmo.pt/en/qualificacao-leads.html</loc>
+    <xhtml:link rel="alternate" hreflang="pt-PT" href="https://andrecarmo.pt/qualificacao-leads.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://andrecarmo.pt/en/qualificacao-leads.html"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://andrecarmo.pt/imobiliarias.html</loc>
+    <xhtml:link rel="alternate" hreflang="pt-PT" href="https://andrecarmo.pt/imobiliarias.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://andrecarmo.pt/en/imobiliarias.html"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://andrecarmo.pt/en/imobiliarias.html</loc>
+    <xhtml:link rel="alternate" hreflang="pt-PT" href="https://andrecarmo.pt/imobiliarias.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://andrecarmo.pt/en/imobiliarias.html"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://andrecarmo.pt/automacao-emails.html</loc>
+    <xhtml:link rel="alternate" hreflang="pt-PT" href="https://andrecarmo.pt/automacao-emails.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://andrecarmo.pt/en/automacao-emails.html"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://andrecarmo.pt/en/automacao-emails.html</loc>
+    <xhtml:link rel="alternate" hreflang="pt-PT" href="https://andrecarmo.pt/automacao-emails.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://andrecarmo.pt/en/automacao-emails.html"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://andrecarmo.pt/integracao-sistemas.html</loc>
+    <xhtml:link rel="alternate" hreflang="pt-PT" href="https://andrecarmo.pt/integracao-sistemas.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://andrecarmo.pt/en/integracao-sistemas.html"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://andrecarmo.pt/en/integracao-sistemas.html</loc>
+    <xhtml:link rel="alternate" hreflang="pt-PT" href="https://andrecarmo.pt/integracao-sistemas.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://andrecarmo.pt/en/integracao-sistemas.html"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://andrecarmo.pt/agentes-ia.html</loc>
+    <xhtml:link rel="alternate" hreflang="pt-PT" href="https://andrecarmo.pt/agentes-ia.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://andrecarmo.pt/en/agentes-ia.html"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://andrecarmo.pt/stonedgworld.html</loc>
+    <loc>https://andrecarmo.pt/en/agentes-ia.html</loc>
+    <xhtml:link rel="alternate" hreflang="pt-PT" href="https://andrecarmo.pt/agentes-ia.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://andrecarmo.pt/en/agentes-ia.html"/>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://andrecarmo.pt/stonedgeworld.html</loc>
+    <xhtml:link rel="alternate" hreflang="pt-PT" href="https://andrecarmo.pt/stonedgeworld.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://andrecarmo.pt/en/stonedgeworld.html"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://andrecarmo.pt/en/stonedgeworld.html</loc>
+    <xhtml:link rel="alternate" hreflang="pt-PT" href="https://andrecarmo.pt/stonedgeworld.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://andrecarmo.pt/en/stonedgeworld.html"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
 </urlset>
