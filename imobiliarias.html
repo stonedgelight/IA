@@ -73,6 +73,33 @@
       width: 0; height: 2px; background: var(--electric-blue); transition: width 0.3s ease;
     }
     .nav-links a:hover::after { width: 100%; }
+    .nav-dropdown { position: relative; }
+    .nav-dropdown-toggle {
+      display: flex; align-items: center; gap: 0.4rem; cursor: pointer;
+      background: none; border: none; font: inherit;
+    }
+    .nav-dropdown-toggle i { font-size: 0.65rem; transition: transform 0.3s ease; }
+    .nav-dropdown:hover .nav-dropdown-toggle i,
+    .nav-dropdown:focus-within .nav-dropdown-toggle i { transform: rotate(180deg); }
+    .nav-dropdown-menu {
+      list-style: none; position: absolute; top: calc(100% + 1rem); left: 50%;
+      transform: translateX(-50%) translateY(-8px);
+      background: rgba(0, 8, 20, 0.98); border: 1px solid var(--glass-border);
+      border-radius: 12px; padding: 0.6rem; min-width: 200px;
+      opacity: 0; visibility: hidden;
+      transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5); z-index: 10;
+    }
+    .nav-dropdown:hover .nav-dropdown-menu,
+    .nav-dropdown:focus-within .nav-dropdown-menu {
+      opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0);
+    }
+    .nav-dropdown-menu a {
+      display: block; padding: 0.6rem 0.9rem; border-radius: 8px;
+      white-space: nowrap; color: var(--text-gray);
+    }
+    .nav-dropdown-menu a:hover { background: rgba(0, 212, 255, 0.08); color: var(--electric-blue); }
+    .nav-dropdown-menu a::after { display: none; }
     .mobile-menu { display: none; font-size: 1.5rem; cursor: pointer; color: var(--electric-blue); }
 
     /* HERO */
@@ -84,7 +111,8 @@
     }
     .page-hero::before {
       content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-      background: radial-gradient(ellipse at 60% 50%, rgba(0, 102, 204, 0.15) 0%, transparent 70%);
+      background-image: url('images/hero-tech.jpg');
+      background-size: cover; background-position: center; opacity: 0.3;
     }
     .page-hero-content { position: relative; z-index: 2; max-width: 900px; text-align: center; }
     .breadcrumb {
@@ -221,6 +249,7 @@
     /* CONTACT */
     .contact { background: var(--deep-space); }
     .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
+    .contact-info { display: flex; flex-direction: column; justify-content: flex-end; }
     .contact-info h3 { font-size: 2rem; margin-bottom: 1.5rem; color: var(--electric-blue); }
     .contact-info > p { color: var(--text-gray); margin-bottom: 2rem; font-size: 1.1rem; }
     .contact-methods { display: flex; flex-direction: column; gap: 1.5rem; }
@@ -297,6 +326,12 @@
       .mobile-menu { display: block; }
       .contact-grid, .benefits-grid { grid-template-columns: 1fr; }
       .footer-content { grid-template-columns: 1fr 1fr; }
+      .nav-dropdown-menu {
+        position: static; opacity: 1; visibility: visible; transform: none;
+        background: transparent; border: none; box-shadow: none;
+        padding: 0.25rem 0 0 1.25rem; min-width: 0;
+      }
+      .nav-dropdown-toggle i { display: none; }
     }
     @media (max-width: 576px) {
       .footer-content { grid-template-columns: 1fr; text-align: center; }
@@ -358,8 +393,15 @@
     <ul class="nav-links">
       <li><a href="index.html#inicio">Início</a></li>
       <li><a href="index.html#sobre">Sobre</a></li>
-      <li><a href="index.html#servicos">Soluções</a></li>
+      <li class="nav-dropdown">
+        <a href="index.html#servicos" class="nav-dropdown-toggle">Clientes <i class="fas fa-chevron-down"></i></a>
+        <ul class="nav-dropdown-menu">
+          <li><a href="index.html#servicos">O Que Resolvo</a></li>
+          <li><a href="index.html#sectores">Por Sector</a></li>
+        </ul>
+      </li>
       <li><a href="index.html#portfolio">Portfólio</a></li>
+      <li><a href="index.html#precos">Preços</a></li>
       <li><a href="#contactos">Contactos</a></li>
     </ul>
     <div class="lang-switch">
@@ -667,8 +709,9 @@
       <ul>
         <li><a href="index.html#inicio">Início</a></li>
         <li><a href="index.html#sobre">Sobre</a></li>
-        <li><a href="index.html#servicos">Soluções</a></li>
+        <li><a href="index.html#servicos">Clientes</a></li>
         <li><a href="index.html#portfolio">Portfólio</a></li>
+        <li><a href="index.html#precos">Preços</a></li>
       </ul>
     </div>
     <div class="footer-links">

@@ -91,6 +91,54 @@
             transition: width 0.3s ease;
         }
         .nav-links a:hover::after { width: 100%; }
+        .nav-dropdown { position: relative; }
+        .nav-dropdown-toggle {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+            font: inherit;
+        }
+        .nav-dropdown-toggle i {
+            font-size: 0.65rem;
+            transition: transform 0.3s ease;
+        }
+        .nav-dropdown:hover .nav-dropdown-toggle i,
+        .nav-dropdown:focus-within .nav-dropdown-toggle i { transform: rotate(180deg); }
+        .nav-dropdown-menu {
+            list-style: none;
+            position: absolute;
+            top: calc(100% + 1rem);
+            left: 50%;
+            transform: translateX(-50%) translateY(-8px);
+            background: rgba(0, 8, 20, 0.98);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 0.6rem;
+            min-width: 200px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            z-index: 10;
+        }
+        .nav-dropdown:hover .nav-dropdown-menu,
+        .nav-dropdown:focus-within .nav-dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+        }
+        .nav-dropdown-menu a {
+            display: block;
+            padding: 0.6rem 0.9rem;
+            border-radius: 8px;
+            white-space: nowrap;
+            color: var(--text-gray);
+        }
+        .nav-dropdown-menu a:hover { background: rgba(0, 212, 255, 0.08); color: var(--electric-blue); }
+        .nav-dropdown-menu a::after { display: none; }
         .mobile-menu {
             display: none;
             font-size: 1.5rem;
@@ -114,7 +162,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background-image: url('https://kimi-web-img.moonshot.cn/img/as2.ftcdn.net/7f6dcdc77c3dc4438c421f658a7bf4b45baccfea.jpg');
+            background-image: url('../images/hero-tech.jpg');
             background-size: cover;
             background-position: center;
             opacity: 0.3;
@@ -414,6 +462,11 @@
             position: relative;
             z-index: 1;
         }
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
         .contact-info h3 {
             font-size: 2rem;
             margin-bottom: 1.5rem;
@@ -564,6 +617,18 @@
             .mobile-menu { display: block; }
             .contact-grid, .benefits-grid { grid-template-columns: 1fr; }
             .footer-content { grid-template-columns: 1fr 1fr; }
+            .nav-dropdown-menu {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                background: transparent;
+                border: none;
+                box-shadow: none;
+                padding: 0.25rem 0 0 1.25rem;
+                min-width: 0;
+            }
+            .nav-dropdown-toggle i { display: none; }
         }
         @media (max-width: 576px) {
             .footer-content {
@@ -645,7 +710,13 @@
             <ul class="nav-links">
                 <li><a href="index.html#inicio">Home</a></li>
                 <li><a href="index.html#sobre">About</a></li>
-                <li><a href="index.html#servicos">Solutions</a></li>
+                <li class="nav-dropdown">
+                    <a href="index.html#servicos" class="nav-dropdown-toggle">Clients <i class="fas fa-chevron-down"></i></a>
+                    <ul class="nav-dropdown-menu">
+                        <li><a href="index.html#servicos">What I Solve</a></li>
+                        <li><a href="index.html#sectores">By Sector</a></li>
+                    </ul>
+                </li>
                 <li><a href="index.html#portfolio">Portfolio</a></li>
                 <li><a href="index.html#precos">Pricing</a></li>
                 <li><a href="#contactos">Contact</a></li>
@@ -992,7 +1063,7 @@
                 <ul>
                     <li><a href="index.html#inicio">Home</a></li>
                     <li><a href="index.html#sobre">About</a></li>
-                    <li><a href="index.html#servicos">Solutions</a></li>
+                    <li><a href="index.html#servicos">Clients</a></li>
                     <li><a href="index.html#portfolio">Portfolio</a></li>
                     <li><a href="index.html#precos">Pricing</a></li>
                 </ul>

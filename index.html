@@ -1,10 +1,10 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-PT">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>André Carmo | Consultoria e Eficiência Operacional para PMEs em Portugal</title>
-    <meta name="description" content="Resolvo os problemas que travam o seu negócio: atendimento perdido, agenda com buracos, processos manuais. Proposta em 24h, implementação em 48h.">
+    <title>André Carmo | Engenheiro de IA · Automação e Agentes para PME</title>
+    <meta name="description" content="Agentes de IA e automação em produção para PME e profissões liberais: atendimento e marcações por WhatsApp, qualificação de leads, assistentes sobre documentos e integração com CRM e ERP. Primeira versão em 48 horas.">
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -91,6 +91,54 @@
             transition: width 0.3s ease;
         }
         .nav-links a:hover::after { width: 100%; }
+        .nav-dropdown { position: relative; }
+        .nav-dropdown-toggle {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+            font: inherit;
+        }
+        .nav-dropdown-toggle i {
+            font-size: 0.65rem;
+            transition: transform 0.3s ease;
+        }
+        .nav-dropdown:hover .nav-dropdown-toggle i,
+        .nav-dropdown:focus-within .nav-dropdown-toggle i { transform: rotate(180deg); }
+        .nav-dropdown-menu {
+            list-style: none;
+            position: absolute;
+            top: calc(100% + 1rem);
+            left: 50%;
+            transform: translateX(-50%) translateY(-8px);
+            background: rgba(0, 8, 20, 0.98);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 0.6rem;
+            min-width: 200px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            z-index: 10;
+        }
+        .nav-dropdown:hover .nav-dropdown-menu,
+        .nav-dropdown:focus-within .nav-dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+        }
+        .nav-dropdown-menu a {
+            display: block;
+            padding: 0.6rem 0.9rem;
+            border-radius: 8px;
+            white-space: nowrap;
+            color: var(--text-gray);
+        }
+        .nav-dropdown-menu a:hover { background: rgba(0, 212, 255, 0.08); color: var(--electric-blue); }
+        .nav-dropdown-menu a::after { display: none; }
         .mobile-menu {
             display: none;
             font-size: 1.5rem;
@@ -114,7 +162,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background-image: url('https://kimi-web-img.moonshot.cn/img/as2.ftcdn.net/7f6dcdc77c3dc4438c421f658a7bf4b45baccfea.jpg ');
+            background-image: url('images/hero-tech.jpg');
             background-size: cover;
             background-position: center;
             opacity: 0.3;
@@ -159,10 +207,17 @@
         .hero-subtitle {
             font-size: 1.3rem;
             color: var(--text-gray);
-            margin-bottom: 2.5rem;
+            margin-bottom: 1rem;
             max-width: 700px;
             margin-left: auto;
             margin-right: auto;
+        }
+        .hero-tagline {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--electric-blue);
+            margin-bottom: 2.5rem;
+            letter-spacing: 0.02em;
         }
         .hero-cta {
             display: flex;
@@ -262,11 +317,14 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 4rem;
-            align-items: center;
+            align-items: stretch;
         }
         .about-image { position: relative; }
         .about-image img {
+            display: block;
             width: 100%;
+            height: 100%;
+            object-fit: cover;
             border-radius: 20px;
             box-shadow: 0 20px 60px rgba(0, 102, 204, 0.3);
             border: 2px solid var(--glass-border);
@@ -311,6 +369,9 @@
             background-size: cover;
             opacity: 0.1;
             background-attachment: fixed;
+        }
+        #sectores {
+            background: var(--dark-blue);
         }
         .services-links-grid {
             display: grid;
@@ -379,6 +440,9 @@
             overflow: hidden;
             transition: all 0.4s ease;
             position: relative;
+            display: flex;
+            flex-direction: column;
+            min-height: 880px;
         }
         .portfolio-item:hover {
             transform: scale(1.02);
@@ -386,6 +450,7 @@
         }
         .portfolio-image {
             height: 250px;
+            flex-shrink: 0;
             background: linear-gradient(135deg, var(--primary-blue), var(--dark-blue));
             display: flex;
             align-items: center;
@@ -404,9 +469,10 @@
             bottom: 0;
             background: linear-gradient(to top, var(--deep-space), transparent);
         }
-        .portfolio-content { padding: 2rem; }
+        .portfolio-content { padding: 2rem; display: flex; flex-direction: column; flex: 1; }
         .portfolio-tag {
             display: inline-block;
+            align-self: flex-start;
             background: var(--glass-bg);
             color: var(--electric-blue);
             padding: 0.3rem 1rem;
@@ -426,11 +492,22 @@
         }
         .portfolio-stats {
             display: flex;
+            justify-content: space-between;
             gap: 2rem;
             padding-top: 1.5rem;
             border-top: 1px solid var(--glass-border);
+            margin-top: auto;
         }
         .portfolio-stat { text-align: center; }
+        .portfolio-stat-tag {
+            display: block;
+            font-size: 0.65rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-gray);
+            margin-bottom: 0.2rem;
+        }
         .portfolio-stat-value {
             font-size: 1.5rem;
             font-weight: 700;
@@ -441,7 +518,24 @@
             font-size: 0.8rem;
             color: var(--text-gray);
         }
-        .process { background: var(--deep-space); }
+        .portfolio-note {
+            display: inline-block;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 50px;
+            padding: 0.5rem 1.5rem;
+            margin-top: 1.5rem;
+            color: var(--electric-blue);
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        .portfolio-item-note {
+            font-size: 0.75rem;
+            color: var(--text-gray);
+            font-style: italic;
+            margin-top: 0.75rem;
+        }
+        .process { background: var(--dark-blue); }
         .process-steps {
             display: flex;
             justify-content: space-between;
@@ -489,7 +583,10 @@
             font-size: 0.95rem;
         }
         .pricing {
-            background: linear-gradient(180deg, var(--deep-space) 0%, var(--dark-blue) 100%);
+            background: var(--dark-blue);
+        }
+        #equipas {
+            background: var(--deep-space);
         }
         .contact {
             background: var(--deep-space);
@@ -512,6 +609,11 @@
             gap: 4rem;
             position: relative;
             z-index: 1;
+        }
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
         }
         .contact-info h3 {
             font-size: 2rem;
@@ -666,6 +768,18 @@
             .process-steps { flex-direction: column; }
             .footer-content { grid-template-columns: 1fr 1fr; }
             .services-links-grid { grid-template-columns: repeat(2, 1fr); }
+            .nav-dropdown-menu {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                background: transparent;
+                border: none;
+                box-shadow: none;
+                padding: 0.25rem 0 0 1.25rem;
+                min-width: 0;
+            }
+            .nav-dropdown-toggle i { display: none; }
         }
         @media (max-width: 640px) {
             .services-links-grid { grid-template-columns: 1fr; }
@@ -741,19 +855,19 @@
 <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
 
 <meta name="author" content="André Carmo">
-<meta name="keywords" content="consultoria operacional PME, eficiência empresarial Portugal, resolver problemas empresariais, automação de processos, chatbots WhatsApp, agentes de IA, PMEs Portugal">
+<meta name="keywords" content="engenheiro de IA, agentes de IA, automação com inteligência artificial, LLM, RAG, n8n, chatbots WhatsApp, automação de processos, integração de sistemas, PME Portugal, Porto">
 
 <!-- Open Graph -->
 <meta property="og:type" content="website">
-<meta property="og:title" content="André Carmo | Consultoria e Eficiência Operacional para PMEs">
-<meta property="og:description" content="Resolvo os problemas que travam o seu negócio. Atendimento, agenda, processos - proposta em 24h, implementação em 48h.">
+<meta property="og:title" content="André Carmo | Engenheiro de IA · Automação e Agentes para PME">
+<meta property="og:description" content="Agentes de IA e automação em produção para PME e profissões liberais: atendimento e marcações por WhatsApp, qualificação de leads, assistentes sobre documentos e integração com CRM e ERP. Primeira versão em 48 horas.">
 <meta property="og:url" content="https://www.andrecarmo.pt ">
 <meta property="og:site_name" content="André Carmo">
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="André Carmo | Consultoria e Eficiência Operacional">
-<meta name="twitter:description" content="Resolvo os problemas que travam o seu negócio. Atendimento perdido, agenda com buracos, processos manuais - resolvidos em 48h.">
+<meta name="twitter:title" content="André Carmo | Engenheiro de IA · Automação e Agentes para PME">
+<meta name="twitter:description" content="Agentes de IA e automação em produção para PME e profissões liberais: atendimento e marcações por WhatsApp, qualificação de leads, assistentes sobre documentos e integração com CRM e ERP. Primeira versão em 48 horas.">
 </head>
 <body>
     <script type="application/ld+json">
@@ -763,19 +877,20 @@
   "name": "André Carmo",
   "url": "https://www.andrecarmo.pt ",
   "image": "https://www.andrecarmo.pt/favicon.png ",
-  "jobTitle": "Consultor de Eficiência Operacional",
+  "jobTitle": "Engenheiro de IA e Automação",
   "worksFor": {
     "@type": "Organization",
-    "name": "André Carmo – Consultoria e Eficiência Operacional"
+    "name": "André Carmo – Engenharia de IA e Automação"
   },
   "address": {
     "@type": "PostalAddress",
     "addressCountry": "PT"
   },
   "knowsAbout": [
+    "Agentes LLM",
     "Automação de Processos",
     "Chatbots WhatsApp",
-    "Inteligência Artificial",
+    "RAG",
     "n8n",
     "Integração de APIs",
     "Agentes de IA"
@@ -815,8 +930,13 @@
             <ul class="nav-links">
                 <li><a href="index.html#inicio">Início</a></li>
                 <li><a href="index.html#sobre">Sobre</a></li>
-                <li><a href="index.html#servicos">O Que Resolvo</a></li>
-                <li><a href="index.html#sectores">Por Sector</a></li>
+                <li class="nav-dropdown">
+                    <a href="index.html#servicos" class="nav-dropdown-toggle">Clientes <i class="fas fa-chevron-down"></i></a>
+                    <ul class="nav-dropdown-menu">
+                        <li><a href="index.html#servicos">O Que Resolvo</a></li>
+                        <li><a href="index.html#sectores">Por Sector</a></li>
+                    </ul>
+                </li>
                 <li><a href="index.html#portfolio">Portfólio</a></li>
                 <li><a href="index.html#precos">Preços</a></li>
                 <li><a href="index.html#contactos">Contactos</a></li>
@@ -840,12 +960,13 @@
                 <i class="fas fa-sparkles"></i> 30 Anos de Experiência em Tecnologia
             </div>
             <h1>André Carmo</h1>
-            <h1>O trabalho que trava o seu negócio - resolvido.</h1>
+            <h1>O trabalho que trava o seu negócio.</h1>
             <p class="hero-subtitle">
                 Não vendo software. Ouço o problema, projeto a solução e implemento em dias.
-                Atendimento, agendamentos, gestão de clientes - o seu negócio a funcionar
+                Atendimento, agendamentos, gestão de clientes: o seu negócio a funcionar
                 sem depender de si para tudo.
             </p>
+            <p class="hero-tagline">Engenheiro de IA · agentes LLM e automação em produção desde 2025 · 30 anos em TI</p>
             <div class="hero-cta">
                 <a href="#contactos" class="btn btn-primary">
                     <i class="fas fa-comments"></i> Fale Comigo 20 Minutos
@@ -883,18 +1004,20 @@
             </div>
             <div class="about-grid">
                 <div class="about-image fade-in">
-                    <img src="https://kimi-web-img.moonshot.cn/img/as2.ftcdn.net/7f6dcdc77c3dc4438c421f658a7bf4b45baccfea.jpg " alt="Tecnologia IA">
+                    <img src="images/hero-tech.jpg" alt="Tecnologia IA">
                 </div>
                 <div class="about-content fade-in">
                     <h3>Porque Escolher Trabalhar Comigo?</h3>
                     <p>
-                        Ao contrário das grandes consultoras que cobram dezenas de milhares de euros,
-                        trabalho diretamente consigo - sem intermediários, sem produtos de prateleira,
-                        sem jargão tecnológico.
-                    </p>
-                    <p>
-                        Ouço o problema, identifico a causa raiz e implemento a solução certa. Normalmente
-                        em 48 horas. A tecnologia é o meio - o resultado é o que interessa.
+                        Sou engenheiro de IA especializado em automação. Desde 2025 concebo, construo e opero
+                        agentes LLM e automações de processos em produção para PME e profissões liberais: agentes
+                        de WhatsApp que atendem, qualificam e marcam 24 horas por dia, assistentes de pesquisa e
+                        redação sobre os documentos da empresa, e integrações entre CRM, ERP, agenda, email e
+                        mensagens. Por trás estão 30 anos em TI, incluindo 5 anos em equipas de engenharia de
+                        software na Altran e na Capgemini Engineering e uma década a gerir infraestrutura. É isso
+                        que torna os sistemas prontos para produção: testes por cenários, guardrails e recurso a
+                        humano em cada implementação. O meu trabalho começa com uma pergunta simples: o que está
+                        a custar mais tempo ou clientes ao seu negócio.
                     </p>
                     <ul class="experience-list">
                         <li>
@@ -903,7 +1026,7 @@
                         </li>
                         <li>
                             <i class="fas fa-check-circle"></i>
-                            <span>Soluções à medida - não produtos de prateleira</span>
+                            <span>Soluções à medida, não produtos de prateleira</span>
                         </li>
                         <li>
                             <i class="fas fa-check-circle"></i>
@@ -915,7 +1038,7 @@
                         </li>
                         <li>
                             <i class="fas fa-check-circle"></i>
-                            <span>Sem contratos longos - resultados antes de pagamento</span>
+                            <span>Sem contratos longos: resultados antes de pagamento</span>
                         </li>
                     </ul>
                 </div>
@@ -932,7 +1055,7 @@
                     Cada solução nasce de um problema real. Reconhece algum?
                 </p>
             </div>
-            <div class="services-links-grid" style="grid-template-columns: repeat(3, 1fr);">
+            <div class="services-links-grid">
                 <a href="chatbots-whatsapp.html" class="service-link-card fade-in">
                     <i class="fas fa-phone-slash service-link-icon"></i>
                     <h3>Ligações perdidas fora de horas</h3>
@@ -1012,7 +1135,7 @@
                     Problemas diferentes, soluções à medida. Escolha o seu sector.
                 </p>
             </div>
-            <div class="services-links-grid" style="grid-template-columns: repeat(3, 1fr);">
+            <div class="services-links-grid">
                 <a href="clinicas-dentarias.html" class="service-link-card fade-in">
                     <i class="fas fa-tooth service-link-icon"></i>
                     <h3>Clínicas e Saúde</h3>
@@ -1057,7 +1180,7 @@
                     <i class="fas fa-scale-balanced service-link-icon"></i>
                     <h3>Advocacia e Jurídico</h3>
                     <p>
-                        Contratos e documentos que demoram horas a analisar e resumir.
+                        Pesquisa jurídica, revisão de contratos e triagem de email a consumir dias de trabalho.
                     </p>
                     <span class="service-link-btn">
                         Ver Solução <i class="fas fa-arrow-right"></i>
@@ -1077,6 +1200,68 @@
         </div>
     </section>
 
+    <section class="services-preview" id="como-construo">
+        <div class="container">
+            <div class="section-header fade-in">
+                <span class="section-tag">Como Construo</span>
+                <h2 class="section-title">Da Ideia ao Sistema em Produção</h2>
+                <p class="section-subtitle">
+                    A camada técnica por trás de cada solução.
+                </p>
+            </div>
+            <div class="services-links-grid">
+                <div class="service-link-card fade-in">
+                    <i class="fas fa-brain service-link-icon"></i>
+                    <h3>Agentes LLM</h3>
+                    <p>
+                        Claude API e Claude Agent SDK, OpenAI API, tool calling e structured outputs, MCP.
+                        Lógica conversacional em código (Python e TypeScript) onde os fluxos visuais chegam ao limite.
+                    </p>
+                </div>
+                <div class="service-link-card fade-in">
+                    <i class="fas fa-diagram-project service-link-icon"></i>
+                    <h3>Orquestração e Integração</h3>
+                    <p>
+                        n8n self-hosted, APIs REST, webhooks, WhatsApp Business API, Google Workspace e
+                        Microsoft 365, CRM e ERP dos clientes.
+                    </p>
+                </div>
+                <div class="service-link-card fade-in">
+                    <i class="fas fa-book-open service-link-icon"></i>
+                    <h3>Documentos e Conhecimento</h3>
+                    <p>
+                        RAG com embeddings e pesquisa híbrida em Supabase/pgvector, respostas com fontes e
+                        passagem a humano quando a confiança é baixa.
+                    </p>
+                </div>
+                <div class="service-link-card fade-in">
+                    <i class="fas fa-clipboard-check service-link-icon"></i>
+                    <h3>Qualidade</h3>
+                    <p>
+                        Suite de regressão por cenários (pytest) a cada alteração de prompt ou de modelo,
+                        validação contra a agenda real antes de o utilizador ver a resposta, caminhos de recurso definidos.
+                    </p>
+                </div>
+                <div class="service-link-card fade-in">
+                    <i class="fas fa-server service-link-icon"></i>
+                    <h3>Operação</h3>
+                    <p>
+                        Docker em VPS, plataformas geridas ou servidor do cliente, logging estruturado com
+                        controlo de tokens e custo por conversa.
+                    </p>
+                </div>
+                <div class="service-link-card fade-in">
+                    <i class="fas fa-flag-checkered service-link-icon"></i>
+                    <h3>Entrega</h3>
+                    <p>
+                        Levantamento com o dono do negócio, priorização por impacto, primeira versão normalmente
+                        em 48 horas, documentação e passagem.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section class="portfolio" id="portfolio">
         <div class="container">
             <div class="section-header fade-in">
@@ -1085,6 +1270,7 @@
                 <p class="section-subtitle">
                     Problemas reais, resultados em 48 horas.
                 </p>
+                <p class="portfolio-note"><i class="fas fa-shield-halved"></i> Nomes de clientes alterados por confidencialidade.</p>
             </div>
             <div class="portfolio-grid">
                 <div class="portfolio-item fade-in">
@@ -1095,15 +1281,17 @@
                         <span class="portfolio-tag">Saúde</span>
                         <h3>Clínica Dentária Smile</h3>
                         <p>
-                            <strong>O Problema:</strong> Pacientes a ligar para marcar consulta fora de horas - sem resposta, sem marcação.
+                            <strong>O Problema:</strong> Pacientes a ligar para marcar consulta fora de horas, sem resposta, sem marcação.
                             Implementação de atendimento automático via WhatsApp com agendamento e lembretes.
                         </p>
                         <div class="portfolio-stats">
                             <div class="portfolio-stat">
+                                <span class="portfolio-stat-tag">Objetivo</span>
                                 <span class="portfolio-stat-value">70%</span>
-                                <span class="portfolio-stat-label">Redução Chamadas</span>
+                                <span class="portfolio-stat-label">Menos Chamadas</span>
                             </div>
                             <div class="portfolio-stat">
+                                <span class="portfolio-stat-tag" aria-hidden="true">&nbsp;</span>
                                 <span class="portfolio-stat-value">48h</span>
                                 <span class="portfolio-stat-label">Tempo Implementação</span>
                             </div>
@@ -1118,15 +1306,17 @@
                         <span class="portfolio-tag">Imobiliário</span>
                         <h3>Imobiliária Casa Nova</h3>
                         <p>
-                            <strong>O Problema:</strong> Leads do portal a chegar sem resposta a tempo - o cliente já tinha ido a outro.
+                            <strong>O Problema:</strong> Leads do portal a chegar sem resposta a tempo: o cliente já tinha ido a outro.
                             Sistema de qualificação automática e integração com gestão de propriedades.
                         </p>
                         <div class="portfolio-stats">
                             <div class="portfolio-stat">
+                                <span class="portfolio-stat-tag">Objetivo</span>
                                 <span class="portfolio-stat-value">3x</span>
                                 <span class="portfolio-stat-label">Mais Leads Qualificados</span>
                             </div>
                             <div class="portfolio-stat">
+                                <span class="portfolio-stat-tag">Objetivo</span>
                                 <span class="portfolio-stat-value">5h</span>
                                 <span class="portfolio-stat-label">Poupadas por Dia</span>
                             </div>
@@ -1141,19 +1331,71 @@
                         <span class="portfolio-tag">Bem-Estar</span>
                         <h3>Centro de Estética Belle</h3>
                         <p>
-                            <strong>O Problema:</strong> Recepcionista ao telefone em vez de atender clientes presenciais - agenda com buracos e faltas.
+                            <strong>O Problema:</strong> Recepcionista ao telefone em vez de atender clientes presenciais. Agenda com buracos e faltas.
                             Agendamento automático com confirmações e gestão de lista de espera.
                         </p>
                         <div class="portfolio-stats">
                             <div class="portfolio-stat">
+                                <span class="portfolio-stat-tag">Objetivo</span>
                                 <span class="portfolio-stat-value">40%</span>
-                                <span class="portfolio-stat-label">Redução Faltas</span>
+                                <span class="portfolio-stat-label">Menos Faltas</span>
                             </div>
                             <div class="portfolio-stat">
+                                <span class="portfolio-stat-tag" aria-hidden="true">&nbsp;</span>
                                 <span class="portfolio-stat-value">24/7</span>
                                 <span class="portfolio-stat-label">Disponibilidade</span>
                             </div>
                         </div>
+                    </div>
+                </div>
+                <div class="portfolio-item fade-in">
+                    <div class="portfolio-image">
+                        <i class="fas fa-scale-balanced"></i>
+                    </div>
+                    <div class="portfolio-content">
+                        <span class="portfolio-tag">Jurídico</span>
+                        <h3>Escritório de Advogados</h3>
+                        <p><strong>Problema:</strong> Pesquisa jurídica, revisão de contratos e triagem de email a consumir dias de trabalho do advogado.</p>
+                        <p><strong>Solução:</strong> Assistente de pesquisa e redação à medida do escritório, que agrega códigos legais, analisa
+                            contratos e redige a partir de modelos estruturados. A última palavra é sempre do advogado.</p>
+                        <div class="portfolio-stats">
+                            <div class="portfolio-stat">
+                                <span class="portfolio-stat-tag">Objetivo</span>
+                                <span class="portfolio-stat-value">8h para 1h</span>
+                                <span class="portfolio-stat-label">Tempo por Tarefa</span>
+                            </div>
+                            <div class="portfolio-stat">
+                                <span class="portfolio-stat-tag" aria-hidden="true">&nbsp;</span>
+                                <span class="portfolio-stat-value">Python</span>
+                                <span class="portfolio-stat-label">À Medida</span>
+                            </div>
+                        </div>
+                        <p class="portfolio-item-note">Tarefa típica: 30 min assistidos pela IA e 30 min de revisão. Em produção desde novembro de 2025.</p>
+                    </div>
+                </div>
+                <div class="portfolio-item fade-in">
+                    <div class="portfolio-image">
+                        <i class="fas fa-magnifying-glass"></i>
+                    </div>
+                    <div class="portfolio-content">
+                        <span class="portfolio-tag">Conhecimento</span>
+                        <h3>Assistente Documentos</h3>
+                        <p><strong>Problema:</strong> Respostas técnicas e documentais a depender de quem sabe onde está a informação.</p>
+                        <p><strong>Solução:</strong> Assistente RAG sobre os documentos da empresa (Supabase/pgvector): responde com fontes e passa
+                            a um humano, com todo o contexto, quando a confiança é baixa.</p>
+                        <div class="portfolio-stats">
+                            <div class="portfolio-stat">
+                                <span class="portfolio-stat-tag">Objetivo</span>
+                                <span class="portfolio-stat-value"><i class="fas fa-check"></i></span>
+                                <span class="portfolio-stat-label">Respostas com Fontes</span>
+                            </div>
+                            <div class="portfolio-stat">
+                                <span class="portfolio-stat-tag" aria-hidden="true">&nbsp;</span>
+                                <span class="portfolio-stat-value"><i class="fas fa-check"></i></span>
+                                <span class="portfolio-stat-label">Passagem a Humano</span>
+                            </div>
+                        </div>
+                        <p class="portfolio-item-note" aria-hidden="true">&nbsp;<br>&nbsp;</p>
                     </div>
                 </div>
             </div>
@@ -1178,7 +1420,7 @@
                 <div class="process-step fade-in">
                     <div class="step-number">2</div>
                     <h3>Desenhamos a Solução</h3>
-                    <p>Proposta à medida do problema - não um produto genérico. Orçamento transparente e prazo definido.</p>
+                    <p>Proposta à medida do problema, não um produto genérico. Orçamento transparente e prazo definido.</p>
                 </div>
                 <div class="process-step fade-in">
                     <div class="step-number">3</div>
@@ -1188,8 +1430,29 @@
                 <div class="process-step fade-in">
                     <div class="step-number">4</div>
                     <h3>Ficamos Disponíveis</h3>
-                    <p>Formação incluída e suporte contínuo. Sem contratos longos - os resultados falam primeiro.</p>
+                    <p>Formação incluída e suporte contínuo. Sem contratos longos: os resultados falam primeiro.</p>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="equipas">
+        <div class="container">
+            <div class="section-header fade-in">
+                <span class="section-tag">Disponibilidade</span>
+                <h2 class="section-title">Trabalho com Equipas</h2>
+                <p class="section-subtitle">
+                    Além dos projetos para PME, estou disponível para funções de engenharia de IA e automação,
+                    remoto ou na área do Porto, como freelancer ou em contrato.
+                </p>
+            </div>
+            <div class="hero-cta">
+                <a href="cv/Andre_Carmo_CV.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                    <i class="fas fa-file-arrow-down"></i> Descarregar CV (PDF)
+                </a>
+                <a href="https://www.linkedin.com/in/stonedge" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+                    <i class="fab fa-linkedin-in"></i> LinkedIn
+                </a>
             </div>
         </div>
     </section>
@@ -1200,7 +1463,7 @@
                 <span class="section-tag">Orçamento Personalizado</span>
                 <h2 class="section-title">Soluções à Medida do Seu Negócio</h2>
                 <p class="section-subtitle">
-                    Primeiro falamos. Depois percebo o problema. Só então há proposta - transparente e sem surpresas.
+                    Primeiro falamos. Depois percebo o problema. Só então há proposta, transparente e sem surpresas.
                     Cada empresa tem necessidades únicas e o orçamento reflete isso.
                 </p>
             </div>
@@ -1243,8 +1506,8 @@
                 <div class="contact-info fade-in">
                     <h3>Fale Comigo Diretamente</h3>
                     <p>
-                        Estou disponível para uma conversa de 20 minutos. Sem apresentações de vendas —
-                        ouço o problema e digo honestamente se posso ajudar.
+                        Estou disponível para uma conversa de 20 minutos. Sem apresentações de vendas.
+                        Ouço o problema e digo honestamente se posso ajudar.
                     </p>
                     <div class="contact-methods">
                         <div class="contact-method">
@@ -1287,7 +1550,7 @@
                 </div>
                 <div class="contact-form fade-in">
                     <form id="contactForm" action="https://formspree.io/f/xgoleojl " method="POST">
-                        <input type="hidden" name="_subject" value="Novo contacto via website - André Carmo">
+                        <input type="hidden" name="_subject" value="Novo contacto via website: André Carmo">
                         
                         <div class="form-group">
                             <label for="name">Nome Completo *</label>
@@ -1318,7 +1581,7 @@
                                 <option value="leads">Captação e qualificação de clientes</option>
                                 <option value="email">Comunicação automática por e-mail</option>
                                 <option value="integracao">Integração de ferramentas / sistemas</option>
-                                <option value="conversa">Não sei bem - quero só conversar</option>
+                                <option value="conversa">Não sei bem, quero só conversar</option>
                                 <option value="outro">Outro</option>
                             </select>
                         </div>
@@ -1364,8 +1627,8 @@
                     André Carmo
                 </a>
                 <p>
-                    Consultor de eficiência operacional para PMEs em Portugal.
-                    30 anos a resolver problemas reais com tecnologia prática.
+                    Engenheiro de IA e automação para PME em Portugal.
+                    30 anos em TI, agentes e integrações em produção desde 2025.
                 </p>
                 <div class="social-links">
                     <a href="https://www.linkedin.com/in/stonedge" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
@@ -1378,8 +1641,7 @@
                 <ul>
                     <li><a href="index.html#inicio">Início</a></li>
                     <li><a href="index.html#sobre">Sobre</a></li>
-                    <li><a href="index.html#servicos">O Que Resolvo</a></li>
-                    <li><a href="index.html#sectores">Por Sector</a></li>
+                    <li><a href="index.html#servicos">Clientes</a></li>
                     <li><a href="index.html#portfolio">Portfólio</a></li>
                     <li><a href="index.html#precos">Preços</a></li>
                 </ul>
