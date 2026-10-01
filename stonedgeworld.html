@@ -32,7 +32,6 @@
   --faint:     #64748b;
   --font:      'Inter',system-ui,sans-serif;
   --heading:   'Poppins','Inter',system-ui,sans-serif;
-  --nav-h:     70px;
   --r:         12px;
   --rl:        16px;
   --maxw:      1100px;
@@ -42,29 +41,12 @@
 html{scroll-behavior:smooth}
 body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.65;overflow-x:hidden}
 
-/* NAV */
-#nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:var(--nav-h);background:rgba(15,23,42,0.96);backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}
-.nw{max-width:var(--maxw);margin:0 auto;padding:0 2rem;height:100%;display:flex;align-items:center;justify-content:space-between;gap:1rem}
-.logo{display:flex;align-items:center;gap:.65rem;text-decoration:none;font-family:var(--heading);font-weight:700;font-size:1.2rem;color:var(--text);letter-spacing:-.02em;white-space:nowrap}
-.logo-box{width:36px;height:36px;background:var(--accent);border-radius:8px;display:grid;place-items:center;font-size:.9rem;color:#fff;font-weight:800;font-family:var(--heading);flex-shrink:0}
-.nav-ul{display:flex;align-items:center;gap:.15rem;list-style:none}
-.nav-ul a{display:block;padding:.5rem .8rem;color:var(--muted);text-decoration:none;font-size:.85rem;font-weight:500;border-radius:6px;transition:color var(--t),background var(--t);white-space:nowrap}
-.nav-ul a:hover{color:var(--text);background:rgba(255,255,255,.06)}
-.nav-ul .cta{background:var(--accent);color:#fff!important;padding:.5rem 1.1rem;font-weight:600;margin-left:.35rem}
-.nav-ul .cta:hover{background:var(--accent2)!important}
-.ham{display:none;background:none;border:none;cursor:pointer;padding:.5rem}
-.ham span{display:block;width:22px;height:2px;background:var(--muted);margin:4px 0;border-radius:2px}
-
-.ham{display:none;background:none;border:none;cursor:pointer;padding:.5rem}
-.ham span{display:block;width:22px;height:2px;background:var(--muted);margin:4px 0;border-radius:2px}
-
 /* GLOBAL TEXT CENTER */
 body { text-align: center; }
 /* Elements that must remain left-aligned */
-.nw, .nstrip, .ntags, .fbot, .ftop,
-.tl, .rdbox, .cis, .frow, .cfbox, .cg,
-.nav-ul, .fcol ul, .fbrand, .fbrand p,
-.cl, .cl2, .ci2, .cit, .ct { text-align: left; }
+.nstrip, .ntags,
+.tl, .rdbox,
+.cl, .ci2, .ct { text-align: left; }
 /* Hero: centrado */
 .hi { text-align: center; }
 .hi .hp, .hi .hcmt, .hi .hbadge { margin-left: auto; margin-right: auto; }
@@ -105,7 +87,7 @@ section{padding:88px 0;position:relative}
 .btn-fw{width:100%;justify-content:center}
 
 /* HERO */
-#hero{min-height:100vh;padding-top:calc(var(--nav-h) + 80px);padding-bottom:80px;display:flex;align-items:center;overflow:hidden}
+#hero{min-height:100vh;padding-top:80px;padding-bottom:80px;display:flex;align-items:center;overflow:hidden}
 .hg{position:absolute;top:-180px;left:50%;transform:translateX(-50%);width:900px;height:600px;background:radial-gradient(ellipse,rgba(37,99,235,.12),transparent 65%);pointer-events:none}
 .hdots{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.04) 1px,transparent 1px);background-size:32px 32px;pointer-events:none}
 .hi{position:relative;z-index:1;max-width:780px}
@@ -148,7 +130,7 @@ section{padding:88px 0;position:relative}
 
 /* ESTADO */
 #estado{background:var(--bg)}
-.eg{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;align-items:start}
+.eg{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;align-items:stretch}
 .cl{display:flex;flex-direction:column;gap:.55rem}
 .ci2{display:flex;align-items:center;gap:.85rem;background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:.8rem 1rem;transition:border-color var(--t)}
 .ci2:hover{border-color:rgba(37,99,235,.3)}
@@ -157,9 +139,10 @@ section{padding:88px 0;position:relative}
 .cbadge.w{background:rgba(245,158,11,.12);border:1.5px solid rgba(245,158,11,.3);color:var(--amber)}
 .ct strong{display:block;font-size:.84rem;font-weight:500;color:var(--text)}
 .ct span{font-size:.76rem;color:var(--faint)}
-.rdbox{background:var(--bg2);border:1px solid var(--border);border-radius:var(--rl);padding:1.65rem}
+.rdbox{background:var(--bg2);border:1px solid var(--border);border-radius:var(--rl);padding:1.65rem;display:flex;flex-direction:column}
 .rdbox h3{font-family:var(--heading);font-size:.975rem;font-weight:600;margin-bottom:1.4rem;color:var(--amber);display:flex;align-items:center;gap:.5rem}
-.rdi{display:flex;gap:.9rem;padding-bottom:1.4rem;position:relative}
+.rdi{display:flex;gap:.9rem;padding-bottom:1.4rem;position:relative;flex:1 1 auto}
+.rdi:last-child{flex:0 0 auto;padding-bottom:0}
 .rdi:not(:last-child)::after{content:'';position:absolute;left:11px;top:25px;bottom:0;width:2px;background:linear-gradient(180deg,rgba(37,99,235,.3),transparent)}
 .rdd{width:24px;height:24px;border-radius:50%;background:var(--bg);border:2px solid var(--accent);display:grid;place-items:center;flex-shrink:0;margin-top:2px}
 .rdd span{width:7px;height:7px;border-radius:50%;background:var(--accent)}
@@ -223,43 +206,6 @@ section{padding:88px 0;position:relative}
 .tn{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--faint);margin:.22rem 0 .45rem}
 .tr{font-size:.76rem;color:var(--muted);line-height:1.45}
 
-/* CONTACTO */
-#contacto{background:var(--bg3)}
-#contacto .hdr{margin-bottom:7rem}
-.cg{display:grid;grid-template-columns:1fr 1.5fr;gap:3rem;align-items:start}
-.cl2 h3{font-family:var(--heading);font-size:1.45rem;font-weight:700;margin-bottom:.9rem}
-.cl2 p{font-size:.9rem;color:var(--muted);line-height:1.72;margin-bottom:1.8rem}
-.cis{display:flex;flex-direction:column;gap:.8rem}
-.cit{display:flex;align-items:center;gap:.85rem;background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:.8rem 1rem;text-decoration:none;color:var(--muted);font-size:.875rem;transition:all var(--t)}
-.cit:hover{border-color:var(--accent);color:var(--accent)}
-.cit i{font-size:.95rem;width:16px;text-align:center;color:var(--accent);flex-shrink:0}
-.cfbox{background:var(--bg2);border:1px solid var(--border);border-radius:var(--rl);padding:1.9rem}
-.cfbox h3{font-family:var(--heading);font-size:1.05rem;font-weight:600;margin-bottom:1.4rem}
-.frow{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
-.fg2{margin-bottom:.9rem}
-.fg2 label{display:block;font-size:.78rem;font-weight:500;color:var(--faint);margin-bottom:.35rem}
-.fg2 input,.fg2 select,.fg2 textarea{width:100%;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:8px;padding:.68rem .88rem;color:var(--text);font-family:var(--font);font-size:.875rem;transition:border-color var(--t),box-shadow var(--t);resize:vertical}
-.fg2 input::placeholder,.fg2 textarea::placeholder{color:var(--faint)}
-.fg2 input:focus,.fg2 select:focus,.fg2 textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(37,99,235,.12)}
-.fg2 select{appearance:none;cursor:pointer}
-.fg2 select option{background:var(--bg2)}
-.fnote{font-size:.74rem;color:var(--faint);text-align:center;margin-top:.7rem;display:flex;align-items:center;justify-content:center;gap:.4rem}
-.fsuccess,.ferror{display:none;text-align:center;padding:.9rem;border-radius:8px;margin-top:.9rem;font-size:.86rem}
-.fsuccess{background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.2);color:var(--green)}
-.ferror{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);color:#f87171}
-
-/* FOOTER - identical structure to andrecarmo.pt */
-footer{background:#0a1628;border-top:1px solid var(--border);padding:4rem 2rem 2rem}
-.ftop{max-width:var(--maxw);margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;margin-bottom:3rem}
-.fbrand a{font-family:var(--heading);font-size:1.2rem;font-weight:700;color:var(--text);display:flex;align-items:center;gap:.6rem;text-decoration:none;margin-bottom:.8rem}
-.fbrand-ic{width:32px;height:32px;background:var(--accent);border-radius:7px;display:grid;place-items:center;font-size:.84rem;color:#fff;font-weight:800;flex-shrink:0}
-.fbrand p{font-size:.875rem;color:var(--faint);line-height:1.65;max-width:270px}
-.fcol h4{font-family:var(--heading);font-size:.77rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);margin-bottom:1rem}
-.fcol ul{list-style:none;display:flex;flex-direction:column;gap:.55rem}
-.fcol a{font-size:.875rem;color:var(--faint);text-decoration:none;transition:color var(--t)}
-.fcol a:hover{color:var(--accent)}
-.fbot{max-width:var(--maxw);margin:0 auto;padding-top:1.8rem;border-top:1px solid var(--border2);display:flex;justify-content:space-between;align-items:center;font-size:.78rem;color:var(--faint);flex-wrap:wrap;gap:.5rem}
-
 /* REVEAL */
 .rv{opacity:0;transform:translateY(18px);transition:opacity .55s ease,transform .55s ease}
 .rv.in{opacity:1;transform:none}
@@ -275,77 +221,12 @@ footer{background:#0a1628;border-top:1px solid var(--border);padding:4rem 2rem 2
 .instbox .tx{color:var(--text)}
 
 /* RESPONSIVE */
-@media(max-width:1024px){.fg{grid-template-columns:1fr 1fr}.ftop{grid-template-columns:1fr 1fr}}
-@media(max-width:768px){:root{--nav-h:60px}.pg{grid-template-columns:1fr}.fg{grid-template-columns:1fr}.eg{grid-template-columns:1fr}.rg{grid-template-columns:1fr 1fr}.tg{grid-template-columns:repeat(3,1fr)}.cg{grid-template-columns:1fr}.ftop{grid-template-columns:1fr 1fr}.nav-ul{display:none}.ham{display:block}.hstats{flex-wrap:wrap}.hstat{min-width:120px}.frow{grid-template-columns:1fr}}
-@media(max-width:480px){.rg{grid-template-columns:1fr}.tg{grid-template-columns:1fr 1fr}.ftop{grid-template-columns:1fr}.hctas{flex-direction:column}.hctas .btn{width:100%;justify-content:center}}
-        /* ===== Seletor de idioma / Language switcher ===== */
-        .lang-switch {
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
-            margin-left: 3rem;
-            flex: 0 0 auto;
-        }
-        .lang-switch-label {
-            font-size: 0.75rem;
-            font-weight: 500;
-            color: var(--text-gray, #b3d9ff);
-            white-space: nowrap;
-            line-height: 1;
-        }
-        .lang-flag {
-            width: 30px;
-            height: 30px;
-            min-width: 30px;
-            border-radius: 50%;
-            overflow: hidden;
-            display: block;
-            border: 1px solid var(--glass-border, rgba(0, 212, 255, 0.35));
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .lang-flag:hover { transform: scale(1.12); box-shadow: 0 0 14px rgba(0, 212, 255, 0.55); }
-        .lang-flag .flag-on, .lang-flag .flag-off { display: block; width: 100%; height: 100%; }
-        .lang-flag .flag-off { display: none; }
-        .lang-flag:hover .flag-on { display: none; }
-        .lang-flag:hover .flag-off { display: block; }
-        .lang-flag svg { display: block; width: 100%; height: 100%; }
-        .nw .nav-ul { margin-left: auto; }
-        @media (max-width: 1100px) { .lang-switch-label { display: none; } }
-        @media (max-width: 768px) {
-            .lang-switch { margin-left: auto; }
-            .lang-switch-label { display: inline; }
-            .ham { margin-left: 0.75rem; }
-        }
-        @media (max-width: 560px) { .lang-switch-label { display: none; } }
+@media(max-width:1024px){.fg{grid-template-columns:1fr 1fr}}
+@media(max-width:768px){.pg{grid-template-columns:1fr}.fg{grid-template-columns:1fr}.eg{grid-template-columns:1fr}.rg{grid-template-columns:1fr 1fr}.tg{grid-template-columns:repeat(3,1fr)}.hstats{flex-wrap:wrap}.hstat{min-width:120px}}
+@media(max-width:480px){.rg{grid-template-columns:1fr}.tg{grid-template-columns:1fr 1fr}.hctas{flex-direction:column}.hctas .btn{width:100%;justify-content:center}}
     </style>
 </head>
 <body>
-
-<!-- NAV - identical structure to andrecarmo.pt -->
-<nav id="nav">
-  <div class="nw">
-    <a href="https://andrecarmo.pt" class="logo">
-      <div class="logo-box">AC</div>
-      André Carmo
-    </a>
-    <ul class="nav-ul" id="navul">
-      <li><a href="#problema">O Problema</a></li>
-      <li><a href="#solucao">A Solução</a></li>
-      <li><a href="#estado">MVP</a></li>
-      <li><a href="#modelo">Modelo</a></li>
-      <li><a href="#cronograma">Cronograma</a></li>
-      <li><a href="#contacto" class="cta">Contacto</a></li>
-    </ul>
-    <div class="lang-switch">
-        <span class="lang-switch-label">Select language</span>
-        <a href="en/stonedgeworld.html" class="lang-flag" hreflang="en" title="View this page in English" aria-label="View this page in English">
-            <span class="flag-on"><svg viewBox="0 0 60 60" aria-hidden="true"><rect width="60" height="60" fill="#DA291C"/><rect width="24" height="60" fill="#046A38"/><circle cx="24" cy="30" r="11" fill="#FFE900" stroke="#046A38" stroke-width="1.5"/><circle cx="24" cy="30" r="6.5" fill="#DA291C" stroke="#FFFFFF" stroke-width="1.5"/></svg></span>
-            <span class="flag-off"><svg viewBox="0 0 60 60" aria-hidden="true"><rect width="60" height="60" fill="#012169"/><path d="M0 0 60 60M60 0 0 60" stroke="#FFFFFF" stroke-width="12"/><path d="M0 0 60 60M60 0 0 60" stroke="#C8102E" stroke-width="6"/><path d="M30 0V60M0 30H60" stroke="#FFFFFF" stroke-width="20"/><path d="M30 0V60M0 30H60" stroke="#C8102E" stroke-width="12"/></svg></span>
-        </a>
-    </div>
-    <button type="button" class="ham" id="ham" aria-label="Menu"><span></span><span></span><span></span></button>
-  </div>
-</nav>
 
 <!-- HERO -->
 <section id="hero">
@@ -546,7 +427,7 @@ flowchart TD
     <div class="hdr rv">
       <span class="lbl"><i class="fas fa-calendar-alt"></i> Cronograma</span>
       <h2 class="sh">Do protocolo ao primeiro encontro presencial</h2>
-      <p class="sd">Piloto local nas freguesias de S. Cosme, Valbom e Jovim, em Gondomar, para residentes com 40 ou mais anos. Nesta fase, só para telemóveis Android.</p>
+      <p class="sd">Piloto local nas freguesias de S. Cosme, Valbom e Jovim, em Gondomar, para residentes com 40+ anos. Nesta fase, só para telemóveis Android.</p>
     </div>
     <div class="tl rv">
       <!-- Versão com o nome: Parecer favorável do Órgão Executivo da União de Freguesias de Gondomar, S. Cosme, Valbom e Jovim a 17 de junho, seguido da assinatura do protocolo. -->
@@ -598,101 +479,6 @@ flowchart TD
   </div>
 </section>
 
-<!-- CONTACTO - Formspree -->
-<section id="contacto">
-  <div class="c">
-    <div class="hdr rv">
-      <span class="lbl"><i class="fas fa-envelope"></i> Contacto</span>
-      <h2 class="sh">Vamos Conversar</h2>
-      <p class="sd">Incubadoras, câmaras municipais, investidores, media - estou disponível para demonstrar o MVP ao vivo.</p>
-    </div>
-    <div class="cg">
-      <div class="cl2 rv">
-        <h3>Fale Comigo Diretamente</h3>
-        <p>Disponível para uma conversa sem compromisso sobre o StonedgeWorld. Posso fazer uma demonstração ao vivo do MVP no telemóvel - registo, feed, chat e videochamada.</p>
-        <div class="cis">
-          <a href="tel:+351912405722" class="cit"><i class="fas fa-phone"></i>+351&nbsp;912&nbsp;405&nbsp;722</a>
-          <a href="mailto:andre.carmo@gmail.com" class="cit"><i class="fas fa-envelope"></i>andre.carmo@gmail.com</a>
-          <a href="https://andrecarmo.pt" class="cit"><i class="fas fa-globe"></i>andrecarmo.pt</a>
-        </div>
-      </div>
-      <div class="cfbox rv d2">
-        <h3>Enviar Mensagem</h3>
-        <!-- FORMSPREE: replace YOUR_FORM_ID at formspree.io/forms/new -->
-        <form id="cform" action="https://formspree.io/f/mwvakayv" method="POST">
-          <div class="frow">
-            <div class="fg2"><label>Nome Completo *</label><input type="text" name="nome" placeholder="O seu nome" required></div>
-            <div class="fg2"><label>E-mail *</label><input type="email" name="email" placeholder="email@exemplo.pt" required></div>
-          </div>
-          <div class="fg2"><label>Telefone</label><input type="tel" name="telefone" placeholder="+351 900 000 000"></div>
-          <div class="fg2"><label>Organização</label><input type="text" name="organizacao" placeholder="Câmara, incubadora, empresa, media..."></div>
-          <div class="fg2"><label>Interesse *</label>
-            <select name="interesse" required>
-              <option value="">Selecione uma opção</option>
-              <option>Parceria - Câmara Municipal / Junta de Freguesia</option>
-              <option>Incubadora / Aceleradora (UPTEC, Startup Braga...)</option>
-              <option>Investimento (Portugal Ventures...)</option>
-              <option>Media / Imprensa</option>
-              <option>Patrocínio local (restaurante, espaço de eventos)</option>
-              <option>Utilizador interessado (40+)</option>
-              <option>Outro</option>
-            </select>
-          </div>
-          <div class="fg2"><label>Mensagem</label><textarea name="mensagem" rows="4" placeholder="Posso fazer uma demonstração ao vivo do MVP em qualquer momento..."></textarea></div>
-          <input type="text" name="_gotcha" style="display:none">
-          <input type="hidden" name="_subject" value="StonedgeWorld - Novo contacto">
-          <button type="submit" class="btn btn-p btn-fw btn-lg" id="sbtn"><i class="fas fa-paper-plane"></i> Enviar Mensagem</button>
-          <p class="fnote"><i class="fas fa-lock"></i> Os seus dados estão protegidos e nunca serão partilhados.</p>
-          <div class="fsuccess" id="fsuccess"><i class="fas fa-check-circle"></i> Mensagem enviada! Responderei em 24h.</div>
-          <div class="ferror" id="ferror"><i class="fas fa-exclamation-circle"></i> Erro ao enviar. Contacte pelo telefone: +351 912 405 722</div>
-        </form>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FOOTER - identical to andrecarmo.pt -->
-<footer>
-  <div class="ftop">
-    <div class="fbrand">
-      <a href="https://andrecarmo.pt"><div class="fbrand-ic">AC</div>André Carmo</a>
-      <p>Especialista em automação inteligente e desenvolvimento com IA para PMEs em Portugal. 30 anos de experiência em tecnologia ao serviço do seu negócio.</p>
-    </div>
-    <div class="fcol">
-      <h4>Links Rápidos</h4>
-      <ul>
-        <li><a href="https://andrecarmo.pt#inicio">Início</a></li>
-        <li><a href="https://andrecarmo.pt#sobre">Sobre</a></li>
-        <li><a href="https://andrecarmo.pt#servicos">Soluções</a></li>
-        <li><a href="https://andrecarmo.pt#portfolio">Portfólio</a></li>
-        <li><a href="https://andrecarmo.pt#precos">Preços</a></li>
-      </ul>
-    </div>
-    <div class="fcol">
-      <h4>StonedgeWorld</h4>
-      <ul>
-        <li><a href="#problema">O Problema</a></li>
-        <li><a href="#solucao">A Solução</a></li>
-        <li><a href="#estado">Estado MVP</a></li>
-        <li><a href="#modelo">Modelo</a></li>
-        <li><a href="#alternativa">vs Apps</a></li>
-      </ul>
-    </div>
-    <div class="fcol">
-      <h4>Legal</h4>
-      <ul>
-        <li><a href="politica-privacidade.html">Política de Privacidade</a></li>
-        <li><a href="politica-privacidade.html#termos">Termos de Serviço</a></li>
-        <li><a href="politica-privacidade.html#direitos">RGPD - Os Seus Direitos</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="fbot">
-    <span>© 2026 André Carmo. Todos os direitos reservados. | NIF: 217 056 903</span>
-    <span>StonedgeWorld - projecto sem fins lucrativos para utilizadores 🇵🇹</span>
-  </div>
-</footer>
-
 <script>
 // Mermaid
 mermaid.initialize({
@@ -710,50 +496,6 @@ mermaid.initialize({
 const io=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}})},{threshold:.1});
 document.querySelectorAll('.rv').forEach(el=>io.observe(el));
 
-// Nav active
-const secs=document.querySelectorAll('section[id]');
-const as=document.querySelectorAll('.nav-ul a');
-window.addEventListener('scroll',()=>{
-  let cur='';
-  secs.forEach(s=>{if(window.scrollY>=s.offsetTop-85)cur=s.id});
-  as.forEach(a=>{
-    const act=a.getAttribute('href')==='#'+cur&&!a.classList.contains('cta');
-    a.style.color=act?'var(--text)':'';
-    a.style.background=act?'rgba(255,255,255,.06)':'';
-  });
-},{passive:true});
-
-// Mobile nav
-const ham=document.getElementById('ham');
-const ul=document.getElementById('navul');
-ham.addEventListener('click',()=>{
-  const o=ul.style.display==='flex';
-  ul.style.cssText=o?'':'display:flex;flex-direction:column;position:fixed;top:var(--nav-h);left:0;right:0;background:rgba(15,23,42,.98);padding:1rem 1.5rem;border-bottom:1px solid var(--border);z-index:999;gap:.25rem';
-});
-
-// Smooth scroll
-document.querySelectorAll('a[href^="#"]').forEach(a=>{
-  a.addEventListener('click',e=>{
-    const t=document.querySelector(a.getAttribute('href'));
-    if(t){e.preventDefault();window.scrollTo({top:t.getBoundingClientRect().top+window.scrollY-75,behavior:'smooth'});ul.style.cssText='';}
-  });
-});
-
-// Formspree AJAX
-const form=document.getElementById('cform');
-if(form){
-  form.addEventListener('submit',async e=>{
-    e.preventDefault();
-    const btn=document.getElementById('sbtn');
-    btn.disabled=true;
-    btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> A enviar...';
-    try{
-      const r=await fetch(form.action,{method:'POST',body:new FormData(form),headers:{Accept:'application/json'}});
-      if(r.ok){form.reset();document.getElementById('fsuccess').style.display='block';btn.innerHTML='<i class="fas fa-check"></i> Enviado!';btn.style.background='var(--green)';}
-      else throw 0;
-    }catch{document.getElementById('ferror').style.display='block';btn.disabled=false;btn.innerHTML='<i class="fas fa-paper-plane"></i> Enviar Mensagem';}
-  });
-}
 </script>
 <script src="cookie-consent.js"></script>
 </body>

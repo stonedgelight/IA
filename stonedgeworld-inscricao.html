@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Inscrições no grupo inicial | StonedgeWorld | André Carmo</title>
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
-<meta name="description" content="Residentes nas freguesias de S. Cosme, Valbom e Jovim, com 40 ou mais anos e telemóvel Android.">
+<meta name="description" content="Residentes nas freguesias de S. Cosme, Valbom e Jovim, com 40+ anos, convidados e familiares na zona Metropolitana do Porto, e com telemóvel Android.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
@@ -28,7 +28,6 @@
   --faint:     #64748b;
   --font:      'Inter',system-ui,sans-serif;
   --heading:   'Poppins','Inter',system-ui,sans-serif;
-  --nav-h:     70px;
   --r:         12px;
   --rl:        16px;
   --maxw:      1100px;
@@ -38,29 +37,12 @@
 html{scroll-behavior:smooth}
 body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.65;overflow-x:hidden}
 
-/* NAV */
-#nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:var(--nav-h);background:rgba(15,23,42,0.96);backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}
-.nw{max-width:var(--maxw);margin:0 auto;padding:0 2rem;height:100%;display:flex;align-items:center;justify-content:space-between;gap:1rem}
-.logo{display:flex;align-items:center;gap:.65rem;text-decoration:none;font-family:var(--heading);font-weight:700;font-size:1.2rem;color:var(--text);letter-spacing:-.02em;white-space:nowrap}
-.logo-box{width:36px;height:36px;background:var(--accent);border-radius:8px;display:grid;place-items:center;font-size:.9rem;color:#fff;font-weight:800;font-family:var(--heading);flex-shrink:0}
-.nav-ul{display:flex;align-items:center;gap:.15rem;list-style:none}
-.nav-ul a{display:block;padding:.5rem .8rem;color:var(--muted);text-decoration:none;font-size:.85rem;font-weight:500;border-radius:6px;transition:color var(--t),background var(--t);white-space:nowrap}
-.nav-ul a:hover{color:var(--text);background:rgba(255,255,255,.06)}
-.nav-ul .cta{background:var(--accent);color:#fff!important;padding:.5rem 1.1rem;font-weight:600;margin-left:.35rem}
-.nav-ul .cta:hover{background:var(--accent2)!important}
-.ham{display:none;background:none;border:none;cursor:pointer;padding:.5rem}
-.ham span{display:block;width:22px;height:2px;background:var(--muted);margin:4px 0;border-radius:2px}
-
-.ham{display:none;background:none;border:none;cursor:pointer;padding:.5rem}
-.ham span{display:block;width:22px;height:2px;background:var(--muted);margin:4px 0;border-radius:2px}
-
 /* GLOBAL TEXT CENTER */
 body { text-align: center; }
 /* Elements that must remain left-aligned */
-.nw, .nstrip, .ntags, .fbot, .ftop,
-.tl, .rdbox, .cis, .frow, .cfbox, .cg,
-.nav-ul, .fcol ul, .fbrand, .fbrand p,
-.cl, .cl2, .ci2, .cit, .ct { text-align: left; }
+.nstrip, .ntags,
+.tl, .rdbox,
+.cl, .ci2, .ct { text-align: left; }
 /* Hero: centrado */
 .hi { text-align: center; }
 .hi .hp, .hi .hcmt, .hi .hbadge { margin-left: auto; margin-right: auto; }
@@ -100,7 +82,7 @@ section{padding:88px 0;position:relative}
 .btn-fw{width:100%;justify-content:center}
 
 /* HERO */
-#hero{min-height:100vh;padding-top:calc(var(--nav-h) + 80px);padding-bottom:80px;display:flex;align-items:center;overflow:hidden}
+#hero{min-height:100vh;padding-top:80px;padding-bottom:80px;display:flex;align-items:center;overflow:hidden}
 .hg{position:absolute;top:-180px;left:50%;transform:translateX(-50%);width:900px;height:600px;background:radial-gradient(ellipse,rgba(37,99,235,.12),transparent 65%);pointer-events:none}
 .hdots{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.04) 1px,transparent 1px);background-size:32px 32px;pointer-events:none}
 .hi{position:relative;z-index:1;max-width:780px}
@@ -218,43 +200,6 @@ section{padding:88px 0;position:relative}
 .tn{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--faint);margin:.22rem 0 .45rem}
 .tr{font-size:.76rem;color:var(--muted);line-height:1.45}
 
-/* CONTACTO */
-#contacto{background:var(--bg3)}
-#contacto .hdr{margin-bottom:7rem}
-.cg{display:grid;grid-template-columns:1fr 1.5fr;gap:3rem;align-items:start}
-.cl2 h3{font-family:var(--heading);font-size:1.45rem;font-weight:700;margin-bottom:.9rem}
-.cl2 p{font-size:.9rem;color:var(--muted);line-height:1.72;margin-bottom:1.8rem}
-.cis{display:flex;flex-direction:column;gap:.8rem}
-.cit{display:flex;align-items:center;gap:.85rem;background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:.8rem 1rem;text-decoration:none;color:var(--muted);font-size:.875rem;transition:all var(--t)}
-.cit:hover{border-color:var(--accent);color:var(--accent)}
-.cit i{font-size:.95rem;width:16px;text-align:center;color:var(--accent);flex-shrink:0}
-.cfbox{background:var(--bg2);border:1px solid var(--border);border-radius:var(--rl);padding:1.9rem}
-.cfbox h3{font-family:var(--heading);font-size:1.05rem;font-weight:600;margin-bottom:1.4rem}
-.frow{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
-.fg2{margin-bottom:.9rem}
-.fg2 label{display:block;font-size:.78rem;font-weight:500;color:var(--faint);margin-bottom:.35rem}
-.fg2 input,.fg2 select,.fg2 textarea{width:100%;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:8px;padding:.68rem .88rem;color:var(--text);font-family:var(--font);font-size:.875rem;transition:border-color var(--t),box-shadow var(--t);resize:vertical}
-.fg2 input::placeholder,.fg2 textarea::placeholder{color:var(--faint)}
-.fg2 input:focus,.fg2 select:focus,.fg2 textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(37,99,235,.12)}
-.fg2 select{appearance:none;cursor:pointer}
-.fg2 select option{background:var(--bg2)}
-.fnote{font-size:.74rem;color:var(--faint);text-align:center;margin-top:.7rem;display:flex;align-items:center;justify-content:center;gap:.4rem}
-.fsuccess,.ferror{display:none;text-align:center;padding:.9rem;border-radius:8px;margin-top:.9rem;font-size:.86rem}
-.fsuccess{background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.2);color:var(--green)}
-.ferror{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);color:#f87171}
-
-/* FOOTER - identical structure to andrecarmo.pt */
-footer{background:#0a1628;border-top:1px solid var(--border);padding:4rem 2rem 2rem}
-.ftop{max-width:var(--maxw);margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;margin-bottom:3rem}
-.fbrand a{font-family:var(--heading);font-size:1.2rem;font-weight:700;color:var(--text);display:flex;align-items:center;gap:.6rem;text-decoration:none;margin-bottom:.8rem}
-.fbrand-ic{width:32px;height:32px;background:var(--accent);border-radius:7px;display:grid;place-items:center;font-size:.84rem;color:#fff;font-weight:800;flex-shrink:0}
-.fbrand p{font-size:.875rem;color:var(--faint);line-height:1.65;max-width:270px}
-.fcol h4{font-family:var(--heading);font-size:.77rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);margin-bottom:1rem}
-.fcol ul{list-style:none;display:flex;flex-direction:column;gap:.55rem}
-.fcol a{font-size:.875rem;color:var(--faint);text-decoration:none;transition:color var(--t)}
-.fcol a:hover{color:var(--accent)}
-.fbot{max-width:var(--maxw);margin:0 auto;padding-top:1.8rem;border-top:1px solid var(--border2);display:flex;justify-content:space-between;align-items:center;font-size:.78rem;color:var(--faint);flex-wrap:wrap;gap:.5rem}
-
 /* REVEAL */
 .rv{opacity:0;transform:translateY(18px);transition:opacity .55s ease,transform .55s ease}
 .rv.in{opacity:1;transform:none}
@@ -269,50 +214,11 @@ footer{background:#0a1628;border-top:1px solid var(--border);padding:4rem 2rem 2
 .instbox p{font-size:.875rem;color:var(--muted);line-height:1.72;max-width:700px;margin:0 auto}
 
 /* RESPONSIVE */
-@media(max-width:1024px){.fg{grid-template-columns:1fr 1fr}.ftop{grid-template-columns:1fr 1fr}}
-@media(max-width:768px){:root{--nav-h:60px}.pg{grid-template-columns:1fr}.fg{grid-template-columns:1fr}.eg{grid-template-columns:1fr}.rg{grid-template-columns:1fr 1fr}.tg{grid-template-columns:repeat(3,1fr)}.cg{grid-template-columns:1fr}.ftop{grid-template-columns:1fr 1fr}.nav-ul{display:none}.ham{display:block}.hstats{flex-wrap:wrap}.hstat{min-width:120px}.frow{grid-template-columns:1fr}}
-@media(max-width:480px){.rg{grid-template-columns:1fr}.tg{grid-template-columns:1fr 1fr}.ftop{grid-template-columns:1fr}.hctas{flex-direction:column}.hctas .btn{width:100%;justify-content:center}}
-        /* ===== Seletor de idioma / Language switcher ===== */
-        .lang-switch {
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
-            margin-left: 3rem;
-            flex: 0 0 auto;
-        }
-        .lang-switch-label {
-            font-size: 0.75rem;
-            font-weight: 500;
-            color: var(--text-gray, #b3d9ff);
-            white-space: nowrap;
-            line-height: 1;
-        }
-        .lang-flag {
-            width: 30px;
-            height: 30px;
-            min-width: 30px;
-            border-radius: 50%;
-            overflow: hidden;
-            display: block;
-            border: 1px solid var(--glass-border, rgba(0, 212, 255, 0.35));
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .lang-flag:hover { transform: scale(1.12); box-shadow: 0 0 14px rgba(0, 212, 255, 0.55); }
-        .lang-flag .flag-on, .lang-flag .flag-off { display: block; width: 100%; height: 100%; }
-        .lang-flag .flag-off { display: none; }
-        .lang-flag:hover .flag-on { display: none; }
-        .lang-flag:hover .flag-off { display: block; }
-        .lang-flag svg { display: block; width: 100%; height: 100%; }
-        .nw .nav-ul { margin-left: auto; }
-        @media (max-width: 1100px) { .lang-switch-label { display: none; } }
-        @media (max-width: 768px) {
-            .lang-switch { margin-left: auto; }
-            .lang-switch-label { display: inline; }
-            .ham { margin-left: 0.75rem; }
-        }
-        @media (max-width: 560px) { .lang-switch-label { display: none; } }
+@media(max-width:1024px){.fg{grid-template-columns:1fr 1fr}}
+@media(max-width:768px){.pg{grid-template-columns:1fr}.fg{grid-template-columns:1fr}.eg{grid-template-columns:1fr}.rg{grid-template-columns:1fr 1fr}.tg{grid-template-columns:repeat(3,1fr)}.hstats{flex-wrap:wrap}.hstat{min-width:120px}}
+@media(max-width:480px){.rg{grid-template-columns:1fr}.tg{grid-template-columns:1fr 1fr}.hctas{flex-direction:column}.hctas .btn{width:100%;justify-content:center}}
     /* INSCRIÇÃO */
-#inscricao{background:var(--bg);padding-top:calc(var(--nav-h) + 56px)}
+#inscricao{background:var(--bg);padding-top:56px}
 .ins{max-width:720px;margin:0 auto;text-align:left}
 .ins h1{font-family:var(--heading);font-size:clamp(1.75rem,5vw,2.5rem);font-weight:700;line-height:1.22;letter-spacing:-.02em;margin-bottom:2rem;text-align:center}
 .ins h2{font-family:var(--heading);font-size:1.4rem;font-weight:700;line-height:1.3;margin:2.6rem 0 .8rem;color:var(--text)}
@@ -332,43 +238,17 @@ footer{background:#0a1628;border-top:1px solid var(--border);padding:4rem 2rem 2
 </head>
 <body>
 
-<!-- NAV - igual à página do projeto -->
-<nav id="nav">
-  <div class="nw">
-    <a href="https://andrecarmo.pt" class="logo">
-      <div class="logo-box">AC</div>
-      André Carmo
-    </a>
-    <ul class="nav-ul" id="navul">
-      <li><a href="stonedgeworld.html#problema">O Problema</a></li>
-      <li><a href="stonedgeworld.html#solucao">A Solução</a></li>
-      <li><a href="stonedgeworld.html#estado">MVP</a></li>
-      <li><a href="stonedgeworld.html#modelo">Modelo</a></li>
-      <li><a href="stonedgeworld.html#cronograma">Cronograma</a></li>
-      <li><a href="stonedgeworld.html#contacto" class="cta">Contacto</a></li>
-    </ul>
-    <div class="lang-switch">
-        <span class="lang-switch-label">Select language</span>
-        <a href="en/stonedgeworld.html" class="lang-flag" hreflang="en" title="View the project page in English" aria-label="View the project page in English">
-            <span class="flag-on"><svg viewBox="0 0 60 60" aria-hidden="true"><rect width="60" height="60" fill="#DA291C"/><rect width="24" height="60" fill="#046A38"/><circle cx="24" cy="30" r="11" fill="#FFE900" stroke="#046A38" stroke-width="1.5"/><circle cx="24" cy="30" r="6.5" fill="#DA291C" stroke="#FFFFFF" stroke-width="1.5"/></svg></span>
-            <span class="flag-off"><svg viewBox="0 0 60 60" aria-hidden="true"><rect width="60" height="60" fill="#012169"/><path d="M0 0 60 60M60 0 0 60" stroke="#FFFFFF" stroke-width="12"/><path d="M0 0 60 60M60 0 0 60" stroke="#C8102E" stroke-width="6"/><path d="M30 0V60M0 30H60" stroke="#FFFFFF" stroke-width="20"/><path d="M30 0V60M0 30H60" stroke="#C8102E" stroke-width="12"/></svg></span>
-        </a>
-    </div>
-    <button type="button" class="ham" id="ham" aria-label="Menu"><span></span><span></span><span></span></button>
-  </div>
-</nav>
-
 <main>
 <section id="inscricao">
   <div class="c">
     <div class="ins">
-      <h1>Grupo inicial do projeto StonedgeWorld em S. Cosme, Valbom e Jovim</h1>
+      <h1>Grupo Teste inicial do projeto StonedgeWorld da União Freguesias de Gondomar, S. Cosme, Valbom e Jovim.</h1>
 
       <h2>Para quem</h2>
-      <p>Residentes nas freguesias de S. Cosme, Valbom e Jovim, com 40 ou mais anos e telemóvel Android.</p>
+      <p>Residentes nas freguesias de S. Cosme, Valbom e Jovim, com 40+ anos, convidados e familiares na zona Metropolitana do Porto, e com telemóvel Android.</p>
 
       <h2>O que é</h2>
-      <p>O StonedgeWorld mostra-lhe pessoas com 40 ou mais anos que vivem perto, até 40 km, para conversar, fazer uma videochamada e combinar encontros na comunidade. É gratuito e não tem publicidade.</p>
+      <p>O StonedgeWorld mostra-lhe pessoas com 40+ anos que vivem perto, até 40 km, para conversar, fazer uma videochamada e combinar encontros na comunidade. É gratuito e não tem publicidade.</p>
 
       <h2>Como funciona o teste</h2>
       <p>Numa sessão presencial em Gondomar, no final de outubro, ajudamos cada pessoa a instalar a versão de teste pela Google Play e a criar o perfil.</p>
@@ -385,7 +265,9 @@ footer{background:#0a1628;border-top:1px solid var(--border);padding:4rem 2rem 2
 
       <h2>Os seus dados</h2>
       <div class="insdados">
-        <p><span class="insl">Responsável:</span> André Carmo, promotor do projeto StonedgeWorld. Contacto: <a href="mailto:andre.carmo@gmail.com">andre.carmo@gmail.com</a>, <a href="tel:+351912405722">912&nbsp;405&nbsp;722</a>.</p>
+        <p><span class="insl">Responsável:</span> André Carmo, promotor do projeto StonedgeWorld.<br>
+        <span class="insl">Contacto:</span> <a href="mailto:andre.carmo@gmail.com">andre.carmo@gmail.com</a><br>
+        <span class="insl">Tel:</span> <a href="tel:+351912405722">912&nbsp;405&nbsp;722</a></p>
         <p><span class="insl">Na inscrição:</span> nome, telemóvel, freguesia e email da conta Google. Servem para organizar a sessão e para lhe dar acesso à versão de teste, onde o email entra na lista de testadores da Google Play. Ficam só com o promotor e são apagados até 30 dias depois do fim do teste.</p>
         <p><span class="insl">No StonedgeWorld:</span> nome, idade, género, apresentação, interesses, valores, intenção, fotografia tirada no registo, freguesia e concelho, localização aproximada (arredondada a cerca de 1 km), email, telemóvel e as mensagens que trocar.</p>
         <p><span class="insl">Quem vê o quê:</span> as outras pessoas veem o seu nome, idade, apresentação, interesses e a distância em quilómetros. A fotografia só aparece depois de cada um enviar 10 mensagens na conversa.</p>
@@ -402,57 +284,6 @@ footer{background:#0a1628;border-top:1px solid var(--border);padding:4rem 2rem 2
 </section>
 </main>
 
-<!-- FOOTER - igual à página do projeto -->
-<footer>
-  <div class="ftop">
-    <div class="fbrand">
-      <a href="https://andrecarmo.pt"><div class="fbrand-ic">AC</div>André Carmo</a>
-      <p>Especialista em automação inteligente e desenvolvimento com IA para PMEs em Portugal. 30 anos de experiência em tecnologia ao serviço do seu negócio.</p>
-    </div>
-    <div class="fcol">
-      <h4>Links Rápidos</h4>
-      <ul>
-        <li><a href="https://andrecarmo.pt#inicio">Início</a></li>
-        <li><a href="https://andrecarmo.pt#sobre">Sobre</a></li>
-        <li><a href="https://andrecarmo.pt#servicos">Soluções</a></li>
-        <li><a href="https://andrecarmo.pt#portfolio">Portfólio</a></li>
-        <li><a href="https://andrecarmo.pt#precos">Preços</a></li>
-      </ul>
-    </div>
-    <div class="fcol">
-      <h4>StonedgeWorld</h4>
-      <ul>
-        <li><a href="stonedgeworld.html#problema">O Problema</a></li>
-        <li><a href="stonedgeworld.html#solucao">A Solução</a></li>
-        <li><a href="stonedgeworld.html#estado">Estado MVP</a></li>
-        <li><a href="stonedgeworld.html#modelo">Modelo</a></li>
-        <li><a href="stonedgeworld.html#alternativa">vs Apps</a></li>
-      </ul>
-    </div>
-    <div class="fcol">
-      <h4>Legal</h4>
-      <ul>
-        <li><a href="politica-privacidade.html">Política de Privacidade</a></li>
-        <li><a href="politica-privacidade.html#termos">Termos de Serviço</a></li>
-        <li><a href="politica-privacidade.html#direitos">RGPD - Os Seus Direitos</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="fbot">
-    <span>© 2026 André Carmo. Todos os direitos reservados. | NIF: 217 056 903</span>
-    <span>StonedgeWorld - projecto sem fins lucrativos para utilizadores 🇵🇹</span>
-  </div>
-</footer>
-
-<script>
-// Mobile nav
-const ham=document.getElementById('ham');
-const ul=document.getElementById('navul');
-ham.addEventListener('click',()=>{
-  const o=ul.style.display==='flex';
-  ul.style.cssText=o?'':'display:flex;flex-direction:column;position:fixed;top:var(--nav-h);left:0;right:0;background:rgba(15,23,42,.98);padding:1rem 1.5rem;border-bottom:1px solid var(--border);z-index:999;gap:.25rem';
-});
-</script>
 <script src="cookie-consent.js"></script>
 </body>
 </html>
