@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt">
 <head>
 <meta charset="UTF-8">
@@ -93,6 +93,7 @@ section{padding:88px 0;position:relative}
 .ci{width:48px;height:48px;background:rgba(37,99,235,.1);border:1px solid rgba(37,99,235,.2);border-radius:10px;display:grid;place-items:center;font-size:1.25rem;margin:0 auto 1rem}
 .card h3{font-family:var(--heading);font-size:.975rem;font-weight:600;margin-bottom:.45rem}
 .card p{font-size:.875rem;color:var(--muted);line-height:1.65}
+.span2{grid-column:span 2}
 
 /* BTN */
 .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.8rem 1.7rem;border-radius:var(--r);font-size:.9rem;font-weight:600;text-decoration:none;transition:all var(--t);cursor:pointer;border:none;font-family:var(--font)}
@@ -203,6 +204,7 @@ section{padding:88px 0;position:relative}
 .tlb{font-size:.875rem;color:var(--muted);line-height:1.7}
 .tltags{display:flex;gap:.38rem;flex-wrap:wrap;margin-top:.55rem}
 .tltag{font-size:.7rem;padding:.18rem .5rem;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:4px;color:var(--faint)}
+.tlcta{margin-top:2.5rem}
 
 /* PPL */
 #financiamento{background:var(--bg)}
@@ -270,6 +272,7 @@ footer{background:#0a1628;border-top:1px solid var(--border);padding:4rem 2rem 2
 .instbox{background:rgba(37,99,235,.05);border:1px solid rgba(37,99,235,.18);border-radius:var(--rl);padding:1.65rem 2rem;margin-top:1.5rem;text-align:center}
 .instbox h4{font-family:var(--heading);font-size:.98rem;font-weight:600;color:var(--accent);margin-bottom:.6rem}
 .instbox p{font-size:.875rem;color:var(--muted);line-height:1.72;max-width:700px;margin:0 auto}
+.instbox .tx{color:var(--text)}
 
 /* RESPONSIVE */
 @media(max-width:1024px){.fg{grid-template-columns:1fr 1fr}.ftop{grid-template-columns:1fr 1fr}}
@@ -340,7 +343,7 @@ footer{background:#0a1628;border-top:1px solid var(--border);padding:4rem 2rem 2
             <span class="flag-off"><svg viewBox="0 0 60 60" aria-hidden="true"><rect width="60" height="60" fill="#012169"/><path d="M0 0 60 60M60 0 0 60" stroke="#FFFFFF" stroke-width="12"/><path d="M0 0 60 60M60 0 0 60" stroke="#C8102E" stroke-width="6"/><path d="M30 0V60M0 30H60" stroke="#FFFFFF" stroke-width="20"/><path d="M30 0V60M0 30H60" stroke="#C8102E" stroke-width="12"/></svg></span>
         </a>
     </div>
-    <button class="ham" id="ham" aria-label="Menu"><span></span><span></span><span></span></button>
+    <button type="button" class="ham" id="ham" aria-label="Menu"><span></span><span></span><span></span></button>
   </div>
 </nav>
 
@@ -371,10 +374,10 @@ footer{background:#0a1628;border-top:1px solid var(--border);padding:4rem 2rem 2
       <p class="sd">A Comissão da OMS reconheceu-o como prioridade de saúde pública global em 2025. Em Portugal, não existe uma solução estruturada para os adultos 40+.</p>
     </div>
     <div class="pg">
-      <div class="card rv d1" style="grid-column:span 2"><div class="ci">😔</div><h3>Isolamento Social Crescente - Prioridade de Saúde Pública Global</h3><p>1 em cada 6 pessoas no mundo é afetada pela solidão - reconhecida pela Comissão da OMS em junho de 2025 como prioridade de saúde pública global, associada a maior risco de AVC, depressão e mortalidade prematura. O Inquérito Europeu de Solidão (JRC / Comissão Europeia, 2022) mostra Portugal entre os países da UE com maior aumento de solidão. Divorciados, viúvos, pais com filhos que saíram de casa, profissionais relocados: pessoas com história e valor, sem ferramentas pensadas para elas.</p></div>
+      <div class="card rv d1 span2"><div class="ci">😔</div><h3>Isolamento Social Crescente - Prioridade de Saúde Pública Global</h3><p>1 em cada 6 pessoas no mundo é afetada pela solidão - reconhecida pela Comissão da OMS em junho de 2025 como prioridade de saúde pública global, associada a maior risco de AVC, depressão e mortalidade prematura. O Inquérito Europeu de Solidão (JRC / Comissão Europeia, 2022) mostra Portugal entre os países da UE com maior aumento de solidão. Divorciados, viúvos, pais com filhos que saíram de casa, profissionais relocados: pessoas com história e valor, sem ferramentas pensadas para elas.</p></div>
       <div class="card rv d2"><div class="ci">👥</div><h3>Uma Faixa Etária sem Resposta</h3><p>Os 65+ têm as universidades seniores e os centros de dia. Os jovens têm redes sociais nativas. Os 40+ ficaram de fora: demasiado novos para os programas seniores, demasiado velhos para as dinâmicas digitais atuais. Não existem estruturas de convívio de proximidade pensadas especificamente para eles.</p></div>
       <div class="card rv d1"><div class="ci">📱</div><h3>O Digital que Isola em vez de Ligar</h3><p>Algoritmos de retenção, scroll infinito, métricas de vaidade. Tinder para os 20s, subscriptions, coins, boosts - um modelo de negócio construído sobre a solidão das pessoas. Desenhado para manter no sofá, não para levar à rua.</p></div>
-      <div class="card rv d2" style="grid-column:span 2"><div class="ci">🗺️</div><h3>Sem Dados, Sem Resposta Local</h3><p>Os dados de isolamento social na faixa 40+ ao nível municipal não estão sistematizados em Portugal - são recolhidos pelos próprios municípios no Diagnóstico Social. A ausência de dados não significa ausência do problema: significa que ainda não foi medido.</p></div>
+      <div class="card rv d2 span2"><div class="ci">🗺️</div><h3>Sem Dados, Sem Resposta Local</h3><p>Os dados de isolamento social na faixa 40+ ao nível municipal não estão sistematizados em Portugal - são recolhidos pelos próprios municípios no Diagnóstico Social. A ausência de dados não significa ausência do problema: significa que ainda não foi medido.</p></div>
     </div>
   </div>
 </section>
@@ -392,7 +395,7 @@ footer{background:#0a1628;border-top:1px solid var(--border);padding:4rem 2rem 2
       <div class="card rv d2"><div class="ci">🏘️</div><h3>Comunitária por Design</h3><p>Vês quem está na tua cidade e cidades vizinhas - não perfis aleatórios nacionais. Comunidades locais reais.</p></div>
       <div class="card rv d3"><div class="ci">🚫</div><h3>Sem Swipe</h3><p>Navegação intencional, não compulsiva. Nenhum mecanismo de scroll infinito ou gamificação viciante.</p></div>
       <div class="card rv d1"><div class="ci">📸</div><h3>Foto Após 10 Mensagens</h3><p>A foto fica oculta até às 10 mensagens trocadas. Conheces a pessoa antes de a julgar visualmente.</p></div>
-      <div class="card rv d2"><div class="ci">🔐</div><h3>Verificação Dupla de Identidade</h3><p>Selfie em tempo real + comprovativo de morada. Elimina bots, catfishing e perfis falsos.</p></div>
+      <div class="card rv d2"><div class="ci">🔐</div><h3>Verificação Dupla de Identidade</h3><p>Fotografia tirada no momento do registo e validação de cada perfil pelo promotor. No grupo inicial, a identidade é confirmada presencialmente.</p></div>
       <div class="card rv d3"><div class="ci">📹</div><h3>Videochamada Obrigatória</h3><p>Antes de qualquer encontro físico, videochamada obrigatória. Segurança acima de tudo.</p></div>
     </div>
     <div class="cmtbox rv">
@@ -412,27 +415,27 @@ footer{background:#0a1628;border-top:1px solid var(--border);padding:4rem 2rem 2
     </div>
     <div class="eg">
       <div class="cl rv">
-        <div class="ci2"><span class="cbadge d">✓</span><div class="ct"><strong>Autenticação + Validação PT</strong><span>Número português obrigatório + detecção VPN</span></div></div>
-        <div class="ci2"><span class="cbadge d">✓</span><div class="ct"><strong>Onboarding Completo (4 passos)</strong><span>GPS obrigatório, interesses, intenções</span></div></div>
-        <div class="ci2"><span class="cbadge d">✓</span><div class="ct"><strong>Verificação Dupla de Identidade</strong><span>Selfie em tempo real + comprovativo de morada</span></div></div>
-        <div class="ci2"><span class="cbadge d">✓</span><div class="ct"><strong>Feed por Distância + Cidades Vizinhas</strong><span>Fórmula Haversine, raio configurável</span></div></div>
+        <div class="ci2"><span class="cbadge d">✓</span><div class="ct"><strong>Autenticação + Validação PT</strong><span>Número português obrigatório</span></div></div>
+        <div class="ci2"><span class="cbadge d">✓</span><div class="ct"><strong>Onboarding Completo (6 passos)</strong><span>GPS obrigatório, interesses, intenções. Nesta fase, o registo está aberto a residentes da Área Metropolitana do Porto.</span></div></div>
+        <div class="ci2"><span class="cbadge d">✓</span><div class="ct"><strong>Verificação Dupla de Identidade</strong><span>Fotografia tirada no momento do registo e validação de cada perfil pelo promotor. No grupo inicial, a identidade é confirmada presencialmente.</span></div></div>
+        <div class="ci2"><span class="cbadge d">✓</span><div class="ct"><strong>Feed por Distância + Cidades Vizinhas</strong><span>Fórmula Haversine, raio de 40 km</span></div></div>
         <div class="ci2"><span class="cbadge d">✓</span><div class="ct"><strong>Score de Compatibilidade ICQ-style</strong><span>Interesses, valores e intenções comuns</span></div></div>
         <div class="ci2"><span class="cbadge d">✓</span><div class="ct"><strong>Chat Tempo Real (Supabase Realtime)</strong><span>WebSocket nativo, sem polling</span></div></div>
         <div class="ci2"><span class="cbadge d">✓</span><div class="ct"><strong>Notificações Push Android</strong><span>Expo Push Notifications + FCM</span></div></div>
-        <div class="ci2"><span class="cbadge d">✓</span><div class="ct"><strong>RGPD Completo</strong><span>RLS em todas as tabelas, SecureStore, sem tracking</span></div></div>
+        <div class="ci2"><span class="cbadge w">~</span><div class="ct"><strong>Proteção de dados</strong><span>Revisão de segurança e de proteção de dados em curso</span></div></div>
         <div class="ci2"><span class="cbadge d">✓</span><div class="ct"><strong>Backend Supabase Cloud Activo</strong><span>PostgreSQL, Auth, Storage, Edge Functions</span></div></div>
-        <div class="ci2"><span class="cbadge w">~</span><div class="ct"><strong>Revelação de Foto (10 msgs)</strong><span>Implementado - bug de actualização em resolução</span></div></div>
-        <div class="ci2"><span class="cbadge w">~</span><div class="ct"><strong>Videochamada Agora.io</strong><span>Interface pronta - integração SDK em curso</span></div></div>
+        <div class="ci2"><span class="cbadge d">✓</span><div class="ct"><strong>Revelação de Foto (10 msgs)</strong><span>Revelação a funcionar.</span></div></div>
+        <div class="ci2"><span class="cbadge w">~</span><div class="ct"><strong>Videochamada Agora.io</strong><span>Videochamada integrada, com o convite em curso.</span></div></div>
       </div>
       <div class="rdbox rv d2">
         <h3><i class="fas fa-map"></i> Roadmap Imediato</h3>
         <div class="rdi"><div class="rdd"><span></span></div><div class="rdc"><strong>Fix revelação de foto + videochamada real</strong><em>~3 dias com Claude Code</em><div><span class="rtag">Agora.io SDK</span></div></div></div>
-        <div class="rdi"><div class="rdd"><span></span></div><div class="rdc"><strong>Liveness detection na selfie</strong><em>expo-face-detector · ~3 dias</em><div><span class="rtag">Anti-fraude</span></div></div></div>
-        <div class="rdi"><div class="rdd"><span></span></div><div class="rdc"><strong>OCR automático na factura de morada</strong><em>Google Vision API · ~3 dias</em><div><span class="rtag">Automação</span></div></div></div>
-        <div class="rdi"><div class="rdd"><span></span></div><div class="rdc"><strong>Painel de administração</strong><em>~5 dias</em><div><span class="rtag">Admin</span></div></div></div>
+        <div class="rdi"><div class="rdd"><span></span></div><div class="rdc"><strong>Denunciar e bloquear</strong><em>A partir do perfil e da conversa</em><div><span class="rtag">Segurança</span></div></div></div>
+        <div class="rdi"><div class="rdd"><span></span></div><div class="rdc"><strong>Eliminar conta</strong><em>No próprio StonedgeWorld</em><div><span class="rtag">Proteção de dados</span></div></div></div>
         <div class="rdi"><div class="rdd"><span></span></div><div class="rdc"><strong>Beta privado - primeiros utilizadores 40+</strong><em>Porto e Norte</em><div><span class="rtag b">Beta</span></div></div></div>
         <div class="rdi"><div class="rdd"><span></span></div><div class="rdc"><strong>Eventos locais por cidade</strong><em>~4 dias</em><div><span class="rtag">Comunidade</span></div></div></div>
         <div class="rdi"><div class="rdd"><span></span></div><div class="rdc"><strong>🚀 Lançamento Google Play Store</strong><em>EAS Build APK</em><div><span class="rtag b">Lançamento</span></div></div></div>
+        <div class="rdi"><div class="rdd"><span></span></div><div class="rdc"><strong>Encontro presencial de dezembro</strong><em>9 a 12 de dezembro</em><div><span class="rtag b">Encontro presencial</span></div></div></div>
       </div>
     </div>
   </div>
@@ -442,16 +445,16 @@ footer{background:#0a1628;border-top:1px solid var(--border);padding:4rem 2rem 2
 <section id="fluxo">
   <div class="c">
     <div class="hdr c2 rv">
-      <span class="lbl"><i class="fas fa-project-diagram"></i> Fluxo da App</span>
+      <span class="lbl"><i class="fas fa-project-diagram"></i> Fluxo do projeto StonedgeWorld</span>
       <h2 class="sh">Do registo ao convívio comunitário</h2>
       <p class="sd">Cada passo foi desenhado para construir confiança e levar ao encontro presencial - e do encontro a dois ao evento comunitário da cidade.</p>
     </div>
     <div class="mwrap rv">
       <div class="mermaid">
 flowchart TD
-    A([📱 Registo na App]) --> B[Verificação\nNúmero PT + anti-VPN]
-    B --> C[Onboarding 4 passos\nGPS + Interesses + Bio]
-    C --> D[Selfie em tempo real\n+ Factura de morada]
+    A([📱 Registo no StonedgeWorld]) --> B[Verificação\nNúmero PT]
+    B --> C[Onboarding 6 passos\nGPS + Interesses + Bio]
+    C --> D[Fotografia tirada\nno momento do registo]
     D --> E{Aprovação\nManual}
     E -->|✗ Recusado| D
     E -->|✓ Aprovado| F([🗺️ Feed Local por Distância])
@@ -468,6 +471,11 @@ flowchart TD
     O --> P([🏘️ Evento comunitário da cidade])
     L -->|Não| G
     H -->|Não| G
+    G -.-> R[🚩 Denunciar e bloquear\nno perfil e na conversa]
+    I -.-> R
+    F -.-> S[Eliminar conta\na qualquer momento]
+    P --> Q([📅 Encontro presencial\nde dezembro])
+    style Q fill:#064e3b,stroke:#10b981,color:#f1f5f9
     style A fill:#1e3a5f,stroke:#2563eb,color:#f1f5f9
     style F fill:#1e3a5f,stroke:#2563eb,color:#f1f5f9
     style N fill:#064e3b,stroke:#10b981,color:#f1f5f9
@@ -490,8 +498,8 @@ flowchart TD
       <p class="sd">A receita vem de quem beneficia das conexões - não de quem as procura.</p>
     </div>
     <div class="rg">
-      <div class="rc rv d1"><span class="rem">📍</span><span class="rv2" style="font-family:var(--heading);font-size:2rem;font-weight:800;color:var(--accent);display:block;line-height:1;margin-bottom:.45rem">€50<small style="font-size:.45em;font-weight:400">/mês</small></span><div class="rl2">Patrocínios Locais</div><div class="rd">Restaurantes, bares e espaços de eventos pagam para aparecer como local recomendado para o primeiro encontro na sua cidade</div></div>
-      <div class="rc rv d2"><span class="rem">🎟️</span><span></span><div class="rl2">Eventos Comunitários</div><div class="rd">A plataforma organiza encontros temáticos por cidade. A comunidade paga o evento, não a app</div></div>
+      <div class="rc rv d1"><span class="rem">📍</span><span></span><div class="rl2">Patrocínios Locais</div><div class="rd">Restaurantes, bares e espaços de eventos pagam para aparecer como local recomendado para o primeiro encontro na sua cidade. Durante o piloto, a adesão dos espaços é gratuita.</div></div>
+      <div class="rc rv d2"><span class="rem">🎟️</span><span></span><div class="rl2">Eventos Comunitários</div><div class="rd">O projeto StonedgeWorld organiza encontros temáticos por cidade. A comunidade paga o evento, não o StonedgeWorld</div></div>
       <div class="rc rv d3"><span class="rem">📢</span><span></span><div class="rl2">Anúncios de Parceiros</div><div class="rd">Anúncios não evasivos de parceiros de eventos. Sem cookies, sem tracking, sem dados partilhados</div></div>
     </div>
     <div class="nstrip rv">
@@ -502,7 +510,7 @@ flowchart TD
     </div>
     <div class="instbox rv">
       <h4>🏛️ Parceria Institucional</h4>
-      <p>Câmaras municipais e juntas de freguesia divulgam o projeto junto dos residentes 40+, facilitam o contacto com cafés e espaços locais, e cedem espaço para os encontros e eventos comunitários - sem custo para o erário público. Esta lógica enquadra-se nos instrumentos de inovação social <strong style="color:var(--text)">Portugal Inovação Social 2030 / PESSOAS 2030</strong>, onde os municípios podem ser promotores ou investidores sociais.</p>
+      <p>Câmaras municipais e juntas de freguesia divulgam o projeto junto dos residentes 40+, facilitam o contacto com cafés e espaços locais, e cedem espaço para os encontros e eventos comunitários - sem custo para o erário público. Esta lógica enquadra-se nos instrumentos de inovação social <strong class="tx">Portugal Inovação Social 2030 / PESSOAS 2030</strong>, onde os municípios podem ser promotores ou investidores sociais.</p>
     </div>
   </div>
 </section>
@@ -517,7 +525,7 @@ flowchart TD
     </div>
     <div class="pg">
       <div class="card rv d1"><div class="ci">🆓</div><h3>Sem Subscrições, Sem Coins, Sem Boosts</h3><p>As grandes plataformas ganham dinheiro com a sua solidão. StonedgeWorld é gratuita para sempre, para qualquer utilizador. Sem truques, sem versões premium, sem funcionalidades pagas.</p></div>
-      <div class="card rv d2"><div class="ci">🛡️</div><h3>Sem Venda de Dados, Sem Targeting</h3><p>Os seus dados não são o produto. Sem publicidade comportamental, sem perfis para vender, sem algoritmos de retenção. RGPD completo, com RLS em todas as tabelas da base de dados.</p></div>
+      <div class="card rv d2"><div class="ci">🛡️</div><h3>Sem Venda de Dados, Sem Targeting</h3><p>Os seus dados não são o produto. Sem publicidade comportamental, sem perfis para vender, sem algoritmos de retenção. Revisão de segurança e de proteção de dados em curso.</p></div>
     </div>
     <div class="vstbl rv">
       <table>
@@ -537,46 +545,56 @@ flowchart TD
   <div class="c">
     <div class="hdr rv">
       <span class="lbl"><i class="fas fa-calendar-alt"></i> Cronograma</span>
-      <h2 class="sh">De MVP a produto lançado<br>em colaboração com Câmaras e Freguesias</h2>
+      <h2 class="sh">Do protocolo ao primeiro encontro presencial</h2>
+      <p class="sd">Piloto local nas freguesias de S. Cosme, Valbom e Jovim, em Gondomar, para residentes com 40 ou mais anos. Nesta fase, só para telemóveis Android.</p>
     </div>
     <div class="tl rv">
+      <!-- Versão com o nome: Parecer favorável do Órgão Executivo da União de Freguesias de Gondomar, S. Cosme, Valbom e Jovim a 17 de junho, seguido da assinatura do protocolo. -->
       <div class="tli">
         <div class="tld"><span></span></div>
-        <div class="tlh"><span class="tldt">Junho 2026 - Hoje</span><span class="tltitle">MVP Funcional - Projeto Piloto</span></div>
-        <div class="tlb">Arquitectura completa a correr em Android físico. Autenticação, feed, chat em tempo real, verificação de identidade, notificações push. Backend Supabase cloud activo com RGPD completo. Desenvolvido em colaboração com a <strong style="color:var(--text)">União de Freguesias de Gondomar, S. Cosme, Valbom e Jovim</strong> - parceria com parecer favorável, protocolo em fase de assinatura.</div>
-        <div class="tltags"><span class="tltag">React Native</span><span class="tltag">Supabase</span><span class="tltag">Expo SDK 54</span><span class="tltag">RGPD</span></div>
+        <div class="tlh"><span class="tldt">Junho de 2026</span><span class="tltitle">Protocolo de colaboração assinado</span></div>
+        <div class="tlb">Parecer favorável do órgão executivo da autarquia local a 17 de junho, seguido da assinatura do protocolo. O piloto é gratuito para os residentes e não tem custos para a autarquia.</div>
+        <div class="tltags"><span class="tltag">Protocolo</span><span class="tltag">Piloto local</span></div>
       </div>
       <div class="tli">
         <div class="tld"><span></span></div>
-        <div class="tlh"><span class="tltitle">Fix + Videochamada Real</span></div>
-        <div class="tlb">Resolução do bug de revelação de foto. Integração SDK Agora.io para videochamada real. Liveness detection na selfie de verificação.</div>
-        <div class="tltags"><span class="tltag">Agora.io</span><span class="tltag">expo-face-detector</span></div>
+        <div class="tlh"><span class="tldt">Outubro de 2026</span><span class="tltitle">Preparação</span></div>
+        <div class="tlb">Revisão de segurança e de proteção de dados antes de entrar o primeiro participante. Publicação da política de privacidade e das normas da comunidade. Teste fechado na Google Play.</div>
+        <div class="tltags"><span class="tltag">Segurança</span><span class="tltag">Proteção de dados</span></div>
       </div>
       <div class="tli">
         <div class="tld"><span></span></div>
-        <div class="tlh"><span class="tltitle">Automação + Painel Admin</span></div>
-        <div class="tlb">OCR automático na factura de morada via Google Vision API. Painel web de administração para aprovação de perfis. Primeiros parceiros B2B contactados no Porto.</div>
-        <div class="tltags"><span class="tltag">Google Vision API</span><span class="tltag">Painel Admin</span></div>
+        <div class="tlh"><span class="tldt">Final de outubro</span><span class="tltitle">Sessão de instalação assistida</span></div>
+        <div class="tlb">Sessão presencial em Gondomar com 18 a 20 residentes 40+ das três freguesias. A instalação faz-se sempre pela loja oficial da Google.</div>
+        <div class="tltags"><span class="tltag">Grupo inicial</span><span class="tltag">Android</span></div>
       </div>
       <div class="tli">
         <div class="tld"><span></span></div>
-        <div class="tlh"><span class="tltitle">Primeiros Utilizadores Beta 40+</span></div>
-        <div class="tlb">Beta privado com utilizadores reais no Porto e Norte. Testes do fluxo completo - registo, verificação, chat, videochamada. Feedback para ajustes finais.</div>
-        <div class="tltags"><span class="tltag">Porto</span><span class="tltag">Beta Privado</span><span class="tltag">Utilizadores Reais</span></div>
+        <div class="tlh"><span class="tldt">Novembro</span><span class="tltitle">Teste, correções e publicação</span></div>
+        <div class="tlb">Duas semanas de utilização e de recolha de opiniões, seguidas de correções. Pedido de publicação na Google Play, com um prazo de análise que depende da Google. Primeiro relatório do piloto, só com números agregados.</div>
+        <div class="tltags"><span class="tltag">Google Play</span><span class="tltag">Relatório</span></div>
       </div>
       <div class="tli">
         <div class="tld"><span></span></div>
-        <div class="tlh"><span class="tltitle">Eventos Locais + Beta Nacional</span></div>
-        <div class="tlb">Funcionalidade de eventos comunitários por cidade. Ajustes com base no feedback beta. Expansão a outras cidades (Braga, Coimbra, Lisboa).</div>
-        <div class="tltags"><span class="tltag">Eventos</span><span class="tltag">Beta Nacional</span></div>
+        <div class="tlh"><span class="tldt">A partir de 23 de novembro</span><span class="tltitle">Divulgação aos residentes 40+</span></div>
+        <div class="tlb">Divulgação nas três freguesias. Cada perfil novo é validado antes de ficar visível para as outras pessoas.</div>
+        <div class="tltags"><span class="tltag">Divulgação</span></div>
       </div>
+      <!-- Versão com o nome: Convívio num espaço cedido pela União, para quem se conheceu através do projeto StonedgeWorld. -->
       <div class="tli">
         <div class="tld lnch"><span></span></div>
-        <div class="tlh"><span class="tltitle">Lançamento Google Play Store</span></div>
-        <div class="tlb">Publicação pública na Google Play Store via EAS Build (APK standalone). Campanha de lançamento no Porto e Norte. Expansão orgânica a todo o território nacional.</div>
-        <div class="tltags"><span class="tltag">Google Play</span><span class="tltag">EAS Build</span><span class="tltag">Lançamento Nacional</span></div>
+        <div class="tlh"><span class="tldt lnch">9 a 12 de dezembro</span><span class="tltitle">Primeiro encontro presencial</span></div>
+        <div class="tlb">Convívio num espaço público da freguesia, para quem se conheceu através do projeto StonedgeWorld. O dia e a hora são anunciados em novembro.</div>
+        <div class="tltags"><span class="tltag">Encontro presencial</span></div>
+      </div>
+      <div class="tli">
+        <div class="tld"><span></span></div>
+        <div class="tlh"><span class="tldt">Todos os meses, até junho de 2027</span><span class="tltitle">Relatório de resultados</span></div>
+        <div class="tlb">Uma página por mês com os indicadores do piloto, sempre agregados e sem dados pessoais. Balanço no fim do primeiro ano do protocolo.</div>
+        <div class="tltags"><span class="tltag">Transparência</span></div>
       </div>
     </div>
+    <div class="tlcta"><a href="stonedgeworld-inscricao.html" class="btn btn-p btn-lg"><i class="fas fa-user-plus"></i> Inscrições para o grupo inicial</a></div>
   </div>
 </section>
 
@@ -593,7 +611,7 @@ flowchart TD
         <h3>Fale Comigo Diretamente</h3>
         <p>Disponível para uma conversa sem compromisso sobre o StonedgeWorld. Posso fazer uma demonstração ao vivo do MVP no telemóvel - registo, feed, chat e videochamada.</p>
         <div class="cis">
-          <a href="tel:+351912405722" class="cit"><i class="fas fa-phone"></i>+351 912 405 722</a>
+          <a href="tel:+351912405722" class="cit"><i class="fas fa-phone"></i>+351&nbsp;912&nbsp;405&nbsp;722</a>
           <a href="mailto:andre.carmo@gmail.com" class="cit"><i class="fas fa-envelope"></i>andre.carmo@gmail.com</a>
           <a href="https://andrecarmo.pt" class="cit"><i class="fas fa-globe"></i>andrecarmo.pt</a>
         </div>
