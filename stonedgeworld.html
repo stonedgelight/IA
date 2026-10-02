@@ -161,7 +161,7 @@ section{padding:88px 0;position:relative}
 .rc{display:grid;grid-template-rows:subgrid;grid-row:span 4;align-items:start;background:var(--bg2);border:1px solid var(--border);border-radius:var(--rl);padding:1.65rem;text-align:center;transition:all var(--t)}
 .rc:hover{border-color:rgba(37,99,235,.35);transform:translateY(-3px);box-shadow:0 6px 24px rgba(0,0,0,.35)}
 .rem{font-size:1.9rem;display:block;margin-bottom:.7rem}
-.rv{font-family:var(--heading);font-size:2.1rem;font-weight:800;color:var(--accent);display:block;line-height:1;margin-bottom:.45rem}
+
 .rl2{font-size:.88rem;font-weight:600;margin-bottom:.45rem}
 .rd{font-size:.82rem;color:var(--muted);line-height:1.6}
 .nstrip{background:rgba(239,68,68,.05);border:1px solid rgba(239,68,68,.15);border-radius:var(--rl);padding:1.2rem 1.65rem;display:flex;align-items:center;gap:1.4rem;flex-wrap:wrap}
@@ -222,8 +222,8 @@ section{padding:88px 0;position:relative}
 
 /* RESPONSIVE */
 @media(max-width:1024px){.fg{grid-template-columns:1fr 1fr}}
-@media(max-width:768px){.pg{grid-template-columns:1fr}.fg{grid-template-columns:1fr}.eg{grid-template-columns:1fr}.rg{grid-template-columns:1fr 1fr}.tg{grid-template-columns:repeat(3,1fr)}.hstats{flex-wrap:wrap}.hstat{min-width:120px}}
-@media(max-width:480px){.rg{grid-template-columns:1fr}.tg{grid-template-columns:1fr 1fr}.hctas{flex-direction:column}.hctas .btn{width:100%;justify-content:center}}
+@media(max-width:768px){.pg{grid-template-columns:1fr}.span2{grid-column:auto}.hp br{display:none}.vstbl{overflow-x:auto;-webkit-overflow-scrolling:touch}.vstbl table{table-layout:auto;min-width:600px}.mwrap{overflow-x:auto;justify-content:flex-start;padding:1.5rem 1rem}.mwrap svg{min-width:520px;height:auto}.fg{grid-template-columns:1fr}.eg{grid-template-columns:1fr}.rg{grid-template-columns:1fr 1fr}.tg{grid-template-columns:repeat(3,1fr)}.hstats{flex-wrap:wrap}.hstat{min-width:120px}}
+@media(max-width:480px){.c{padding:0 1.15rem}section{padding:60px 0}.card{padding:1.3rem}.card p,.tlb,.cmtbox p,.instbox p,.vstbl td,.rd,.tr,.hp{font-size:.95rem}.ct strong,.rdc strong,.vstbl td.p,.hcmt{font-size:.9rem}.ct span,.rdc em,.ntag,.hsl{font-size:.875rem}.lbl,.tldt,.tltag,.rtag,.vstbl th,.tn,.ntitle{font-size:.875rem}.hstats{gap:1.2rem 0}.hstat{flex:1 1 50%;padding:0 .6rem;border-right:none}.rg{grid-template-columns:1fr}.tg{grid-template-columns:1fr 1fr}.hctas{flex-direction:column}.hctas .btn{width:100%;justify-content:center}}
     </style>
 </head>
 <body>
@@ -234,7 +234,7 @@ section{padding:88px 0;position:relative}
   <div class="c">
     <div class="hi">
       <h1 class="h1"><span class="acc">StonedgeWorld</span><br>Do isolamento<br>ao convívio presencial</h1>
-      <p class="hp">Uma solução comunitária que usa a tecnologia<br>para um único fim: tirar os adultos 40+ do isolamento<br>e levá-los a conhecer pessoas na vida real, na sua cidade.<br>Desenvolvida em parceria com câmaras municipais<br>e juntas de freguesia<br>a tirar Portugal do sofá.</p>
+      <p class="hp">Uma solução comunitária que usa a tecnologia <br>para um único fim: tirar os adultos 40+ do isolamento <br>e levá-los a conhecer pessoas na vida real, na sua cidade. <br>Desenvolvida em parceria com câmaras municipais <br>e juntas de freguesia <br>a tirar Portugal do sofá.</p>
       <div class="hcmt"><i class="fas fa-lock"></i> Compromisso público: nunca haverá modelo comercial sobre os utilizadores</div>
       <div class="hstats">
         <div class="hstat"><span class="hsv">1&nbsp;em&nbsp;6</span><span class="hsl">Pessoas afetadas por solidão (OMS, 2025)</span></div>
