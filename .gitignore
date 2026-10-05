@@ -1,0 +1,11 @@
+# Configuração local do editor/MCP (pode conter chaves de API)
+.vscode/
+.mcp.json
+.claude/settings.local.json
+
+# Segredos e variáveis de ambiente
+.env
+.env.*
+*.key
+*.pem
+secrets*.json

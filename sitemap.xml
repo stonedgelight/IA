@@ -131,16 +131,7 @@
   </url>
   <url>
     <loc>https://andrecarmo.pt/stonedgeworld.html</loc>
-    <xhtml:link rel="alternate" hreflang="pt-PT" href="https://andrecarmo.pt/stonedgeworld.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://andrecarmo.pt/en/stonedgeworld.html"/>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://andrecarmo.pt/en/stonedgeworld.html</loc>
-    <xhtml:link rel="alternate" hreflang="pt-PT" href="https://andrecarmo.pt/stonedgeworld.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://andrecarmo.pt/en/stonedgeworld.html"/>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
   </url>
 </urlset>
