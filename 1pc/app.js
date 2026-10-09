@@ -3,13 +3,14 @@
 (function () {
   'use strict';
 
-  const VERSAO = '0.1.2';
+  const VERSAO = '0.1.3';
   const CHAVE = 'umporcento.v1';
   const HORA_SAGRADA = 'Hora sagrada';
   const DIAS = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
   const DIAS_LONGOS = ['domingo', 'segunda', 'terça', 'quarta', 'quinta', 'sexta', 'sábado'];
   const MESES = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez'];
   const CORES = ['#b8860b', '#2f6f9f', '#2e7d5b', '#7b4b94', '#c0582b', '#1f8a8a', '#a3772a', '#5a6b8c'];
+  const SYNC_ATRASO = (typeof window.__SYNC_MS === 'number') ? window.__SYNC_MS : 20000;   // envio automático 20 s depois da última alteração
   const TIPOS_REFLEXAO = ['Identidade', 'Hábitos', 'Semana', '28 dias', '90 dias', 'Anual', 'Integridade'];
 
   /* ---------- datas ---------- */
@@ -80,7 +81,7 @@
     scorecardSujo: false,
     habitosSujos: false,
     licoes: { lidas: {}, notas: {} },
-    sync: { url: '', token: '', ultima: '', formUrl: '' },
+    sync: { url: '', token: '', ultima: '', formUrl: '', erro: '' },
     ui: { diaSel: hojeKey(), ecra: 'hoje', tema: 'auto' }
   });
 
@@ -102,7 +103,7 @@
       return s;
     } catch (e) { return base(); }
   }
-  function guardar() { try { localStorage.setItem(CHAVE, JSON.stringify(S)); } catch (e) { toast('Sem espaço para guardar.'); } }
+  function guardar() { try { localStorage.setItem(CHAVE, JSON.stringify(S)); } catch (e) { toast('Sem espaço para guardar.'); } agendarSync(); }
 
   /* ---------- registos ---------- */
   const valorDe = (nome, k) => {
@@ -418,6 +419,7 @@
 
   function editarHabito(h) {
     const novo = !h;
+    const nomeOriginal = h ? h.nome : null;
     const f = novo ? { nome: '', cor: CORES[S.habitos.length % CORES.length], ativo: true, identidade: '', doisMin: '', intencao: '', empilhar: '', sinal: '', tentacao: '', tribo: '', ritual: '', friccao: '', ambiente: '', decisivo: '', automacao: '', recompensa: '', registo: '', parceiro: '', alvo: 1, dias: 'todos', hora: '', inicio: hojeKey(), nota: '' } : JSON.parse(JSON.stringify(h));
     const dias = parseDias(f.dias);
     const campo = (k, rotulo, ph, multi) => el('label', { class: 'campo' }, rotulo, multi
@@ -469,12 +471,12 @@
       f.nome = String(f.nome || '').trim();
       if (!f.nome) { toast('Dá um nome ao hábito.'); return; }
       if (novo && habPorNome(f.nome)) { toast('Já existe um hábito com esse nome.'); return; }
-      if (novo) S.habitos.push(f); else Object.assign(h, f);
+      if (novo) S.habitos.push(f); else Object.assign(habPorNome(nomeOriginal) || h, f);
       S.habitosSujos = true; guardar(); fecharModal(); renderTudo(); agendarNotificacoes(); toast(novo ? 'Hábito criado.' : 'Guardado.');
     } }, 'Guardar'));
     if (!novo && !h.soLeitura) acoes.append(el('button', { class: 'btn sec', onclick: () => {
       if (!confirm('Apagar "' + h.nome + '" da app? Os registos locais deste hábito também desaparecem (a folha mantém a coluna).')) return;
-      S.habitos = S.habitos.filter(x => x !== h); delete S.registos[h.nome]; S.habitosSujos = true; guardar(); fecharModal(); renderTudo(); toast('Apagado.');
+      S.habitos = S.habitos.filter(x => x.nome !== nomeOriginal); delete S.registos[nomeOriginal]; S.habitosSujos = true; guardar(); fecharModal(); renderTudo(); toast('Apagado.');
     } }, 'Apagar'));
     painel.append(acoes);
     abrirModal(painel);
@@ -623,6 +625,8 @@
     // sincronização
     const b1 = el('div', { class: 'bloco' });
     b1.append(el('h2', null, 'Folha "Hora Sagrada"'));
+    if (S.sync.erro) b1.append(el('div', { class: 'aviso forte', style: 'margin-bottom:10px' }, S.sync.erro));
+    else if (configurado()) b1.append(el('p', { class: 'quieto' }, 'Sincroniza sozinha: ao abrir a app, 20 segundos depois de cada voto e ao sair. O botão serve para forçar.'));
     b1.append(el('p', { class: 'quieto' }, 'A app funciona sem rede. Quando sincronizas, os teus registos vão para a grelha "Registo hábitos" (que alimenta o email das 8:05) e a Hora sagrada vem do Form.'));
     b1.append(el('label', { class: 'campo' }, 'URL do Web App do Apps Script (termina em /exec)', el('input', { type: 'url', value: S.sync.url, placeholder: 'https://script.google.com/macros/s/…/exec', oninput: e => { S.sync.url = e.target.value.trim(); guardar(); } })));
     b1.append(el('p', { class: 'quieto' }, 'Onde se obtém: no editor do Apps Script da folha, botão azul "Implementar" (canto superior direito) > "Nova implementação" > roda dentada "Selecionar tipo" > "Aplicação Web" > Executar como: Eu; Quem tem acesso: Qualquer pessoa (não "Só eu" nem "Qualquer pessoa com uma Conta Google"; a proteção é o token) > Implementar > copiar o "URL da aplicação Web". Se mais tarde mudares o código, usa "Gerir implementações" > lápis > Nova versão, para o URL se manter.'));
@@ -721,33 +725,72 @@
       return true;
     } catch (e) { toast(navigator.onLine === false ? 'Sem rede neste momento.' : MSG_ACESSO); return false; }
   }
-  async function sincronizar(soObter) {
-    if (!S.sync.url || !S.sync.token) { toast('Preenche o URL e o token.'); return; }
-    toast(soObter ? 'A obter da folha…' : 'A sincronizar…');
+  let aSincronizar = false, syncTimer = null;
+  const configurado = () => !!(S.sync.url && S.sync.token);
+  const porEnviar = () => S.pendentes.length + (S.habitosSujos ? 1 : 0) + (S.scorecardSujo ? 1 : 0) + S.reflexoes.filter(x => !x.enviada).length;
+  const aEditar = () => $('#modal').classList.contains('aberto') || /^(INPUT|TEXTAREA|SELECT)$/.test((document.activeElement || {}).tagName || '');
+  function corpoSync(comReflexoes) {
+    const corpo = { token: S.sync.token, registos: S.pendentes.slice() };
+    if (comReflexoes) corpo.reflexoes = S.reflexoes.filter(x => !x.enviada).map(x => ({ data: x.data, tipo: x.tipo, nota: x.nota, pergunta: x.pergunta, resposta: x.resposta }));
+    if (S.habitosSujos) corpo.habitos = S.habitos.map(h => ({ nome: h.nome, ativo: !!h.ativo, identidade: h.identidade, doisMin: h.doisMin, intencao: h.intencao, empilhar: h.empilhar, sinal: h.sinal, tentacao: h.tentacao, tribo: h.tribo, ritual: h.ritual, friccao: h.friccao, ambiente: h.ambiente, decisivo: h.decisivo, automacao: h.automacao, recompensa: h.recompensa, registo: h.registo, parceiro: h.parceiro, alvo: h.alvo, dias: diasTexto(parseDias(h.dias)), hora: h.hora, inicio: h.inicio, nota: h.nota }));
+    if (S.scorecardSujo) corpo.scorecard = S.scorecard;
+    return corpo;
+  }
+  // envio automático: 20 s depois da última alteração, se houver algo por enviar e não estiveres a escrever
+  function agendarSync(ms) {
+    if (!configurado()) return;
+    clearTimeout(syncTimer);
+    syncTimer = setTimeout(() => {
+      if (!porEnviar() || navigator.onLine === false) return;
+      if (aEditar()) { agendarSync(); return; }
+      sincronizar(false, true);
+    }, ms === undefined ? SYNC_ATRASO : ms);
+  }
+  // ao abrir a app ou voltar a ela: envia o que houver e traz a Hora sagrada do Form (no máximo de 5 em 5 min se não houver nada por enviar)
+  function sincronizarAoAbrir() {
+    if (!configurado() || navigator.onLine === false || aEditar()) return;
+    const recente = S.sync.ultima && (Date.now() - new Date(S.sync.ultima).getTime() < 5 * 60000);
+    if (porEnviar()) sincronizar(false, true); else if (!recente) sincronizar(true, true);
+  }
+  // ao sair da app: envio de último recurso (sem resposta; a fila só limpa na próxima sincronização, que repete o envio sem duplicar)
+  function enviarAoSair() {
+    if (!configurado() || !(S.pendentes.length || S.habitosSujos || S.scorecardSujo)) return;
+    try { fetch(S.sync.url, { method: 'POST', body: JSON.stringify(corpoSync(false)), keepalive: true }); } catch (e) { /* sem rede */ }
+  }
+
+  async function sincronizar(soObter, silencioso) {
+    if (!configurado()) { if (!silencioso) toast('Preenche o URL e o token.'); return; }
+    if (aSincronizar) return;
+    aSincronizar = true;
+    if (!silencioso) toast(soObter ? 'A obter da folha…' : 'A sincronizar…');
     let enviados = [];
     try {
       let resp;
       if (soObter) {
         resp = await fetch(S.sync.url + '?token=' + encodeURIComponent(S.sync.token) + '&t=' + Date.now(), { method: 'GET', redirect: 'follow' });
       } else {
-        enviados = S.pendentes.slice();
-        const corpo = { token: S.sync.token, registos: enviados, reflexoes: S.reflexoes.filter(x => !x.enviada).map(x => ({ data: x.data, tipo: x.tipo, nota: x.nota, pergunta: x.pergunta, resposta: x.resposta })) };
-        if (S.habitosSujos) corpo.habitos = S.habitos.map(h => ({ nome: h.nome, ativo: !!h.ativo, identidade: h.identidade, doisMin: h.doisMin, intencao: h.intencao, empilhar: h.empilhar, sinal: h.sinal, tentacao: h.tentacao, tribo: h.tribo, ritual: h.ritual, friccao: h.friccao, ambiente: h.ambiente, decisivo: h.decisivo, automacao: h.automacao, recompensa: h.recompensa, registo: h.registo, parceiro: h.parceiro, alvo: h.alvo, dias: diasTexto(parseDias(h.dias)), hora: h.hora, inicio: h.inicio, nota: h.nota }));
-        if (S.scorecardSujo) corpo.scorecard = S.scorecard;
+        const corpo = corpoSync(true);
+        enviados = corpo.registos;
         resp = await fetch(S.sync.url, { method: 'POST', body: JSON.stringify(corpo), redirect: 'follow' });
       }
       const txt = await resp.text();
       let dados = null; try { dados = JSON.parse(txt); } catch (e) { dados = null; }
-      if (!dados) { toast(MSG_ACESSO); return; }
-      if (!dados.ok) { toast(dados.erro === 'token' ? 'Token errado: compara com o que v3_gerarToken escreveu.' : 'A folha recusou: ' + dados.erro); return; }
+      if (!dados) { S.sync.erro = MSG_ACESSO; if (!silencioso) toast(MSG_ACESSO); return; }
+      if (!dados.ok) { S.sync.erro = dados.erro === 'token' ? 'Token errado: compara com o que v3_gerarToken escreveu.' : 'A folha recusou: ' + dados.erro; if (!silencioso) toast(S.sync.erro); return; }
       aplicarEstado(dados, !soObter);
       if (!soObter) S.pendentes = S.pendentes.filter(p => !enviados.some(e => e.habito === p.habito && e.data === p.data && e.valor === p.valor));
       S.sync.ultima = new Date().toISOString();
-      guardar(); renderTudo(); agendarNotificacoes();
-      toast(soObter ? 'Folha lida.' : 'Sincronizado.');
+      S.sync.erro = '';
+      guardar();
+      if (!(silencioso && aEditar())) renderTudo();
+      agendarNotificacoes();
+      if (!silencioso) toast(soObter ? 'Folha lida.' : 'Sincronizado.');
     } catch (e) {
       console.warn(e);
-      toast(navigator.onLine === false ? 'Sem rede. Os registos ficam guardados para a próxima.' : MSG_ACESSO + ' Os registos ficam guardados.');
+      S.sync.erro = navigator.onLine === false ? 'Sem rede: os registos ficam guardados e vão na próxima.' : MSG_ACESSO;
+      if (!silencioso) toast(navigator.onLine === false ? 'Sem rede. Os registos ficam guardados para a próxima.' : MSG_ACESSO + ' Os registos ficam guardados.');
+    } finally {
+      aSincronizar = false;
     }
   }
   function aplicarEstado(d, enviou) {
@@ -825,7 +868,12 @@
   if (S.ui.ecra && S.ui.ecra !== 'hoje') { document.querySelectorAll('.ecra').forEach(s => s.classList.toggle('ativo', s.id === 'ecra-' + S.ui.ecra)); document.querySelectorAll('nav.barra button').forEach(b => b.classList.toggle('ativo', b.dataset.ecra === S.ui.ecra)); }
   renderTudo();
   agendarNotificacoes();
-  document.addEventListener('visibilitychange', () => { if (!document.hidden) { S.ui.diaSel = hojeKey(); renderTudo(); } });
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) { enviarAoSair(); return; }
+    S.ui.diaSel = hojeKey(); renderTudo(); sincronizarAoAbrir();
+  });
+  window.addEventListener('online', () => sincronizarAoAbrir());
+  setTimeout(sincronizarAoAbrir, 1500);
   if ('serviceWorker' in navigator && !Cap.nativo && location.protocol.indexOf('http') === 0) { navigator.serviceWorker.register('./sw.js').catch(() => { /* sem sw */ }); }
   window.UmPorCento = { estado: () => S, sincronizar, versao: VERSAO };
 })();
