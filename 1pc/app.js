@@ -3,7 +3,7 @@
 (function () {
   'use strict';
 
-  const VERSAO = '0.1.0';
+  const VERSAO = '0.1.1';
   const CHAVE = 'umporcento.v1';
   const HORA_SAGRADA = 'Hora sagrada';
   const DIAS = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
@@ -210,6 +210,33 @@
   function fecharModal() { $('#modal').classList.remove('aberto'); }
   $('#modal').addEventListener('click', e => { if (e.target.id === 'modal') fecharModal(); });
 
+  /* ---------- instalação (versão web) ---------- */
+  let pedidoInstalar = null;
+  window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); pedidoInstalar = e; if ((S.ui.ecra || 'hoje') === 'hoje' || S.ui.ecra === 'mais') renderTudo(); });
+  window.addEventListener('appinstalled', () => { pedidoInstalar = null; toast('Instalada. Abre-a a partir do ecrã inicial.'); renderTudo(); });
+  const jaInstalada = () => (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) || window.navigator.standalone === true;
+  async function instalar() {
+    if (!pedidoInstalar) { abrirModal(painelInstalar()); return; }
+    pedidoInstalar.prompt();
+    try { await pedidoInstalar.userChoice; } catch (e) { /* cancelado */ }
+    pedidoInstalar = null; renderTudo();
+  }
+  function painelInstalar() {
+    const p = el('div', null);
+    p.append(el('div', { class: 'cab' }, el('h2', null, 'Instalar no telemóvel'), el('button', { class: 'btn sec peq', onclick: fecharModal }, 'Fechar')));
+    p.append(el('p', null, 'Há duas formas. A primeira chega hoje; a segunda é a app Android completa, com lembretes.'));
+    p.append(el('h3', null, '1. Versão web, a partir do Chrome'));
+    p.append(el('ol', null,
+      el('li', null, 'Abre andrecarmo.pt/1pc no Chrome do telemóvel (não no browser do WhatsApp nem no Mi Browser).'),
+      el('li', null, 'Toca nos três pontos (menu) no canto superior direito.'),
+      el('li', null, 'Toca em "Instalar aplicação" ou, se não aparecer, "Adicionar ao ecrã principal". Confirma.'),
+      el('li', null, 'Fecha o Chrome e abre o ~1% a partir do ícone no ecrã inicial. Abre em ecrã inteiro e funciona sem rede.')));
+    p.append(el('p', { class: 'quieto' }, 'Se o menu não mostrar nenhuma das duas opções, atualiza o Chrome na Play Store e volta a abrir a página.'));
+    p.append(el('h3', { style: 'margin-top:12px' }, '2. App Android (APK)'));
+    p.append(el('p', null, 'No GitHub, repositório um-por-cento, separador Actions, último run "Android APK": secção Artifacts, ficheiro um-por-cento-apk (zip com o .apk). Descarrega no telemóvel, abre o .apk e permite a instalação. Quando existir uma Release, o .apk fica em Releases com link direto.'));
+    return p;
+  }
+
   /* ---------- Capacitor (só na app Android) ---------- */
   const Cap = {};
   (function ligarCapacitor() {
@@ -280,6 +307,12 @@
           el('b', null, h.nome), a.nivel === 2 ? ': dois dias seguidos a zero (' + dias + '). Hoje é obrigatório, na versão de 2 minutos.' : ': ' + (a.dias[0] === somaDias(hoje, -1) ? 'ontem' : fmtDM(a.dias[0])) + ' ficou a zero. Nunca duas vezes.',
           h.doisMin ? el('span', { class: 'min' }, 'Versão de 2 minutos: ' + h.doisMin) : null));
       });
+    }
+    // instalação (só na versão web, enquanto não estiver instalada)
+    if (!Cap.nativo && !jaInstalada() && k === hoje) {
+      r.append(el('div', { class: 'aviso', style: 'border-left-color:var(--ouro);background:var(--ouro-claro)' },
+        el('b', null, 'Ainda estás no browser. '), 'Instala a app no ecrã inicial para abrir num toque e funcionar sem rede. ',
+        el('button', { class: 'btn peq', style: 'margin-top:6px', onclick: instalar }, pedidoInstalar ? 'Instalar agora' : 'Como instalar')));
     }
     // lição do dia (linha discreta)
     const lic = licaoDoDia();
@@ -588,13 +621,22 @@
     const b1 = el('div', { class: 'bloco' });
     b1.append(el('h2', null, 'Folha "Hora Sagrada"'));
     b1.append(el('p', { class: 'quieto' }, 'A app funciona sem rede. Quando sincronizas, os teus registos vão para a grelha "Registo hábitos" (que alimenta o email das 8:05) e a Hora sagrada vem do Form.'));
-    b1.append(el('label', { class: 'campo' }, 'URL da aplicação web (termina em /exec)', el('input', { type: 'url', value: S.sync.url, placeholder: 'https://script.google.com/macros/s/…/exec', oninput: e => { S.sync.url = e.target.value.trim(); guardar(); } })));
-    b1.append(el('label', { class: 'campo' }, 'Token (v3_gerarToken no Apps Script)', el('input', { type: 'password', value: S.sync.token, oninput: e => { S.sync.token = e.target.value.trim(); guardar(); } })));
+    b1.append(el('label', { class: 'campo' }, 'URL do Web App do Apps Script (termina em /exec)', el('input', { type: 'url', value: S.sync.url, placeholder: 'https://script.google.com/macros/s/…/exec', oninput: e => { S.sync.url = e.target.value.trim(); guardar(); } })));
+    b1.append(el('p', { class: 'quieto' }, 'Onde se obtém: no editor do Apps Script da folha, botão azul "Implementar" (canto superior direito) > "Nova implementação" > roda dentada "Selecionar tipo" > "Aplicação Web" > Executar como: Eu; Quem tem acesso: Qualquer pessoa > Implementar > copiar o "URL da aplicação Web". Se mais tarde mudares o código, usa "Gerir implementações" > lápis > Nova versão, para o URL se manter.'));
+    b1.append(el('label', { class: 'campo' }, 'Token (o que v3_gerarToken escreveu no registo de execução)', el('input', { type: 'password', value: S.sync.token, oninput: e => { S.sync.token = e.target.value.trim(); guardar(); } })));
+    b1.append(el('div', { class: 'linha-acoes' }, el('button', { class: 'btn sec peq', onclick: testarLigacao }, 'Testar ligação')));
     const pend = S.pendentes.length + (S.habitosSujos ? 1 : 0) + (S.scorecardSujo ? 1 : 0) + S.reflexoes.filter(x => !x.enviada).length;
     b1.append(el('div', { class: 'linha-acoes' },
       el('button', { class: 'btn', onclick: () => sincronizar(false) }, pend ? 'Sincronizar (' + pend + ' por enviar)' : 'Sincronizar'),
       el('button', { class: 'btn sec', onclick: () => sincronizar(true) }, 'Só obter da folha')));
     r.append(b1);
+    if (!Cap.nativo) {
+      const bi = el('div', { class: 'bloco' });
+      bi.append(el('h2', null, jaInstalada() ? 'Instalada no ecrã inicial' : 'Instalar no telemóvel'));
+      bi.append(el('p', { class: 'quieto' }, jaInstalada() ? 'Estás a usar a versão instalada. A app Android (APK) acrescenta lembretes e vibração.' : 'Versão web: instala a partir do Chrome para abrir num toque. A app Android (APK) acrescenta lembretes e vibração.'));
+      bi.append(el('div', { class: 'linha-acoes' }, el('button', { class: 'btn peq', onclick: instalar }, pedidoInstalar ? 'Instalar agora' : 'Como instalar')));
+      r.append(bi);
+    }
     // definições
     const b2 = el('div', { class: 'bloco' });
     b2.append(el('h2', null, 'Definições'));
@@ -661,6 +703,19 @@
   function atualizarBadge() { const l = licaoDoDia(); $('#badge-licao').classList.toggle('oculto', !(l && !S.licoes.lidas[l.id])); }
 
   /* ---------- sincronização ---------- */
+  async function testarLigacao() {
+    if (!S.sync.url || !S.sync.token) { toast('Preenche o URL e o token.'); return; }
+    if (!/^https:\/\/script\.google\.com\/macros\/s\/[^/]+\/exec$/.test(S.sync.url)) { toast('O URL devia ser https://script.google.com/macros/s/…/exec'); return; }
+    toast('A testar…');
+    try {
+      const r = await fetch(S.sync.url + '?token=' + encodeURIComponent(S.sync.token) + '&action=ping&t=' + Date.now(), { method: 'GET', redirect: 'follow' });
+      const txt = await r.text();
+      let d = null; try { d = JSON.parse(txt); } catch (e) { d = null; }
+      if (!d) { toast('A folha respondeu com uma página, não com dados: na implementação, "Quem tem acesso" tem de ser "Qualquer pessoa".'); return; }
+      if (!d.ok) { toast(d.erro === 'token' ? 'Token errado: compara com o que v3_gerarToken escreveu.' : 'Erro: ' + d.erro); return; }
+      toast('Ligação OK. Podes sincronizar.');
+    } catch (e) { toast('Sem resposta. Verifica a rede e o URL (tem de acabar em /exec).'); }
+  }
   async function sincronizar(soObter) {
     if (!S.sync.url || !S.sync.token) { toast('Preenche o URL e o token.'); return; }
     toast(soObter ? 'A obter da folha…' : 'A sincronizar…');
@@ -674,8 +729,10 @@
         if (S.scorecardSujo) corpo.scorecard = S.scorecard;
         resp = await fetch(S.sync.url, { method: 'POST', body: JSON.stringify(corpo), redirect: 'follow' });
       }
-      const dados = await resp.json();
-      if (!dados || !dados.ok) { toast('A folha recusou: ' + ((dados && dados.erro) || 'erro')); return; }
+      const txt = await resp.text();
+      let dados = null; try { dados = JSON.parse(txt); } catch (e) { dados = null; }
+      if (!dados) { toast('A folha respondeu com uma página, não com dados: na implementação, "Quem tem acesso" tem de ser "Qualquer pessoa".'); return; }
+      if (!dados.ok) { toast(dados.erro === 'token' ? 'Token errado: compara com o que v3_gerarToken escreveu.' : 'A folha recusou: ' + dados.erro); return; }
       aplicarEstado(dados, !soObter);
       S.sync.ultima = new Date().toISOString();
       guardar(); renderTudo(); agendarNotificacoes();
