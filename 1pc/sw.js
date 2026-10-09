@@ -11,10 +11,11 @@ self.addEventListener('activate', e => {
 self.addEventListener('fetch', e => {
   const url = new URL(e.request.url);
   if (e.request.method !== 'GET' || url.origin !== location.origin) return;   // a folha (script.google.com) passa direto
+  // rede primeiro (apanha logo as versões novas); sem rede, a cópia guardada
   e.respondWith(
-    caches.match(e.request).then(hit => {
-      const rede = fetch(e.request).then(resp => { if (resp && resp.ok) caches.open(CACHE).then(c => c.put(e.request, resp.clone())); return resp; }).catch(() => hit);
-      return hit || rede;
-    })
+    fetch(e.request).then(resp => {
+      if (resp && resp.ok) { const copia = resp.clone(); caches.open(CACHE).then(c => c.put(e.request, copia)); }
+      return resp;
+    }).catch(() => caches.match(e.request, { ignoreSearch: true }).then(hit => hit || caches.match('./index.html')))
   );
 });
