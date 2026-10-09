@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>~1%</title>
+<meta name="description" content="~1%: hábitos a partir da identidade, em português. Cada ação é um voto na pessoa que queres ser.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#eef0f3" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#121829" media="(prefers-color-scheme: dark)">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="~1%">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" href="./icons/icon-192.png">
+<link rel="apple-touch-icon" href="./icons/icon-192.png">
+<link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+
+<main>
+  <section id="ecra-hoje" class="ecra ativo" aria-label="Hoje"></section>
+  <section id="ecra-habitos" class="ecra" aria-label="Hábitos"></section>
+  <section id="ecra-scorecard" class="ecra" aria-label="Scorecard"></section>
+  <section id="ecra-progresso" class="ecra" aria-label="Progresso"></section>
+  <section id="ecra-mais" class="ecra" aria-label="Mais"></section>
+</main>
+
+<nav class="barra" aria-label="Navegação">
+  <button data-ecra="hoje" class="ativo"><svg viewBox="0 0 24 24"><path d="M3 12c3-5 6-5 9 0s6 5 9 0"/></svg>Hoje</button>
+  <button data-ecra="habitos"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h10"/></svg>Hábitos</button>
+  <button data-ecra="scorecard"><svg viewBox="0 0 24 24"><path d="M5 4h14v16H5zM8 9h8M8 13h8M8 17h5"/></svg>Scorecard</button>
+  <button data-ecra="progresso"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>Progresso</button>
+  <button data-ecra="mais"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 2"/></svg>Mais<span class="badge oculto" id="badge-licao"></span></button>
+</nav>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true"><div class="painel" id="modal-painel"></div></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="./app.js"></script>
+</body>
+</html>
