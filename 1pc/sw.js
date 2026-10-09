@@ -1,5 +1,5 @@
 /* ~1% · service worker: funciona sem rede. Sobe a versão a cada publicação. */
-const CACHE = 'umporcento-0.1.1';
+const CACHE = 'umporcento-0.1.2';
 const FICHEIROS = ['./', './index.html', './styles.css', './app.js', './manifest.webmanifest', './icons/icon-192.png', './icons/icon-512.png', './icons/icon-maskable-512.png'];
 
 self.addEventListener('install', e => {

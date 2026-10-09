@@ -3,7 +3,7 @@
 (function () {
   'use strict';
 
-  const VERSAO = '0.1.1';
+  const VERSAO = '0.1.2';
   const CHAVE = 'umporcento.v1';
   const HORA_SAGRADA = 'Hora sagrada';
   const DIAS = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
@@ -77,8 +77,8 @@
       [9, '10:20', 'Reflexão + Form', 'Fim do bloco', '', '', '', ''],
       [10, '10:25', 'Alvo de amanhã na folha', 'Form enviado', '', '', '', '']
     ],
-    scorecardSujo: true,
-    habitosSujos: true,
+    scorecardSujo: false,
+    habitosSujos: false,
     licoes: { lidas: {}, notas: {} },
     sync: { url: '', token: '', ultima: '', formUrl: '' },
     ui: { diaSel: hojeKey(), ecra: 'hoje', tema: 'auto' }
@@ -96,6 +96,9 @@
       Object.keys(b.perfil).forEach(k => { if (s.perfil[k] === undefined) s.perfil[k] = b.perfil[k]; });
       Object.keys(b.sync).forEach(k => { if (s.sync[k] === undefined) s.sync[k] = b.sync[k]; });
       s.ui.diaSel = hojeKey();
+      // 0.1.2: antes da primeira sincronização, a folha manda nas definições (hábitos, scorecard)
+      if (!s.sync.ultima && !s.migr012) { s.habitosSujos = false; s.scorecardSujo = false; }
+      s.migr012 = true;
       return s;
     } catch (e) { return base(); }
   }
@@ -199,7 +202,7 @@
     return n;
   };
   let toastT;
-  function toast(msg) { const t = $('#toast'); t.textContent = msg; t.classList.add('ver'); clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove('ver'), 2200); }
+  function toast(msg) { const t = $('#toast'); t.textContent = msg; t.classList.add('ver'); clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove('ver'), Math.max(2200, String(msg).length * 60)); }
   function vibrar(ms) {
     try {
       if (Cap.Haptics) { Cap.Haptics.impact({ style: ms > 20 ? 'MEDIUM' : 'LIGHT' }); return; }
@@ -622,7 +625,7 @@
     b1.append(el('h2', null, 'Folha "Hora Sagrada"'));
     b1.append(el('p', { class: 'quieto' }, 'A app funciona sem rede. Quando sincronizas, os teus registos vão para a grelha "Registo hábitos" (que alimenta o email das 8:05) e a Hora sagrada vem do Form.'));
     b1.append(el('label', { class: 'campo' }, 'URL do Web App do Apps Script (termina em /exec)', el('input', { type: 'url', value: S.sync.url, placeholder: 'https://script.google.com/macros/s/…/exec', oninput: e => { S.sync.url = e.target.value.trim(); guardar(); } })));
-    b1.append(el('p', { class: 'quieto' }, 'Onde se obtém: no editor do Apps Script da folha, botão azul "Implementar" (canto superior direito) > "Nova implementação" > roda dentada "Selecionar tipo" > "Aplicação Web" > Executar como: Eu; Quem tem acesso: Qualquer pessoa > Implementar > copiar o "URL da aplicação Web". Se mais tarde mudares o código, usa "Gerir implementações" > lápis > Nova versão, para o URL se manter.'));
+    b1.append(el('p', { class: 'quieto' }, 'Onde se obtém: no editor do Apps Script da folha, botão azul "Implementar" (canto superior direito) > "Nova implementação" > roda dentada "Selecionar tipo" > "Aplicação Web" > Executar como: Eu; Quem tem acesso: Qualquer pessoa (não "Só eu" nem "Qualquer pessoa com uma Conta Google"; a proteção é o token) > Implementar > copiar o "URL da aplicação Web". Se mais tarde mudares o código, usa "Gerir implementações" > lápis > Nova versão, para o URL se manter.'));
     b1.append(el('label', { class: 'campo' }, 'Token (o que v3_gerarToken escreveu no registo de execução)', el('input', { type: 'password', value: S.sync.token, oninput: e => { S.sync.token = e.target.value.trim(); guardar(); } })));
     b1.append(el('div', { class: 'linha-acoes' }, el('button', { class: 'btn sec peq', onclick: testarLigacao }, 'Testar ligação')));
     const pend = S.pendentes.length + (S.habitosSujos ? 1 : 0) + (S.scorecardSujo ? 1 : 0) + S.reflexoes.filter(x => !x.enviada).length;
@@ -703,48 +706,53 @@
   function atualizarBadge() { const l = licaoDoDia(); $('#badge-licao').classList.toggle('oculto', !(l && !S.licoes.lidas[l.id])); }
 
   /* ---------- sincronização ---------- */
+  const MSG_ACESSO = 'A folha não deixou a app entrar. Na implementação do Apps Script, "Quem tem acesso" tem de ser "Qualquer pessoa" (não "Só eu"). A proteção é o token.';
   async function testarLigacao() {
-    if (!S.sync.url || !S.sync.token) { toast('Preenche o URL e o token.'); return; }
-    if (!/^https:\/\/script\.google\.com\/macros\/s\/[^/]+\/exec$/.test(S.sync.url)) { toast('O URL devia ser https://script.google.com/macros/s/…/exec'); return; }
+    if (!S.sync.url || !S.sync.token) { toast('Preenche o URL e o token.'); return false; }
+    if (!/^https:\/\/script\.google\.com\/macros\/s\/[^/]+\/exec$/.test(S.sync.url)) { toast('O URL devia ser https://script.google.com/macros/s/…/exec'); return false; }
     toast('A testar…');
     try {
       const r = await fetch(S.sync.url + '?token=' + encodeURIComponent(S.sync.token) + '&action=ping&t=' + Date.now(), { method: 'GET', redirect: 'follow' });
       const txt = await r.text();
       let d = null; try { d = JSON.parse(txt); } catch (e) { d = null; }
-      if (!d) { toast('A folha respondeu com uma página, não com dados: na implementação, "Quem tem acesso" tem de ser "Qualquer pessoa".'); return; }
-      if (!d.ok) { toast(d.erro === 'token' ? 'Token errado: compara com o que v3_gerarToken escreveu.' : 'Erro: ' + d.erro); return; }
-      toast('Ligação OK. Podes sincronizar.');
-    } catch (e) { toast('Sem resposta. Verifica a rede e o URL (tem de acabar em /exec).'); }
+      if (!d) { toast(MSG_ACESSO); return false; }
+      if (!d.ok) { toast(d.erro === 'token' ? 'Token errado: compara com o que v3_gerarToken escreveu.' : 'Erro: ' + d.erro); return false; }
+      toast('Ligação OK.');
+      return true;
+    } catch (e) { toast(navigator.onLine === false ? 'Sem rede neste momento.' : MSG_ACESSO); return false; }
   }
   async function sincronizar(soObter) {
     if (!S.sync.url || !S.sync.token) { toast('Preenche o URL e o token.'); return; }
     toast(soObter ? 'A obter da folha…' : 'A sincronizar…');
+    let enviados = [];
     try {
       let resp;
       if (soObter) {
         resp = await fetch(S.sync.url + '?token=' + encodeURIComponent(S.sync.token) + '&t=' + Date.now(), { method: 'GET', redirect: 'follow' });
       } else {
-        const corpo = { token: S.sync.token, registos: S.pendentes.slice(), reflexoes: S.reflexoes.filter(x => !x.enviada).map(x => ({ data: x.data, tipo: x.tipo, nota: x.nota, pergunta: x.pergunta, resposta: x.resposta })) };
+        enviados = S.pendentes.slice();
+        const corpo = { token: S.sync.token, registos: enviados, reflexoes: S.reflexoes.filter(x => !x.enviada).map(x => ({ data: x.data, tipo: x.tipo, nota: x.nota, pergunta: x.pergunta, resposta: x.resposta })) };
         if (S.habitosSujos) corpo.habitos = S.habitos.map(h => ({ nome: h.nome, ativo: !!h.ativo, identidade: h.identidade, doisMin: h.doisMin, intencao: h.intencao, empilhar: h.empilhar, sinal: h.sinal, tentacao: h.tentacao, tribo: h.tribo, ritual: h.ritual, friccao: h.friccao, ambiente: h.ambiente, decisivo: h.decisivo, automacao: h.automacao, recompensa: h.recompensa, registo: h.registo, parceiro: h.parceiro, alvo: h.alvo, dias: diasTexto(parseDias(h.dias)), hora: h.hora, inicio: h.inicio, nota: h.nota }));
         if (S.scorecardSujo) corpo.scorecard = S.scorecard;
         resp = await fetch(S.sync.url, { method: 'POST', body: JSON.stringify(corpo), redirect: 'follow' });
       }
       const txt = await resp.text();
       let dados = null; try { dados = JSON.parse(txt); } catch (e) { dados = null; }
-      if (!dados) { toast('A folha respondeu com uma página, não com dados: na implementação, "Quem tem acesso" tem de ser "Qualquer pessoa".'); return; }
+      if (!dados) { toast(MSG_ACESSO); return; }
       if (!dados.ok) { toast(dados.erro === 'token' ? 'Token errado: compara com o que v3_gerarToken escreveu.' : 'A folha recusou: ' + dados.erro); return; }
       aplicarEstado(dados, !soObter);
+      if (!soObter) S.pendentes = S.pendentes.filter(p => !enviados.some(e => e.habito === p.habito && e.data === p.data && e.valor === p.valor));
       S.sync.ultima = new Date().toISOString();
       guardar(); renderTudo(); agendarNotificacoes();
       toast(soObter ? 'Folha lida.' : 'Sincronizado.');
     } catch (e) {
       console.warn(e);
-      toast('Sem ligação à folha. Os registos ficam guardados para a próxima.');
+      toast(navigator.onLine === false ? 'Sem rede. Os registos ficam guardados para a próxima.' : MSG_ACESSO + ' Os registos ficam guardados.');
     }
   }
   function aplicarEstado(d, enviou) {
     // hábitos: a folha manda; cores e marcação de só-leitura mantêm-se
-    if (Array.isArray(d.habitos) && d.habitos.length) {
+    if (Array.isArray(d.habitos) && d.habitos.length && (enviou || !S.habitosSujos)) {
       const antigos = {}; S.habitos.forEach(h => { antigos[h.nome] = h; });
       S.habitos = d.habitos.map((x, i) => {
         const a = antigos[x.nome] || {};
@@ -753,11 +761,11 @@
       if (enviou) S.habitosSujos = false;
     }
     if (d.registos && typeof d.registos === 'object') {
+      const pend = new Set(enviou ? [] : S.pendentes.map(p => p.habito + '|' + p.data));
       Object.keys(d.registos).forEach(nome => {
         S.registos[nome] = S.registos[nome] || {};
-        Object.keys(d.registos[nome]).forEach(k => { S.registos[nome][k] = d.registos[nome][k]; });
+        Object.keys(d.registos[nome]).forEach(k => { if (!pend.has(nome + '|' + k)) S.registos[nome][k] = d.registos[nome][k]; });
       });
-      if (enviou) S.pendentes = [];
     }
     if (Array.isArray(d.scorecard) && (enviou || !S.scorecardSujo)) { if (d.scorecard.length) S.scorecard = d.scorecard; if (enviou) S.scorecardSujo = false; }
     if (Array.isArray(d.reflexoes)) {
@@ -800,6 +808,20 @@
 
   /* ---------- arranque ---------- */
   aplicarTema();
+  // configurar por link: andrecarmo.pt/1pc/#ligar=<URL codificado>&t=<token> (a frio ou com a app já aberta)
+  function ligarPorLink() {
+    const m = (location.hash || '').match(/^#ligar=([^&]+)&t=([0-9a-fA-F]{16,64})$/);
+    if (!m) return false;
+    let url = '';
+    try { url = decodeURIComponent(m[1]); } catch (e) { return false; }
+    if (!/^https:\/\/script\.google\.com\/macros\/s\/[^/]+\/exec$/.test(url)) return false;
+    S.sync.url = url; S.sync.token = m[2]; S.ui.ecra = 'mais'; guardar();
+    try { history.replaceState(null, '', location.pathname + location.search); } catch (e) { /* sem history */ }
+    setTimeout(async () => { if (await testarLigacao()) sincronizar(false); }, 800);
+    return true;
+  }
+  ligarPorLink();
+  window.addEventListener('hashchange', () => { if (ligarPorLink()) irPara('mais'); });
   if (S.ui.ecra && S.ui.ecra !== 'hoje') { document.querySelectorAll('.ecra').forEach(s => s.classList.toggle('ativo', s.id === 'ecra-' + S.ui.ecra)); document.querySelectorAll('nav.barra button').forEach(b => b.classList.toggle('ativo', b.dataset.ecra === S.ui.ecra)); }
   renderTudo();
   agendarNotificacoes();
