@@ -174,7 +174,7 @@ label.campo input::placeholder, label.campo textarea::placeholder { color: var(-
 .sc-linha .cab { display: flex; gap: 8px; align-items: center; }
 .sc-linha .ordem { width: 26px; height: 26px; border-radius: 50%; background: var(--papel-2); display: grid; place-items: center; font-size: 12px; color: var(--tinta-2); flex: none; }
 .sc-linha input.acao { flex: 1; min-width: 0; border: 0; border-bottom: 1px solid var(--linha); background: transparent; padding: 4px 2px; font-size: 15px; }
-.sc-linha input.hora { width: 92px; flex: none; border: 0; border-bottom: 1px solid var(--linha); background: transparent; padding: 4px 2px; font-size: 13px; color: var(--tinta-2); }
+/* (0.2.0: a hora é um botão .campo-hora) */
 .aval { display: inline-flex; flex: none; border: 1.5px solid var(--linha); border-radius: 999px; overflow: hidden; }
 .aval button { border: 0; background: transparent; padding: 4px 11px; font-size: 15px; color: var(--tinta-2); }
 .aval button.on.mais { background: var(--verde-claro); color: var(--verde); }
@@ -183,7 +183,7 @@ label.campo input::placeholder, label.campo textarea::placeholder { color: var(-
 .sc-linha .mais-campos { margin-top: 8px; display: none; gap: 6px; }
 .sc-linha.aberta .mais-campos { display: grid; }
 .sc-linha .mais-campos input, .sc-linha .mais-campos textarea { width: 100%; border: 1px solid var(--linha); border-radius: var(--raio-s); padding: 6px 8px; font-size: 13.5px; background: var(--folha); }
-.sc-linha .rodape { display: flex; justify-content: space-between; align-items: center; margin-top: 6px; }
+.sc-linha .rodape { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 2px 6px; margin-top: 6px; }
 .sc-linha .rodape button { border: 0; background: transparent; color: var(--tinta-3); font-size: 13px; padding: 4px 0; }
 .sc-linha.mais { border-left: 3px solid var(--verde); }
 .sc-linha.menos { border-left: 3px solid var(--rubro); }
@@ -245,3 +245,51 @@ nav.barra button .badge { position: absolute; margin-left: 22px; margin-top: -2p
 .sc-estado.ok::before { content: '\2713  '; color: var(--verde); }
 .sc-linha .sc-campo { display: block; font-size: 12px; color: var(--tinta-2); }
 .sc-linha .sc-campo input { margin-top: 3px; }
+
+/* 0.1.5: mover e inserir linhas no Scorecard */
+.sc-linha .acoes-linha { display: flex; align-items: center; gap: 3px; margin-left: auto; }
+.sc-linha .rodape .acoes-linha button { padding: 6px 6px; min-height: 32px; }
+.sc-linha .rodape .acoes-linha button.seta { font-size: 16px; min-width: 32px; border: 1px solid var(--linha); border-radius: var(--raio-s); }
+.sc-linha .rodape button[disabled] { opacity: .3; }
+.sc-linha.mexida { outline: 2px solid var(--verde); outline-offset: 2px; transition: outline-color .8s; }
+
+/* 0.2.0: hora escolhida no relógio da app */
+.campo-hora { display: inline-flex; align-items: center; gap: 5px; flex: none; border: 1px solid var(--linha); border-radius: var(--raio-s); background: var(--folha); color: var(--tinta); padding: 6px 8px; font-size: 14px; font-variant-numeric: tabular-nums; min-height: 34px; }
+.campo-hora svg { color: var(--ouro); flex: none; }
+.campo-hora.vazio .v { color: var(--tinta-3); }
+label.campo .campo-hora { display: flex; width: 100%; margin-top: 4px; padding: 9px 10px; font-size: 15px; border-width: 1.5px; }
+.relogio { position: fixed; inset: 0; z-index: 60; background: rgba(10, 16, 30, 0.55); display: flex; align-items: flex-end; justify-content: center; }
+.relogio .painel { background: var(--papel); color: var(--tinta); width: 100%; max-width: 480px; max-height: 100dvh; overflow: auto; border-radius: 18px 18px 0 0; padding: 14px 14px 0; display: flex; flex-direction: column; gap: 8px; }
+.relogio .titulo { font-size: 14px; color: var(--tinta-2); }
+.relogio .visor { font-size: 40px; font-weight: 600; text-align: center; font-variant-numeric: tabular-nums; letter-spacing: 1px; }
+.relogio .rot { font-size: 12px; color: var(--tinta-3); text-transform: uppercase; letter-spacing: .5px; }
+.relogio .grelha { display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px; }
+.relogio .grelha button { min-height: 40px; border-radius: var(--raio-s); border: 1px solid var(--linha); background: var(--folha); color: var(--tinta); font-size: 15px; font-variant-numeric: tabular-nums; }
+.relogio .grelha button.on { background: var(--tinta); color: var(--papel); border-color: var(--tinta); font-weight: 600; }
+.relogio .afinar { display: flex; gap: 6px; }
+.relogio .afinar button { flex: 1; min-height: 38px; border-radius: var(--raio-s); border: 1px solid var(--linha); background: transparent; color: var(--tinta-2); font-size: 14px; }
+.relogio .acoes { position: sticky; bottom: 0; display: flex; gap: 8px; background: var(--papel); padding: 10px 0 calc(12px + env(safe-area-inset-bottom)); }
+.relogio .acoes .btn { flex: 1; }
+@media (max-height: 640px) { .relogio .visor { font-size: 28px; } .relogio .grelha button { min-height: 34px; } }
+
+/* 0.2.0: Scorecard = registo da hora sagrada */
+.sc-dia { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin: 0 0 6px; }
+.sc-dia .qual { font-size: 15px; }
+.sc-dia .seta { min-width: 40px; min-height: 36px; border: 1px solid var(--linha); border-radius: var(--raio-s); background: var(--folha); color: var(--tinta); font-size: 20px; line-height: 1; }
+.sc-dia .seta[disabled] { opacity: .3; }
+.sc-legenda { background: var(--papel-2); border-radius: var(--raio-s); padding: 10px 12px; font-size: 13px; color: var(--tinta-2); display: grid; gap: 4px; margin-bottom: 10px; }
+.sc-legenda b { color: var(--tinta); }
+.sc-linha .check { flex: none; width: 34px; height: 34px; border-radius: 50%; border: 2px solid var(--linha); background: transparent; color: transparent; font-size: 17px; font-weight: 700; line-height: 1; }
+.sc-linha .check.on { background: var(--verde); border-color: var(--verde); color: #fff; }
+.sc-linha .check[disabled] { opacity: .35; }
+.sc-linha.feita .acao { color: var(--tinta-2); }
+.sc-linha .cab .campo-hora { padding: 5px 6px; font-size: 13px; }
+.sc-linha .feito-as { display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--verde); margin: 6px 0 0 42px; }
+.sc-linha .feito-as .campo-hora { min-height: 28px; padding: 3px 6px; font-size: 13px; }
+.sc-linha .registo { display: grid; gap: 8px; margin: 10px 0 2px; padding-top: 8px; border-top: 1px dashed var(--linha); }
+.sc-linha .registo .sc-campo { font-size: 12.5px; }
+.sc-linha .registo textarea, .sc-linha .registo input { display: block; width: 100%; margin-top: 4px; border: 1px solid var(--linha); border-radius: var(--raio-s); padding: 7px 9px; font-size: 14.5px; background: var(--folha); color: var(--tinta); resize: none; }
+.sc-linha .registo .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+.sc-linha .registo .sc-campo.falta { color: var(--ambar); }
+.sc-linha .campos-escolha { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+.sc-linha.fecho { border: 1px dashed var(--linha); }

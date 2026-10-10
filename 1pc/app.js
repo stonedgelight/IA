@@ -3,7 +3,7 @@
 (function () {
   'use strict';
 
-  const VERSAO = '0.1.4';
+  const VERSAO = '0.2.0';
   const CHAVE = 'umporcento.v1';
   const HORA_SAGRADA = 'Hora sagrada';
   const DIAS = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
@@ -75,10 +75,11 @@
       [6, '09:30', 'Ignição (3 a 5 min, sempre o mesmo gesto)', 'Água + luz', '', '', '', ''],
       [7, '09:35', 'Leitura: capítulo do dia', 'Fim da ignição', '', '', '', ''],
       [8, '09:50', 'Bloco (30 min)', 'Direção escrita', '', '', '', ''],
-      [9, '10:20', 'Reflexão + Form', 'Fim do bloco', '', '', '', ''],
-      [10, '10:25', 'Alvo de amanhã na folha', 'Form enviado', '', '', '', '']
+      [9, '10:20', 'Reflexão', 'Fim do bloco', '', '', '', ''],
+      [10, '10:25', 'Alvo de amanhã', 'Fim da reflexão', '', '', '', '']
     ],
     scorecardSujo: false,
+    diario: {},
     habitosSujos: false,
     licoes: { lidas: {}, notas: {} },
     sync: { url: '', token: '', ultima: '', formUrl: '', erro: '' },
@@ -204,6 +205,64 @@
     filhos.flat().forEach(f => { if (f === null || f === undefined || f === false) return; n.append(f.nodeType ? f : document.createTextNode(String(f))); });
     return n;
   };
+  // Campo de hora com teclado numérico (sem depender do seletor nativo do Android).
+  // Aceita 730, 0730, 7:30, 7h30, 7 -> "07:30". Grava ao sair do campo.
+  function horaDigitada(v) {
+    const t = String(v == null ? '' : v).trim();
+    if (!t) return '';
+    let h, m;
+    const sep = t.match(/^(\d{1,2})\s*[:h.,]\s*(\d{0,2})$/i);
+    if (sep) { h = +sep[1]; m = sep[2] ? +sep[2] : 0; }
+    else if (/^\d{1,4}$/.test(t)) { if (t.length <= 2) { h = +t; m = 0; } else { h = +t.slice(0, t.length - 2); m = +t.slice(-2); } }
+    else return null;
+    if (h > 23 || m > 59) return null;
+    return ('0' + h).slice(-2) + ':' + ('0' + m).slice(-2);
+  }
+  // Hora escolhida num relógio da própria app (o do Android não se formata e o "Definir" pode ficar fora do ecrã).
+  const ICONE_RELOGIO = '<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 7v5l3 2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>';
+  function campoHora(valor, aoMudar, extra) {
+    const opts = Object.assign({}, extra || {});
+    const titulo = opts.titulo || 'Hora'; delete opts.titulo;
+    const cls = 'campo-hora' + (opts.class ? ' ' + opts.class : ''); delete opts.class;
+    let atual = horaHHMM(valor);
+    const txt = el('span', { class: 'v' }, atual || '--:--');
+    const b = el('button', Object.assign({ type: 'button', class: cls + (atual ? '' : ' vazio'), html: ICONE_RELOGIO }, opts));
+    b.append(txt);
+    b.addEventListener('click', () => escolherHora(atual, titulo, v => {
+      atual = v; txt.textContent = v || '--:--'; b.classList.toggle('vazio', !v); aoMudar(v);
+    }));
+    return b;
+  }
+  function escolherHora(atual, titulo, aoDefinir) {
+    const ini = horaHHMM(atual) || (() => { const d = new Date(); return pad(d.getHours()) + ':' + pad(Math.floor(d.getMinutes() / 5) * 5); })();
+    let h = +ini.slice(0, 2), m = +ini.slice(3, 5);
+    const ov = el('div', { class: 'relogio aberto', role: 'dialog', 'aria-modal': 'true', 'aria-label': titulo });
+    const painel = el('div', { class: 'painel' });
+    const visor = el('div', { class: 'visor' });
+    const gh = el('div', { class: 'grelha horas' }), gm = el('div', { class: 'grelha minutos' });
+    const fechar = () => ov.remove();
+    const desenhar = () => {
+      visor.textContent = pad(h) + ':' + pad(m);
+      gh.querySelectorAll('button').forEach(x => x.classList.toggle('on', +x.dataset.v === h));
+      gm.querySelectorAll('button').forEach(x => x.classList.toggle('on', +x.dataset.v === m));
+    };
+    for (let i = 0; i < 24; i++) gh.append(el('button', { type: 'button', 'data-v': i, onclick: () => { h = i; desenhar(); } }, pad(i)));
+    for (let i = 0; i < 60; i += 5) gm.append(el('button', { type: 'button', 'data-v': i, onclick: () => { m = i; desenhar(); } }, pad(i)));
+    const afinar = el('div', { class: 'afinar' },
+      el('button', { type: 'button', 'aria-label': 'menos um minuto', onclick: () => { m = (m + 59) % 60; desenhar(); } }, '−1 min'),
+      el('button', { type: 'button', onclick: () => { const d = new Date(); h = d.getHours(); m = d.getMinutes(); desenhar(); } }, 'Agora'),
+      el('button', { type: 'button', 'aria-label': 'mais um minuto', onclick: () => { m = (m + 1) % 60; desenhar(); } }, '+1 min'));
+    const acoes = el('div', { class: 'acoes' },
+      el('button', { type: 'button', class: 'btn sec', onclick: () => { fechar(); aoDefinir(''); } }, 'Limpar'),
+      el('button', { type: 'button', class: 'btn sec', onclick: fechar }, 'Cancelar'),
+      el('button', { type: 'button', class: 'btn', onclick: () => { fechar(); aoDefinir(pad(h) + ':' + pad(m)); } }, 'Definir'));
+    painel.append(el('div', { class: 'titulo' }, titulo), visor,
+      el('div', { class: 'rot' }, 'Hora'), gh, el('div', { class: 'rot' }, 'Minutos'), gm, afinar, acoes);
+    ov.append(painel);
+    ov.addEventListener('click', e => { if (e.target === ov) fechar(); });
+    document.body.append(ov);
+    desenhar();
+  }
   let toastT;
   function toast(msg) { const t = $('#toast'); t.textContent = msg; t.classList.add('ver'); clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove('ver'), Math.max(2200, String(msg).length * 60)); }
   function vibrar(ms) {
@@ -349,8 +408,9 @@
     if (bloq) card.append(el('div', { class: 'bloq' }, 'Desbloqueia depois de: ' + bloq.nome));
 
     if (h.soLeitura) {
-      const txt = e === 'feito' ? 'Feito (registo do Form)' : e === 'falhou' ? 'Falhou (registo do Form)' : (k < hojeKey() ? 'Sem dados da folha' : 'Por registar no Form');
-      card.append(el('div', { class: 'solei' }, el('span', { class: 'est' }, txt), S.sync.formUrl ? el('a', { href: S.sync.formUrl, target: '_blank', rel: 'noopener' }, 'Abrir Form') : el('span', { class: 'quieto' }, 'atualiza com Sincronizar')));
+      const reg = (S.diario && S.diario[k]) ? S.diario[k].campos.resultado : '';
+      const txt = reg ? reg + ' (registo)' : e === 'feito' ? 'Feito (registo)' : e === 'falhou' ? 'Falhou (registo)' : (k < hojeKey() ? 'Sem registo' : 'Por registar');
+      card.append(el('div', { class: 'solei' }, el('span', { class: 'est' }, txt), el('button', { class: 'btn sec peq', onclick: () => { S.ui.diaSc = k; irPara('scorecard'); } }, 'Abrir registo')));
       return card;
     }
     const acao = el('div', { class: 'acao' });
@@ -429,7 +489,7 @@
       : el('input', { type: 'text', value: f[k] || '', placeholder: ph || '', oninput: e => { f[k] = e.target.value; } }));
     const painel = el('div', null);
     painel.append(el('div', { class: 'cab' }, el('h2', null, novo ? 'Novo hábito' : h.nome), el('button', { class: 'btn sec peq', onclick: fecharModal }, 'Fechar')));
-    if (h && h.soLeitura) painel.append(el('p', { class: 'quieto' }, 'A Hora sagrada regista-se pelo Form; aqui podes editar a ficha, não o registo.'));
+    if (h && h.soLeitura) painel.append(el('p', { class: 'quieto' }, 'A Hora sagrada regista-se no Scorecard (check por linha e campos do registo); aqui podes editar a ficha, não o registo.'));
     painel.append(el('label', { class: 'campo' }, 'Nome curto (não mudar depois de começar a registar)', el('input', { type: 'text', value: f.nome, oninput: e => { f.nome = e.target.value; }, disabled: !novo && !!h.soLeitura })));
     painel.append(el('label', { class: 'campo' }, 'Quero tornar-me… (identidade, cap. 2)', el('input', { type: 'text', value: f.identidade, placeholder: 'ex.: uma pessoa ainda mais grata', oninput: e => { f.identidade = e.target.value; } })));
     painel.append(campo('doisMin', 'Versão de 2 minutos: o mínimo que conta (cap. 13)', 'ex.: calçar as sapatilhas e sair de casa'));
@@ -442,7 +502,7 @@
     const chips = el('div', { class: 'chips' });
     [1, 2, 3, 4, 5, 6, 0].forEach(d => chips.append(el('button', { type: 'button', class: dias.indexOf(d) >= 0 ? 'on' : '', onclick: ev => { const i = dias.indexOf(d); if (i >= 0) dias.splice(i, 1); else dias.push(d); ev.currentTarget.classList.toggle('on'); f.dias = dias.length ? diasTexto(dias) : 'todos'; } }, DIAS[d])));
     painel.append(el('div', { class: 'campo' }, 'Dias', chips));
-    painel.append(el('label', { class: 'campo' }, 'Hora prevista (para o lembrete e o Calendar)', el('input', { type: 'time', value: f.hora, oninput: e => { f.hora = e.target.value; } })));
+    painel.append(el('label', { class: 'campo' }, 'Hora prevista (para o lembrete e o Calendar)', campoHora(f.hora, v => { f.hora = v; }, { titulo: 'Hora prevista' })));
     painel.append(el('label', { class: 'campo' }, 'Início', el('input', { type: 'date', value: f.inicio, oninput: e => { f.inicio = e.target.value; } })));
     // leis
     const lei = (titulo, sub, ...campos) => el('div', { class: 'lei' }, el('h3', null, titulo), el('p', { class: 'quieto' }, sub), ...campos);
@@ -485,61 +545,192 @@
   }
 
   /* ---------- ecrã: Scorecard ---------- */
+  /* Registo da hora sagrada (substitui o Form): cada linha da rotina tem check com a hora real e os campos
+     do Form que pertencem a esse momento. Vai para a mesma folha de respostas do Form quando há Resultado. */
+  const CAMPOS = {
+    tipo:      { nome: 'Tipo de dia', tipo: 'chips', opcoes: ['Construir', 'Aprender', 'Rever (domingo)', 'Mínima (viagem)'] },
+    aprendi:   { nome: 'O que aprendi', tipo: 'texto' },
+    direcao:   { nome: 'Direção (1 a 3 linhas)', tipo: 'texto' },
+    fiz:       { nome: 'O que fiz', tipo: 'texto' },
+    emperrei:  { nome: 'Onde emperrei', tipo: 'texto' },
+    resultado: { nome: 'Resultado', tipo: 'chips', opcoes: ['Feito', 'Parcial', 'Falhou', 'Versão mínima (15 min)'], obrigatorio: true },
+    energia:   { nome: 'Energia (1 a 5)', tipo: 'chips', opcoes: ['1', '2', '3', '4', '5'] },
+    muda:      { nome: 'O que muda amanhã', tipo: 'texto' },
+    alvo:      { nome: 'Alvo de amanhã', tipo: 'linha' },
+    material:  { nome: 'Material de amanhã (link ou título)', tipo: 'linha' }
+  };
+  const ORDEM_CAMPOS = ['tipo', 'aprendi', 'direcao', 'fiz', 'emperrei', 'resultado', 'energia', 'muda', 'alvo', 'material'];
+  // campos por omissão, pela ação da linha (só quando a linha ainda não tem campos escolhidos)
+  function camposPorOmissao(acao) {
+    const a = String(acao || '').toLowerCase();
+    if (/igni/.test(a)) return 'tipo';
+    if (/leitura|ler\b|cap[ií]tulo/.test(a)) return 'aprendi,direcao';
+    if (/bloco/.test(a)) return 'fiz,emperrei';
+    if (/reflex/.test(a)) return 'resultado,energia,muda';
+    if (/alvo/.test(a)) return 'alvo,material';
+    return '';
+  }
+  const camposDaLinha = l => String(l[8] === undefined || l[8] === null ? camposPorOmissao(l[2]) : l[8]).split(',').map(x => x.trim()).filter(x => CAMPOS[x]);
+  const chaveLinha = l => String(l[2] || '').trim().toLowerCase();
+  function diaRegisto(k, criar) {
+    S.diario = S.diario || {};
+    if (!S.diario[k] && criar) S.diario[k] = { checks: {}, campos: {}, sujo: false, enviado: '' };
+    return S.diario[k] || { checks: {}, campos: {}, sujo: false, enviado: '' };
+  }
+  function resumoDia(k) {
+    const d = diaRegisto(k);
+    const horas = Object.keys(d.checks).map(x => d.checks[x]).filter(Boolean).sort();
+    return { feitos: S.scorecard.filter(l => d.checks[chaveLinha(l)]).length, total: S.scorecard.filter(l => chaveLinha(l)).length, inicio: horas[0] || '', fim: horas[horas.length - 1] || '' };
+  }
+  function blocosTexto(k) {
+    const d = diaRegisto(k);
+    return S.scorecard.filter(l => d.checks[chaveLinha(l)]).map(l => d.checks[chaveLinha(l)] + ' ' + String(l[2]).trim()).join(' · ');
+  }
+  function registoParaEnviar(k) {
+    const d = diaRegisto(k), r = resumoDia(k), c = d.campos;
+    const fim = r.fim || (k === hojeKey() ? pad(new Date().getHours()) + ':' + pad(new Date().getMinutes()) : '10:30');
+    return { data: k, horaInicio: r.inicio, horaFim: fim, resultado: c.resultado || '', palavra: c.palavra || '', tipo: c.tipo || '', aprendi: c.aprendi || '', fiz: c.fiz || '', emperrei: c.emperrei || '', muda: c.muda || '', alvo: c.alvo || '', material: c.material || '', energia: c.energia || '', direcao: c.direcao || '', blocos: blocosTexto(k) };
+  }
+  const diasPorEnviar = () => Object.keys(S.diario || {}).filter(k => S.diario[k].sujo && S.diario[k].campos.resultado);
+
   function renderScorecard() {
     const r = $('#ecra-scorecard'); r.innerHTML = '';
+    const hoje = hojeKey();
+    let k = S.ui.diaSc && S.ui.diaSc <= hoje && S.ui.diaSc >= somaDias(hoje, -7) ? S.ui.diaSc : hoje;
+    S.ui.diaSc = k;
+    const dia = diaRegisto(k);
     const estadoSc = el('p', { class: 'sc-estado' });
     const btGravar = el('button', { class: 'btn peq', onclick: () => gravarScorecard() }, 'Gravar');
     const marcarEstado = () => {
-      const sujo = S.scorecardSujo;
-      btGravar.disabled = !sujo && configurado();
-      estadoSc.className = 'sc-estado ' + (sujo ? 'pendente' : 'ok');
-      estadoSc.textContent = !configurado()
-        ? 'Guardado neste aparelho (folha não ligada).'
-        : sujo ? 'Guardado neste aparelho. Toca em Gravar para enviar já para a folha (senão vai sozinho daqui a pouco).'
-          : 'Gravado na folha' + (S.sync.ultima ? ' às ' + new Date(S.sync.ultima).toLocaleTimeString('pt-PT', { hour: '2-digit', minute: '2-digit' }) : '') + '.';
+      const d = diaRegisto(k), rs = resumoDia(k);
+      const temRes = !!d.campos.resultado;
+      const pendente = S.scorecardSujo || (d.sujo && temRes);
+      btGravar.disabled = !pendente && configurado();
+      let t = rs.feitos + ' de ' + rs.total + ' feitos' + (rs.inicio ? ' · início ' + rs.inicio : '') + '. ';
+      if (!temRes) t += 'O registo vai para a folha quando escolheres o Resultado (linha da reflexão).';
+      else if (!configurado()) t += 'Guardado neste aparelho (folha não ligada).';
+      else if (S.sync.avisoHS) t += S.sync.avisoHS;
+      else if (pendente) t += 'Guardado neste aparelho; Gravar envia já para a folha.';
+      else t += 'Gravado na folha' + (d.enviado ? ' às ' + new Date(d.enviado).toLocaleTimeString('pt-PT', { hour: '2-digit', minute: '2-digit' }) : '') + '.';
+      estadoSc.className = 'sc-estado ' + (!temRes ? '' : (pendente || S.sync.avisoHS) ? 'pendente' : 'ok');
+      estadoSc.textContent = t;
     };
-    r.append(el('div', { class: 'topo' }, el('h1', null, 'Scorecard'),
-      el('div', { class: 'sc-botoes' },
-        el('button', { class: 'btn sec peq', onclick: () => { S.scorecard.push([S.scorecard.length + 1, '', '', '', '', '', '', '']); S.scorecardSujo = true; guardar(); renderScorecard(); } }, 'Nova linha'),
-        btGravar)));
+    const tocar = () => { dia.sujo = true; S.diario[k] = dia; guardar(); marcarEstado(); };
+    r.append(el('div', { class: 'topo' }, el('h1', null, 'Scorecard'), btGravar));
+    // dia
+    const nomeDia = k === hoje ? 'Hoje' : k === somaDias(hoje, -1) ? 'Ontem' : DIAS_LONGOS[dow(k)];
+    r.append(el('div', { class: 'sc-dia' },
+      el('button', { class: 'seta', 'aria-label': 'Dia anterior', disabled: k <= somaDias(hoje, -7), onclick: () => { S.ui.diaSc = somaDias(k, -1); guardar(); renderScorecard(); } }, '‹'),
+      el('div', { class: 'qual' }, el('b', null, nomeDia), ' · ' + DIAS[dow(k)] + ' ' + fmtCurta(k)),
+      el('button', { class: 'seta', 'aria-label': 'Dia seguinte', disabled: k >= hoje, onclick: () => { S.ui.diaSc = somaDias(k, 1); guardar(); renderScorecard(); } }, '›')));
     r.append(estadoSc);
+    if (dia.origem === 'form' && !dia.sujo) r.append(el('p', { class: 'quieto' }, 'Este dia foi registado pelo Form. O que mudares aqui grava por cima, como registo da app.'));
     marcarEstado();
-    const inicio = S.perfil.inicioScorecard || hojeKey();
+    // semana de observação e legenda + = −
+    const inicio = S.perfil.inicioScorecard || hoje;
     const fim = somaDias(inicio, 6);
-    const hoje = hojeKey();
     const emObservacao = hoje >= inicio && hoje <= fim;
     const antes = hoje < inicio;
-    r.append(el('div', { class: 'sc-aviso' }, antes
-      ? 'Semana de observação: ' + fmtCurta(inicio) + ' a ' + fmtCurta(fim) + '. Até lá, lista a tua manhã, por ordem, desde acordar até às 9:30.'
-      : emObservacao
-        ? 'Semana de observação até ' + fmtCurta(fim) + ': só avaliar (+ − =) e, quando um hábito "−" acontecer, dizê-lo tu em voz alta. Decisões ficam fechadas até ' + fmtCurta(somaDias(fim, 1)) + ' (cap. 4, p. 59).'
-        : 'Observação terminada. Agora, por linha: manter, retirar o sinal, ou empilhar aqui um hábito novo (caps. 5 e 7).'));
-    r.append(el('p', { class: 'quieto' }, 'Critério (p. 58): isto aproxima-me ou afasta-me da pessoa que quero ser? Em dúvida, o resultado líquido a longo prazo.'));
+    r.append(el('div', { class: 'sc-legenda' },
+      el('div', null, el('b', null, '✓'), ' quando fazes; fica a hora real. Os campos de cada linha são os do antigo Form.'),
+      el('div', null, el('b', null, '+ = −'), ' (cap. 4): esta linha aproxima-me (+) ou afasta-me (−) da pessoa que quero ser, a minha Direção; = neutra. Avalia-se a rotina, não o dia.'),
+      el('div', { class: 'quieto' }, antes ? 'Semana de observação de ' + fmtCurta(inicio) + ' a ' + fmtCurta(fim) + ': só avaliar, sem mudar a rotina.'
+        : emObservacao ? 'Semana de observação até ' + fmtCurta(fim) + ': só avaliar. Decisões a partir de ' + fmtCurta(somaDias(fim, 1)) + ' (p. 59).'
+          : 'Observação terminada: em cada linha, decidir manter, retirar o sinal ou empilhar um hábito novo (caps. 5 e 7).')));
+    const usados = new Set();
     S.scorecard.forEach((linha, i) => {
       const aval = linha[4];
-      const cls = aval === '+' ? 'mais' : (aval === '−' || aval === '-') ? 'menos' : '';
+      const chave = chaveLinha(linha);
+      const feitoAs = chave ? dia.checks[chave] : '';
+      const cls = (aval === '+' ? 'mais' : (aval === '−' || aval === '-') ? 'menos' : '') + (feitoAs ? ' feita' : '');
       const card = el('div', { class: 'sc-linha ' + cls });
       const set = (j, v) => { linha[j] = v; S.scorecardSujo = true; guardar(); marcarEstado(); };
-      const seg = el('div', { class: 'aval', role: 'group', 'aria-label': 'avaliação' });
-      [['+', 'mais'], ['=', 'igual'], ['−', 'menos']].forEach(([s, c]) => seg.append(el('button', { class: c + (aval === s || (s === '−' && aval === '-') ? ' on' : ''), onclick: () => { set(4, aval === s ? '' : s); renderScorecard(); } }, s)));
+      const seg = el('div', { class: 'aval', role: 'group', 'aria-label': 'aproxima-me ou afasta-me de quem quero ser' });
+      [['+', 'mais', 'aproxima-me de quem quero ser'], ['=', 'igual', 'neutra'], ['−', 'menos', 'afasta-me de quem quero ser']].forEach(([sg, c, t]) => seg.append(el('button', { class: c + (aval === sg || (sg === '−' && aval === '-') ? ' on' : ''), title: t, 'aria-label': t, onclick: () => { set(4, aval === sg ? '' : sg); renderScorecard(); } }, sg)));
+      const check = el('button', { class: 'check' + (feitoAs ? ' on' : ''), 'aria-pressed': !!feitoAs, 'aria-label': (feitoAs ? 'Feito às ' + feitoAs + '. Tocar para desmarcar' : 'Marcar como feito'), disabled: !chave, onclick: () => {
+        if (dia.checks[chave]) delete dia.checks[chave];
+        else { const d = new Date(); dia.checks[chave] = pad(d.getHours()) + ':' + pad(d.getMinutes()); if (k !== hoje) dia.checks[chave] = horaHHMM(linha[1]) || dia.checks[chave]; vibrar(15); }
+        tocar(); renderScorecard();
+      } }, '✓');
       card.append(el('div', { class: 'cab' },
-        el('span', { class: 'ordem' }, i + 1),
-        el('input', { class: 'hora', type: 'time', value: horaHHMM(linha[1]), 'aria-label': 'hora aproximada', onchange: e => set(1, e.target.value) }),
-        el('input', { class: 'acao', type: 'text', value: linha[2] || '', placeholder: 'o que faço', oninput: e => set(2, e.target.value) }),
+        check,
+        campoHora(horaHHMM(linha[1]), v => set(1, v), { class: 'hora', titulo: 'Hora prevista · ' + (linha[2] || 'linha ' + (i + 1)), 'aria-label': 'hora prevista' }),
+        el('input', { class: 'acao', type: 'text', value: linha[2] || '', placeholder: 'o que faço', onchange: e => { const antiga = chave, nova = String(e.target.value).trim().toLowerCase(); set(2, e.target.value); Object.keys(S.diario || {}).forEach(dk => { const c = S.diario[dk].checks; if (antiga && c[antiga] !== undefined && nova) { c[nova] = c[antiga]; delete c[antiga]; } }); guardar(); renderScorecard(); } }),
         seg));
+      if (feitoAs) card.append(el('div', { class: 'feito-as' }, 'Feito às ', campoHora(feitoAs, v => { if (v) dia.checks[chave] = v; else delete dia.checks[chave]; tocar(); renderScorecard(); }, { titulo: 'Feito às · ' + (linha[2] || '') })));
+      // campos do registo desta linha
+      const cs = camposDaLinha(linha).filter(c => !usados.has(c));
+      cs.forEach(c => usados.add(c));
+      if (cs.length) card.append(campoRegisto(cs, dia, tocar, k));
+      // ficha da rotina
       const campo = (titulo, j, ph, extra) => el('label', { class: 'sc-campo' }, titulo, el('input', Object.assign({ type: 'text', value: linha[j] || '', placeholder: ph, oninput: e => set(j, e.target.value) }, extra || {})));
+      const atuais = camposDaLinha(linha);
+      const escolha = el('div', { class: 'chips campos-escolha' }, ORDEM_CAMPOS.map(c => el('button', { type: 'button', class: atuais.indexOf(c) >= 0 ? 'on' : '', onclick: () => {
+        const novos = atuais.indexOf(c) >= 0 ? atuais.filter(x => x !== c) : atuais.concat([c]);
+        linha[8] = ORDEM_CAMPOS.filter(x => novos.indexOf(x) >= 0).join(',') || '-'; S.scorecardSujo = true; guardar(); renderScorecard();
+        const cc = document.querySelectorAll('#ecra-scorecard .sc-linha')[i]; if (cc) cc.classList.add('aberta');
+      } }, CAMPOS[c].nome.replace(/ \(.*\)$/, ''))));
       const mais = el('div', { class: 'mais-campos' },
         campo('Sinal: o que dispara isto', 3, 'ex.: o alarme, sentar à mesa'),
         campo('Porquê: aproxima-me ou afasta-me de quem quero ser?', 5, 'uma frase'),
         campo('Frase para dizeres tu, em voz alta, quando isto acontecer (p. 60)', 6, 'ex.: "Vou ver o telemóvel e não preciso; custa-me a ignição."'),
-        campo('Decisão' + (antes || emObservacao ? ' (abre a ' + fmtCurta(somaDias(fim, 1)) + ')' : ''), 7, 'manter / retirar o sinal / empilhar aqui um hábito novo', { disabled: antes || emObservacao }));
+        campo('Decisão' + (antes || emObservacao ? ' (abre a ' + fmtCurta(somaDias(fim, 1)) + ')' : ''), 7, 'manter / retirar o sinal / empilhar aqui um hábito novo', { disabled: antes || emObservacao }),
+        el('div', { class: 'sc-campo' }, 'Campos do registo nesta linha', escolha));
       card.append(mais);
-      const preenchidos = [3, 5, 6, 7].filter(j => linha[j]).length;
       card.append(el('div', { class: 'rodape' },
-        el('button', { onclick: ev => { card.classList.toggle('aberta'); ev.currentTarget.textContent = card.classList.contains('aberta') ? 'Fechar' : 'Sinal, porquê, frase, decisão' + (preenchidos ? ' (' + preenchidos + '/4)' : ''); } }, 'Sinal, porquê, frase, decisão' + (preenchidos ? ' (' + preenchidos + '/4)' : '')),
-        el('button', { onclick: () => { if (!confirm('Apagar esta linha?')) return; S.scorecard.splice(i, 1); S.scorecard.forEach((l, j) => { l[0] = j + 1; }); S.scorecardSujo = true; guardar(); renderScorecard(); } }, 'Apagar')));
+        el('button', { onclick: ev => { card.classList.toggle('aberta'); ev.currentTarget.textContent = card.classList.contains('aberta') ? 'Fechar' : 'Sinal, porquê…'; } }, 'Sinal, porquê…'),
+        el('div', { class: 'acoes-linha' },
+          el('button', { class: 'seta', 'aria-label': 'Subir a linha ' + (i + 1), title: 'Subir', disabled: i === 0, onclick: () => mexerScorecard(() => S.scorecard.splice(i - 1, 0, S.scorecard.splice(i, 1)[0]), i - 1) }, '↑'),
+          el('button', { class: 'seta', 'aria-label': 'Descer a linha ' + (i + 1), title: 'Descer', disabled: i === S.scorecard.length - 1, onclick: () => mexerScorecard(() => S.scorecard.splice(i + 1, 0, S.scorecard.splice(i, 1)[0]), i + 1) }, '↓'),
+          el('button', { 'aria-label': 'Inserir uma linha abaixo da ' + (i + 1), onclick: () => mexerScorecard(() => S.scorecard.splice(i + 1, 0, linhaVazia()), i + 1, true) }, '+ abaixo'),
+          el('button', { onclick: () => { if (!confirm('Apagar a linha ' + (i + 1) + '?')) return; mexerScorecard(() => S.scorecard.splice(i, 1)); } }, 'Apagar'))));
       r.append(card);
     });
+    // campos que não estão em nenhuma linha: não se perdem
+    const soltos = ORDEM_CAMPOS.filter(c => !usados.has(c));
+    if (soltos.length) {
+      const card = el('div', { class: 'sc-linha fecho' }, el('div', { class: 'cab' }, el('b', null, 'Fecho do registo')), el('p', { class: 'quieto' }, 'Campos do Form que não estão em nenhuma linha. Podes pô-los numa linha em "Sinal, porquê…".'));
+      card.append(campoRegisto(soltos, dia, tocar, k));
+      r.append(card);
+    }
+    r.append(el('div', { class: 'linha-acoes' }, el('button', { class: 'btn sec peq', onclick: () => mexerScorecard(() => S.scorecard.push(linhaVazia()), S.scorecard.length, true) }, '+ Nova linha no fim')));
+  }
+  function campoRegisto(lista, dia, tocar, k) {
+    const caixa = el('div', { class: 'registo' });
+    lista.forEach(c => {
+      const def = CAMPOS[c];
+      const val = dia.campos[c] || '';
+      const lab = el('div', { class: 'sc-campo' + (def.obrigatorio && !val ? ' falta' : '') }, def.nome + (def.obrigatorio ? ' *' : ''));
+      if (def.tipo === 'chips') {
+        const ch = el('div', { class: 'chips' }, def.opcoes.map(o => el('button', { type: 'button', class: String(val) === o ? 'on' : '', onclick: () => {
+          dia.campos[c] = String(val) === o ? '' : o;
+          if (c === 'resultado') { if (!S.registos[HORA_SAGRADA]) S.registos[HORA_SAGRADA] = {}; if (dia.campos[c]) S.registos[HORA_SAGRADA][k] = dia.campos[c] !== 'Falhou'; else delete S.registos[HORA_SAGRADA][k]; }
+          tocar(); renderScorecard();
+        } }, o)));
+        lab.append(ch);
+        if (c === 'resultado' && (val === 'Parcial' || val === 'Falhou')) lab.append(el('input', { type: 'text', value: dia.campos.palavra || '', placeholder: 'Se parcial ou falhou: uma palavra', oninput: e => { dia.campos.palavra = e.target.value; tocar(); } }));
+      } else if (def.tipo === 'texto') {
+        const ta = el('textarea', { rows: 2, placeholder: '…', oninput: e => { dia.campos[c] = e.target.value; e.target.style.height = 'auto'; e.target.style.height = e.target.scrollHeight + 'px'; tocar(); } }, val);
+        lab.append(ta);
+      } else {
+        lab.append(el('input', { type: 'text', value: val, oninput: e => { dia.campos[c] = e.target.value; tocar(); } }));
+      }
+      caixa.append(lab);
+    });
+    return caixa;
+  }
+  // Scorecard: inserir, mover e apagar linhas (renumera, grava e mostra a linha mexida)
+  const linhaVazia = () => [0, '', '', '', '', '', '', '', ''];
+  function mexerScorecard(fn, alvo, nova) {
+    fn();
+    S.scorecard.forEach((l, j) => { l[0] = j + 1; });
+    S.scorecardSujo = true; guardar(); renderScorecard();
+    if (alvo === undefined) return;
+    const c = document.querySelectorAll('#ecra-scorecard .sc-linha')[alvo];
+    if (!c) return;
+    c.classList.add('mexida'); setTimeout(() => c.classList.remove('mexida'), 900);
+    c.scrollIntoView({ block: 'center', behavior: 'smooth' });
+    if (nova) { const h = c.querySelector('input.acao'); if (h) h.focus({ preventScroll: true }); }
   }
   // "07:30", "7:30", "7h30" -> "07:30"; datas ("1899-12-30…", vindas da folha) e lixo -> ''
   function horaHHMM(v) {
@@ -551,7 +742,7 @@
     if (document.activeElement && document.activeElement.blur) document.activeElement.blur();
     guardar();
     if (!configurado()) { toast('Guardado neste aparelho.'); renderScorecard(); return; }
-    if (!S.scorecardSujo) { toast('Já está gravado na folha.'); return; }
+    if (!S.scorecardSujo && !diasPorEnviar().length) { toast(diaRegisto(S.ui.diaSc || hojeKey()).campos.resultado ? 'Já está gravado na folha.' : 'Falta o Resultado: sem ele o registo não vai para a folha.'); return; }
     await sincronizar(false);
     renderScorecard();
   }
@@ -652,7 +843,7 @@
     b1.append(el('h2', null, 'Folha "Hora Sagrada"'));
     if (S.sync.erro) b1.append(el('div', { class: 'aviso forte', style: 'margin-bottom:10px' }, S.sync.erro));
     else if (configurado()) b1.append(el('p', { class: 'quieto' }, 'Sincroniza sozinha: ao abrir a app, 20 segundos depois de cada voto e ao sair. O botão serve para forçar.'));
-    b1.append(el('p', { class: 'quieto' }, 'A app funciona sem rede. Quando sincronizas, os teus registos vão para a grelha "Registo hábitos" (que alimenta o email das 8:05) e a Hora sagrada vem do Form.'));
+    b1.append(el('p', { class: 'quieto' }, 'A app funciona sem rede. Quando sincronizas, os votos vão para a grelha "Registo hábitos" (que alimenta o email das 8:05) e o registo da hora sagrada (Scorecard) vai para a folha de respostas, no lugar do Form.'));
     b1.append(el('label', { class: 'campo' }, 'URL do Web App do Apps Script (termina em /exec)', el('input', { type: 'url', value: S.sync.url, placeholder: 'https://script.google.com/macros/s/…/exec', oninput: e => { S.sync.url = e.target.value.trim(); guardar(); } })));
     b1.append(el('p', { class: 'quieto' }, 'Onde se obtém: no editor do Apps Script da folha, botão azul "Implementar" (canto superior direito) > "Nova implementação" > roda dentada "Selecionar tipo" > "Aplicação Web" > Executar como: Eu; Quem tem acesso: Qualquer pessoa (não "Só eu" nem "Qualquer pessoa com uma Conta Google"; a proteção é o token) > Implementar > copiar o "URL da aplicação Web". Se mais tarde mudares o código, usa "Gerir implementações" > lápis > Nova versão, para o URL se manter.'));
     b1.append(el('label', { class: 'campo' }, 'Token (o que v3_gerarToken escreveu no registo de execução)', el('input', { type: 'password', value: S.sync.token, oninput: e => { S.sync.token = e.target.value.trim(); guardar(); } })));
@@ -673,7 +864,7 @@
     const b2 = el('div', { class: 'bloco' });
     b2.append(el('h2', null, 'Definições'));
     b2.append(el('label', { class: 'campo' }, 'Início da semana de observação do Scorecard', el('input', { type: 'date', value: S.perfil.inicioScorecard, oninput: e => { S.perfil.inicioScorecard = e.target.value; guardar(); } })));
-    b2.append(el('label', { class: 'campo' }, 'Lembrete da noite (só na app Android)', el('input', { type: 'time', value: S.perfil.lembreteNoite, oninput: e => { S.perfil.lembreteNoite = e.target.value; guardar(); agendarNotificacoes(); } })));
+    b2.append(el('label', { class: 'campo' }, 'Lembrete da noite (só na app Android)', campoHora(S.perfil.lembreteNoite, v => { S.perfil.lembreteNoite = v || '21:30'; guardar(); agendarNotificacoes(); }, { titulo: 'Lembrete da noite' })));
     b2.append(el('div', { class: 'toggle' }, el('span', null, 'Lembretes nas horas dos hábitos (só na app Android)'), el('input', { type: 'checkbox', checked: S.perfil.notificacoes, onchange: e => { S.perfil.notificacoes = e.target.checked; guardar(); agendarNotificacoes(); } })));
     const temaSel = el('select', { onchange: e => { S.ui.tema = e.target.value; guardar(); aplicarTema(); } }, ...[['auto', 'Automático'], ['light', 'Claro'], ['dark', 'Escuro']].map(([v, t]) => el('option', { value: v, selected: S.ui.tema === v }, t)));
     b2.append(el('label', { class: 'campo' }, 'Tema', temaSel));
@@ -681,6 +872,7 @@
       el('button', { class: 'btn sec peq', onclick: exportar }, 'Exportar cópia (JSON)'),
       el('button', { class: 'btn sec peq', onclick: importar }, 'Importar cópia'),
       el('button', { class: 'btn sec peq', onclick: () => { if (confirm('Repor a app ao estado inicial? Os dados locais perdem-se (a folha fica).')) { localStorage.removeItem(CHAVE); S = base(); guardar(); renderTudo(); } } }, 'Repor')));
+    b2.append(el('div', { class: 'linha-acoes' }, el('button', { class: 'btn sec peq', onclick: () => verificarVersao(true) }, 'Procurar atualização')));
     b2.append(el('p', { class: 'quieto', style: 'margin-top:10px' }, '~1% versão ' + VERSAO + (Cap.nativo ? ' · Android' : ' · web') + '. Cada ação é um voto na pessoa que queres ser (Atomic Habits, p. 38).'));
     r.append(b2);
   }
@@ -752,13 +944,15 @@
   }
   let aSincronizar = false, syncTimer = null;
   const configurado = () => !!(S.sync.url && S.sync.token);
-  const porEnviar = () => S.pendentes.length + (S.habitosSujos ? 1 : 0) + (S.scorecardSujo ? 1 : 0) + S.reflexoes.filter(x => !x.enviada).length;
-  const aEditar = () => $('#modal').classList.contains('aberto') || /^(INPUT|TEXTAREA|SELECT)$/.test((document.activeElement || {}).tagName || '');
+  const porEnviar = () => S.pendentes.length + (S.habitosSujos ? 1 : 0) + (S.scorecardSujo ? 1 : 0) + S.reflexoes.filter(x => !x.enviada).length + diasPorEnviar().length;
+  const aEditar = () => $('#modal').classList.contains('aberto') || !!document.querySelector('.relogio.aberto') || /^(INPUT|TEXTAREA|SELECT)$/.test((document.activeElement || {}).tagName || '');
   function corpoSync(comReflexoes) {
     const corpo = { token: S.sync.token, registos: S.pendentes.slice() };
     if (comReflexoes) corpo.reflexoes = S.reflexoes.filter(x => !x.enviada).map(x => ({ data: x.data, tipo: x.tipo, nota: x.nota, pergunta: x.pergunta, resposta: x.resposta }));
     if (S.habitosSujos) corpo.habitos = S.habitos.map(h => ({ nome: h.nome, ativo: !!h.ativo, identidade: h.identidade, doisMin: h.doisMin, intencao: h.intencao, empilhar: h.empilhar, sinal: h.sinal, tentacao: h.tentacao, tribo: h.tribo, ritual: h.ritual, friccao: h.friccao, ambiente: h.ambiente, decisivo: h.decisivo, automacao: h.automacao, recompensa: h.recompensa, registo: h.registo, parceiro: h.parceiro, alvo: h.alvo, dias: diasTexto(parseDias(h.dias)), hora: h.hora, inicio: h.inicio, nota: h.nota }));
     if (S.scorecardSujo) corpo.scorecard = S.scorecard;
+    const dias = diasPorEnviar();
+    if (dias.length) corpo.horaSagrada = dias.map(registoParaEnviar);
     return corpo;
   }
   // envio automático: 20 s depois da última alteração, se houver algo por enviar e não estiveres a escrever
@@ -771,7 +965,7 @@
       sincronizar(false, true);
     }, ms === undefined ? SYNC_ATRASO : ms);
   }
-  // ao abrir a app ou voltar a ela: envia o que houver e traz a Hora sagrada do Form (no máximo de 5 em 5 min se não houver nada por enviar)
+  // ao abrir a app ou voltar a ela: envia o que houver e traz a Hora sagrada da folha (no máximo de 5 em 5 min se não houver nada por enviar)
   function sincronizarAoAbrir() {
     if (!configurado() || navigator.onLine === false || aEditar()) return;
     const recente = S.sync.ultima && (Date.now() - new Date(S.sync.ultima).getTime() < 5 * 60000);
@@ -779,7 +973,7 @@
   }
   // ao sair da app: envio de último recurso (sem resposta; a fila só limpa na próxima sincronização, que repete o envio sem duplicar)
   function enviarAoSair() {
-    if (!configurado() || !(S.pendentes.length || S.habitosSujos || S.scorecardSujo)) return;
+    if (!configurado() || !(S.pendentes.length || S.habitosSujos || S.scorecardSujo || diasPorEnviar().length)) return;
     try { fetch(S.sync.url, { method: 'POST', body: JSON.stringify(corpoSync(false)), keepalive: true }); } catch (e) { /* sem rede */ }
   }
 
@@ -788,13 +982,14 @@
     if (aSincronizar) return;
     aSincronizar = true;
     if (!silencioso) toast(soObter ? 'A obter da folha…' : 'A sincronizar…');
-    let enviados = [];
+    let enviados = [], corpoEnviado = null;
     try {
       let resp;
       if (soObter) {
         resp = await fetch(S.sync.url + '?token=' + encodeURIComponent(S.sync.token) + '&t=' + Date.now(), { method: 'GET', redirect: 'follow' });
       } else {
         const corpo = corpoSync(true);
+        corpoEnviado = corpo;
         enviados = corpo.registos;
         resp = await fetch(S.sync.url, { method: 'POST', body: JSON.stringify(corpo), redirect: 'follow' });
       }
@@ -803,13 +998,24 @@
       if (!dados) { S.sync.erro = MSG_ACESSO; if (!silencioso) toast(MSG_ACESSO); return; }
       if (!dados.ok) { S.sync.erro = dados.erro === 'token' ? 'Token errado: compara com o que v3_gerarToken escreveu.' : 'A folha recusou: ' + dados.erro; if (!silencioso) toast(S.sync.erro); return; }
       aplicarEstado(dados, !soObter);
+      if (!soObter) {
+        const enviadosHS = (corpoEnviado && corpoEnviado.horaSagrada) || [];
+        if (Array.isArray(dados.horaSagradaGravados)) {
+          S.sync.avisoHS = '';
+          // só limpa o dia se nada mudou enquanto o pedido estava a caminho (a hora de fim não conta)
+          const semFim = o => JSON.stringify(Object.assign({}, o, { horaFim: '' }));
+          enviadosHS.forEach(x => { if (dados.horaSagradaGravados.indexOf(x.data) >= 0 && S.diario[x.data] && semFim(registoParaEnviar(x.data)) === semFim(x)) { S.diario[x.data].sujo = false; S.diario[x.data].enviado = new Date().toISOString(); S.diario[x.data].origem = 'app'; } });
+        } else if (enviadosHS.length) {
+          S.sync.avisoHS = 'A folha ainda não recebe o registo: falta atualizar o Apps Script (v3.2). Fica guardado aqui.';
+        }
+      }
       if (!soObter) S.pendentes = S.pendentes.filter(p => !enviados.some(e => e.habito === p.habito && e.data === p.data && e.valor === p.valor));
       S.sync.ultima = new Date().toISOString();
       S.sync.erro = '';
       guardar();
       if (!(silencioso && aEditar())) renderTudo();
       agendarNotificacoes();
-      if (!silencioso) toast(soObter ? 'Folha lida.' : 'Sincronizado.');
+      if (!silencioso) toast(soObter ? 'Folha lida.' : (S.sync.avisoHS && corpoEnviado && corpoEnviado.horaSagrada ? S.sync.avisoHS : 'Sincronizado.'));
     } catch (e) {
       console.warn(e);
       S.sync.erro = navigator.onLine === false ? 'Sem rede: os registos ficam guardados e vão na próxima.' : MSG_ACESSO;
@@ -840,8 +1046,11 @@
         // a folha pode devolver a hora como data ("1899-12-30"): fica a hora que já estava na app
         const antes = S.scorecard;
         S.scorecard = d.scorecard.map((r, i) => {
-          const a = Array.isArray(r) ? r.slice(0, 8) : [];
+          const a = Array.isArray(r) ? r.slice(0, 9) : [];
           while (a.length < 8) a.push('');
+          // coluna 9 = campos do registo; a folha antiga (v3.1) não a tem e uma célula vazia quer dizer "por omissão"
+          if (a.length < 9 || a[8] === null || a[8] === undefined || a[8] === '') a[8] = (antes[i] && antes[i][8] !== undefined && chaveLinha(antes[i]) === chaveLinha(a)) ? antes[i][8] : undefined;
+          if (a[8] === undefined) a.length = 8;
           a[1] = horaHHMM(a[1]) || horaHHMM(antes[i] && antes[i][1]);
           return a;
         });
@@ -853,6 +1062,21 @@
       S.reflexoes = d.reflexoes.map(x => ({ data: x.data, tipo: x.tipo, nota: x.nota, pergunta: x.pergunta, resposta: x.resposta, enviada: true })).concat(locaisNaoEnviadas);
     }
     if (d.formUrl) S.sync.formUrl = d.formUrl;
+    // registos da hora sagrada que estão na folha (Form ou app): preenchem os dias que não têm alterações locais
+    if (d.horaSagrada && typeof d.horaSagrada === 'object') {
+      S.diario = S.diario || {};
+      Object.keys(d.horaSagrada).forEach(k => {
+        const loc = S.diario[k];
+        if (loc && loc.sujo) return;
+        const x = d.horaSagrada[k] || {};
+        const campos = {};
+        ['resultado', 'palavra', 'tipo', 'aprendi', 'fiz', 'emperrei', 'muda', 'alvo', 'material', 'energia', 'direcao'].forEach(c => { if (x[c] !== undefined && x[c] !== '') campos[c] = String(x[c]); });
+        const checks = {};
+        String(x.blocos || '').split('·').forEach(b => { const m = b.trim().match(/^(\d{1,2}:\d{2})\s+(.+)$/); if (m) checks[m[2].trim().toLowerCase()] = horaHHMM(m[1]); });
+        if (!Object.keys(checks).length && x.horaInicio && loc) Object.assign(checks, loc.checks);
+        S.diario[k] = { checks: Object.keys(checks).length ? checks : (loc ? loc.checks : {}), campos, sujo: false, enviado: loc && loc.enviado ? loc.enviado : '', origem: x.origem || '' };
+      });
+    }
   }
 
   /* ---------- exportar / importar ---------- */
@@ -886,6 +1110,34 @@
   }
   function aplicarTema() { const t = S.ui.tema || 'auto'; if (t === 'auto') document.documentElement.removeAttribute('data-theme'); else document.documentElement.setAttribute('data-theme', t); }
 
+  /* ---------- atualização da versão web ---------- */
+  // O site (GitHub Pages) manda guardar os ficheiros 10 min. Ao abrir e ao voltar à app, pergunta-se ao site
+  // a versão publicada (sw.js, sem cache); se for outra, instala-se o service worker novo e recarrega-se.
+  let swReg = null, aRecarregar = false;
+  async function versaoPublicada() {
+    try { const t = await (await fetch('./sw.js?v=' + Date.now(), { cache: 'no-store' })).text(); const m = t.match(/umporcento-([\d.]+)/); return m ? m[1] : null; } catch (e) { return null; }
+  }
+  function recarregarParaVersaoNova() {
+    if (aRecarregar) return;
+    if (aEditar()) { setTimeout(recarregarParaVersaoNova, 3000); return; }
+    aRecarregar = true;
+    guardar(); enviarAoSair();
+    location.reload();
+  }
+  async function verificarVersao(manual) {
+    if (Cap.nativo || !('serviceWorker' in navigator)) { if (manual) toast('Na app Android, as versões novas instalam-se pelo APK.'); return; }
+    const v = await versaoPublicada();
+    if (!v) { if (manual) toast('Sem ligação ao site.'); return; }
+    if (v === VERSAO) { if (manual) toast('Já tens a versão mais recente (' + VERSAO + ').'); return; }
+    // evita ciclos: no máximo uma recarga automática por versão em 2 minutos
+    let marca = null; try { marca = JSON.parse(localStorage.getItem('umporcento.atualizacao') || 'null'); } catch (e) { marca = null; }
+    if (!manual && marca && marca.v === v && Date.now() - marca.t < 120000) return;
+    try { localStorage.setItem('umporcento.atualizacao', JSON.stringify({ v, t: Date.now() })); } catch (e) { /* sem storage */ }
+    toast('A atualizar para a versão ' + v + '…');
+    try { if (swReg) await swReg.update(); } catch (e) { /* segue */ }
+    setTimeout(recarregarParaVersaoNova, 2500);   // se o service worker novo tomar conta antes, o controllerchange recarrega já
+  }
+
   /* ---------- arranque ---------- */
   aplicarTema();
   // configurar por link: andrecarmo.pt/1pc/#ligar=<URL codificado>&t=<token> (a frio ou com a app já aberta)
@@ -911,6 +1163,11 @@
   });
   window.addEventListener('online', () => sincronizarAoAbrir());
   setTimeout(sincronizarAoAbrir, 1500);
-  if ('serviceWorker' in navigator && !Cap.nativo && location.protocol.indexOf('http') === 0) { navigator.serviceWorker.register('./sw.js').catch(() => { /* sem sw */ }); }
-  window.UmPorCento = { estado: () => S, sincronizar, versao: VERSAO };
+  if ('serviceWorker' in navigator && !Cap.nativo && location.protocol.indexOf('http') === 0) {
+    const tinhaControlo = !!navigator.serviceWorker.controller;
+    navigator.serviceWorker.register('./sw.js', { updateViaCache: 'none' }).then(reg => { swReg = reg; verificarVersao(); }).catch(() => { /* sem sw */ });
+    navigator.serviceWorker.addEventListener('controllerchange', () => { if (tinhaControlo) recarregarParaVersaoNova(); });
+  }
+  document.addEventListener('visibilitychange', () => { if (!document.hidden) verificarVersao(); });
+  window.UmPorCento = { estado: () => S, sincronizar, versao: VERSAO, verificarVersao };
 })();
