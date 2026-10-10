@@ -3,7 +3,7 @@
 (function () {
   'use strict';
 
-  const VERSAO = '0.1.3';
+  const VERSAO = '0.1.4';
   const CHAVE = 'umporcento.v1';
   const HORA_SAGRADA = 'Hora sagrada';
   const DIAS = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
@@ -100,6 +100,8 @@
       // 0.1.2: antes da primeira sincronização, a folha manda nas definições (hábitos, scorecard)
       if (!s.sync.ultima && !s.migr012) { s.habitosSujos = false; s.scorecardSujo = false; }
       s.migr012 = true;
+      // 0.1.4: horas do Scorecard que chegaram da folha como data ("1899-12-30") ficam vazias
+      if (Array.isArray(s.scorecard)) s.scorecard.forEach(l => { if (Array.isArray(l) && l[1] && !/^\d{1,2}[:h]\d{2}/.test(String(l[1]))) l[1] = ''; });
       return s;
     } catch (e) { return base(); }
   }
@@ -485,7 +487,23 @@
   /* ---------- ecrã: Scorecard ---------- */
   function renderScorecard() {
     const r = $('#ecra-scorecard'); r.innerHTML = '';
-    r.append(el('div', { class: 'topo' }, el('h1', null, 'Scorecard'), el('button', { class: 'btn peq', onclick: () => { S.scorecard.push([S.scorecard.length + 1, '', '', '', '', '', '', '']); S.scorecardSujo = true; guardar(); renderScorecard(); } }, 'Nova linha')));
+    const estadoSc = el('p', { class: 'sc-estado' });
+    const btGravar = el('button', { class: 'btn peq', onclick: () => gravarScorecard() }, 'Gravar');
+    const marcarEstado = () => {
+      const sujo = S.scorecardSujo;
+      btGravar.disabled = !sujo && configurado();
+      estadoSc.className = 'sc-estado ' + (sujo ? 'pendente' : 'ok');
+      estadoSc.textContent = !configurado()
+        ? 'Guardado neste aparelho (folha não ligada).'
+        : sujo ? 'Guardado neste aparelho. Toca em Gravar para enviar já para a folha (senão vai sozinho daqui a pouco).'
+          : 'Gravado na folha' + (S.sync.ultima ? ' às ' + new Date(S.sync.ultima).toLocaleTimeString('pt-PT', { hour: '2-digit', minute: '2-digit' }) : '') + '.';
+    };
+    r.append(el('div', { class: 'topo' }, el('h1', null, 'Scorecard'),
+      el('div', { class: 'sc-botoes' },
+        el('button', { class: 'btn sec peq', onclick: () => { S.scorecard.push([S.scorecard.length + 1, '', '', '', '', '', '', '']); S.scorecardSujo = true; guardar(); renderScorecard(); } }, 'Nova linha'),
+        btGravar)));
+    r.append(estadoSc);
+    marcarEstado();
     const inicio = S.perfil.inicioScorecard || hojeKey();
     const fim = somaDias(inicio, 6);
     const hoje = hojeKey();
@@ -494,41 +512,48 @@
     r.append(el('div', { class: 'sc-aviso' }, antes
       ? 'Semana de observação: ' + fmtCurta(inicio) + ' a ' + fmtCurta(fim) + '. Até lá, lista a tua manhã, por ordem, desde acordar até às 9:30.'
       : emObservacao
-        ? 'Semana de observação até ' + fmtCurta(fim) + ': só avaliar (+ − =) e dizer em voz alta. Decisões ficam fechadas até ' + fmtCurta(somaDias(fim, 1)) + ' (cap. 4, p. 59).'
+        ? 'Semana de observação até ' + fmtCurta(fim) + ': só avaliar (+ − =) e, quando um hábito "−" acontecer, dizê-lo tu em voz alta. Decisões ficam fechadas até ' + fmtCurta(somaDias(fim, 1)) + ' (cap. 4, p. 59).'
         : 'Observação terminada. Agora, por linha: manter, retirar o sinal, ou empilhar aqui um hábito novo (caps. 5 e 7).'));
     r.append(el('p', { class: 'quieto' }, 'Critério (p. 58): isto aproxima-me ou afasta-me da pessoa que quero ser? Em dúvida, o resultado líquido a longo prazo.'));
     S.scorecard.forEach((linha, i) => {
       const aval = linha[4];
       const cls = aval === '+' ? 'mais' : (aval === '−' || aval === '-') ? 'menos' : '';
       const card = el('div', { class: 'sc-linha ' + cls });
-      const set = (j, v) => { linha[j] = v; S.scorecardSujo = true; guardar(); };
+      const set = (j, v) => { linha[j] = v; S.scorecardSujo = true; guardar(); marcarEstado(); };
       const seg = el('div', { class: 'aval', role: 'group', 'aria-label': 'avaliação' });
       [['+', 'mais'], ['=', 'igual'], ['−', 'menos']].forEach(([s, c]) => seg.append(el('button', { class: c + (aval === s || (s === '−' && aval === '-') ? ' on' : ''), onclick: () => { set(4, aval === s ? '' : s); renderScorecard(); } }, s)));
       card.append(el('div', { class: 'cab' },
         el('span', { class: 'ordem' }, i + 1),
-        el('input', { class: 'hora', type: 'text', value: linha[1] || '', placeholder: 'hh:mm', oninput: e => set(1, e.target.value) }),
+        el('input', { class: 'hora', type: 'time', value: horaHHMM(linha[1]), 'aria-label': 'hora aproximada', onchange: e => set(1, e.target.value) }),
         el('input', { class: 'acao', type: 'text', value: linha[2] || '', placeholder: 'o que faço', oninput: e => set(2, e.target.value) }),
         seg));
+      const campo = (titulo, j, ph, extra) => el('label', { class: 'sc-campo' }, titulo, el('input', Object.assign({ type: 'text', value: linha[j] || '', placeholder: ph, oninput: e => set(j, e.target.value) }, extra || {})));
       const mais = el('div', { class: 'mais-campos' },
-        el('input', { type: 'text', value: linha[3] || '', placeholder: 'sinal: o que o dispara', oninput: e => set(3, e.target.value) }),
-        el('input', { type: 'text', value: linha[5] || '', placeholder: 'porquê: aproxima ou afasta de quem quero ser?', oninput: e => set(5, e.target.value) }),
-        el('input', { type: 'text', value: linha[6] || '', placeholder: 'em voz alta: "estou a fazer X e não preciso; vai custar-me Y"', oninput: e => set(6, e.target.value) }),
-        el('input', { type: 'text', value: linha[7] || '', placeholder: 'decisão (depois da semana): manter / retirar o sinal / empilhar aqui…', disabled: antes || emObservacao, oninput: e => set(7, e.target.value) }));
+        campo('Sinal: o que dispara isto', 3, 'ex.: o alarme, sentar à mesa'),
+        campo('Porquê: aproxima-me ou afasta-me de quem quero ser?', 5, 'uma frase'),
+        campo('Frase para dizeres tu, em voz alta, quando isto acontecer (p. 60)', 6, 'ex.: "Vou ver o telemóvel e não preciso; custa-me a ignição."'),
+        campo('Decisão' + (antes || emObservacao ? ' (abre a ' + fmtCurta(somaDias(fim, 1)) + ')' : ''), 7, 'manter / retirar o sinal / empilhar aqui um hábito novo', { disabled: antes || emObservacao }));
       card.append(mais);
       const preenchidos = [3, 5, 6, 7].filter(j => linha[j]).length;
       card.append(el('div', { class: 'rodape' },
-        el('button', { onclick: ev => { card.classList.toggle('aberta'); ev.currentTarget.textContent = card.classList.contains('aberta') ? 'Menos' : 'Detalhes' + (preenchidos ? ' (' + preenchidos + ')' : ''); } }, 'Detalhes' + (preenchidos ? ' (' + preenchidos + ')' : '')),
-        el('button', { onclick: () => dizer(linha[6] || ('Estou a ' + (linha[2] || 'fazer isto') + '.')) }, 'Voz alta'),
+        el('button', { onclick: ev => { card.classList.toggle('aberta'); ev.currentTarget.textContent = card.classList.contains('aberta') ? 'Fechar' : 'Sinal, porquê, frase, decisão' + (preenchidos ? ' (' + preenchidos + '/4)' : ''); } }, 'Sinal, porquê, frase, decisão' + (preenchidos ? ' (' + preenchidos + '/4)' : '')),
         el('button', { onclick: () => { if (!confirm('Apagar esta linha?')) return; S.scorecard.splice(i, 1); S.scorecard.forEach((l, j) => { l[0] = j + 1; }); S.scorecardSujo = true; guardar(); renderScorecard(); } }, 'Apagar')));
       r.append(card);
     });
   }
-  function dizer(texto) {
-    try {
-      if (!('speechSynthesis' in window)) { toast('Sem voz neste aparelho. Di-lo tu.'); return; }
-      const u = new SpeechSynthesisUtterance(texto); u.lang = 'pt-PT'; u.rate = 0.95;
-      window.speechSynthesis.cancel(); window.speechSynthesis.speak(u);
-    } catch (e) { toast('Sem voz neste aparelho. Di-lo tu.'); }
+  // "07:30", "7:30", "7h30" -> "07:30"; datas ("1899-12-30…", vindas da folha) e lixo -> ''
+  function horaHHMM(v) {
+    const m = String(v == null ? '' : v).trim().match(/^(\d{1,2})[:h](\d{2})(?::\d{2})?$/);
+    if (!m || Number(m[1]) > 23 || Number(m[2]) > 59) return '';
+    return ('0' + m[1]).slice(-2) + ':' + m[2];
+  }
+  async function gravarScorecard() {
+    if (document.activeElement && document.activeElement.blur) document.activeElement.blur();
+    guardar();
+    if (!configurado()) { toast('Guardado neste aparelho.'); renderScorecard(); return; }
+    if (!S.scorecardSujo) { toast('Já está gravado na folha.'); return; }
+    await sincronizar(false);
+    renderScorecard();
   }
 
   /* ---------- ecrã: Progresso ---------- */
@@ -810,7 +835,19 @@
         Object.keys(d.registos[nome]).forEach(k => { if (!pend.has(nome + '|' + k)) S.registos[nome][k] = d.registos[nome][k]; });
       });
     }
-    if (Array.isArray(d.scorecard) && (enviou || !S.scorecardSujo)) { if (d.scorecard.length) S.scorecard = d.scorecard; if (enviou) S.scorecardSujo = false; }
+    if (Array.isArray(d.scorecard) && (enviou || !S.scorecardSujo)) {
+      if (d.scorecard.length) {
+        // a folha pode devolver a hora como data ("1899-12-30"): fica a hora que já estava na app
+        const antes = S.scorecard;
+        S.scorecard = d.scorecard.map((r, i) => {
+          const a = Array.isArray(r) ? r.slice(0, 8) : [];
+          while (a.length < 8) a.push('');
+          a[1] = horaHHMM(a[1]) || horaHHMM(antes[i] && antes[i][1]);
+          return a;
+        });
+      }
+      if (enviou) S.scorecardSujo = false;
+    }
     if (Array.isArray(d.reflexoes)) {
       const locaisNaoEnviadas = enviou ? [] : S.reflexoes.filter(x => !x.enviada);
       S.reflexoes = d.reflexoes.map(x => ({ data: x.data, tipo: x.tipo, nota: x.nota, pergunta: x.pergunta, resposta: x.resposta, enviada: true })).concat(locaisNaoEnviadas);

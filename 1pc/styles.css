@@ -174,7 +174,7 @@ label.campo input::placeholder, label.campo textarea::placeholder { color: var(-
 .sc-linha .cab { display: flex; gap: 8px; align-items: center; }
 .sc-linha .ordem { width: 26px; height: 26px; border-radius: 50%; background: var(--papel-2); display: grid; place-items: center; font-size: 12px; color: var(--tinta-2); flex: none; }
 .sc-linha input.acao { flex: 1; min-width: 0; border: 0; border-bottom: 1px solid var(--linha); background: transparent; padding: 4px 2px; font-size: 15px; }
-.sc-linha input.hora { width: 60px; border: 0; border-bottom: 1px solid var(--linha); background: transparent; padding: 4px 2px; font-size: 13px; color: var(--tinta-2); }
+.sc-linha input.hora { width: 92px; flex: none; border: 0; border-bottom: 1px solid var(--linha); background: transparent; padding: 4px 2px; font-size: 13px; color: var(--tinta-2); }
 .aval { display: inline-flex; flex: none; border: 1.5px solid var(--linha); border-radius: 999px; overflow: hidden; }
 .aval button { border: 0; background: transparent; padding: 4px 11px; font-size: 15px; color: var(--tinta-2); }
 .aval button.on.mais { background: var(--verde-claro); color: var(--verde); }
@@ -236,3 +236,12 @@ nav.barra button .badge { position: absolute; margin-left: 22px; margin-top: -2p
 
 :focus-visible { outline: 2px solid var(--ouro); outline-offset: 2px; }
 @media (prefers-reduced-motion: reduce) { .votar.a-premir .onda { transition-duration: 0.01s; } .toast { transition: none; } }
+
+/* 0.1.4: Gravar no Scorecard, campos com título */
+.sc-botoes { display: flex; gap: 8px; }
+.sc-botoes .btn[disabled] { opacity: .45; }
+.sc-estado { font-size: 13px; margin: -4px 0 10px; color: var(--tinta-3); }
+.sc-estado.pendente { color: var(--tinta-2); }
+.sc-estado.ok::before { content: '\2713  '; color: var(--verde); }
+.sc-linha .sc-campo { display: block; font-size: 12px; color: var(--tinta-2); }
+.sc-linha .sc-campo input { margin-top: 3px; }
