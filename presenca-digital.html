@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Esboço: publicado sem indexação até aprovação. Retirar esta linha e acrescentar ao sitemap quando for para o público. -->
+    <meta name="robots" content="noindex, nofollow">
+    <title>Presença digital em 48h | André Carmo</title>
+    <meta name="description" content="Página própria para negócios que vivem do Google, do Instagram e do Facebook. Maquete privada sem custo antes de decidir. Online em 48 horas, desde 290 €.">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-blue: #0066cc;
+            --dark-blue: #001a33;
+            --electric-blue: #00d4ff;
+            --deep-space: #000814;
+            --text-light: #e6f7ff;
+            --text-gray: #b3d9ff;
+            --glass-bg: rgba(0, 102, 204, 0.1);
+            --glass-border: rgba(0, 212, 255, 0.2);
+            --ok: #3ddc97;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--deep-space);
+            color: var(--text-light);
+            line-height: 1.65;
+            overflow-x: hidden;
+        }
+        a { color: var(--electric-blue); }
+        .wrap { max-width: 1080px; margin: 0 auto; padding: 0 1.25rem; }
+
+        header.top {
+            position: sticky; top: 0; z-index: 10;
+            background: rgba(0, 8, 20, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--glass-border);
+        }
+        header.top .wrap { display: flex; justify-content: space-between; align-items: center; padding-top: .9rem; padding-bottom: .9rem; gap: 1rem; }
+        .logo { font-weight: 800; font-size: 1.2rem; text-decoration: none;
+            background: linear-gradient(135deg, var(--electric-blue), var(--primary-blue));
+            -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+        .top-cta { font-size: .9rem; font-weight: 600; text-decoration: none; white-space: nowrap; }
+
+        .hero { padding: 4.5rem 0 3.5rem; background:
+            radial-gradient(ellipse at 20% 0%, rgba(0, 128, 255, .22), transparent 60%),
+            radial-gradient(ellipse at 90% 30%, rgba(0, 212, 255, .10), transparent 55%); }
+        .tag { display: inline-block; font-size: .8rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+            color: var(--electric-blue); border: 1px solid var(--glass-border); border-radius: 999px; padding: .3rem .9rem; margin-bottom: 1.2rem; }
+        h1 { font-size: clamp(2rem, 6vw, 3.4rem); line-height: 1.12; font-weight: 800; max-width: 17ch; }
+        h1 span { color: var(--electric-blue); }
+        .lead { font-size: clamp(1.05rem, 2.4vw, 1.25rem); color: var(--text-gray); max-width: 60ch; margin: 1.2rem 0 2rem; }
+        .btns { display: flex; flex-wrap: wrap; gap: .8rem; }
+        .btn { display: inline-flex; align-items: center; gap: .55rem; padding: .95rem 1.6rem; border-radius: 10px;
+            font-weight: 700; text-decoration: none; font-size: 1rem; transition: transform .2s, box-shadow .2s; }
+        .btn-primary { background: linear-gradient(135deg, var(--primary-blue), var(--electric-blue)); color: #fff; }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(0, 212, 255, .3); }
+        .btn-ghost { border: 1px solid var(--glass-border); color: var(--text-light); background: var(--glass-bg); }
+        .facts { display: flex; flex-wrap: wrap; gap: 1.5rem 2.5rem; margin-top: 2.5rem; color: var(--text-gray); font-size: .95rem; }
+        .facts b { display: block; font-size: 1.6rem; color: var(--text-light); }
+
+        section { padding: 3.5rem 0; }
+        section.alt { background: linear-gradient(180deg, rgba(0, 26, 51, .55), rgba(0, 8, 20, 0)); }
+        h2 { font-size: clamp(1.5rem, 4vw, 2.1rem); font-weight: 800; margin-bottom: .6rem; }
+        .sub { color: var(--text-gray); max-width: 62ch; margin-bottom: 2rem; }
+
+        .grid { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+        .card { background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 14px; padding: 1.4rem; }
+        .card i { color: var(--electric-blue); font-size: 1.35rem; margin-bottom: .7rem; display: block; }
+        .card h3 { font-size: 1.05rem; margin-bottom: .35rem; }
+        .card p { color: var(--text-gray); font-size: .95rem; }
+
+        ol.steps { list-style: none; counter-reset: s; display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+        ol.steps li { counter-increment: s; position: relative; padding: 1.4rem 1.4rem 1.4rem 4rem; border-radius: 14px;
+            border: 1px solid var(--glass-border); background: rgba(0, 26, 51, .6); }
+        ol.steps li::before { content: counter(s); position: absolute; left: 1.2rem; top: 1.2rem; width: 2rem; height: 2rem;
+            border-radius: 50%; display: grid; place-items: center; font-weight: 800;
+            background: linear-gradient(135deg, var(--primary-blue), var(--electric-blue)); color: #fff; }
+        ol.steps h3 { font-size: 1.02rem; margin-bottom: .3rem; }
+        ol.steps p { color: var(--text-gray); font-size: .93rem; }
+
+        .price { display: grid; gap: 1.5rem; grid-template-columns: 1.1fr 1fr; align-items: start; }
+        .price-box { border: 1px solid var(--electric-blue); border-radius: 16px; padding: 2rem; background: rgba(0, 102, 204, .14); }
+        .price-box .from { color: var(--text-gray); font-size: .95rem; }
+        .price-box .value { font-size: 3rem; font-weight: 800; line-height: 1.1; margin: .2rem 0 .3rem; }
+        .price-box .note { color: var(--text-gray); font-size: .9rem; margin-bottom: 1.2rem; }
+        ul.check { list-style: none; display: grid; gap: .55rem; }
+        ul.check li { padding-left: 1.7rem; position: relative; color: var(--text-light); }
+        ul.check li::before { content: "\f00c"; font-family: "Font Awesome 6 Free"; font-weight: 900; position: absolute; left: 0; top: .1rem; color: var(--ok); }
+        .honest { border-left: 3px solid var(--electric-blue); padding: 1rem 1.2rem; background: var(--glass-bg); border-radius: 0 12px 12px 0; }
+        .honest h3 { margin-bottom: .4rem; }
+        .honest p { color: var(--text-gray); }
+
+        details { border: 1px solid var(--glass-border); border-radius: 12px; padding: 1rem 1.2rem; background: rgba(0, 26, 51, .5); }
+        details + details { margin-top: .7rem; }
+        summary { cursor: pointer; font-weight: 600; }
+        details p { color: var(--text-gray); margin-top: .6rem; }
+
+        .final { text-align: center; padding: 4rem 0; }
+        .final .btns { justify-content: center; }
+        footer { border-top: 1px solid var(--glass-border); padding: 2rem 0; color: var(--text-gray); font-size: .9rem; }
+        footer .wrap { display: flex; flex-wrap: wrap; gap: .8rem 2rem; justify-content: space-between; }
+        footer a { color: var(--text-gray); }
+
+        @media (max-width: 760px) {
+            .price { grid-template-columns: 1fr; }
+            .hero { padding-top: 3rem; }
+            .top-cta span { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="top">
+    <div class="wrap">
+        <a class="logo" href="index.html">André Carmo</a>
+        <a class="top-cta" href="https://wa.me/351912405722?text=Ol%C3%A1%2C%20gostava%20de%20ver%20a%20maquete%20do%20site%20para%20o%20meu%20neg%C3%B3cio." target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> <span>Pedir maquete grátis</span></a>
+    </div>
+</header>
+
+<main>
+    <section class="hero">
+        <div class="wrap">
+            <span class="tag">Presença digital em 48h</span>
+            <h1>Os seus clientes procuram no Google. <span>Falta-lhe a página.</span></h1>
+            <p class="lead">Para negócios com boas avaliações que vivem do Instagram, do Facebook e do telefone. Faço uma maquete do seu site antes de decidir, sem custo. Se gostar, fica online em 48 horas.</p>
+            <div class="btns">
+                <a class="btn btn-primary" href="https://wa.me/351912405722?text=Ol%C3%A1%2C%20gostava%20de%20ver%20a%20maquete%20do%20site%20para%20o%20meu%20neg%C3%B3cio." target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Pedir a maquete pelo WhatsApp</a>
+                <a class="btn btn-ghost" href="mailto:geral@andrecarmo.pt?subject=Maquete%20do%20site"><i class="fas fa-envelope"></i> geral@andrecarmo.pt</a>
+            </div>
+            <div class="facts">
+                <div><b>0 €</b>pela maquete</div>
+                <div><b>48 h</b>até ficar online</div>
+                <div><b>desde 290 €</b>preço à vista</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="alt" id="porque">
+        <div class="wrap">
+            <h2>Já tem Instagram. Para que serve um site?</h2>
+            <p class="sub">O Instagram mostra o seu trabalho a quem já o segue. O site serve para quem ainda não o conhece e está a procurar.</p>
+            <div class="grid">
+                <div class="card"><i class="fas fa-map-location-dot"></i><h3>O Google pergunta pelo seu site</h3><p>No perfil do Google e no Maps, o campo "Website" vazio deixa o cliente sem o passo seguinte. Muitas vezes, esse cliente escolhe o vizinho que tem página.</p></div>
+                <div class="card"><i class="fas fa-robot"></i><h3>As pesquisas com IA citam páginas</h3><p>Quem pergunta ao ChatGPT ou ao Google "onde há um bom cabeleireiro em Gondomar" recebe respostas tiradas de sites. Perfis de Instagram raramente entram.</p></div>
+                <div class="card"><i class="fas fa-house-lock"></i><h3>A conta numa rede social é emprestada</h3><p>Uma conta pirateada ou suspensa leva consigo o canal inteiro. O domínio fica em seu nome e ninguém lho tira.</p></div>
+                <div class="card"><i class="fas fa-list-check"></i><h3>Tudo num só sítio</h3><p>Serviços, preços, horário, morada e marcação. O cliente encontra a resposta sem ter de mandar mensagem a perguntar.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="como">
+        <div class="wrap">
+            <h2>Como funciona</h2>
+            <p class="sub">Vê o resultado antes de pagar. Se não gostar, não paga nada e a maquete é apagada.</p>
+            <ol class="steps">
+                <li><h3>Olho para o seu perfil público</h3><p>Avaliações, serviços, fotografias e horário que já estão no Google e nas redes.</p></li>
+                <li><h3>Faço a maquete privada</h3><p>Uma pré-visualização do seu site, com o seu nome e os seus serviços. Só o senhor ou a senhora a vê.</p></li>
+                <li><h3>Ajustamos e publico</h3><p>Uma ronda de alterações incluída. Depois de aprovada e com as fotografias escolhidas, fica online em 48 horas.</p></li>
+                <li><h3>Se quiser, damos o passo seguinte</h3><p>Marcações automáticas, respostas no WhatsApp fora de horas e pedido de avaliações aos clientes satisfeitos.</p></li>
+            </ol>
+        </div>
+    </section>
+
+    <section class="alt" id="preco">
+        <div class="wrap">
+            <h2>Preço</h2>
+            <p class="sub">O preço fica fechado na proposta, antes de começar. Sem surpresas depois.</p>
+            <div class="price">
+                <div class="price-box">
+                    <div class="from">Página própria, desde</div>
+                    <div class="value">290 €</div>
+                    <div class="note">Pagamento só depois de aprovar a maquete.</div>
+                    <ul class="check">
+                        <li>Página com serviços, preços, horário e mapa</li>
+                        <li>Botões para ligar e para falar no WhatsApp</li>
+                        <li>Pensada primeiro para telemóvel</li>
+                        <li>Ligação ao seu perfil do Google</li>
+                        <li>Domínio .pt registado em nome do seu negócio</li>
+                        <li>Uma ronda de alterações incluída</li>
+                    </ul>
+                </div>
+                <div class="honest">
+                    <h3>Quando não compensa</h3>
+                    <p>Se a sua agenda já está cheia por recomendação, ou se marca tudo pelo Booksy ou pela Fresha, talvez não precise de site. Digo-lhe isso na primeira conversa.</p>
+                    <br>
+                    <h3>O que fica a seu cargo</h3>
+                    <p>O custo anual do domínio, pago diretamente pelo seu negócio, e 3 a 5 fotografias de que goste. A manutenção é opcional, com preço indicado na proposta.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="perguntas">
+        <div class="wrap">
+            <h2>Perguntas frequentes</h2>
+            <details><summary>Tenho de deixar de usar o Instagram?</summary><p>Não. O site complementa as redes: liga para elas e recebe quem chega pelo Google.</p></details>
+            <details><summary>De quem fica o domínio?</summary><p>Do seu negócio. É registado em seu nome e pode levá-lo para onde quiser.</p></details>
+            <details><summary>E se não gostar da maquete?</summary><p>Não paga nada. A maquete é apagada e não fica publicada em lado nenhum.</p></details>
+            <details><summary>Quanto tempo demora?</summary><p>A maquete fica pronta em poucos dias. Depois de a aprovar e de enviar as fotografias, o site fica online em 48 horas.</p></details>
+            <details><summary>Quem sou?</summary><p>André Carmo, engenheiro com 30 anos em tecnologia, em Rio Tinto. Trabalho com pequenos negócios do Grande Porto em sites e automação do atendimento. <a href="index.html">Saber mais</a>.</p></details>
+        </div>
+    </section>
+
+    <section class="final">
+        <div class="wrap">
+            <h2>Quer ver como ficava o seu?</h2>
+            <p class="sub" style="margin: 0 auto 1.8rem;">Diga-me o nome do negócio. Recebe a maquete sem compromisso.</p>
+            <div class="btns">
+                <a class="btn btn-primary" href="https://wa.me/351912405722?text=Ol%C3%A1%2C%20gostava%20de%20ver%20a%20maquete%20do%20site%20para%20o%20meu%20neg%C3%B3cio." target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> WhatsApp 912 405 722</a>
+                <a class="btn btn-ghost" href="mailto:geral@andrecarmo.pt?subject=Maquete%20do%20site"><i class="fas fa-envelope"></i> Enviar email</a>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <div class="wrap">
+        <span>© 2026 André Carmo · geral@andrecarmo.pt · +351 912 405 722</span>
+        <span><a href="politica-privacidade.html">Política de privacidade</a></span>
+    </div>
+</footer>
+
+</body>
+</html>
