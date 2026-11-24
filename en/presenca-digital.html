@@ -1,0 +1,1175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow">
+    <title>Digital presence in 48h | André Carmo</title>
+    <meta name="description" content="A website of their own for businesses that live on Google, Instagram and Facebook. Free private mock-up before you decide. Live in 48 hours, from €290.">
+    <link rel="canonical" href="https://andrecarmo.pt/en/presenca-digital.html">
+    <link rel="alternate" hreflang="pt-PT" href="https://andrecarmo.pt/presenca-digital.html">
+    <link rel="alternate" hreflang="en" href="https://andrecarmo.pt/en/presenca-digital.html">
+    <link rel="alternate" hreflang="x-default" href="https://andrecarmo.pt/presenca-digital.html">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://andrecarmo.pt/en/presenca-digital.html">
+    <meta property="og:title" content="Digital presence in 48h | André Carmo">
+    <meta property="og:description" content="Free private mock-up before you decide. Live in 48 hours, from €290.">
+    <meta property="og:locale" content="en_GB">
+    <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-blue: #0066cc;
+            --dark-blue: #001a33;
+            --electric-blue: #00d4ff;
+            --neon-blue: #0080ff;
+            --deep-space: #000814;
+            --text-light: #e6f7ff;
+            --text-gray: #b3d9ff;
+            --glass-bg: rgba(0, 102, 204, 0.1);
+            --glass-border: rgba(0, 212, 255, 0.2);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--deep-space);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: var(--dark-blue); }
+        ::-webkit-scrollbar-thumb { background: var(--primary-blue); border-radius: 5px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--electric-blue); }
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(0, 8, 20, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--glass-border);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+        nav.scrolled {
+            background: rgba(0, 8, 20, 0.98);
+            box-shadow: 0 5px 30px rgba(0, 102, 204, 0.3);
+        }
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--electric-blue), var(--primary-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        .nav-links a {
+            color: var(--text-gray);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .nav-links a:hover { color: var(--electric-blue); }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--electric-blue);
+            transition: width 0.3s ease;
+        }
+        .nav-links a:hover::after { width: 100%; }
+        .nav-dropdown { position: relative; }
+        .nav-dropdown-toggle {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+            font: inherit;
+        }
+        .nav-dropdown-toggle i {
+            font-size: 0.65rem;
+            transition: transform 0.3s ease;
+        }
+        .nav-dropdown:hover .nav-dropdown-toggle i,
+        .nav-dropdown:focus-within .nav-dropdown-toggle i { transform: rotate(180deg); }
+        .nav-dropdown-menu {
+            list-style: none;
+            position: absolute;
+            top: calc(100% + 1rem);
+            left: 50%;
+            transform: translateX(-50%) translateY(-8px);
+            background: rgba(0, 8, 20, 0.98);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 0.6rem;
+            min-width: 200px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            z-index: 10;
+        }
+        .nav-dropdown:hover .nav-dropdown-menu,
+        .nav-dropdown:focus-within .nav-dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+        }
+        .nav-dropdown-menu a {
+            display: block;
+            padding: 0.6rem 0.9rem;
+            border-radius: 8px;
+            white-space: nowrap;
+            color: var(--text-gray);
+        }
+        .nav-dropdown-menu a:hover { background: rgba(0, 212, 255, 0.08); color: var(--electric-blue); }
+        .nav-dropdown-menu a::after { display: none; }
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--electric-blue);
+        }
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: linear-gradient(135deg, var(--deep-space) 0%, var(--dark-blue) 50%, var(--deep-space) 100%);
+            overflow: hidden;
+            padding: 6rem 2rem 4rem;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('images/hero-tech.jpg');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.3;
+            animation: pulse 8s ease-in-out infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 0.2; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(1.05); }
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            text-align: center;
+        }
+        .hero-badge {
+            display: inline-block;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            color: var(--electric-blue);
+            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #ffffff 0%, var(--electric-blue) 50%, var(--primary-blue) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: var(--text-gray);
+            margin-bottom: 1rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .hero-tagline {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--electric-blue);
+            margin-bottom: 2.5rem;
+            letter-spacing: 0.02em;
+        }
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .btn {
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1rem;
+            cursor: pointer;
+            border: none;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-blue), var(--neon-blue));
+            color: white;
+            box-shadow: 0 10px 30px rgba(0, 102, 204, 0.4);
+        }
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 128, 255, 0.6);
+        }
+        .btn-secondary {
+            background: transparent;
+            color: var(--electric-blue);
+            border: 2px solid var(--electric-blue);
+        }
+        .btn-secondary:hover {
+            background: var(--electric-blue);
+            color: var(--deep-space);
+        }
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 4rem;
+            flex-wrap: wrap;
+        }
+        .stat { text-align: center; }
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--electric-blue);
+            display: block;
+        }
+        .stat-label {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+        section {
+            padding: 6rem 2rem;
+            position: relative;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        .section-tag {
+            color: var(--electric-blue);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #ffffff, var(--electric-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .section-subtitle {
+            color: var(--text-gray);
+            max-width: 600px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+        }
+        .about {
+            background: linear-gradient(180deg, var(--deep-space) 0%, var(--dark-blue) 100%);
+        }
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: stretch;
+        }
+        .about-image { position: relative; }
+        .about-image img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 102, 204, 0.3);
+            border: 2px solid var(--glass-border);
+        }
+        .about-content h3 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--electric-blue);
+        }
+        .about-content p {
+            color: var(--text-gray);
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+        .experience-list {
+            list-style: none;
+            margin-top: 2rem;
+        }
+        .experience-list li {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            color: var(--text-light);
+        }
+        .experience-list i {
+            color: var(--electric-blue);
+            font-size: 1.2rem;
+        }
+        .services-preview {
+            background: var(--deep-space);
+            position: relative;
+        }
+        .services-preview::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('https://kimi-web-img.moonshot.cn/img/thumbs.dreamstime.com/0c28dc25fb2289c7ba659de341ddb878960b758d.jpg ');
+            background-size: cover;
+            opacity: 0.1;
+            background-attachment: fixed;
+        }
+        #sectores {
+            background: var(--dark-blue);
+        }
+        .services-links-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+        .service-link-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2.5rem;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(10px);
+            text-align: center;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .service-link-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 102, 204, 0.3);
+            border-color: var(--electric-blue);
+        }
+        .service-link-icon {
+            font-size: 3rem;
+            color: var(--electric-blue);
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+        .service-link-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-light);
+        }
+        .service-link-card p {
+            color: var(--text-gray);
+            margin-bottom: 1.5rem;
+        }
+        .service-link-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--electric-blue);
+            font-weight: 600;
+            transition: gap 0.3s ease;
+            margin-top: auto;
+        }
+        .service-link-card:hover .service-link-btn {
+            gap: 1rem;
+        }
+        .portfolio {
+            background: linear-gradient(180deg, var(--dark-blue) 0%, var(--deep-space) 100%);
+        }
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+        .portfolio-item {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            min-height: 880px;
+        }
+        .portfolio-item:hover {
+            transform: scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 102, 204, 0.4);
+        }
+        .portfolio-image {
+            height: 250px;
+            flex-shrink: 0;
+            background: linear-gradient(135deg, var(--primary-blue), var(--dark-blue));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: var(--electric-blue);
+            position: relative;
+            overflow: hidden;
+        }
+        .portfolio-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to top, var(--deep-space), transparent);
+        }
+        .portfolio-content { padding: 2rem; display: flex; flex-direction: column; flex: 1; }
+        .portfolio-tag {
+            display: inline-block;
+            align-self: flex-start;
+            background: var(--glass-bg);
+            color: var(--electric-blue);
+            padding: 0.3rem 1rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            margin-bottom: 1rem;
+            border: 1px solid var(--glass-border);
+        }
+        .portfolio-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-light);
+        }
+        .portfolio-content p {
+            color: var(--text-gray);
+            margin-bottom: 1.5rem;
+        }
+        .portfolio-stats {
+            display: flex;
+            justify-content: space-between;
+            gap: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--glass-border);
+            margin-top: auto;
+        }
+        .portfolio-stat { text-align: center; }
+        .portfolio-stat-tag {
+            display: block;
+            font-size: 0.65rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-gray);
+            margin-bottom: 0.2rem;
+        }
+        .portfolio-stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--electric-blue);
+            display: block;
+        }
+        .portfolio-stat-label {
+            font-size: 0.8rem;
+            color: var(--text-gray);
+        }
+        .portfolio-note {
+            display: inline-block;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 50px;
+            padding: 0.5rem 1.5rem;
+            margin-top: 1.5rem;
+            color: var(--electric-blue);
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        .portfolio-item-note {
+            font-size: 0.75rem;
+            color: var(--text-gray);
+            font-style: italic;
+            margin-top: 0.75rem;
+        }
+        .process { background: var(--dark-blue); }
+        .process-steps {
+            display: flex;
+            justify-content: space-between;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        .process-step {
+            flex: 1;
+            min-width: 200px;
+            text-align: center;
+            position: relative;
+        }
+        .process-step:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            top: 40px;
+            right: -50%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary-blue), transparent);
+        }
+        .step-number {
+            width: 80px;
+            height: 80px;
+            background: var(--glass-bg);
+            border: 2px solid var(--electric-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--electric-blue);
+            margin: 0 auto 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+        .process-step h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-light);
+        }
+        .process-step p {
+            color: var(--text-gray);
+            font-size: 0.95rem;
+        }
+        .pricing {
+            background: var(--dark-blue);
+        }
+        #equipas {
+            background: var(--deep-space);
+        }
+        .contact {
+            background: var(--deep-space);
+            position: relative;
+        }
+        .contact::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('https://kimi-web-img.moonshot.cn/img/gd-hbimg.huaban.com/ef89a69a06971ff7fdd81179be1b3c8bddcf73d7 ');
+            background-size: cover;
+            opacity: 0.1;
+        }
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            position: relative;
+            z-index: 1;
+        }
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+        .contact-info h3 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--electric-blue);
+        }
+        .contact-info > p {
+            color: var(--text-gray);
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+        .contact-methods {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        .contact-method {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.5rem;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+        .contact-method:hover {
+            border-color: var(--electric-blue);
+            transform: translateX(10px);
+        }
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--primary-blue);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.3rem;
+        }
+        .contact-details h4 {
+            color: var(--text-light);
+            margin-bottom: 0.3rem;
+        }
+        .contact-details p {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+        .contact-form {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 3rem;
+            backdrop-filter: blur(10px);
+        }
+        .form-group { margin-bottom: 1.5rem; }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(0, 26, 51, 0.5);
+            border: 1px solid var(--glass-border);
+            border-radius: 10px;
+            color: var(--text-light);
+            font-family: inherit;
+            transition: all 0.3s ease;
+        }
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--electric-blue);
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.2);
+        }
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        footer {
+            background: var(--dark-blue);
+            border-top: 1px solid var(--glass-border);
+            padding: 3rem 2rem 2rem;
+        }
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+        .footer-brand p {
+            color: var(--text-gray);
+            margin-top: 1rem;
+            line-height: 1.8;
+        }
+        .footer-links h4 {
+            color: var(--electric-blue);
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+        .footer-links ul { list-style: none; }
+        .footer-links li { margin-bottom: 0.8rem; }
+        .footer-links a {
+            color: var(--text-gray);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .footer-links a:hover { color: var(--electric-blue); }
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid var(--glass-border);
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--electric-blue);
+            transition: all 0.3s ease;
+        }
+        .social-links a:hover {
+            background: var(--electric-blue);
+            color: var(--deep-space);
+            transform: translateY(-3px);
+        }
+        @media (max-width: 968px) {
+            .nav-links { display: none; }
+            .mobile-menu { display: block; }
+            .about-grid, .contact-grid { grid-template-columns: 1fr; }
+            .process-step:not(:last-child)::after { display: none; }
+            .process-steps { flex-direction: column; }
+            .footer-content { grid-template-columns: 1fr 1fr; }
+            .services-links-grid { grid-template-columns: repeat(2, 1fr); }
+            .nav-dropdown-menu {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                background: transparent;
+                border: none;
+                box-shadow: none;
+                padding: 0.25rem 0 0 1.25rem;
+                min-width: 0;
+            }
+            .nav-dropdown-toggle i { display: none; }
+        }
+        @media (max-width: 640px) {
+            .services-links-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 576px) {
+            .hero-stats {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .social-links { justify-content: center; }
+            .contact-form { padding: 2rem 1.5rem; }
+        }
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        #successMessage, #errorMessage { display: none; }
+            /* ===== Seletor de idioma / Language switcher ===== */
+        .lang-switch {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin-left: 3rem;
+            flex: 0 0 auto;
+        }
+        .lang-switch-label {
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--text-gray, #b3d9ff);
+            white-space: nowrap;
+            line-height: 1;
+        }
+        .lang-flag {
+            width: 30px;
+            height: 30px;
+            min-width: 30px;
+            border-radius: 50%;
+            overflow: hidden;
+            display: block;
+            border: 1px solid var(--glass-border, rgba(0, 212, 255, 0.35));
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .lang-flag:hover { transform: scale(1.12); box-shadow: 0 0 14px rgba(0, 212, 255, 0.55); }
+        .lang-flag .flag-on, .lang-flag .flag-off { display: block; width: 100%; height: 100%; }
+        .lang-flag .flag-off { display: none; }
+        .lang-flag:hover .flag-on { display: none; }
+        .lang-flag:hover .flag-off { display: block; }
+        .lang-flag svg { display: block; width: 100%; height: 100%; }
+        .nav-container .nav-links { margin-left: auto; }
+        @media (max-width: 1180px) { .lang-switch-label { display: none; } }
+        @media (max-width: 1080px) { .nav-container .nav-links { gap: 1.4rem; } }
+        @media (max-width: 968px) {
+            .lang-switch { margin-left: auto; }
+            .lang-switch-label { display: inline; }
+            .mobile-menu { margin-left: 1.25rem; }
+        }
+        @media (max-width: 560px) { .lang-switch-label { display: none; } }
+    
+        /* ---------- Presença digital em 48h ---------- */
+        .pd-wrap { max-width: 1080px; margin: 0 auto; padding: 0 1.25rem; }
+        section.pd { padding: 3.5rem 0; }
+        section.pd-hero { padding: 8rem 0 3.5rem; background:
+            radial-gradient(ellipse at 20% 0%, rgba(0, 128, 255, .22), transparent 60%),
+            radial-gradient(ellipse at 90% 30%, rgba(0, 212, 255, .10), transparent 55%); }
+        .pd-hero h1 { font-size: clamp(2rem, 6vw, 3.4rem); line-height: 1.12; font-weight: 800; max-width: 17ch; }
+        .pd-hero h1 span { color: var(--electric-blue); }
+        .pd-lead { font-size: clamp(1.05rem, 2.4vw, 1.25rem); color: var(--text-gray); max-width: 60ch; margin: 1.2rem 0 2rem; }
+        .pd-btns { display: flex; flex-wrap: wrap; gap: .8rem; }
+        .pd-facts { display: flex; flex-wrap: wrap; gap: 1.5rem 2.5rem; margin-top: 2.5rem; color: var(--text-gray); font-size: .95rem; }
+        .pd-facts b { display: block; font-size: 1.6rem; color: var(--text-light); }
+        section.pd-alt { background: linear-gradient(180deg, rgba(0, 26, 51, .55), rgba(0, 8, 20, 0)); }
+        .pd h2 { font-size: clamp(1.5rem, 4vw, 2.1rem); font-weight: 800; margin-bottom: .6rem; }
+        .pd-sub { color: var(--text-gray); max-width: 62ch; margin-bottom: 2rem; }
+        .pd-grid { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+        .pd-card { background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 14px; padding: 1.4rem; }
+        .pd-card > i { color: var(--electric-blue); font-size: 1.35rem; margin-bottom: .7rem; display: block; }
+        .pd-card h3 { font-size: 1.05rem; margin-bottom: .35rem; }
+        .pd-card p { color: var(--text-gray); font-size: .95rem; }
+        ol.pd-steps { list-style: none; counter-reset: s; display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+        ol.pd-steps li { counter-increment: s; position: relative; padding: 1.4rem 1.4rem 1.4rem 4rem; border-radius: 14px;
+            border: 1px solid var(--glass-border); background: rgba(0, 26, 51, .6); }
+        ol.pd-steps li::before { content: counter(s); position: absolute; left: 1.2rem; top: 1.2rem; width: 2rem; height: 2rem;
+            border-radius: 50%; display: grid; place-items: center; font-weight: 800;
+            background: linear-gradient(135deg, var(--primary-blue), var(--electric-blue)); color: #fff; }
+        ol.pd-steps h3 { font-size: 1.02rem; margin-bottom: .3rem; }
+        ol.pd-steps p { color: var(--text-gray); font-size: .93rem; }
+        .pd-price { display: grid; gap: 1.5rem; grid-template-columns: 1.1fr 1fr; align-items: start; }
+        .pd-price-box { border: 1px solid var(--electric-blue); border-radius: 16px; padding: 2rem; background: rgba(0, 102, 204, .14); }
+        .pd-price-box .pd-from { color: var(--text-gray); font-size: .95rem; }
+        .pd-price-box .pd-value { font-size: 3rem; font-weight: 800; line-height: 1.1; margin: .2rem 0 .3rem; }
+        .pd-price-box .pd-note { color: var(--text-gray); font-size: .9rem; margin-bottom: 1.2rem; }
+        ul.pd-check { list-style: none; display: grid; gap: .55rem; }
+        ul.pd-check li { padding-left: 1.7rem; position: relative; }
+        ul.pd-check li i { position: absolute; left: 0; top: .3rem; color: #3ddc97; }
+        .pd-honest { border-left: 3px solid var(--electric-blue); padding: 1rem 1.2rem; background: var(--glass-bg); border-radius: 0 12px 12px 0; }
+        .pd-honest h3 { margin-bottom: .4rem; }
+        .pd-honest p { color: var(--text-gray); }
+        .pd details { border: 1px solid var(--glass-border); border-radius: 12px; padding: 1rem 1.2rem; background: rgba(0, 26, 51, .5); }
+        .pd details + details { margin-top: .7rem; }
+        .pd summary { cursor: pointer; font-weight: 600; }
+        .pd details p { color: var(--text-gray); margin-top: .6rem; }
+        .pd details a, ol.pd-steps a { color: var(--electric-blue); }
+        section.pd-final { text-align: center; padding: 4rem 0; }
+        .pd-final .pd-btns { justify-content: center; }
+        @media (max-width: 760px) { .pd-price { grid-template-columns: 1fr; } section.pd-hero { padding-top: 6.5rem; } }
+    </style>
+</head>
+<body>
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-lightbulb"></i>
+                André Carmo
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html#inicio">Home</a></li>
+                <li><a href="index.html#sobre">About</a></li>
+                <li class="nav-dropdown">
+                    <a href="index.html#servicos" class="nav-dropdown-toggle">Clients <i class="fas fa-chevron-down"></i></a>
+                    <ul class="nav-dropdown-menu">
+                        <li><a href="index.html#servicos">What I Solve</a></li>
+                        <li><a href="index.html#sectores">By Sector</a></li>
+                    </ul>
+                </li>
+                <li><a href="presenca-digital.html" aria-current="page" style="color: var(--electric-blue);">Websites in 48h</a></li>
+                <li><a href="index.html#portfolio">Portfolio</a></li>
+                <li><a href="index.html#precos">Pricing</a></li>
+                <li><a href="index.html#contactos">Contact</a></li>
+            </ul>
+            <div class="lang-switch">
+                <span class="lang-switch-label">Select language</span>
+                <a href="../presenca-digital.html" class="lang-flag" hreflang="pt-PT" title="Ver esta página em português" aria-label="Ver esta página em português">
+                    <span class="flag-on"><svg viewBox="0 0 60 60" aria-hidden="true"><rect width="60" height="60" fill="#012169"/><path d="M0 0 60 60M60 0 0 60" stroke="#FFFFFF" stroke-width="12"/><path d="M0 0 60 60M60 0 0 60" stroke="#C8102E" stroke-width="6"/><path d="M30 0V60M0 30H60" stroke="#FFFFFF" stroke-width="20"/><path d="M30 0V60M0 30H60" stroke="#C8102E" stroke-width="12"/></svg></span>
+                    <span class="flag-off"><svg viewBox="0 0 60 60" aria-hidden="true"><rect width="60" height="60" fill="#DA291C"/><rect width="24" height="60" fill="#046A38"/><circle cx="24" cy="30" r="11" fill="#FFE900" stroke="#046A38" stroke-width="1.5"/><circle cx="24" cy="30" r="6.5" fill="#DA291C" stroke="#FFFFFF" stroke-width="1.5"/></svg></span>
+                </a>
+            </div>
+            <div class="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+<main>
+    <section class="pd pd-hero">
+        <div class="pd-wrap">
+            <span class="section-tag">Digital presence in 48h</span>
+            <h1>Your customers search on Google. <span>You're missing the page.</span></h1>
+            <p class="pd-lead">For well-reviewed businesses that live on Instagram, Facebook and the phone. I build a mock-up of your website before you decide, free of charge. If you like it, it goes live in 48 hours.</p>
+            <div class="pd-btns">
+                <a class="btn btn-primary" href="https://wa.me/351912405722?text=Hello%2C%20I%27d%20like%20to%20see%20the%20website%20mock-up%20for%20my%20business." target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Ask for the mock-up on WhatsApp</a>
+                <a class="btn btn-secondary" href="mailto:geral@andrecarmo.pt?subject=Website%20mock-up"><i class="fas fa-envelope"></i> geral@andrecarmo.pt</a>
+            </div>
+            <div class="pd-facts">
+                <div><b>€0</b>for the mock-up</div>
+                <div><b>48 h</b>to go live</div>
+                <div><b>from €290</b>price up front</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="pd pd-alt" id="porque">
+        <div class="pd-wrap">
+            <h2>You already have Instagram. Why a website?</h2>
+            <p class="pd-sub">Instagram shows your work to people who already follow you. A website is for people who don't know you yet and are searching.</p>
+            <div class="pd-grid">
+                <div class="pd-card fade-in"><i class="fas fa-map-marker-alt"></i><h3>Google asks for your website</h3><p>On your Google profile and on Maps, an empty "Website" field leaves the customer without a next step. Often that customer picks the competitor next door who has a page.</p></div>
+                <div class="pd-card fade-in"><i class="fas fa-robot"></i><h3>AI search quotes web pages</h3><p>Anyone asking ChatGPT or Google "where is a good hairdresser in Gondomar" gets answers taken from websites. Instagram profiles rarely make it in.</p></div>
+                <div class="pd-card fade-in"><i class="fas fa-lock"></i><h3>A social media account is borrowed</h3><p>A hacked or suspended account takes the whole channel with it. The domain is in your name and nobody can take it away.</p></div>
+                <div class="pd-card fade-in"><i class="fas fa-list-check"></i><h3>Everything in one place</h3><p>Services, prices, opening hours, address and booking. Customers find the answer without having to message you to ask.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="pd" id="como">
+        <div class="pd-wrap">
+            <h2>How it works</h2>
+            <p class="pd-sub">You see the result before you pay. If you don't like it, you pay nothing and the mock-up is deleted.</p>
+            <ol class="pd-steps">
+                <li><h3>I look at your public profile</h3><p>Reviews, services, photos and opening hours already on Google and social media.</p></li>
+                <li><h3>I build the private mock-up</h3><p>A preview of your website, with your name and your services. Only you can see it.</p></li>
+                <li><h3>We adjust it and I publish</h3><p>One round of changes included. Once approved and the photos are chosen, it goes live in 48 hours.</p></li>
+                <li><h3>If you want, we take the next step</h3><p>Automatic bookings, out-of-hours WhatsApp replies and review requests to happy customers. <a href="#passo-seguinte">See prices</a>.</p></li>
+            </ol>
+        </div>
+    </section>
+
+    <section class="pd pd-alt" id="preco">
+        <div class="pd-wrap">
+            <h2>Price</h2>
+            <p class="pd-sub">The price is fixed in the proposal, before any work starts. No surprises later.</p>
+            <div class="pd-price">
+                <div class="pd-price-box">
+                    <div class="pd-from">Your own website, from</div>
+                    <div class="pd-value">€290</div>
+                    <div class="pd-note">You only pay after approving the mock-up.</div>
+                    <ul class="pd-check">
+                        <li><i class="fas fa-check"></i>Page with services, prices, opening hours and map</li>
+                        <li><i class="fas fa-check"></i>Buttons to call and to chat on WhatsApp</li>
+                        <li><i class="fas fa-check"></i>Designed mobile-first</li>
+                        <li><i class="fas fa-check"></i>Linked to your Google profile</li>
+                        <li><i class="fas fa-check"></i>.pt domain registered in your business's name</li>
+                        <li><i class="fas fa-check"></i>One round of changes included</li>
+                    </ul>
+                </div>
+                <div class="pd-honest">
+                    <h3>When it isn't worth it</h3>
+                    <p>If your diary is already full through word of mouth, or you take every booking through Booksy or Fresha, you may not need a website. I'll tell you that in our first conversation.</p>
+                    <br>
+                    <h3>What you cover</h3>
+                    <p>The yearly domain fee, paid directly by your business, and 3 to 5 photos you like. Maintenance is optional, priced in the proposal.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="pd" id="passo-seguinte">
+        <div class="pd-wrap">
+            <h2>After the website: the next step</h2>
+            <p class="pd-sub">Once the website brings in contacts, automation makes sure none goes unanswered. Same prices as the home page.</p>
+            <div class="pd-price">
+                <div class="pd-price-box" style="border-color: var(--glass-border);">
+                    <span class="section-tag">For businesses already running ads</span>
+                    <h3 style="font-size: 1.3rem; margin: .5rem 0 .4rem;">Lead in 60 seconds</h3>
+                    <p style="color: var(--text-gray);">Every contact from an ad or form gets a WhatsApp reply in under a minute, is qualified and, where it fits, leaves with a booking.</p>
+                    <div class="pd-from" style="margin-top: 1rem;">from</div>
+                    <div class="pd-value" style="font-size: 2.4rem;">€490</div>
+                    <div class="pd-note">setup + €99 per month</div>
+                    <p style="color: var(--electric-blue); font-size: .95rem; margin-bottom: 1rem;">Founder price until 22 December: €290 setup, start in January.</p>
+                    <a href="qualificacao-leads.html" class="btn btn-secondary">See how it works</a>
+                    <p style="color: var(--text-gray); font-size: .85rem; margin-top: 1rem;">The monthly fee covers hosting, maintenance and adjustments. Per-message fees charged by Meta, where they apply, are billed at cost.</p>
+                </div>
+                <div class="pd-honest">
+                    <h3>Automation and AI agents</h3>
+                    <p>Bookings, customer service, email, system integrations and AI agents: tailored quote after a 20-minute conversation.</p>
+                    <br>
+                    <ul class="pd-check">
+                        <li><i class="fas fa-check"></i>Proposal in 24 hours</li>
+                        <li><i class="fas fa-check"></i>No obligation to proceed</li>
+                        <li><i class="fas fa-check"></i>Implementation in 24 to 48 hours</li>
+                        <li><i class="fas fa-check"></i>Ongoing support</li>
+                    </ul>
+                    <br>
+                    <a href="index.html#contactos" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Request a free proposal</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="pd pd-alt" id="perguntas">
+        <div class="pd-wrap">
+            <h2>Frequently asked questions</h2>
+            <details><summary>Do I have to stop using Instagram?</summary><p>No. The website complements your social media: it links to them and welcomes the people who arrive from Google.</p></details>
+            <details><summary>Who owns the domain?</summary><p>Your business. It is registered in your name and you can take it wherever you want.</p></details>
+            <details><summary>What if I don't like the mock-up?</summary><p>You pay nothing. The mock-up is deleted and is not published anywhere.</p></details>
+            <details><summary>How long does it take?</summary><p>The mock-up is ready in a few days. Once you approve it and send the photos, the website goes live in 48 hours.</p></details>
+            <details><summary>Who am I?</summary><p>André Carmo, an engineer with 30 years in technology, based in Rio Tinto. I work with small businesses in the Porto area on websites and customer-service automation. <a href="index.html#sobre">Learn more</a>.</p></details>
+        </div>
+    </section>
+
+    <section class="pd pd-final">
+        <div class="pd-wrap">
+            <h2>Want to see how yours would look?</h2>
+            <p class="pd-sub" style="margin: 0 auto 1.8rem;">Tell me your business name. You get the mock-up with no commitment.</p>
+            <div class="pd-btns">
+                <a class="btn btn-primary" href="https://wa.me/351912405722?text=Hello%2C%20I%27d%20like%20to%20see%20the%20website%20mock-up%20for%20my%20business." target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> WhatsApp +351 912 405 722</a>
+                <a class="btn btn-secondary" href="mailto:geral@andrecarmo.pt?subject=Website%20mock-up"><i class="fas fa-envelope"></i> Send an email</a>
+            </div>
+        </div>
+    </section>
+</main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-robot"></i>
+                    André Carmo
+                </a>
+                <p>
+                    Websites and automation for small businesses in Portugal.
+                    30 years in IT, based in Rio Tinto.
+                </p>
+                <div class="social-links">
+                    <a href="https://www.linkedin.com/in/stonedge" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://wa.me/351912405722" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    <a href="mailto:geral@andrecarmo.pt" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html#inicio">Home</a></li>
+                    <li><a href="index.html#sobre">About</a></li>
+                    <li><a href="index.html#servicos">Clients</a></li>
+                    <li><a href="presenca-digital.html">Websites in 48h</a></li>
+                <li><a href="index.html#portfolio">Portfolio</a></li>
+                    <li><a href="index.html#precos">Pricing</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="politica-privacidade.html">Privacy Policy</a></li>
+                    <li><a href="politica-privacidade.html#termos">Terms of Service</a></li>
+                    <li><a href="politica-privacidade.html#direitos">GDPR - Your Rights</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 André Carmo. All rights reserved. | VAT (NIF): 217 056 903</p>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Fade in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Mobile menu toggle
+        document.querySelector('.mobile-menu').addEventListener('click', function() {
+            var navLinks = document.querySelector('.nav-links');
+            var isOpen = navLinks.style.display === 'flex';
+            navLinks.style.display = isOpen ? 'none' : 'flex';
+            navLinks.style.flexDirection = 'column';
+            navLinks.style.position = 'absolute';
+            navLinks.style.top = '100%';
+            navLinks.style.left = '0';
+            navLinks.style.right = '0';
+            navLinks.style.background = 'rgba(0,8,20,0.98)';
+            navLinks.style.padding = '1rem 2rem';
+            navLinks.style.borderBottom = '1px solid rgba(0,212,255,0.2)';
+        });
+        </script>
+    <script src="../cookie-consent.js"></script>
+</body>
+</html>
